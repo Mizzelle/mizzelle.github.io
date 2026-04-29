@@ -12,11 +12,12 @@
   --purple:#6c3fa0;--purple-mid:#8b55c0;--purple-light:#b07fe0;
   --teal:#2dd4bf;--teal-dim:#1a7a6e;--teal-glow:rgba(45,212,191,0.2);
   --gold:#c8a96e;--gold-light:#e8cc8f;
+  --twitch:#9146ff;
   --text:#dde0f5;--text-muted:#7a80b0;--border:rgba(108,63,160,0.3);--border-teal:rgba(45,212,191,0.2);
 }
 html{scroll-behavior:smooth}
 body{background:var(--void);color:var(--text);font-family:'Raleway',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(1px 1px at 10% 15%,rgba(255,255,255,0.7) 0%,transparent 100%),radial-gradient(1px 1px at 25% 40%,rgba(255,255,255,0.5) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 40% 8%,rgba(255,255,255,0.8) 0%,transparent 100%),radial-gradient(1px 1px at 55% 30%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(1px 1px at 70% 55%,rgba(255,255,255,0.6) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 80% 20%,rgba(255,255,255,0.7) 0%,transparent 100%),radial-gradient(1px 1px at 90% 70%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(1px 1px at 15% 75%,rgba(255,255,255,0.5) 0%,transparent 100%),radial-gradient(1px 1px at 35% 60%,rgba(255,255,255,0.6) 0%,transparent 100%),radial-gradient(1px 1px at 60% 85%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 75% 10%,rgba(180,160,255,0.7) 0%,transparent 100%),radial-gradient(1px 1px at 92% 45%,rgba(255,255,255,0.5) 0%,transparent 100%),radial-gradient(1px 1px at 5% 50%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(1px 1px at 48% 48%,rgba(180,160,255,0.6) 0%,transparent 100%),radial-gradient(1px 1px at 85% 88%,rgba(255,255,255,0.5) 0%,transparent 100%),radial-gradient(1px 1px at 20% 25%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(1px 1px at 65% 15%,rgba(180,160,255,0.5) 0%,transparent 100%),radial-gradient(1px 1px at 50% 70%,rgba(255,255,255,0.3) 0%,transparent 100%),radial-gradient(1px 1px at 30% 90%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(1px 1px at 88% 35%,rgba(255,255,255,0.5) 0%,transparent 100%);pointer-events:none;z-index:0}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(1px 1px at 10% 15%,rgba(255,255,255,0.7) 0%,transparent 100%),radial-gradient(1px 1px at 25% 40%,rgba(255,255,255,0.5) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 40% 8%,rgba(255,255,255,0.8) 0%,transparent 100%),radial-gradient(1px 1px at 55% 30%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(1px 1px at 70% 55%,rgba(255,255,255,0.6) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 80% 20%,rgba(255,255,255,0.7) 0%,transparent 100%),radial-gradient(1px 1px at 90% 70%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(1px 1px at 15% 75%,rgba(255,255,255,0.5) 0%,transparent 100%),radial-gradient(1px 1px at 35% 60%,rgba(255,255,255,0.6) 0%,transparent 100%),radial-gradient(1px 1px at 60% 85%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 75% 10%,rgba(180,160,255,0.7) 0%,transparent 100%),radial-gradient(1px 1px at 92% 45%,rgba(255,255,255,0.5) 0%,transparent 100%),radial-gradient(1px 1px at 5% 50%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(1px 1px at 48% 48%,rgba(180,160,255,0.6) 0%,transparent 100%),radial-gradient(1px 1px at 85% 88%,rgba(255,255,255,0.5) 0%,transparent 100%);pointer-events:none;z-index:0}
 nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.9rem 2.5rem;background:rgba(4,5,15,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
 .nav-logo{font-family:'Cinzel Decorative',serif;font-size:0.85rem;color:var(--purple-light);letter-spacing:0.15em;text-decoration:none}
 .nav-links{display:flex;gap:2rem;list-style:none}
@@ -59,7 +60,7 @@ section{position:relative;padding:5rem 2rem;z-index:1}
 .captain-card:hover{border-color:rgba(108,63,160,0.6);box-shadow:0 0 30px rgba(108,63,160,0.2)}
 .captain-role{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.5rem;color:var(--purple-light)}
 .captain-name{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:0.2rem}
-.captain-guild{font-size:0.78rem;color:var(--text-muted);margin-bottom:0.6rem}
+.captain-guild{font-size:0.78rem;color:var(--text-muted);margin-bottom:0.75rem}
 .cocaptain-label{font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--teal);margin-bottom:0.2rem;display:block}
 .cocaptain-name{font-family:'Cinzel',serif;font-size:0.9rem;font-weight:600;color:var(--text)}
 .format-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
@@ -80,6 +81,26 @@ section{position:relative;padding:5rem 2rem;z-index:1}
 .s-badge{display:inline-block;padding:0.12rem 0.55rem;font-size:0.55rem;font-family:'Cinzel',serif;letter-spacing:0.15em;text-transform:uppercase;border:1px solid;margin-left:0.6rem;vertical-align:middle}
 .b-closed{color:#f87171;border-color:rgba(248,113,113,0.4);background:rgba(248,113,113,0.07)}
 .b-next{color:var(--purple-light);border-color:rgba(176,127,224,0.4);background:rgba(176,127,224,0.07)}
+
+/* WATCH LIVE */
+.watch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;align-items:start}
+.stream-card{background:var(--panel-light);border:1px solid var(--border);overflow:hidden;transition:border-color 0.3s,box-shadow 0.3s;text-decoration:none;display:flex;flex-direction:column}
+.stream-card:hover{border-color:rgba(145,70,255,0.5);box-shadow:0 0 30px rgba(145,70,255,0.2)}
+.stream-thumb{width:100%;height:140px;background:var(--panel);position:relative;overflow:hidden;flex-shrink:0}
+.stream-thumb img{width:100%;height:100%;object-fit:cover;opacity:0.75}
+.stream-thumb-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(108,63,160,0.3),rgba(45,212,191,0.1))}
+.live-badge{position:absolute;top:0.6rem;left:0.6rem;display:flex;align-items:center;gap:0.4rem;font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.25rem 0.6rem;background:rgba(220,20,20,0.92);color:#fff}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#fff;animation:blink 1.5s ease infinite;flex-shrink:0}
+.offline-badge{position:absolute;top:0.6rem;left:0.6rem;font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.25rem 0.6rem;background:rgba(0,0,0,0.65);color:var(--text-muted)}
+.viewer-count{position:absolute;top:0.6rem;right:0.6rem;font-family:'Cinzel',serif;font-size:0.58rem;padding:0.2rem 0.5rem;background:rgba(0,0,0,0.75);color:#fff;display:flex;align-items:center;gap:0.3rem}
+.stream-info{padding:1rem 1.25rem;display:flex;flex-direction:column;flex:1}
+.stream-name{font-family:'Cinzel',serif;font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:0.2rem}
+.stream-role{font-size:0.7rem;color:var(--purple-light);margin-bottom:0.5rem;font-family:'Cinzel',serif;letter-spacing:0.1em}
+.stream-title{font-size:0.78rem;color:var(--text-muted);line-height:1.5;flex:1}
+.stream-link{display:flex;align-items:center;gap:0.4rem;margin-top:0.75rem;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--twitch)}
+.stream-link svg{width:13px;height:13px;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+
 .predictions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.25rem}
 .prediction-card{background:var(--panel-light);border:1px solid var(--border);padding:1.5rem;text-align:center;transition:border-color 0.3s,box-shadow 0.3s}
 .prediction-card:hover{border-color:rgba(108,63,160,0.5);box-shadow:0 0 25px rgba(108,63,160,0.15)}
@@ -111,7 +132,7 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
 .footer-links a{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);text-decoration:none}
 .footer-links a:hover{color:var(--teal)}
 .footer-text{font-size:0.66rem;color:var(--text-muted);letter-spacing:0.08em}
-@media(max-width:700px){nav{padding:0.8rem 1rem}.nav-links{display:none}section{padding:3.5rem 1.25rem}.hero-meta-row{gap:0.5rem}}
+@media(max-width:700px){nav{padding:0.8rem 1rem}.nav-links{display:none}section{padding:3.5rem 1.25rem}.hero-meta-row{gap:0.5rem}.watch-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -122,6 +143,7 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
     <li><a href="#captains">Captains</a></li>
     <li><a href="#format">Format</a></li>
     <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#watch">Watch</a></li>
     <li><a href="#predictions">Predictions</a></li>
     <li><a href="#rules">Rules</a></li>
     <li><a href="#prizes">Prizes</a></li>
@@ -144,7 +166,7 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
       <span class="hero-pill">Mon &amp; Thu · 8:30PM EST</span>
     </div>
     <div class="btn-group">
-      <a href="https://discord.gg/vpfNx3qb" target="_blank" class="btn btn-teal">Join Discord</a>
+      <a href="https://discord.gg/etH67YK6" target="_blank" class="btn btn-teal">Join Discord</a>
       <a href="#format" class="btn btn-outline">How It Works</a>
     </div>
   </div>
@@ -166,34 +188,10 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
     <h2 class="section-title">Captains &amp; <span>Co-Captains</span></h2>
     <div class="section-divider"></div>
     <div class="captains-grid">
-      <div class="captain-card">
-        <p class="captain-role">✦ Captain</p>
-        <p class="captain-name">Arelite</p>
-        <p class="captain-guild">Undercooked</p>
-        <span class="cocaptain-label">Co-Captain</span>
-        <span class="cocaptain-name">Zaels</span>
-      </div>
-      <div class="captain-card">
-        <p class="captain-role">✦ Captain</p>
-        <p class="captain-name">Rheggie</p>
-        <p class="captain-guild">Undercooked</p>
-        <span class="cocaptain-label">Co-Captain</span>
-        <span class="cocaptain-name">Ruthless</span>
-      </div>
-      <div class="captain-card">
-        <p class="captain-role">✦ Captain</p>
-        <p class="captain-name">Bora</p>
-        <p class="captain-guild">Ma Vontade</p>
-        <span class="cocaptain-label">Co-Captain</span>
-        <span class="cocaptain-name">Soju</span>
-      </div>
-      <div class="captain-card">
-        <p class="captain-role">✦ Captain</p>
-        <p class="captain-name">Wicked</p>
-        <p class="captain-guild">Milk</p>
-        <span class="cocaptain-label">Co-Captain</span>
-        <span class="cocaptain-name">Rosie</span>
-      </div>
+      <div class="captain-card"><p class="captain-role">✦ Captain</p><p class="captain-name">Arelite</p><p class="captain-guild">Undercooked</p><span class="cocaptain-label">Co-Captain</span><span class="cocaptain-name">Zaels</span></div>
+      <div class="captain-card"><p class="captain-role">✦ Captain</p><p class="captain-name">Rheggie</p><p class="captain-guild">Undercooked</p><span class="cocaptain-label">Co-Captain</span><span class="cocaptain-name">Ruthless</span></div>
+      <div class="captain-card"><p class="captain-role">✦ Captain</p><p class="captain-name">Bora</p><p class="captain-guild">Ma Vontade</p><span class="cocaptain-label">Co-Captain</span><span class="cocaptain-name">Soju</span></div>
+      <div class="captain-card"><p class="captain-role">✦ Captain</p><p class="captain-name">Wicked</p><p class="captain-guild">Milk</p><span class="cocaptain-label">Co-Captain</span><span class="cocaptain-name">Rosie</span></div>
     </div>
     <p style="margin-top:1.5rem;font-size:0.82rem;color:var(--text-muted)">Rosters are assembled through a reverse snake style draft during the live stream on April 30th at 8PM EST.</p>
   </div>
@@ -205,42 +203,12 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
     <h2 class="section-title">How the <span>Draft Works</span></h2>
     <div class="section-divider"></div>
     <div class="format-grid">
-      <div class="format-card">
-        <svg class="card-icon" viewBox="0 0 48 48" fill="none"><path d="M6 24 C10 15, 38 15, 42 24 C38 33, 10 33, 6 24Z" stroke="#2dd4bf" stroke-width="1.5" fill="none"/><circle cx="24" cy="24" r="5" stroke="#b07fe0" stroke-width="1.5" fill="rgba(108,63,160,0.2)"/><circle cx="24" cy="24" r="2" fill="#2dd4bf"/><line x1="4" y1="9" x2="44" y2="39" stroke="#f87171" stroke-width="1.8" stroke-linecap="round"/><line x1="4" y1="10" x2="44" y2="40" stroke="rgba(248,113,113,0.25)" stroke-width="4" stroke-linecap="round"/></svg>
-        <p class="format-title">Draft Style</p><p class="format-value">Reverse Snake</p>
-        <p class="format-desc">Captains pick in reverse snake order — each round the pick order flips, giving every team a fair shot at top players.</p>
-      </div>
-      <div class="format-card">
-        <svg class="card-icon" viewBox="0 0 48 48" fill="none"><path d="M24 4 L38 9 L38 22 C38 31 31 38 24 41 C17 38 10 31 10 22 L10 9 Z" stroke="#b07fe0" stroke-width="1.5" fill="rgba(108,63,160,0.1)"/><circle cx="18" cy="19" r="3" stroke="#2dd4bf" stroke-width="1.2" fill="rgba(45,212,191,0.1)"/><path d="M12 29 C12 25, 15 23, 18 23 C21 23, 24 25, 24 29" stroke="#2dd4bf" stroke-width="1.2" fill="none"/><circle cx="30" cy="19" r="3" stroke="#b07fe0" stroke-width="1.2" fill="rgba(176,127,224,0.1)"/><path d="M24 29 C24 25, 27 23, 30 23 C33 23, 36 25, 36 29" stroke="#b07fe0" stroke-width="1.2" fill="none"/></svg>
-        <p class="format-title">Roster Size</p><p class="format-value">48 + 18 Subs</p>
-        <p class="format-desc">Each team fields 48 players with 18 substitutes. Can scale to 54 based on sign-up numbers.</p>
-      </div>
-      <div class="format-card">
-        <svg class="card-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="#2dd4bf" stroke-width="1.5" fill="rgba(45,212,191,0.05)"/><ellipse cx="24" cy="24" rx="8" ry="18" stroke="#b07fe0" stroke-width="1" fill="none" opacity="0.7"/><line x1="6" y1="24" x2="42" y2="24" stroke="#b07fe0" stroke-width="1" opacity="0.7"/><line x1="24" y1="6" x2="24" y2="42" stroke="#2dd4bf" stroke-width="1" opacity="0.5"/><path d="M24 8 L26 14 L24 12 L22 14 Z" fill="#2dd4bf"/><circle cx="24" cy="24" r="2.5" fill="#2dd4bf" opacity="0.8"/></svg>
-        <p class="format-title">Open to All</p><p class="format-value">Cross-Guild</p>
-        <p class="format-desc">Players from all guilds across the NA/SA region are eligible. Sign up and get drafted!</p>
-      </div>
-      <div class="format-card">
-        <svg class="card-icon" viewBox="0 0 48 48" fill="none">
-          <defs><linearGradient id="b1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf"/><stop offset="100%" stop-color="#6c3fa0"/></linearGradient><linearGradient id="b2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#b07fe0"/><stop offset="100%" stop-color="#1a7a6e"/></linearGradient></defs>
-          <g transform="rotate(-42, 24, 24)"><rect x="22" y="4" width="4" height="26" rx="1" fill="url(#b1)"/><polygon points="22,4 26,4 24,1" fill="#2dd4bf"/><rect x="16" y="28" width="16" height="3" rx="1.5" fill="#b07fe0"/><rect x="22.5" y="31" width="3" height="9" rx="1" fill="#8b55c0"/><circle cx="24" cy="41" r="2.5" fill="#b07fe0"/><rect x="23.5" y="6" width="1" height="18" rx="0.5" fill="rgba(255,255,255,0.35)"/></g>
-          <g transform="rotate(42, 24, 24)"><rect x="22" y="4" width="4" height="26" rx="1" fill="url(#b2)"/><polygon points="22,4 26,4 24,1" fill="#b07fe0"/><rect x="16" y="28" width="16" height="3" rx="1.5" fill="#2dd4bf"/><rect x="22.5" y="31" width="3" height="9" rx="1" fill="#1a7a6e"/><circle cx="24" cy="41" r="2.5" fill="#2dd4bf"/><rect x="23.5" y="6" width="1" height="18" rx="0.5" fill="rgba(255,255,255,0.35)"/></g>
-          <circle cx="24" cy="24" r="4" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/><circle cx="24" cy="24" r="2" fill="rgba(255,255,255,0.5)"/>
-          <line x1="24" y1="18" x2="24" y2="15" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity="0.7"/><line x1="24" y1="30" x2="24" y2="33" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity="0.7"/><line x1="18" y1="24" x2="15" y2="24" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity="0.7"/><line x1="30" y1="24" x2="33" y2="24" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity="0.7"/>
-        </svg>
-        <p class="format-title">Game Mode</p><p class="format-value">War Games</p>
-        <p class="format-desc">Official war games in the NA/SA region. Mondays &amp; Thursdays, 8:30–10PM EST.</p>
-      </div>
-      <div class="format-card">
-        <svg class="card-icon" viewBox="0 0 48 48" fill="none"><defs><radialGradient id="orbg" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="rgba(176,127,224,0.5)"/><stop offset="100%" stop-color="rgba(108,63,160,0.1)"/></radialGradient></defs><circle cx="24" cy="20" r="14" stroke="#b07fe0" stroke-width="1.5" fill="url(#orbg)"/><circle cx="24" cy="20" r="8" stroke="#2dd4bf" stroke-width="1" fill="rgba(45,212,191,0.05)" opacity="0.7"/><circle cx="24" cy="20" r="2" fill="#2dd4bf"/><path d="M14 36 L24 40 L34 36" stroke="#b07fe0" stroke-width="1.2" fill="none" opacity="0.7"/><line x1="24" y1="34" x2="24" y2="40" stroke="#2dd4bf" stroke-width="1.2"/><path d="M16 40 L32 40" stroke="#2dd4bf" stroke-width="1.5" stroke-linecap="round"/><ellipse cx="19" cy="16" rx="4" ry="2.5" fill="rgba(255,255,255,0.12)" transform="rotate(-30,19,16)"/></svg>
-        <p class="format-title">Admin &amp; Scoring</p><p class="format-value">Live Tracked</p>
-        <p class="format-desc">Dedicated admin parses scoreboards after every war to track top performers and predictions.</p>
-      </div>
-      <div class="format-card">
-        <svg class="card-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="#f87171" stroke-width="1.5" fill="rgba(248,113,113,0.05)"/><circle cx="24" cy="24" r="18" stroke="#f87171" stroke-width="1" fill="none" stroke-dasharray="4 2" opacity="0.35"/><path d="M24 10 L27 17 L34 17 L28 21 L30 28 L24 24 L18 28 L20 21 L14 17 L21 17 Z" stroke="#f87171" stroke-width="1.2" fill="rgba(248,113,113,0.1)"/><line x1="8" y1="8" x2="40" y2="40" stroke="#f87171" stroke-width="2" stroke-linecap="round"/><line x1="7" y1="9" x2="39" y2="41" stroke="rgba(248,113,113,0.2)" stroke-width="4" stroke-linecap="round"/></svg>
-        <p class="format-title">Class Restriction</p><p class="format-value">1 Limit Only</p>
-        <p class="format-desc">Only restriction: <span class="restrict-badge">Cordy Xbow ×2</span> max per team. All other classes unrestricted.</p>
-      </div>
+      <div class="format-card"><svg class="card-icon" viewBox="0 0 48 48" fill="none"><path d="M6 24 C10 15, 38 15, 42 24 C38 33, 10 33, 6 24Z" stroke="#2dd4bf" stroke-width="1.5" fill="none"/><circle cx="24" cy="24" r="5" stroke="#b07fe0" stroke-width="1.5" fill="rgba(108,63,160,0.2)"/><circle cx="24" cy="24" r="2" fill="#2dd4bf"/><line x1="4" y1="9" x2="44" y2="39" stroke="#f87171" stroke-width="1.8" stroke-linecap="round"/><line x1="4" y1="10" x2="44" y2="40" stroke="rgba(248,113,113,0.25)" stroke-width="4" stroke-linecap="round"/></svg><p class="format-title">Draft Style</p><p class="format-value">Reverse Snake</p><p class="format-desc">Pick order flips each round giving every team a fair shot at top players.</p></div>
+      <div class="format-card"><svg class="card-icon" viewBox="0 0 48 48" fill="none"><path d="M24 4 L38 9 L38 22 C38 31 31 38 24 41 C17 38 10 31 10 22 L10 9 Z" stroke="#b07fe0" stroke-width="1.5" fill="rgba(108,63,160,0.1)"/><circle cx="18" cy="19" r="3" stroke="#2dd4bf" stroke-width="1.2" fill="rgba(45,212,191,0.1)"/><path d="M12 29 C12 25, 15 23, 18 23 C21 23, 24 25, 24 29" stroke="#2dd4bf" stroke-width="1.2" fill="none"/><circle cx="30" cy="19" r="3" stroke="#b07fe0" stroke-width="1.2" fill="rgba(176,127,224,0.1)"/><path d="M24 29 C24 25, 27 23, 30 23 C33 23, 36 25, 36 29" stroke="#b07fe0" stroke-width="1.2" fill="none"/></svg><p class="format-title">Roster Size</p><p class="format-value">48 + 18 Subs</p><p class="format-desc">Each team fields 48 players with 18 substitutes. Can scale to 54 based on sign-up numbers.</p></div>
+      <div class="format-card"><svg class="card-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="#2dd4bf" stroke-width="1.5" fill="rgba(45,212,191,0.05)"/><ellipse cx="24" cy="24" rx="8" ry="18" stroke="#b07fe0" stroke-width="1" fill="none" opacity="0.7"/><line x1="6" y1="24" x2="42" y2="24" stroke="#b07fe0" stroke-width="1" opacity="0.7"/><line x1="24" y1="6" x2="24" y2="42" stroke="#2dd4bf" stroke-width="1" opacity="0.5"/><path d="M24 8 L26 14 L24 12 L22 14 Z" fill="#2dd4bf"/><circle cx="24" cy="24" r="2.5" fill="#2dd4bf" opacity="0.8"/></svg><p class="format-title">Open to All</p><p class="format-value">Cross-Guild</p><p class="format-desc">Players from all guilds across the NA/SA region are eligible. Sign up and get drafted!</p></div>
+      <div class="format-card"><svg class="card-icon" viewBox="0 0 48 48" fill="none"><defs><linearGradient id="b1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf"/><stop offset="100%" stop-color="#6c3fa0"/></linearGradient><linearGradient id="b2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#b07fe0"/><stop offset="100%" stop-color="#1a7a6e"/></linearGradient></defs><g transform="rotate(-42, 24, 24)"><rect x="22" y="4" width="4" height="26" rx="1" fill="url(#b1)"/><polygon points="22,4 26,4 24,1" fill="#2dd4bf"/><rect x="16" y="28" width="16" height="3" rx="1.5" fill="#b07fe0"/><rect x="22.5" y="31" width="3" height="9" rx="1" fill="#8b55c0"/><circle cx="24" cy="41" r="2.5" fill="#b07fe0"/></g><g transform="rotate(42, 24, 24)"><rect x="22" y="4" width="4" height="26" rx="1" fill="url(#b2)"/><polygon points="22,4 26,4 24,1" fill="#b07fe0"/><rect x="16" y="28" width="16" height="3" rx="1.5" fill="#2dd4bf"/><rect x="22.5" y="31" width="3" height="9" rx="1" fill="#1a7a6e"/><circle cx="24" cy="41" r="2.5" fill="#2dd4bf"/></g><circle cx="24" cy="24" r="4" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/><circle cx="24" cy="24" r="2" fill="rgba(255,255,255,0.5)"/><line x1="24" y1="18" x2="24" y2="15" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity="0.7"/><line x1="24" y1="30" x2="24" y2="33" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity="0.7"/><line x1="18" y1="24" x2="15" y2="24" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity="0.7"/><line x1="30" y1="24" x2="33" y2="24" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity="0.7"/></svg><p class="format-title">Game Mode</p><p class="format-value">War Games</p><p class="format-desc">Official war games in the NA/SA region. Mondays &amp; Thursdays, 8:30–10PM EST.</p></div>
+      <div class="format-card"><svg class="card-icon" viewBox="0 0 48 48" fill="none"><defs><radialGradient id="orbg" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="rgba(176,127,224,0.5)"/><stop offset="100%" stop-color="rgba(108,63,160,0.1)"/></radialGradient></defs><circle cx="24" cy="20" r="14" stroke="#b07fe0" stroke-width="1.5" fill="url(#orbg)"/><circle cx="24" cy="20" r="8" stroke="#2dd4bf" stroke-width="1" fill="rgba(45,212,191,0.05)" opacity="0.7"/><circle cx="24" cy="20" r="2" fill="#2dd4bf"/><path d="M14 36 L24 40 L34 36" stroke="#b07fe0" stroke-width="1.2" fill="none" opacity="0.7"/><line x1="24" y1="34" x2="24" y2="40" stroke="#2dd4bf" stroke-width="1.2"/><path d="M16 40 L32 40" stroke="#2dd4bf" stroke-width="1.5" stroke-linecap="round"/></svg><p class="format-title">Admin &amp; Scoring</p><p class="format-value">Live Tracked</p><p class="format-desc">Dedicated admin parses scoreboards after every war to track top performers and predictions.</p></div>
+      <div class="format-card"><svg class="card-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="#f87171" stroke-width="1.5" fill="rgba(248,113,113,0.05)"/><circle cx="24" cy="24" r="18" stroke="#f87171" stroke-width="1" fill="none" stroke-dasharray="4 2" opacity="0.35"/><path d="M24 10 L27 17 L34 17 L28 21 L30 28 L24 24 L18 28 L20 21 L14 17 L21 17 Z" stroke="#f87171" stroke-width="1.2" fill="rgba(248,113,113,0.1)"/><line x1="8" y1="8" x2="40" y2="40" stroke="#f87171" stroke-width="2" stroke-linecap="round"/></svg><p class="format-title">Class Restriction</p><p class="format-value">1 Limit Only</p><p class="format-desc">Only restriction: <span class="restrict-badge">Cordy Xbow ×2</span> max per team. All other classes unrestricted.</p></div>
     </div>
   </div>
 </section>
@@ -261,48 +229,36 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
   </div>
 </section>
 
-<section id="predictions" class="alt-bg">
+<!-- WATCH LIVE -->
+<section id="watch" class="alt-bg">
+  <div class="container">
+    <span class="section-label">Watch Live</span>
+    <h2 class="section-title">Stream <span>Coverage</span></h2>
+    <div class="section-divider"></div>
+    <div class="watch-grid" id="watch-grid">
+      <!-- injected by JS -->
+    </div>
+  </div>
+</section>
+
+<section id="predictions">
   <div class="container">
     <span class="section-label">Viewer Engagement</span>
     <h2 class="section-title">Predictions &amp; <span>Top Performers</span></h2>
     <div class="section-divider"></div>
     <p style="font-size:0.88rem;color:var(--text-muted);max-width:620px;margin-bottom:2rem">After each war game, stats are parsed and tracked. Viewers and players submit predictions and earn recognition. Additional prizes awarded to top performers and lucky prediction winners.</p>
     <div class="predictions-grid">
-      <div class="prediction-card">
-        <svg class="pred-icon" viewBox="0 0 52 52" fill="none"><defs><radialGradient id="orb2" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="rgba(176,127,224,0.5)"/><stop offset="100%" stop-color="rgba(108,63,160,0.1)"/></radialGradient></defs><ellipse cx="26" cy="46" rx="10" ry="3" fill="rgba(108,63,160,0.3)"/><rect x="22" y="40" width="8" height="6" rx="1" fill="#6c3fa0" opacity="0.6"/><rect x="18" y="45" width="16" height="2.5" rx="1.2" fill="#8b55c0"/><circle cx="26" cy="23" r="16" stroke="#b07fe0" stroke-width="1.2" fill="url(#orb2)"/><circle cx="26" cy="23" r="16" stroke="#2dd4bf" stroke-width="0.5" fill="none" opacity="0.3" stroke-dasharray="3 3"/><circle cx="26" cy="23" r="10" stroke="rgba(45,212,191,0.3)" stroke-width="1" fill="rgba(45,212,191,0.05)"/><path d="M22 19 C22 16, 30 16, 30 20 C30 23, 26 23, 26 26" stroke="#2dd4bf" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="26" cy="29" r="1.2" fill="#2dd4bf"/><ellipse cx="20" cy="17" rx="4" ry="2.5" fill="rgba(255,255,255,0.12)" transform="rotate(-30,20,17)"/></svg>
-        <p class="prediction-title">Match Predictions</p>
-        <p class="prediction-desc">Vote on who you think will win before each match. Lucky winners get additional prizes.</p>
-      </div>
-      <div class="prediction-card">
-        <svg class="pred-icon" viewBox="0 0 52 52" fill="none"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8cc8f"/><stop offset="100%" stop-color="#c8a96e"/></linearGradient></defs><line x1="26" y1="4" x2="26" y2="1" stroke="#e8cc8f" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/><line x1="36" y1="7" x2="38" y2="5" stroke="#e8cc8f" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/><line x1="16" y1="7" x2="14" y2="5" stroke="#e8cc8f" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/><line x1="43" y1="14" x2="46" y2="12" stroke="#e8cc8f" stroke-width="1" stroke-linecap="round" opacity="0.4"/><line x1="9" y1="14" x2="6" y2="12" stroke="#e8cc8f" stroke-width="1" stroke-linecap="round" opacity="0.4"/><path d="M8 36 L8 20 L16 28 L26 12 L36 28 L44 20 L44 36 Z" fill="url(#cg)" stroke="#e8cc8f" stroke-width="1" stroke-linejoin="round"/><rect x="8" y="34" width="36" height="5" rx="1" fill="#c8a96e" stroke="#e8cc8f" stroke-width="0.8"/><circle cx="26" cy="24" r="3" fill="#2dd4bf" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/><circle cx="14" cy="31" r="2" fill="#b07fe0"/><circle cx="38" cy="31" r="2" fill="#b07fe0"/><circle cx="20" cy="36.5" r="1.5" fill="#2dd4bf" opacity="0.8"/><circle cx="26" cy="36.5" r="1.5" fill="#e8cc8f"/><circle cx="32" cy="36.5" r="1.5" fill="#2dd4bf" opacity="0.8"/></svg>
-        <p class="prediction-title">Top Performer</p>
-        <p class="prediction-desc">Tracked per game from parsed scoreboard data. Highlighted each week with prize reward.</p>
-      </div>
-      <div class="prediction-card">
-        <svg class="pred-icon" viewBox="0 0 52 52" fill="none"><defs><radialGradient id="sg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="rgba(45,212,191,0.2)"/><stop offset="100%" stop-color="rgba(108,63,160,0.1)"/></radialGradient></defs><ellipse cx="26" cy="47" rx="12" ry="3" fill="rgba(45,212,191,0.15)"/><path d="M14 43 L10 28 L14 12 L26 8 L38 12 L42 28 L38 43 Z" fill="url(#sg)" stroke="#2dd4bf" stroke-width="1.5"/><path d="M20 20 L26 16 L32 20 L32 32 L26 36 L20 32 Z" stroke="#b07fe0" stroke-width="1.2" fill="rgba(176,127,224,0.1)"/><line x1="26" y1="16" x2="26" y2="36" stroke="#2dd4bf" stroke-width="1" opacity="0.7"/><line x1="20" y1="26" x2="32" y2="26" stroke="#2dd4bf" stroke-width="1" opacity="0.7"/><circle cx="26" cy="26" r="3.5" fill="rgba(45,212,191,0.3)" stroke="#2dd4bf" stroke-width="1"/><circle cx="26" cy="26" r="1.5" fill="#2dd4bf"/><circle cx="26" cy="26" r="7" stroke="#2dd4bf" stroke-width="0.5" fill="none" opacity="0.3" stroke-dasharray="2 2"/></svg>
-        <p class="prediction-title">Longest Stone Held</p>
-        <p class="prediction-desc">Which team or player held the stone longest across each game — tracked every match.</p>
-      </div>
-      <div class="prediction-card">
-        <svg class="pred-icon" viewBox="0 0 52 52" fill="none"><line x1="26" y1="10" x2="26" y2="46" stroke="#8b55c0" stroke-width="2" stroke-linecap="round"/><path d="M26 10 L40 16 L26 22 Z" fill="#b07fe0" opacity="0.9"/><line x1="6" y1="34" x2="20" y2="34" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round"/><polygon points="20,30 26,34 20,38" fill="#2dd4bf"/><line x1="46" y1="34" x2="32" y2="34" stroke="#f87171" stroke-width="2" stroke-linecap="round"/><polygon points="32,30 26,34 32,38" fill="#f87171"/><circle cx="26" cy="34" r="4" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/></svg>
-        <p class="prediction-title">Longest Contested Cap</p>
-        <p class="prediction-desc">The longest standoff where both teams fought for the same capture point.</p>
-      </div>
-      <div class="prediction-card">
-        <svg class="pred-icon" viewBox="0 0 52 52" fill="none"><defs><radialGradient id="skull" cx="45%" cy="35%" r="60%"><stop offset="0%" stop-color="rgba(176,127,224,0.4)"/><stop offset="100%" stop-color="rgba(108,63,160,0.1)"/></radialGradient></defs><path d="M14 29 C14 18, 38 18, 38 29 C38 35, 35 38, 32 39 L32 43 L20 43 L20 39 C17 38, 14 35, 14 29Z" fill="url(#skull)" stroke="#b07fe0" stroke-width="1.5"/><ellipse cx="21" cy="29" rx="4" ry="4.5" fill="rgba(4,5,15,0.8)" stroke="#6c3fa0" stroke-width="0.8"/><ellipse cx="31" cy="29" rx="4" ry="4.5" fill="rgba(4,5,15,0.8)" stroke="#6c3fa0" stroke-width="0.8"/><ellipse cx="21" cy="29" rx="2" ry="2.5" fill="#b07fe0" opacity="0.6"/><ellipse cx="31" cy="29" rx="2" ry="2.5" fill="#b07fe0" opacity="0.6"/><path d="M24 34 L26 37 L28 34 Z" fill="rgba(4,5,15,0.6)" stroke="#6c3fa0" stroke-width="0.6"/><line x1="20" y1="43" x2="32" y2="43" stroke="#b07fe0" stroke-width="1" opacity="0.5"/><line x1="22" y1="40" x2="22" y2="43" stroke="#b07fe0" stroke-width="1.2"/><line x1="26" y1="40" x2="26" y2="43" stroke="#b07fe0" stroke-width="1.2"/><line x1="30" y1="40" x2="30" y2="43" stroke="#b07fe0" stroke-width="1.2"/><text x="35" y="19" font-size="8" fill="#2dd4bf" font-family="Cinzel,serif" opacity="0.9">K/D</text></svg>
-        <p class="prediction-title">Kill / Death Leaders</p>
-        <p class="prediction-desc">Individual K/D stats tracked per match and aggregated across the full season.</p>
-      </div>
-      <div class="prediction-card">
-        <svg class="pred-icon" viewBox="0 0 52 52" fill="none"><defs><linearGradient id="lb1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8cc8f"/><stop offset="100%" stop-color="#c8a96e"/></linearGradient><linearGradient id="lb2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#b07fe0"/><stop offset="100%" stop-color="#6c3fa0"/></linearGradient><linearGradient id="lb3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf"/><stop offset="100%" stop-color="#1a7a6e"/></linearGradient></defs><line x1="6" y1="46" x2="46" y2="46" stroke="#8b55c0" stroke-width="1.5" stroke-linecap="round"/><rect x="20" y="18" width="12" height="28" rx="1" fill="url(#lb1)"/><path d="M21 20 L23 17 L26 19 L29 17 L31 20 Z" fill="#e8cc8f" opacity="0.8"/><text x="24" y="15" font-size="7" fill="#e8cc8f" font-family="Cinzel,serif" font-weight="bold">1</text><rect x="6" y="28" width="12" height="18" rx="1" fill="url(#lb2)"/><text x="10" y="25" font-size="7" fill="#b07fe0" font-family="Cinzel,serif">2</text><rect x="34" y="32" width="12" height="14" rx="1" fill="url(#lb3)"/><text x="38" y="29" font-size="7" fill="#2dd4bf" font-family="Cinzel,serif">3</text></svg>
-        <p class="prediction-title">Season Leaderboard</p>
-        <p class="prediction-desc">Running standings updated after every match day so you always know where teams stand.</p>
-      </div>
+      <div class="prediction-card"><svg class="pred-icon" viewBox="0 0 52 52" fill="none"><defs><radialGradient id="orb2" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="rgba(176,127,224,0.5)"/><stop offset="100%" stop-color="rgba(108,63,160,0.1)"/></radialGradient></defs><ellipse cx="26" cy="46" rx="10" ry="3" fill="rgba(108,63,160,0.3)"/><rect x="22" y="40" width="8" height="6" rx="1" fill="#6c3fa0" opacity="0.6"/><rect x="18" y="45" width="16" height="2.5" rx="1.2" fill="#8b55c0"/><circle cx="26" cy="23" r="16" stroke="#b07fe0" stroke-width="1.2" fill="url(#orb2)"/><circle cx="26" cy="23" r="16" stroke="#2dd4bf" stroke-width="0.5" fill="none" opacity="0.3" stroke-dasharray="3 3"/><circle cx="26" cy="23" r="10" stroke="rgba(45,212,191,0.3)" stroke-width="1" fill="rgba(45,212,191,0.05)"/><path d="M22 19 C22 16, 30 16, 30 20 C30 23, 26 23, 26 26" stroke="#2dd4bf" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="26" cy="29" r="1.2" fill="#2dd4bf"/></svg><p class="prediction-title">Match Predictions</p><p class="prediction-desc">Vote on who you think will win before each match. Lucky winners get additional prizes.</p></div>
+      <div class="prediction-card"><svg class="pred-icon" viewBox="0 0 52 52" fill="none"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8cc8f"/><stop offset="100%" stop-color="#c8a96e"/></linearGradient></defs><line x1="26" y1="4" x2="26" y2="1" stroke="#e8cc8f" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/><line x1="36" y1="7" x2="38" y2="5" stroke="#e8cc8f" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/><line x1="16" y1="7" x2="14" y2="5" stroke="#e8cc8f" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/><path d="M8 36 L8 20 L16 28 L26 12 L36 28 L44 20 L44 36 Z" fill="url(#cg)" stroke="#e8cc8f" stroke-width="1" stroke-linejoin="round"/><rect x="8" y="34" width="36" height="5" rx="1" fill="#c8a96e" stroke="#e8cc8f" stroke-width="0.8"/><circle cx="26" cy="24" r="3" fill="#2dd4bf"/><circle cx="14" cy="31" r="2" fill="#b07fe0"/><circle cx="38" cy="31" r="2" fill="#b07fe0"/></svg><p class="prediction-title">Top Performer</p><p class="prediction-desc">Tracked per game from parsed scoreboard data. Highlighted each week with prize reward.</p></div>
+      <div class="prediction-card"><svg class="pred-icon" viewBox="0 0 52 52" fill="none"><defs><radialGradient id="sg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="rgba(45,212,191,0.2)"/><stop offset="100%" stop-color="rgba(108,63,160,0.1)"/></radialGradient></defs><ellipse cx="26" cy="47" rx="12" ry="3" fill="rgba(45,212,191,0.15)"/><path d="M14 43 L10 28 L14 12 L26 8 L38 12 L42 28 L38 43 Z" fill="url(#sg)" stroke="#2dd4bf" stroke-width="1.5"/><path d="M20 20 L26 16 L32 20 L32 32 L26 36 L20 32 Z" stroke="#b07fe0" stroke-width="1.2" fill="rgba(176,127,224,0.1)"/><line x1="26" y1="16" x2="26" y2="36" stroke="#2dd4bf" stroke-width="1" opacity="0.7"/><line x1="20" y1="26" x2="32" y2="26" stroke="#2dd4bf" stroke-width="1" opacity="0.7"/><circle cx="26" cy="26" r="3.5" fill="rgba(45,212,191,0.3)" stroke="#2dd4bf" stroke-width="1"/><circle cx="26" cy="26" r="1.5" fill="#2dd4bf"/></svg><p class="prediction-title">Longest Stone Held</p><p class="prediction-desc">Which team or player held the stone longest across each game — tracked every match.</p></div>
+      <div class="prediction-card"><svg class="pred-icon" viewBox="0 0 52 52" fill="none"><line x1="26" y1="10" x2="26" y2="46" stroke="#8b55c0" stroke-width="2" stroke-linecap="round"/><path d="M26 10 L40 16 L26 22 Z" fill="#b07fe0" opacity="0.9"/><line x1="6" y1="34" x2="20" y2="34" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round"/><polygon points="20,30 26,34 20,38" fill="#2dd4bf"/><line x1="46" y1="34" x2="32" y2="34" stroke="#f87171" stroke-width="2" stroke-linecap="round"/><polygon points="32,30 26,34 32,38" fill="#f87171"/><circle cx="26" cy="34" r="4" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/></svg><p class="prediction-title">Longest Contested Cap</p><p class="prediction-desc">The longest standoff where both teams fought for the same capture point.</p></div>
+      <div class="prediction-card"><svg class="pred-icon" viewBox="0 0 52 52" fill="none"><defs><radialGradient id="skull" cx="45%" cy="35%" r="60%"><stop offset="0%" stop-color="rgba(176,127,224,0.4)"/><stop offset="100%" stop-color="rgba(108,63,160,0.1)"/></radialGradient></defs><path d="M14 29 C14 18, 38 18, 38 29 C38 35, 35 38, 32 39 L32 43 L20 43 L20 39 C17 38, 14 35, 14 29Z" fill="url(#skull)" stroke="#b07fe0" stroke-width="1.5"/><ellipse cx="21" cy="29" rx="4" ry="4.5" fill="rgba(4,5,15,0.8)" stroke="#6c3fa0" stroke-width="0.8"/><ellipse cx="31" cy="29" rx="4" ry="4.5" fill="rgba(4,5,15,0.8)" stroke="#6c3fa0" stroke-width="0.8"/><ellipse cx="21" cy="29" rx="2" ry="2.5" fill="#b07fe0" opacity="0.6"/><ellipse cx="31" cy="29" rx="2" ry="2.5" fill="#b07fe0" opacity="0.6"/><line x1="22" y1="40" x2="22" y2="43" stroke="#b07fe0" stroke-width="1.2"/><line x1="26" y1="40" x2="26" y2="43" stroke="#b07fe0" stroke-width="1.2"/><line x1="30" y1="40" x2="30" y2="43" stroke="#b07fe0" stroke-width="1.2"/><text x="35" y="19" font-size="8" fill="#2dd4bf" font-family="Cinzel,serif" opacity="0.9">K/D</text></svg><p class="prediction-title">Kill / Death Leaders</p><p class="prediction-desc">Individual K/D stats tracked per match and aggregated across the full season.</p></div>
+      <div class="prediction-card"><svg class="pred-icon" viewBox="0 0 52 52" fill="none"><defs><linearGradient id="lb1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8cc8f"/><stop offset="100%" stop-color="#c8a96e"/></linearGradient><linearGradient id="lb2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#b07fe0"/><stop offset="100%" stop-color="#6c3fa0"/></linearGradient><linearGradient id="lb3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf"/><stop offset="100%" stop-color="#1a7a6e"/></linearGradient></defs><line x1="6" y1="46" x2="46" y2="46" stroke="#8b55c0" stroke-width="1.5" stroke-linecap="round"/><rect x="20" y="18" width="12" height="28" rx="1" fill="url(#lb1)"/><path d="M21 20 L23 17 L26 19 L29 17 L31 20 Z" fill="#e8cc8f" opacity="0.8"/><text x="24" y="15" font-size="7" fill="#e8cc8f" font-family="Cinzel,serif" font-weight="bold">1</text><rect x="6" y="28" width="12" height="18" rx="1" fill="url(#lb2)"/><text x="10" y="25" font-size="7" fill="#b07fe0" font-family="Cinzel,serif">2</text><rect x="34" y="32" width="12" height="14" rx="1" fill="url(#lb3)"/><text x="38" y="29" font-size="7" fill="#2dd4bf" font-family="Cinzel,serif">3</text></svg><p class="prediction-title">Season Leaderboard</p><p class="prediction-desc">Running standings updated after every match day so you always know where teams stand.</p></div>
     </div>
   </div>
 </section>
 
-<section id="rules">
+<section id="rules" class="panel-bg">
   <div class="container">
     <span class="section-label">Regulations</span>
     <h2 class="section-title">Rules &amp; <span>Eligibility</span></h2>
@@ -311,12 +267,12 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
       <div><p class="rule-group-title">Eligibility</p><ul class="rule-list"><li>Must play in the NA/SA region.</li><li>Open to all players regardless of guild affiliation.</li><li>One player, one team — no switching after draft.</li><li>Must be available Mon &amp; Thu 8:30–10PM EST.</li></ul></div>
       <div><p class="rule-group-title">Class Restrictions</p><ul class="rule-list"><li>Only one restriction applies: <span class="restrict-badge">Cordy Xbow ×2</span> max per team at any time.</li><li>All other classes and builds are completely unrestricted.</li><li>Bring whatever composition your team decides.</li></ul></div>
       <div><p class="rule-group-title">Match Conduct</p><ul class="rule-list"><li>Respectful behaviour required at all times.</li><li>No exploits, bugs, or third-party tools permitted.</li><li>Scoreboard screenshots must be submitted after each match.</li><li>Admin team has final say on all disputes.</li><li>Harassment or abuse results in immediate removal.</li></ul></div>
-      <div><p class="rule-group-title">Draft Rules</p><ul class="rule-list"><li>Draft conducted live via stream on April 30th at 8PM EST.</li><li>Reverse snake style — pick order flips each round.</li><li>Co-captains assist their captain during the draft.</li><li>Roster: 48 players + 18 subs. </li></ul></div>
+      <div><p class="rule-group-title">Draft Rules</p><ul class="rule-list"><li>Draft conducted live via stream on April 30th at 8PM EST.</li><li>Reverse snake style — pick order flips each round.</li><li>Co-captains assist their captain during the draft.</li><li>Roster: 48 players + 18 subs.</li></ul></div>
     </div>
   </div>
 </section>
 
-<section id="prizes" class="panel-bg">
+<section id="prizes" class="alt-bg">
   <div class="container">
     <span class="section-label">Rewards</span>
     <h2 class="section-title">Prizes &amp; <span>Recognition</span></h2>
@@ -338,7 +294,7 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
     <h2 class="section-title" style="text-align:center">Draft Stream <span>Apr 30 · 8PM EST</span></h2>
     <p class="cta-desc">Sign-ups for Season 1 are now closed. The draft stream goes live April 30th at 8PM EST — stay tuned on Discord for team reveals, match schedules, and all the action!</p>
     <div class="btn-group">
-      <a href="https://discord.gg/vpfNx3qb" target="_blank" class="btn btn-teal">Join the Discord</a>
+      <a href="https://discord.gg/etH67YK6" target="_blank" class="btn btn-teal">Join the Discord</a>
     </div>
   </div>
 </section>
@@ -346,11 +302,73 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
 <footer>
   <p class="footer-logo">T&amp;L Draft Tournament · Season 1</p>
   <div class="footer-links">
-    <a href="https://discord.gg/vpfNx3qb" target="_blank">Discord</a>
+    <a href="https://discord.gg/etH67YK6" target="_blank">Discord</a>
     <a href="https://www.playthroneandliberty.com/en-us/" target="_blank">Official T&amp;L Site</a>
   </div>
   <p class="footer-text">NA/SA Region · Community Run Event · Not affiliated with NCSoft or Amazon Games</p>
 </footer>
 
+<script>
+const CLIENT_ID = 'b78tx41mpqxdjtip3gpfz77or7dp8w';
+const streamers = [
+  { name: 'Arelite', login: 'arelite', role: 'Captain · Undercooked', url: 'https://www.twitch.tv/arelite' },
+  { name: 'Jehoo', login: 'jehoo1', role: 'Caster', url: 'https://www.twitch.tv/jehoo1' },
+  { name: 'Ruthless', login: 'ru7hlessss', role: 'Co-Captain · Undercooked', url: 'https://www.twitch.tv/ru7hlessss' },
+];
+const twitchSVG = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>`;
+const placeholderHTML = `<div class="stream-thumb-placeholder">${twitchSVG}</div>`;
+
+function renderCard(s, live) {
+  const thumb = live ? live.thumbnail_url.replace('{width}','320').replace('{height}','180') : null;
+  const viewers = live ? Number(live.viewer_count).toLocaleString() : null;
+  const title = live ? live.title : '';
+  return `<a href="${s.url}" target="_blank" class="stream-card">
+    <div class="stream-thumb">
+      ${thumb ? `<img src="${thumb}" alt="${s.name}"/>` : placeholderHTML}
+      ${live ? `<span class="live-badge"><span class="live-dot"></span>Live</span>` : `<span class="offline-badge">Offline</span>`}
+      ${viewers ? `<span class="viewer-count">👁 ${viewers}</span>` : ''}
+    </div>
+    <div class="stream-info">
+      <p class="stream-name">${s.name}</p>
+      <p class="stream-role">${s.role}</p>
+      <p class="stream-title">${title || (live ? 'Live now' : 'Not currently streaming')}</p>
+      <p class="stream-link">${twitchSVG} twitch.tv/${s.login}</p>
+    </div>
+  </a>`;
+}
+
+async function checkLive() {
+  const grid = document.getElementById('watch-grid');
+  try {
+    const tr = await fetch(`https://id.twitch.tv/oauth2/token?client_id=${CLIENT_ID}&grant_type=client_credentials`, { method: 'POST' });
+    const { access_token } = await tr.json();
+    const logins = streamers.map(s => `user_login=${s.login}`).join('&');
+    const sr = await fetch(`https://api.twitch.tv/helix/streams?${logins}`, {
+      headers: { 'Client-ID': CLIENT_ID, 'Authorization': `Bearer ${access_token}` }
+    });
+    const { data } = await sr.json();
+    const liveMap = {};
+    (data || []).forEach(s => { liveMap[s.user_login.toLowerCase()] = s; });
+    grid.innerHTML = streamers.map(s => renderCard(s, liveMap[s.login.toLowerCase()] || null)).join('');
+  } catch(e) {
+    grid.innerHTML = streamers.map(s => renderCard(s, null)).join('');
+  }
+}
+
+// Initial skeleton
+document.getElementById('watch-grid').innerHTML = streamers.map(s => `
+  <a href="${s.url}" target="_blank" class="stream-card">
+    <div class="stream-thumb">${placeholderHTML}<span class="offline-badge">Checking...</span></div>
+    <div class="stream-info">
+      <p class="stream-name">${s.name}</p>
+      <p class="stream-role">${s.role}</p>
+      <p class="stream-title" style="font-style:italic;font-size:0.75rem">Loading...</p>
+      <p class="stream-link">${twitchSVG} twitch.tv/${s.login}</p>
+    </div>
+  </a>`).join('');
+
+checkLive();
+setInterval(checkLive, 120000);
+</script>
 </body>
 </html>
