@@ -53,13 +53,15 @@ section{position:relative;padding:5rem 2rem;z-index:1}
 .section-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.4rem,3.5vw,2.3rem);color:#fff;margin-bottom:0.75rem;line-height:1.2}
 .section-title span{background:linear-gradient(135deg,var(--purple-light),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .section-divider{width:60px;height:1px;background:linear-gradient(90deg,var(--purple-mid),var(--teal),transparent);margin-bottom:2.5rem}
-.captains-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.25rem}
+.captains-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem}
 .captain-card{background:var(--panel-light);border:1px solid var(--border);padding:1.75rem 1.5rem;position:relative;overflow:hidden;transition:border-color 0.3s,box-shadow 0.3s}
 .captain-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--teal),transparent)}
 .captain-card:hover{border-color:rgba(108,63,160,0.6);box-shadow:0 0 30px rgba(108,63,160,0.2)}
 .captain-role{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.5rem;color:var(--purple-light)}
-.captain-name{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:0.25rem}
-.captain-guild{font-size:0.8rem;color:var(--text-muted)}
+.captain-name{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:0.2rem}
+.captain-guild{font-size:0.78rem;color:var(--text-muted);margin-bottom:0.6rem}
+.cocaptain-label{font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--teal);margin-bottom:0.2rem;display:block}
+.cocaptain-name{font-family:'Cinzel',serif;font-size:0.9rem;font-weight:600;color:var(--text)}
 .format-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
 .format-card{background:var(--panel);border:1px solid var(--border);padding:1.75rem 1.5rem;position:relative;overflow:hidden;transition:border-color 0.3s,box-shadow 0.3s}
 .format-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal-dim),var(--purple-mid),transparent)}
@@ -131,7 +133,7 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
   <div class="hero-bg"></div>
   <div class="hero-nebula"></div>
   <div class="hero-content">
-    <span class="hero-badge">✦ NA / SA Server &nbsp;·&nbsp; Community Event ✦</span>
+    <span class="hero-badge">✦ NA / SA Region &nbsp;·&nbsp; Community Event ✦</span>
     <h1 class="hero-title">Draft <span>Tournament</span></h1>
     <p class="hero-season">Official Season 1</p>
     <div class="hero-divider"></div>
@@ -164,12 +166,36 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
     <h2 class="section-title">Captains &amp; <span>Co-Captains</span></h2>
     <div class="section-divider"></div>
     <div class="captains-grid">
-      <div class="captain-card"><p class="captain-role">✦ Captain</p><p class="captain-name">Arelite</p><p class="captain-guild">Undercooked</p></div>
-      <div class="captain-card"><p class="captain-role">✦ Captain</p><p class="captain-name">Rheggie</p><p class="captain-guild">Undercooked</p></div>
-      <div class="captain-card"><p class="captain-role">✦ Captain</p><p class="captain-name">Bora</p><p class="captain-guild">Ma Vontade</p></div>
-      <div class="captain-card"><p class="captain-role">✦ Captain</p><p class="captain-name">Wicked</p><p class="captain-guild">Milk</p></div>
+      <div class="captain-card">
+        <p class="captain-role">✦ Captain</p>
+        <p class="captain-name">Arelite</p>
+        <p class="captain-guild">Undercooked</p>
+        <span class="cocaptain-label">Co-Captain</span>
+        <span class="cocaptain-name">Zaels</span>
+      </div>
+      <div class="captain-card">
+        <p class="captain-role">✦ Captain</p>
+        <p class="captain-name">Rheggie</p>
+        <p class="captain-guild">Undercooked</p>
+        <span class="cocaptain-label">Co-Captain</span>
+        <span class="cocaptain-name">Ruthless</span>
+      </div>
+      <div class="captain-card">
+        <p class="captain-role">✦ Captain</p>
+        <p class="captain-name">Bora</p>
+        <p class="captain-guild">Ma Vontade</p>
+        <span class="cocaptain-label">Co-Captain</span>
+        <span class="cocaptain-name">Soju</span>
+      </div>
+      <div class="captain-card">
+        <p class="captain-role">✦ Captain</p>
+        <p class="captain-name">Wicked</p>
+        <p class="captain-guild">Milk</p>
+        <span class="cocaptain-label">Co-Captain</span>
+        <span class="cocaptain-name">Rosie</span>
+      </div>
     </div>
-    <p style="margin-top:1.5rem;font-size:0.82rem;color:var(--text-muted)">Co-captains are self-managed by each captain prior to the draft. Rosters are assembled through blind picks during the live draft stream 8pm on April 30th.</p>
+    <p style="margin-top:1.5rem;font-size:0.82rem;color:var(--text-muted)">Rosters are assembled through a reverse snake style draft during the live stream on April 30th at 8PM EST.</p>
   </div>
 </section>
 
@@ -181,18 +207,18 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
     <div class="format-grid">
       <div class="format-card">
         <svg class="card-icon" viewBox="0 0 48 48" fill="none"><path d="M6 24 C10 15, 38 15, 42 24 C38 33, 10 33, 6 24Z" stroke="#2dd4bf" stroke-width="1.5" fill="none"/><circle cx="24" cy="24" r="5" stroke="#b07fe0" stroke-width="1.5" fill="rgba(108,63,160,0.2)"/><circle cx="24" cy="24" r="2" fill="#2dd4bf"/><line x1="4" y1="9" x2="44" y2="39" stroke="#f87171" stroke-width="1.8" stroke-linecap="round"/><line x1="4" y1="10" x2="44" y2="40" stroke="rgba(248,113,113,0.25)" stroke-width="4" stroke-linecap="round"/></svg>
-        <p class="format-title">Draft Style</p><p class="format-value">Blind Pick</p>
-        <p class="format-desc">Captains build rosters from the player pool using blind picks on the live draft stream.</p>
+        <p class="format-title">Draft Style</p><p class="format-value">Reverse Snake</p>
+        <p class="format-desc">Captains pick in reverse snake order — each round the pick order flips, giving every team a fair shot at top players.</p>
       </div>
       <div class="format-card">
         <svg class="card-icon" viewBox="0 0 48 48" fill="none"><path d="M24 4 L38 9 L38 22 C38 31 31 38 24 41 C17 38 10 31 10 22 L10 9 Z" stroke="#b07fe0" stroke-width="1.5" fill="rgba(108,63,160,0.1)"/><circle cx="18" cy="19" r="3" stroke="#2dd4bf" stroke-width="1.2" fill="rgba(45,212,191,0.1)"/><path d="M12 29 C12 25, 15 23, 18 23 C21 23, 24 25, 24 29" stroke="#2dd4bf" stroke-width="1.2" fill="none"/><circle cx="30" cy="19" r="3" stroke="#b07fe0" stroke-width="1.2" fill="rgba(176,127,224,0.1)"/><path d="M24 29 C24 25, 27 23, 30 23 C33 23, 36 25, 36 29" stroke="#b07fe0" stroke-width="1.2" fill="none"/></svg>
         <p class="format-title">Roster Size</p><p class="format-value">48 + 18 Subs</p>
-        <p class="format-desc">Each team fields 48 players with 18 substitutes. .</p>
+        <p class="format-desc">Each team fields 48 players with 18 substitutes. Can scale to 54 based on sign-up numbers.</p>
       </div>
       <div class="format-card">
         <svg class="card-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="#2dd4bf" stroke-width="1.5" fill="rgba(45,212,191,0.05)"/><ellipse cx="24" cy="24" rx="8" ry="18" stroke="#b07fe0" stroke-width="1" fill="none" opacity="0.7"/><line x1="6" y1="24" x2="42" y2="24" stroke="#b07fe0" stroke-width="1" opacity="0.7"/><line x1="24" y1="6" x2="24" y2="42" stroke="#2dd4bf" stroke-width="1" opacity="0.5"/><path d="M24 8 L26 14 L24 12 L22 14 Z" fill="#2dd4bf"/><circle cx="24" cy="24" r="2.5" fill="#2dd4bf" opacity="0.8"/></svg>
         <p class="format-title">Open to All</p><p class="format-value">Cross-Guild</p>
-        <p class="format-desc">Players from all guilds across NA/SA region are eligible. Sign up and get drafted!</p>
+        <p class="format-desc">Players from all guilds across the NA/SA region are eligible. Sign up and get drafted!</p>
       </div>
       <div class="format-card">
         <svg class="card-icon" viewBox="0 0 48 48" fill="none">
@@ -203,7 +229,7 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
           <line x1="24" y1="18" x2="24" y2="15" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity="0.7"/><line x1="24" y1="30" x2="24" y2="33" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity="0.7"/><line x1="18" y1="24" x2="15" y2="24" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity="0.7"/><line x1="30" y1="24" x2="33" y2="24" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity="0.7"/>
         </svg>
         <p class="format-title">Game Mode</p><p class="format-value">War Games</p>
-        <p class="format-desc">Official war games on the NA/SA region. Mondays &amp; Thursdays, 8:30–10PM EST.</p>
+        <p class="format-desc">Official war games in the NA/SA region. Mondays &amp; Thursdays, 8:30–10PM EST.</p>
       </div>
       <div class="format-card">
         <svg class="card-icon" viewBox="0 0 48 48" fill="none"><defs><radialGradient id="orbg" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="rgba(176,127,224,0.5)"/><stop offset="100%" stop-color="rgba(108,63,160,0.1)"/></radialGradient></defs><circle cx="24" cy="20" r="14" stroke="#b07fe0" stroke-width="1.5" fill="url(#orbg)"/><circle cx="24" cy="20" r="8" stroke="#2dd4bf" stroke-width="1" fill="rgba(45,212,191,0.05)" opacity="0.7"/><circle cx="24" cy="20" r="2" fill="#2dd4bf"/><path d="M14 36 L24 40 L34 36" stroke="#b07fe0" stroke-width="1.2" fill="none" opacity="0.7"/><line x1="24" y1="34" x2="24" y2="40" stroke="#2dd4bf" stroke-width="1.2"/><path d="M16 40 L32 40" stroke="#2dd4bf" stroke-width="1.5" stroke-linecap="round"/><ellipse cx="19" cy="16" rx="4" ry="2.5" fill="rgba(255,255,255,0.12)" transform="rotate(-30,19,16)"/></svg>
@@ -226,7 +252,7 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
     <div class="section-divider"></div>
     <div class="schedule-list">
       <div class="schedule-item"><span class="schedule-date">Apr 28 EST</span><span class="schedule-event">Player Sign-Up Window — registrations are now closed <span class="s-badge b-closed">Closed</span></span></div>
-      <div class="schedule-item"><span class="schedule-date">Apr 30 · Thu 8pm EST</span><span class="schedule-event">Live Draft Stream — captains do blind picks to build rosters <span class="s-badge b-next">This Week</span></span><span class="schedule-time">8:00PM EST</span></div>
+      <div class="schedule-item"><span class="schedule-date">Apr 30 · Thu EST</span><span class="schedule-event">Live Draft Stream — reverse snake draft to build rosters <span class="s-badge b-next">This Week</span></span><span class="schedule-time">8:00PM EST</span></div>
       <div class="schedule-item"><span class="schedule-date">May 7 · Wed EST</span><span class="schedule-event">Season 1 Games Begin — first official war matches</span><span class="schedule-time">8:30PM EST</span></div>
       <div class="schedule-item"><span class="schedule-date">Every Monday</span><span class="schedule-event">Regular Season Match Day</span><span class="schedule-time">8:30–10PM EST</span></div>
       <div class="schedule-item"><span class="schedule-date">Every Thursday</span><span class="schedule-event">Regular Season Match Day</span><span class="schedule-time">8:30–10PM EST</span></div>
@@ -282,10 +308,10 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
     <h2 class="section-title">Rules &amp; <span>Eligibility</span></h2>
     <div class="section-divider"></div>
     <div class="rules-grid">
-      <div><p class="rule-group-title">Eligibility</p><ul class="rule-list"><li>Must play on the NA/SA region.</li><li>Open to all players regardless of guild affiliation.</li><li>One player, one team — no switching after draft.</li><li>Must be available Mon &amp; Thu 8:30–10PM EST.</li></ul></div>
+      <div><p class="rule-group-title">Eligibility</p><ul class="rule-list"><li>Must play in the NA/SA region.</li><li>Open to all players regardless of guild affiliation.</li><li>One player, one team — no switching after draft.</li><li>Must be available Mon &amp; Thu 8:30–10PM EST.</li></ul></div>
       <div><p class="rule-group-title">Class Restrictions</p><ul class="rule-list"><li>Only one restriction applies: <span class="restrict-badge">Cordy Xbow ×2</span> max per team at any time.</li><li>All other classes and builds are completely unrestricted.</li><li>Bring whatever composition your team decides.</li></ul></div>
       <div><p class="rule-group-title">Match Conduct</p><ul class="rule-list"><li>Respectful behaviour required at all times.</li><li>No exploits, bugs, or third-party tools permitted.</li><li>Scoreboard screenshots must be submitted after each match.</li><li>Admin team has final say on all disputes.</li><li>Harassment or abuse results in immediate removal.</li></ul></div>
-      <div><p class="rule-group-title">Draft Rules</p><ul class="rule-list"><li>Draft conducted live via stream on April 30th EST.</li><li>Co-captains selected by captains before the stream.</li><li>Picks are blind — captains cannot see each other's selections.</li><li>Roster: 48 players + 18 subs.</li></ul></div>
+      <div><p class="rule-group-title">Draft Rules</p><ul class="rule-list"><li>Draft conducted live via stream on April 30th at 8PM EST.</li><li>Reverse snake style — pick order flips each round.</li><li>Co-captains assist their captain during the draft.</li><li>Roster: 48 players + 18 subs. </li></ul></div>
     </div>
   </div>
 </section>
@@ -323,7 +349,7 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
     <a href="https://discord.gg/vpfNx3qb" target="_blank">Discord</a>
     <a href="https://www.playthroneandliberty.com/en-us/" target="_blank">Official T&amp;L Site</a>
   </div>
-  <p class="footer-text">NA/SA Server · Community Run Event · Not affiliated with NCSoft or Amazon Games</p>
+  <p class="footer-text">NA/SA Region · Community Run Event · Not affiliated with NCSoft or Amazon Games</p>
 </footer>
 
 </body>
