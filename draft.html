@@ -4,6 +4,8 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>T&L Draft Tool - Season 1</title>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -32,6 +34,7 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;fon
 #app.show{display:flex}
 .pause-bar{background:var(--orange);color:#000;text-align:center;padding:0.28rem;font-weight:700;font-size:0.82rem;display:none}
 .pause-bar.on{display:block}
+.sync-bar{background:var(--surface2);color:var(--text3);text-align:center;padding:0.2rem;font-size:0.68rem;border-bottom:1px solid var(--border);flex-shrink:0}
 header{background:var(--surface);border-bottom:1px solid var(--border);padding:0.45rem 0.9rem;display:flex;align-items:center;gap:1rem;flex-shrink:0}
 .logo{font-size:0.9rem;font-weight:700;color:var(--purple);white-space:nowrap}
 .hcenter{flex:1;display:flex;align-items:center;justify-content:center;gap:1.25rem}
@@ -48,64 +51,73 @@ header{background:var(--surface);border-bottom:1px solid var(--border);padding:0
 .btn.danger{border-color:var(--red2);color:var(--red)}.btn.danger:hover{background:var(--red2)}
 .btn.ok{border-color:var(--teal2);color:var(--teal)}.btn.ok:hover{background:var(--teal2)}
 .btn.primary{border-color:var(--purple2);background:var(--purple2);color:#fff}.btn.primary:hover{background:var(--purple)}
-main{flex:1;display:grid;grid-template-columns:290px 1fr 250px;overflow:hidden}
+main{flex:1;display:grid;grid-template-columns:310px 1fr 240px;overflow:hidden}
 #pool-panel{background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
-.ph{padding:.55rem .65rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.45rem;flex-shrink:0}
+.ph{padding:.5rem .65rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.45rem;flex-shrink:0}
 .ptitle{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text2)}
 .pbadge{background:var(--surface3);color:var(--text2);padding:.08rem .4rem;border-radius:2px;font-size:.68rem}
-.sbar{padding:.45rem .65rem;border-bottom:1px solid var(--border);flex-shrink:0;display:flex;flex-direction:column;gap:.35rem}
+.sbar{padding:.4rem .65rem;border-bottom:1px solid var(--border);flex-shrink:0;display:flex;flex-direction:column;gap:.3rem}
 .sbar input{width:100%;padding:.35rem .55rem;background:var(--surface2);border:1px solid var(--border);color:var(--text);font-size:.82rem;outline:none}
 .sbar input:focus{border-color:var(--purple)}
-.frow{display:flex;gap:.25rem;flex-wrap:wrap}
-.fb{padding:.18rem .45rem;border:1px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;font-size:.67rem;border-radius:2px}
+.frow{display:flex;gap:.22rem;flex-wrap:wrap}
+.fb{padding:.2rem .5rem;border:1px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;font-size:.72rem;border-radius:2px}
 .fb.act{background:var(--purple3);border-color:var(--purple2);color:var(--text)}
 .fb.rt.act{background:#1e3a5f;border-color:var(--tank);color:var(--tank)}
 .fb.rd.act{background:#4a1515;border-color:var(--dps);color:var(--dps)}
 .fb.rh.act{background:#14432a;border-color:var(--healer);color:var(--healer)}
+.cfrow-wrap{display:flex;flex-wrap:wrap;gap:.22rem;padding:.3rem 0}
+.cfb{padding:.2rem .5rem;border:1px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;font-size:.72rem;border-radius:2px;white-space:nowrap}
+.cfb.act{background:var(--purple3);border-color:var(--purple2);color:var(--text)}
 .plist{flex:1;overflow-y:auto;padding:.2rem}
-.pi{padding:.42rem .55rem;cursor:pointer;border:1px solid transparent;border-radius:2px;margin-bottom:2px;display:flex;align-items:center;gap:.4rem}
+.pi{padding:.38rem .5rem;cursor:pointer;border:1px solid transparent;border-radius:2px;margin-bottom:2px;display:flex;align-items:center;gap:.35rem}
 .pi:hover{background:var(--surface2);border-color:var(--border)}
 .pi.sel{background:var(--surface3);border-color:var(--purple2)}
 .pi.hw{background:#0d2a1a;border-color:var(--green2)}
 .pi.hn{background:#2a0d0d;border-color:var(--red2);opacity:.5}
 .rdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .rdot.Tank{background:var(--tank)}.rdot.DPS{background:var(--dps)}.rdot.Healer{background:var(--healer)}
-.pname{font-size:.88rem;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pcls{font-size:.75rem;color:var(--text2);white-space:nowrap}
-.wi{font-size:.65rem;color:var(--green);margin-left:auto}.ni{font-size:.65rem;color:var(--red);margin-left:auto}
-#roster-panel{background:var(--bg);overflow-y:auto;padding:.65rem}
+.pname{font-size:.82rem;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pcls{font-size:.7rem;color:var(--text2);white-space:nowrap}
+.wi{font-size:.62rem;color:var(--green);margin-left:auto}.ni{font-size:.62rem;color:var(--red);margin-left:auto}
+#roster-panel{background:var(--bg);overflow-y:auto;padding:.5rem}
 .ctabs{display:flex;gap:.25rem;margin-bottom:.5rem;flex-wrap:wrap}
 .ctab{padding:.35rem .8rem;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:.72rem;border-radius:2px;color:var(--text2)}
 .ctab.act{border-color:var(--purple2);background:var(--purple3);color:var(--text)}
-.rsec{margin-bottom:.85rem}
-.rsec-title{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin-bottom:.35rem;padding:.2rem .4rem;border-left:2px solid var(--teal2);display:flex;justify-content:space-between;align-items:center}
-.rslot{background:var(--surface);border:1px solid var(--border);padding:.28rem .45rem;min-height:28px;display:flex;align-items:center;gap:.35rem;cursor:pointer;border-radius:2px;margin-bottom:2px}
-.rslot:hover{border-color:var(--border2)}.rslot.filled:hover{border-color:var(--purple2)}
-.stype{font-size:.6rem;color:var(--text3);white-space:nowrap;min-width:52px}
+/* 3-column party grid */
+.party-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.5rem}
+.party-col{background:var(--surface);border:1px solid var(--border);border-radius:3px;overflow:hidden}
+.party-col-title{font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--teal);padding:.3rem .45rem;border-bottom:1px solid var(--border);background:var(--surface2);display:flex;justify-content:space-between}
+.rslot{border-bottom:1px solid var(--border);padding:.25rem .45rem;min-height:26px;display:flex;align-items:center;gap:.3rem;cursor:pointer}
+.rslot:last-child{border-bottom:none}
+.rslot:hover{background:var(--surface2)}.rslot.filled:hover{background:#1a1040}
+.stype{font-size:.58rem;color:var(--text3);white-space:nowrap;min-width:48px}
 .stype.Any{color:var(--any)}.stype.Tank{color:var(--tank)}.stype.DPS{color:var(--dps)}.stype.Support{color:var(--healer)}.stype.Spinner{color:var(--orange)}
-.splayer{font-size:.78rem;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sempty{font-size:.65rem;color:var(--text3);font-style:italic}
+.splayer{font-size:.75rem;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sempty{font-size:.62rem;color:var(--text3);font-style:italic}
+/* subs grid */
+.subs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.5rem}
+.subs-title{font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);margin-bottom:.3rem;padding:.2rem .35rem;border-left:2px solid var(--gold2);display:flex;justify-content:space-between}
+.sub-col{background:var(--surface);border:1px solid var(--border);border-radius:3px;overflow:hidden}
+.sub-col-title{font-size:.58rem;color:var(--text3);padding:.2rem .4rem;border-bottom:1px solid var(--border);background:var(--surface2);text-align:center;text-transform:uppercase;letter-spacing:.04em}
 #info-panel{background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
-.pdet{padding:.7rem;flex:1;overflow-y:auto}
-.dname{font-size:.95rem;font-weight:700;margin-bottom:.18rem}
-.dcls{font-size:.75rem;color:var(--text2);margin-bottom:.6rem}
-.dsec{margin-bottom:.6rem}.dlbl{font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:.22rem}
-.dval{font-size:.78rem;color:var(--text);background:var(--surface2);padding:.35rem .55rem;border-radius:2px}
-.dtag{display:inline-block;padding:.12rem .45rem;border-radius:2px;font-size:.68rem;margin:.08rem;border:1px solid}
+.pdet{padding:.65rem;flex:1;overflow-y:auto}
+.dname{font-size:.92rem;font-weight:700;margin-bottom:.15rem}
+.dcls{font-size:.73rem;color:var(--text2);margin-bottom:.55rem}
+.dsec{margin-bottom:.55rem}.dlbl{font-size:.6rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:.2rem}
+.dval{font-size:.76rem;color:var(--text);background:var(--surface2);padding:.32rem .5rem;border-radius:2px}
+.dtag{display:inline-block;padding:.1rem .4rem;border-radius:2px;font-size:.66rem;margin:.07rem;border:1px solid}
 .tw{background:#0d2a1a;border-color:var(--green2);color:var(--green)}
 .tn{background:#2a0d0d;border-color:var(--red2);color:var(--red)}
 .ta{background:#2a1d00;border-color:var(--gold2);color:var(--gold)}
-.pbtn{width:100%;padding:.55rem;background:var(--purple2);color:#fff;border:none;cursor:pointer;font-size:.82rem;font-weight:600;margin-top:.45rem;border-radius:2px}
+.pbtn{width:100%;padding:.52rem;background:var(--purple2);color:#fff;border:none;cursor:pointer;font-size:.8rem;font-weight:600;margin-top:.4rem;border-radius:2px}
 .pbtn:hover{background:var(--purple)}
-.nosel{padding:.85rem;color:var(--text3);font-size:.78rem;text-align:center}
-.hkhint{font-size:.65rem;color:var(--text3);text-align:center;padding:.3rem;border-top:1px solid var(--border)}
-#pick-feed{background:var(--surface2);border-top:1px solid var(--border);flex-shrink:0;max-height:120px;overflow-y:auto}
-.feed-title{font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);padding:.25rem .65rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface2)}
-.fe{padding:.18rem .65rem;font-size:.72rem;color:var(--text2);border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:center}
+.nosel{padding:.85rem;color:var(--text3);font-size:.76rem;text-align:center}
+.hkhint{font-size:.63rem;color:var(--text3);text-align:center;padding:.28rem;border-top:1px solid var(--border)}
+#pick-feed{background:var(--surface2);border-top:1px solid var(--border);flex-shrink:0;max-height:100px;overflow-y:auto}
+.feed-title{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);padding:.2rem .65rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface2)}
+.fe{padding:.15rem .65rem;font-size:.7rem;color:var(--text2);border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:center}
 .fe-pick{color:var(--gold);font-weight:500}
 .fe-skip{color:var(--orange)}
-#logpanel{background:var(--bg);border-top:1px solid var(--border);max-height:50px;overflow-y:auto;flex-shrink:0}
-.le{padding:.15rem .65rem;font-size:.68rem;color:var(--text3);border-bottom:1px solid var(--border);display:flex;gap:.55rem}
 #smodal,#amodal,#mvmodal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:500}
 #smodal.open,#amodal.open,#mvmodal.open{display:flex}
 .mbox{background:var(--surface);border:1px solid var(--border2);padding:1.1rem;width:370px;max-height:78vh;overflow-y:auto}
@@ -129,6 +141,7 @@ main{flex:1;display:grid;grid-template-columns:290px 1fr 250px;overflow:hidden}
   </div>
 </div>
 <div id="app">
+  <div class="sync-bar" id="sync-bar">⟳ Connecting...</div>
   <div class="pause-bar" id="pbar">⏸ DRAFT PAUSED</div>
   <header>
     <div class="logo">T&amp;L Draft S1</div>
@@ -140,7 +153,7 @@ main{flex:1;display:grid;grid-template-columns:290px 1fr 250px;overflow:hidden}
       </div>
       <div><div class="tlabel">Up Next</div><div class="tval" id="tnext" style="font-size:.82rem;color:var(--text2)">—</div></div>
       <div style="text-align:center"><div class="tlabel">Round</div><div class="tval" style="color:var(--teal)" id="rnum">1</div></div>
-      <div style="text-align:center"><div class="tlabel">Pick</div><div class="tval" id="pnum">1/192</div></div>
+      <div style="text-align:center"><div class="tlabel">Pick</div><div class="tval" id="pnum">1/256</div></div>
       <div style="text-align:center"><div class="tlabel">Pool</div><div class="tval" id="premain">336</div></div>
     </div>
     <div class="hright">
@@ -160,7 +173,7 @@ main{flex:1;display:grid;grid-template-columns:290px 1fr 250px;overflow:hidden}
           <button class="fb rd" onclick="setRF('DPS',this)">DPS</button>
           <button class="fb rh" onclick="setRF('Healer',this)">Healer</button>
         </div>
-        <div class="frow" id="cfrow" style="max-height:52px;overflow-y:auto;gap:.2rem"></div>
+        <div class="cfrow-wrap" id="cfrow"></div>
       </div>
       <div class="plist" id="plist"></div>
     </div>
@@ -175,7 +188,6 @@ main{flex:1;display:grid;grid-template-columns:290px 1fr 250px;overflow:hidden}
     </div>
   </main>
   <div id="pick-feed"><div class="feed-title">📢 Live Pick Feed</div><div id="feed-entries"></div></div>
-  <div id="logpanel"></div>
 </div>
 <div id="smodal">
   <div class="mbox">
@@ -209,10 +221,24 @@ main{flex:1;display:grid;grid-template-columns:290px 1fr 250px;overflow:hidden}
     <button class="btn" style="width:100%" onclick="closeAdmin()">Close</button>
   </div>
 </div>
-<script>
+PART 2 of 3 — paste immediately after Part 1:
+html<script>
+const firebaseConfig={
+  apiKey:"AIzaSyBFoZE4Oem9WVb3iF1YStRvIQX67vmve6A",
+  authDomain:"tnltourney.firebaseapp.com",
+  databaseURL:"https://tnltourney-default-rtdb.firebaseio.com",
+  projectId:"tnltourney",
+  storageBucket:"tnltourney.firebasestorage.app",
+  messagingSenderId:"218077176790",
+  appId:"1:218077176790:web:4c875af2c39a0050903a77"
+};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.database();
+
 const PW='mizzelleisthebest';
 const CIRC=2*Math.PI*20;
 const TSEC=40;
+const TOTAL_PICKS=256;
 const CAPS=[
   {id:'arelite',name:'Arelite',color:'#7c6ff7',co:'Zaels'},
   {id:'rheggie',name:'Rheggie',color:'#2dd4bf',co:'Ruthless'},
@@ -220,8 +246,17 @@ const CAPS=[
   {id:'wicked',name:'Wicked',color:'#f87171',co:'Rosie'},
 ];
 
-function genOrder(n){const o=[];let r=1,pk=0;while(pk<n){const ev=r%2===0;const seq=ev?[3,2,1,0]:[0,1,2,3];for(const i of seq){if(pk>=n)break;o.push({ci:i,r});pk++;}r++;}return o;}
-const ORD=genOrder(192);
+function genOrder(n){
+  const o=[];let r=1,pk=0;
+  while(pk<n){
+    const ev=r%2===0;
+    const seq=ev?[3,2,1,0]:[0,1,2,3];
+    for(const i of seq){if(pk>=n)break;o.push({ci:i,r});pk++;}
+    r++;
+  }
+  return o;
+}
+const ORD=genOrder(TOTAL_PICKS);
 
 const PARTY_DEFS=[
   {key:'p1',label:'Party 1 — Objective',prefix:'p1',slots:[
@@ -374,6 +409,7 @@ const PL=[
   {id:'encore',n:'encore',role:'Tank',cls:'Crusader',alts:'Gladiator',notes:'',w:[],x:[]},
   {id:'alice',n:'鿫゚alice',role:'Healer',cls:'Oracle',alts:'Enigma',notes:'Special chars in IGN — Alice must send party invite',w:[],x:[]},
   {id:'marruh',n:'Marruh',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'meow',n:'Meow',role:'Healer',cls:'Oracle',alts:'Steelheart, Crusader',notes:'',w:[],x:[]},
   {id:'akaroyoshi',n:'Akaroyoshi',role:'Tank',cls:'Crusader',alts:'',notes:'Hit/CC/buff bot. No capping.',w:[],x:[]},
   {id:'mcdo',n:'McDo',role:'Tank',cls:'Warden',alts:'Crusader',notes:'',w:[],x:[]},
   {id:'amaterasu',n:'amaterasu',role:'DPS',cls:'Gladiator',alts:'Enigma, Infiltrator, Scryer',notes:'Flexible flank/KS/main',w:[],x:[]},
@@ -635,159 +671,300 @@ const PL=[
   {id:'miffy',n:'miffyる',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
   {id:'krowck',n:'Krowck神',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'',w:['hitz'],x:[]},
   {id:'poodlexd',n:'poodlexd',role:'DPS',cls:'Enigma',alts:'Spellblade',notes:'',w:[],x:[]},
-  {id:'raiotu',n:'Raiotu',role:'DPS',cls:'Scorpion',alts:'',notes:'Pref oracle / KS',w:[],x:[]},
-  {id:'meow',n:'Meow',role:'Healer',cls:'Oracle',alts:'Steelheart, Crusader',notes:'',w:[],x:[]},
+  {id:'raitou',n:'Raitou',role:'DPS',cls:'Scorpion',alts:'',notes:'Pref oracle / KS',w:[],x:[]},
 ];
-  let S={pickIdx:0,tsec:TSEC,tint:null,paused:false,log:[],slots:prePlaceCaptains(buildSlots()),sel:null,viewCap:CAPS[0].id,stream:false,movePlayer:null};
-let RF='All',ST='',CF='';
+  // Local UI state (not synced)
+let localSel=null;
+let localStream=false;
+let localRF='All';
+let localST='';
+let localCF='';
+let localViewCap=CAPS[0].id;
+let localMovePlayer=null;
+
+// Shared draft state (synced via Firebase)
+let DS={
+  pickIdx:0,
+  paused:false,
+  slots:prePlaceCaptains(buildSlots()),
+  feed:[],
+  timerStart:null,
+  timerRunning:false,
+};
+
+let timerInterval=null;
+let lastPickIdx=-1;
+let isAdmin=false;
+
+// ── FIREBASE SYNC ──────────────────────────────────────────────
+
+function slotsToFirebase(slots){
+  const out={};
+  for(const capId in slots){
+    out[capId]={};
+    for(const slot of slots[capId]){
+      out[capId][slot.id.replace(/[.#$/[\]]/g,'_')]={
+        id:slot.id,party:slot.party,t:slot.t,lb:slot.lb,
+        playerId:slot.player?slot.player.id:null
+      };
+    }
+  }
+  return out;
+}
+
+function slotsFromFirebase(data,localSlots){
+  const result=JSON.parse(JSON.stringify(localSlots));
+  // clear all
+  for(const capId in result)for(const s of result[capId])s.player=null;
+  if(!data)return result;
+  for(const capId in data){
+    for(const key in data[capId]){
+      const fd=data[capId][key];
+      const slot=result[capId]?.find(s=>s.id===fd.id);
+      if(slot){
+        slot.player=fd.playerId?PL.find(p=>p.id===fd.playerId)||null:null;
+      }
+    }
+  }
+  return result;
+}
+
+function pushState(){
+  const payload={
+    pickIdx:DS.pickIdx,
+    paused:DS.paused,
+    slots:slotsToFirebase(DS.slots),
+    feed:DS.feed.slice(-50),
+    timerStart:DS.timerStart,
+    timerRunning:DS.timerRunning,
+    ts:Date.now()
+  };
+  db.ref('draft').set(payload);
+}
+
+function initFirebase(){
+  db.ref('draft').on('value',snap=>{
+    const data=snap.val();
+    document.getElementById('sync-bar').textContent='✓ Live synced';
+    document.getElementById('sync-bar').style.color='var(--teal)';
+    if(!data){
+      // First load — push initial state
+      pushState();
+      return;
+    }
+    const prevIdx=DS.pickIdx;
+    DS.pickIdx=data.pickIdx||0;
+    DS.paused=data.paused||false;
+    DS.slots=slotsFromFirebase(data.slots,prePlaceCaptains(buildSlots()));
+    DS.feed=data.feed||[];
+    DS.timerStart=data.timerStart||null;
+    DS.timerRunning=data.timerRunning||false;
+
+    // Sync timer
+    syncTimer();
+
+    // Update pause bar
+    document.getElementById('pbar').classList.toggle('on',DS.paused);
+
+    // Rebuild UI
+    updateTurnDisplay();
+    buildPlist();
+    buildRboard();
+    buildFeed();
+
+    if(localSel)renderDet();
+  });
+
+  db.ref('.info/connected').on('value',snap=>{
+    if(!snap.val()){
+      document.getElementById('sync-bar').textContent='⚠ Disconnected — reconnecting...';
+      document.getElementById('sync-bar').style.color='var(--orange)';
+    }
+  });
+}
+
+function syncTimer(){
+  clearInterval(timerInterval);
+  if(DS.timerRunning&&DS.timerStart&&!DS.paused){
+    const elapsed=Math.floor((Date.now()-DS.timerStart)/1000);
+    const remaining=Math.max(0,TSEC-elapsed);
+    updateTimerDisplay(remaining);
+    if(remaining>0){
+      timerInterval=setInterval(()=>{
+        if(DS.paused)return;
+        const el=Math.floor((Date.now()-DS.timerStart)/1000);
+        const rem=Math.max(0,TSEC-el);
+        updateTimerDisplay(rem);
+        if(rem<=0){
+          clearInterval(timerInterval);
+          // Only the "admin" browser fires the auto-skip
+          if(isAdmin)doSkip();
+        }
+      },500);
+    }
+  } else {
+    updateTimerDisplay(TSEC);
+  }
+}
+
+function startNewTimer(){
+  DS.timerStart=Date.now();
+  DS.timerRunning=true;
+}
+
+// ── LOGIN ──────────────────────────────────────────────────────
 
 function doLogin(){
-  if(document.getElementById('pwin').value===PW){
+  const v=document.getElementById('pwin').value;
+  if(v===PW){
     document.getElementById('login-screen').style.display='none';
     document.getElementById('app').classList.add('show');
-    init();
-  }else{document.getElementById('lerr').textContent='Incorrect password.';}
+    isAdmin=true; // first login is admin — in production you'd have a separate admin pw
+    buildCF();
+    buildCtabs();
+    buildFTbtns();
+    initFirebase();
+  }else{
+    document.getElementById('lerr').textContent='Incorrect password.';
+  }
 }
 
-function init(){buildCF();buildCtabs();buildRboard();buildFTbtns();updateTurn();startTimer();buildPlist();}
+// ── TIMER DISPLAY ──────────────────────────────────────────────
 
-function startTimer(){
-  clearInterval(S.tint);S.tsec=TSEC;updTimer();
-  S.tint=setInterval(()=>{if(S.paused)return;S.tsec--;updTimer();if(S.tsec<=0)skipTurn();},1000);
-}
-
-function updTimer(){
-  const n=document.getElementById('tnum'),c=document.getElementById('tcirc');
+function updateTimerDisplay(sec){
+  const n=document.getElementById('tnum');
+  const c=document.getElementById('tcirc');
   if(!n||!c)return;
-  n.textContent=S.tsec;
-  c.style.strokeDashoffset=CIRC*(1-S.tsec/TSEC);
-  c.style.stroke=S.tsec>15?'var(--teal)':S.tsec>7?'var(--orange)':'var(--red)';
+  const s=sec===undefined?TSEC:sec;
+  n.textContent=Math.ceil(s);
+  c.style.strokeDashoffset=CIRC*(1-s/TSEC);
+  c.style.stroke=s>15?'var(--teal)':s>7?'var(--orange)':'var(--red)';
 }
 
-function getCap(){return CAPS[ORD[Math.min(S.pickIdx,ORD.length-1)].ci];}
-function getNxt(){const ni=S.pickIdx+1;if(ni>=ORD.length)return null;return CAPS[ORD[ni].ci];}
+// ── TURN DISPLAY ───────────────────────────────────────────────
 
-function updateTurn(){
+function getCap(){return CAPS[ORD[Math.min(DS.pickIdx,ORD.length-1)].ci];}
+function getNxt(){const ni=DS.pickIdx+1;if(ni>=ORD.length)return null;return CAPS[ORD[ni].ci];}
+
+function updateTurnDisplay(){
   const c=getCap(),nx=getNxt();
-  const rnd=ORD[Math.min(S.pickIdx,ORD.length-1)].r;
+  const rnd=ORD[Math.min(DS.pickIdx,ORD.length-1)].r;
   document.getElementById('tcap').textContent=c.name;
   document.getElementById('tcap').style.color=c.color;
   document.getElementById('tnext').textContent=nx?nx.name:'—';
   document.getElementById('rnum').textContent=rnd;
-  document.getElementById('pnum').textContent=`${S.pickIdx+1}/192`;
-  S.viewCap=c.id;
-  buildCtabs();buildRboard();
+  document.getElementById('pnum').textContent=`${DS.pickIdx+1}/${TOTAL_PICKS}`;
+  localViewCap=c.id;
+  buildCtabs();
 }
 
-function skipTurn(){addFeed(null,getCap(),'');advTurn();}
-
-function advTurn(){
-  S.pickIdx++;
-  if(S.pickIdx>=ORD.length){clearInterval(S.tint);alert('Draft Complete!');return;}
-  updateTurn();startTimer();
-}
+// ── PLAYER LIST ────────────────────────────────────────────────
 
 function getDraftedIds(){
   const s=new Set();
-  for(const c of CAPS)for(const sl of S.slots[c.id])if(sl.player)s.add(sl.player.id);
+  for(const c of CAPS)for(const sl of DS.slots[c.id])if(sl.player)s.add(sl.player.id);
   return s;
 }
 
 function buildCF(){
   const cls=[...new Set(PL.map(p=>p.cls))].sort();
-  document.getElementById('cfrow').innerHTML=cls.map(c=>`<button class="fb" onclick="setCF('${c}',this)">${c}</button>`).join('');
+  document.getElementById('cfrow').innerHTML=cls.map(c=>
+    `<button class="cfb" onclick="setCF('${c}',this)">${c}</button>`
+  ).join('');
 }
 
 function setCF(c,btn){
-  CF=CF===c?'':c;
-  document.querySelectorAll('#cfrow .fb').forEach(b=>b.classList.remove('act'));
-  if(CF)btn.classList.add('act');
+  localCF=localCF===c?'':c;
+  document.querySelectorAll('#cfrow .cfb').forEach(b=>b.classList.remove('act'));
+  if(localCF)btn.classList.add('act');
   buildPlist();
 }
 
 function setRF(r,btn){
-  RF=r;
+  localRF=r;
   document.querySelectorAll('#rfrow .fb').forEach(b=>b.classList.remove('act'));
   btn.classList.add('act');
   buildPlist();
 }
 
-function filterP(){ST=document.getElementById('srch').value.toLowerCase();buildPlist();}
+function filterP(){localST=document.getElementById('srch').value.toLowerCase();buildPlist();}
 
 function isOffSpec(p){
-  if(!CF)return false;
-  return p.cls!==CF&&p.alts.toLowerCase().split(',').map(a=>a.trim()).includes(CF.toLowerCase());
+  if(!localCF)return false;
+  return p.cls!==localCF&&p.alts.toLowerCase().split(',').map(a=>a.trim()).includes(localCF.toLowerCase());
 }
 
 function buildPlist(){
   const drafted=getDraftedIds();
-  const wids=new Set(S.sel?S.sel.w:[]);
-  const xids=new Set(S.sel?S.sel.x:[]);
+  const wids=new Set(localSel?localSel.w:[]);
+  const xids=new Set(localSel?localSel.x:[]);
   const fl=PL.filter(p=>{
     if(drafted.has(p.id))return false;
-    if(RF!=='All'&&p.role!==RF)return false;
-    if(ST&&!p.n.toLowerCase().includes(ST)&&!p.cls.toLowerCase().includes(ST)&&!p.alts.toLowerCase().includes(ST))return false;
-    if(CF){
-      const mainMatch=p.cls===CF;
-      const altMatch=p.alts.toLowerCase().split(',').map(a=>a.trim()).includes(CF.toLowerCase());
-      if(!mainMatch&&!altMatch)return false;
+    if(localRF!=='All'&&p.role!==localRF)return false;
+    if(localST&&!p.n.toLowerCase().includes(localST)&&!p.cls.toLowerCase().includes(localST)&&!p.alts.toLowerCase().includes(localST))return false;
+    if(localCF){
+      const mm=p.cls===localCF;
+      const am=p.alts.toLowerCase().split(',').map(a=>a.trim()).includes(localCF.toLowerCase());
+      if(!mm&&!am)return false;
     }
     return true;
   });
   document.getElementById('pcbadge').textContent=fl.length;
   document.getElementById('premain').textContent=PL.length-drafted.size;
   document.getElementById('plist').innerHTML=fl.map(p=>{
-    const iw=wids.has(p.id),ix=xids.has(p.id),is=S.sel?.id===p.id;
-    const offSpec=isOffSpec(p);
+    const iw=wids.has(p.id),ix=xids.has(p.id),is=localSel?.id===p.id;
+    const off=isOffSpec(p);
     let cls='pi';
     if(is)cls+=' sel';else if(iw)cls+=' hw';else if(ix)cls+=' hn';
-    const offTag=offSpec?`<span style="font-size:.62rem;color:var(--orange);border:1px solid var(--orange);border-radius:2px;padding:.05rem .3rem;margin-left:.2rem;flex-shrink:0">off spec</span>`:'';
+    const offTag=off?`<span style="font-size:.6rem;color:var(--orange);border:1px solid var(--orange);border-radius:2px;padding:.04rem .28rem;margin-left:.18rem;flex-shrink:0">off spec</span>`:'';
     return `<div class="${cls}" onclick="selP('${p.id}')">
       <div class="rdot ${p.role}"></div>
-      <span class="pname">${p.n}</span>
-      ${offTag}
+      <span class="pname">${p.n}</span>${offTag}
       <span class="pcls">${p.cls}</span>
       ${iw?'<span class="wi">♥</span>':ix?'<span class="ni">✕</span>':''}
     </div>`;
   }).join('');
 }
 
-function selP(id){S.sel=PL.find(p=>p.id===id)||null;buildPlist();renderDet();}
+function selP(id){localSel=PL.find(p=>p.id===id)||null;buildPlist();renderDet();}
+
+// ── DETAIL PANEL ───────────────────────────────────────────────
 
 function renderDet(){
   const panel=document.getElementById('pdet');
-  const p=S.sel;
+  const p=localSel;
   if(!p){panel.innerHTML='<div class="nosel">Click a player to view details</div>';return;}
   const cap=getCap();
   let wh='',xh='',nh='';
-  if(p.w.length&&!S.stream){
+  if(p.w.length&&!localStream){
     wh=`<div class="dsec"><div class="dlbl">Wants to play with</div>${p.w.map(id=>{const pl=PL.find(x=>x.id===id);return`<span class="dtag tw">${pl?pl.n:id}</span>`;}).join('')}</div>`;
   }
-  if(p.x.length&&!S.stream){
+  if(p.x.length&&!localStream){
     xh=`<div class="dsec"><div class="dlbl">Won't play with</div>${p.x.map(id=>{const pl=PL.find(x=>x.id===id);return`<span class="dtag tn">${pl?pl.n:id}</span>`;}).join('')}</div>`;
   }
-  if(p.notes&&!S.stream){
+  if(p.notes&&!localStream){
     nh=`<div class="dsec"><div class="dlbl">Notes</div><div class="dval">${p.notes}</div></div>`;
-  }else if(S.stream){
+  }else if(localStream){
     nh=`<div class="dsec"><div class="dlbl" style="color:var(--text3)">[Stream mode — notes hidden]</div></div>`;
   }
-  const avail=p.notes.includes('⚠')?`<div style="margin-bottom:.45rem"><span class="dtag ta">⚠ ${p.notes.split('⚠')[1]?.trim()||'Restriction'}</span></div>`:'';
-  const capTag=(p.notes==='Captain'||p.notes.includes('Co-Captain'))?`<div style="margin-bottom:.45rem"><span style="font-size:.65rem;color:var(--gold);border:1px solid var(--gold2);border-radius:2px;padding:.08rem .4rem">${p.notes}</span></div>`:'';
+  const avail=p.notes.includes('⚠')?`<div style="margin-bottom:.4rem"><span class="dtag ta">⚠ ${p.notes.split('⚠')[1]?.trim()||'Restriction'}</span></div>`:'';
+  const capTag=(p.notes==='Captain'||p.notes.includes('Co-Captain'))?`<div style="margin-bottom:.4rem"><span style="font-size:.63rem;color:var(--gold);border:1px solid var(--gold2);border-radius:2px;padding:.07rem .38rem">${p.notes}</span></div>`:'';
   panel.innerHTML=`
     <div class="dname">${p.n}</div>
     <div class="dcls">${p.cls} · ${p.role}</div>
     ${capTag}
-    ${p.alts?`<div style="font-size:.7rem;color:var(--text2);margin-bottom:.5rem">Alts: ${p.alts}</div>`:''}
-    ${avail}
-    ${wh}${xh}${nh}
+    ${p.alts?`<div style="font-size:.68rem;color:var(--text2);margin-bottom:.45rem">Alts: ${p.alts}</div>`:''}
+    ${avail}${wh}${xh}${nh}
     <button class="pbtn" onclick="pickP()">Draft for ${cap.name}</button>`;
 }
 
-function pickP(){if(S.sel)openSM(S.sel,getCap());}
+function pickP(){if(localSel)openSM(localSel,getCap());}
+
+// ── SLOT MODAL ─────────────────────────────────────────────────
 
 function openSM(player,cap){
   document.getElementById('smtitle').textContent=`Place ${player.n} — ${cap.name}`;
-  const empty=S.slots[cap.id].filter(s=>!s.player);
+  const empty=DS.slots[cap.id].filter(s=>!s.player);
   document.getElementById('smopts').innerHTML=empty.length?empty.map(s=>`
     <div class="sopt" onclick="confirmPick('${s.id}')">
       <span class="sopt-party">${s.party}</span>
@@ -799,24 +976,29 @@ function closeSM(){document.getElementById('smodal').classList.remove('open');}
 
 function confirmPick(slotId){
   const cap=getCap();
-  const slot=S.slots[cap.id].find(s=>s.id===slotId);
-  if(!slot||!S.sel)return;
-  slot.player=S.sel;
-  addFeed(S.sel,cap,`${slot.party} / ${slot.lb}`);
-  closeSM();S.sel=null;
-  buildPlist();renderDet();buildRboard();advTurn();
+  const slot=DS.slots[cap.id].find(s=>s.id===slotId);
+  if(!slot||!localSel)return;
+  slot.player=localSel;
+  DS.feed.unshift({capName:cap.name,capColor:cap.color,playerName:localSel.n,cls:localSel.cls,slot:`${slot.party} / ${slot.lb}`,ts:Date.now()});
+  DS.pickIdx++;
+  if(DS.pickIdx<TOTAL_PICKS){startNewTimer();}else{DS.timerRunning=false;}
+  closeSM();
+  localSel=null;
+  pushState();
 }
+
+// ── MOVE MODAL ─────────────────────────────────────────────────
 
 function openMV(slotId){
   let ownerCap=null,sourceSlot=null;
   for(const c of CAPS){
-    const sl=S.slots[c.id].find(s=>s.id===slotId);
+    const sl=DS.slots[c.id].find(s=>s.id===slotId);
     if(sl&&sl.player){ownerCap=c;sourceSlot=sl;break;}
   }
   if(!ownerCap||!sourceSlot)return;
-  S.movePlayer={player:sourceSlot.player,sourceSlotId:slotId,capId:ownerCap.id};
-  document.getElementById('mvtitle').textContent=`Move ${sourceSlot.player.n} to different slot`;
-  const empty=S.slots[ownerCap.id].filter(s=>!s.player);
+  localMovePlayer={player:sourceSlot.player,sourceSlotId:slotId,capId:ownerCap.id};
+  document.getElementById('mvtitle').textContent=`Move ${sourceSlot.player.n}`;
+  const empty=DS.slots[ownerCap.id].filter(s=>!s.player);
   document.getElementById('mvopts').innerHTML=empty.length?empty.map(s=>`
     <div class="sopt" onclick="confirmMove('${s.id}')">
       <span class="sopt-party">${s.party}</span>
@@ -824,105 +1006,121 @@ function openMV(slotId){
     </div>`).join(''):`<p style="color:var(--text3);font-size:.78rem">No other empty slots</p>`;
   document.getElementById('mvmodal').classList.add('open');
 }
-function closeMV(){document.getElementById('mvmodal').classList.remove('open');S.movePlayer=null;}
+function closeMV(){document.getElementById('mvmodal').classList.remove('open');localMovePlayer=null;}
 
 function confirmMove(newSlotId){
-  if(!S.movePlayer)return;
-  const{player,sourceSlotId,capId}=S.movePlayer;
-  const sourceSlot=S.slots[capId].find(s=>s.id===sourceSlotId);
-  const newSlot=S.slots[capId].find(s=>s.id===newSlotId);
-  if(!sourceSlot||!newSlot)return;
-  sourceSlot.player=null;
-  newSlot.player=player;
-  closeMV();buildRboard();
+  if(!localMovePlayer)return;
+  const{player,sourceSlotId,capId}=localMovePlayer;
+  const src=DS.slots[capId].find(s=>s.id===sourceSlotId);
+  const dst=DS.slots[capId].find(s=>s.id===newSlotId);
+  if(!src||!dst)return;
+  src.player=null;dst.player=player;
+  closeMV();pushState();
 }
 
-function addFeed(player,cap,slot){
+// ── FEED ───────────────────────────────────────────────────────
+
+function buildFeed(){
   const feed=document.getElementById('feed-entries');
-  const e=document.createElement('div');e.className='fe';
-  if(player){
-    e.innerHTML=`<span style="color:${cap.color};font-weight:600;min-width:58px">${cap.name}</span><span class="fe-pick">${player.n}</span><span style="color:var(--text3);font-size:.65rem">${player.cls}</span><span style="color:var(--text3);font-size:.65rem">→ ${slot}</span>`;
-  }else{
-    e.innerHTML=`<span style="color:${cap.color};font-weight:600;min-width:58px">${cap.name}</span><span class="fe-skip">skipped turn</span>`;
-  }
-  feed.insertBefore(e,feed.firstChild);
-  S.log.push({idx:S.pickIdx,player,cap:cap.name,slot});
+  feed.innerHTML=(DS.feed||[]).map(f=>`
+    <div class="fe">
+      <span style="color:${f.capColor};font-weight:600;min-width:58px">${f.capName}</span>
+      <span class="fe-pick">${f.playerName}</span>
+      <span style="color:var(--text3);font-size:.65rem">${f.cls}</span>
+      <span style="color:var(--text3);font-size:.65rem">→ ${f.slot}</span>
+    </div>`).join('');
 }
+
+// ── ROSTER BOARD ───────────────────────────────────────────────
 
 function buildCtabs(){
   document.getElementById('ctabs').innerHTML=CAPS.map(c=>`
-    <button class="ctab ${S.viewCap===c.id?'act':''}" onclick="viewCap('${c.id}')" style="${S.viewCap===c.id?`border-color:${c.color};color:${c.color}`:''}">
-      ${c.name} <span style="font-size:.62rem;color:var(--text3)">${S.slots[c.id].filter(s=>s.player).length}/66</span>
+    <button class="ctab ${localViewCap===c.id?'act':''}" onclick="viewCap('${c.id}')" style="${localViewCap===c.id?`border-color:${c.color};color:${c.color}`:''}">
+      ${c.name} <span style="font-size:.62rem;color:var(--text3)">${DS.slots[c.id].filter(s=>s.player).length}/66</span>
     </button>`).join('');
 }
 
-function viewCap(id){S.viewCap=id;buildCtabs();buildRboard();}
+function viewCap(id){localViewCap=id;buildCtabs();buildRboard();}
 
 function buildRboard(){
-  const slots=S.slots[S.viewCap];
-  const cap=CAPS.find(c=>c.id===S.viewCap);
+  const slots=DS.slots[localViewCap];
+  const cap=CAPS.find(c=>c.id===localViewCap);
 
-  const partySections=PARTY_DEFS.map(party=>{
-    const ps=slots.filter(s=>s.id.startsWith(`${S.viewCap}-${party.prefix}-`));
-    const filled=ps.filter(s=>s.player).length;
-    return `<div class="rsec">
-      <div class="rsec-title">
-        <span>${party.label}</span>
-        <span style="font-size:.65rem;color:var(--text3);font-weight:400">${filled}/6</span>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:2px">
+  // 8 parties in 3-column grid
+  const partyHtml=`<div class="party-grid">
+    ${PARTY_DEFS.map(party=>{
+      const ps=slots.filter(s=>s.id.startsWith(`${localViewCap}-${party.prefix}-`));
+      const filled=ps.filter(s=>s.player).length;
+      return `<div class="party-col">
+        <div class="party-col-title">
+          <span>${party.label}</span>
+          <span style="color:var(--text3);font-weight:400">${filled}/6</span>
+        </div>
         ${ps.map(s=>{
           if(s.player){
             const isCap=s.player.notes==='Captain'||s.player.notes.includes('Co-Captain');
-            return `<div class="rslot filled" onclick="openMV('${s.id}')" title="Click to move" style="border-color:${isCap?cap.color:'var(--border)'}">
+            return `<div class="rslot filled" onclick="openMV('${s.id}')" title="Click to move" style="${isCap?`background:rgba(${hexToRgb(cap.color)},.08)`:''}">
               <div class="rdot ${s.player.role}" style="flex-shrink:0"></div>
               <span class="splayer">${s.player.n}</span>
-              <span style="font-size:.58rem;color:var(--text3);margin-left:auto;white-space:nowrap">${s.lb}</span>
-              <span style="font-size:.6rem;color:var(--purple2);margin-left:.3rem;flex-shrink:0">⇄</span>
-            </div>`;
-          }
-          return `<div class="rslot">
-            <span class="stype ${s.t}">${s.lb}</span>
-            <span class="sempty">empty</span>
-          </div>`;
-        }).join('')}
-      </div>
-    </div>`;
-  }).join('');
-
-  const subSlots=slots.filter(s=>s.id.startsWith(`${S.viewCap}-sub-`));
-  const filled=subSlots.filter(s=>s.player).length;
-  const subRows=[];
-  for(let i=0;i<subSlots.length;i+=3)subRows.push(subSlots.slice(i,i+3));
-  const subSection=`<div class="rsec">
-    <div class="rsec-title" style="color:var(--gold)">
-      <span>Subs</span>
-      <span style="font-size:.65rem;color:var(--text3);font-weight:400">${filled}/18</span>
-    </div>
-    ${subRows.map(row=>`
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:2px">
-        ${row.map(s=>{
-          if(s.player){
-            const isCap=s.player.notes==='Captain'||s.player.notes.includes('Co-Captain');
-            return `<div class="rslot filled" onclick="openMV('${s.id}')" title="Click to move" style="border-color:${isCap?cap.color:'var(--border)'}">
-              <div class="rdot ${s.player.role}" style="flex-shrink:0"></div>
-              <span class="splayer">${s.player.n}</span>
-              <span style="font-size:.6rem;color:var(--purple2);margin-left:auto;flex-shrink:0">⇄</span>
+              <span style="font-size:.56rem;color:var(--text3);margin-left:auto;white-space:nowrap">${s.lb}</span>
+              <span style="font-size:.58rem;color:var(--purple2);margin-left:.2rem;flex-shrink:0">⇄</span>
             </div>`;
           }
           return `<div class="rslot"><span class="stype ${s.t}">${s.lb}</span><span class="sempty">empty</span></div>`;
         }).join('')}
-      </div>`).join('')}
+      </div>`;
+    }).join('')}
   </div>`;
 
-  document.getElementById('rboard').innerHTML=partySections+subSection;
+  // Subs in 3 columns
+  const subSlots=slots.filter(s=>s.id.startsWith(`${localViewCap}-sub-`));
+  const filledSubs=subSlots.filter(s=>s.player).length;
+  const col1=subSlots.slice(0,6);
+  const col2=subSlots.slice(6,12);
+  const col3=subSlots.slice(12,18);
+  const subHtml=`<div>
+    <div class="subs-title">
+      <span>Subs</span>
+      <span style="color:var(--text3);font-weight:400">${filledSubs}/18</span>
+    </div>
+    <div class="subs-grid">
+      ${[col1,col2,col3].map((col,ci)=>`
+        <div class="sub-col">
+          <div class="sub-col-title">Sub ${ci+1}</div>
+          ${col.map(s=>{
+            if(s.player){
+              const isCap=s.player.notes==='Captain'||s.player.notes.includes('Co-Captain');
+              return `<div class="rslot filled" onclick="openMV('${s.id}')" title="Click to move" style="${isCap?`background:rgba(${hexToRgb(cap.color)},.08);`:''}">
+                <div class="rdot ${s.player.role}" style="flex-shrink:0"></div>
+                <span class="splayer">${s.player.n}</span>
+                <span style="font-size:.58rem;color:var(--purple2);margin-left:auto;flex-shrink:0">⇄</span>
+              </div>`;
+            }
+            return `<div class="rslot"><span class="stype ${s.t}">${s.lb}</span><span class="sempty">empty</span></div>`;
+          }).join('')}
+        </div>`).join('')}
+    </div>
+  </div>`;
+
+  document.getElementById('rboard').innerHTML=partyHtml+subHtml;
 }
 
-function toggleStream(){
-  S.stream=!S.stream;
-  document.getElementById('stbtn').textContent=S.stream?'Notes OFF':'Notes ON';
-  if(S.sel)renderDet();
+function hexToRgb(hex){
+  const r=parseInt(hex.slice(1,3),16);
+  const g=parseInt(hex.slice(3,5),16);
+  const b=parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
 }
+
+// ── STREAM MODE ────────────────────────────────────────────────
+
+function toggleStream(){
+  localStream=!localStream;
+  document.getElementById('stbtn').textContent=localStream?'Notes OFF':'Notes ON';
+  if(localSel)renderDet();
+}
+
+// ── ADMIN ──────────────────────────────────────────────────────
 
 function openAdmin(){document.getElementById('amodal').classList.add('open');}
 function closeAdmin(){document.getElementById('amodal').classList.remove('open');}
@@ -933,38 +1131,50 @@ function buildFTbtns(){
 }
 
 function forceTurn(idx){
-  clearInterval(S.tint);
-  for(let i=S.pickIdx;i<ORD.length;i++){if(ORD[i].ci===idx){S.pickIdx=i;break;}}
-  updateTurn();startTimer();closeAdmin();
+  for(let i=DS.pickIdx;i<ORD.length;i++){if(ORD[i].ci===idx){DS.pickIdx=i;break;}}
+  startNewTimer();pushState();closeAdmin();
+}
+
+function doSkip(){
+  DS.feed.unshift({capName:getCap().name,capColor:getCap().color,playerName:'— SKIPPED —',cls:'',slot:'',ts:Date.now()});
+  DS.pickIdx=Math.min(DS.pickIdx+1,TOTAL_PICKS-1);
+  startNewTimer();
+  pushState();
 }
 
 function adm(a){
-  if(a==='pause'){S.paused=true;document.getElementById('pbar').classList.add('on');}
-  else if(a==='resume'){S.paused=false;document.getElementById('pbar').classList.remove('on');}
-  else if(a==='skip'){skipTurn();closeAdmin();}
-  else if(a==='undo'){
-    if(!S.log.length)return;
-    const last=S.log.pop();
-    if(last.player){
+  if(a==='pause'){
+    DS.paused=true;DS.timerRunning=false;
+    pushState();
+  }else if(a==='resume'){
+    DS.paused=false;startNewTimer();
+    pushState();
+  }else if(a==='skip'){
+    doSkip();closeAdmin();
+  }else if(a==='undo'){
+    if(DS.pickIdx<=0)return;
+    // Find last actual pick and remove it
+    const lastFeed=DS.feed.find(f=>f.playerName!=='— SKIPPED —');
+    if(lastFeed){
       for(const c of CAPS){
-        const sl=S.slots[c.id].find(s=>s.player?.id===last.player.id);
+        const sl=DS.slots[c.id].find(s=>s.player&&s.player.n===lastFeed.playerName);
         if(sl){sl.player=null;break;}
       }
-      const feed=document.getElementById('feed-entries');
-      if(feed.firstChild)feed.removeChild(feed.firstChild);
+      DS.feed=DS.feed.filter(f=>f!==lastFeed);
     }
-    S.pickIdx=Math.max(0,S.pickIdx-1);
-    updateTurn();startTimer();buildPlist();buildRboard();closeAdmin();
-  }
-  else if(a==='rtimer'){startTimer();closeAdmin();}
-  else if(a==='reset'){
+    DS.pickIdx=Math.max(0,DS.pickIdx-1);
+    startNewTimer();pushState();closeAdmin();
+  }else if(a==='rtimer'){
+    startNewTimer();pushState();closeAdmin();
+  }else if(a==='reset'){
     if(!confirm('Reset entire draft? All picks will be lost!'))return;
-    S.slots=prePlaceCaptains(buildSlots());
-    S.pickIdx=0;S.log=[];S.sel=null;S.movePlayer=null;
-    updateTurn();startTimer();buildPlist();buildRboard();
-    document.getElementById('feed-entries').innerHTML='';closeAdmin();
+    DS.slots=prePlaceCaptains(buildSlots());
+    DS.pickIdx=0;DS.feed=[];DS.paused=false;
+    startNewTimer();pushState();closeAdmin();
   }
 }
+
+// ── KEYBOARD ───────────────────────────────────────────────────
 
 document.addEventListener('keydown',e=>{
   if((e.key==='n'||e.key==='N')&&document.activeElement.tagName!=='INPUT')toggleStream();
