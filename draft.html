@@ -854,7 +854,6 @@ function updateTurnDisplay(){
   document.getElementById('tnext').textContent=nx?nx.name:'—';
   document.getElementById('rnum').textContent=rnd;
   document.getElementById('pnum').textContent=`${DS.pickIdx+1}/${TOTAL_PICKS}`;
-  localViewCap=c.id;
   buildCtabs();
 }
 
@@ -966,7 +965,7 @@ function openSM(player,cap){
   document.getElementById('smtitle').textContent=`Place ${player.n} — ${cap.name}`;
   const empty=DS.slots[cap.id].filter(s=>!s.player);
   document.getElementById('smopts').innerHTML=empty.length?empty.map(s=>`
-    <div class="sopt" onclick="confirmPick('${s.id}')">
+ 
       <span class="sopt-party">${s.party}</span>
       <span class="sopt-type ${s.t}">${s.lb}</span>
     </div>`).join(''):`<p style="color:var(--text3);font-size:.78rem">No empty slots</p>`;
