@@ -285,7 +285,7 @@ const PL=[
   {id:'wolferwolf',n:'Wolferwolf',role:'Tank',cls:'Steelheart',alts:'',notes:'Tank party preferred',w:[],x:[]},
   {id:'trazodone',n:'Trazodone ッ',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
   {id:'dioxin',n:'Dioxin',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
-  {id:'justin',n:'Justin',role:'DPS',cls:'Scorpion',alts:'Lunarch',notes:'Normalized from Curse Bomber',w:[],x:[]},
+  {id:'justin',n:'Justin',role:'DPS',cls:'Oracle',alts:'Lunarch,Scorpion',notes:'Normalized from Curse Bomber',w:[],x:[]},
   {id:'cyclingpig',n:'cyclingpig',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'',w:[],x:[]},
   {id:'plumb3rcrack',n:'Plumb3rcrack',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
   {id:'hammyjammy',n:'hammyjammy',role:'Healer',cls:'Seeker',alts:'Infiltrator, Spellblade',notes:'Can play anything anywhere',w:[],x:[]},
@@ -598,7 +598,7 @@ const PL=[
   {id:'miffy',n:'miffyる',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
   {id:'krowck',n:'Krowck神',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'',w:['hitz'],x:[]},
   {id:'poodlexd',n:'poodlexd',role:'DPS',cls:'Enigma',alts:'Spellblade',notes:'',w:[],x:[]},
-  {id:'raiotu',n:'Raiotu',role:'DPS',cls:'Scorpion',alts:'',notes:'',w:[],x:[]},
+  {id:'raiotu',n:'Raiotu',role:'DPS',cls:'Scorpion',alts:'',notes:'pref an oracle / ks',w:[],x:[]},
 ];
 
 // Pre-place captains and co-captains into first two sub slots
@@ -620,7 +620,7 @@ function prePlaceCaptains(slots){
   }
   return slots;
 }
-  let S={pickIdx:0,tsec:TSEC,tint:null,paused:false,log:[],slots:prePlaceCaptains(buildSlots()),sel:null,viewCap:CAPS[0].id,stream:false,movePlayer:null};
+ let S={pickIdx:0,tsec:TSEC,tint:null,paused:false,log:[],slots:prePlaceCaptains(buildSlots()),sel:null,viewCap:CAPS[0].id,stream:false,movePlayer:null};
 let RF='All',ST='',CF='';
 
 function doLogin(){
@@ -723,12 +723,12 @@ function buildPlist(){
     const offSpec=isOffSpec(p);
     let cls='pi';
     if(is)cls+=' sel';else if(iw)cls+=' hw';else if(ix)cls+=' hn';
-    const offTag=offSpec?`<span style="font-size:.58rem;color:var(--orange);border:1px solid var(--orange);border-radius:2px;padding:.05rem .3rem;margin-left:.2rem;flex-shrink:0">off spec</span>`:'';
+    const offTag=offSpec?`<span style="font-size:.62rem;color:var(--orange);border:1px solid var(--orange);border-radius:2px;padding:.05rem .3rem;margin-left:.2rem;flex-shrink:0">off spec</span>`:'';
     return `<div class="${cls}" onclick="selP('${p.id}')">
       <div class="rdot ${p.role}"></div>
-      <span class="pname">${p.n}</span>
+      <span class="pname" style="font-size:.88rem">${p.n}</span>
       ${offTag}
-      <span class="pcls">${p.cls}</span>
+      <span class="pcls" style="font-size:.75rem">${p.cls}</span>
       ${iw?'<span class="wi">♥</span>':ix?'<span class="ni">✕</span>':''}
     </div>`;
   }).join('');
@@ -840,42 +840,152 @@ function buildCtabs(){
 
 function viewCap(id){S.viewCap=id;buildCtabs();buildRboard();}
 
+// Party definitions — 8 parties + subs, each is a column from the image
+const PARTY_DEFS=[
+  {key:'p1',label:'Party 1 — Objective',prefix:'p1',col:0,slots:[
+    {t:'Any',lb:'Any Role'},{t:'Any',lb:'Any Role'},{t:'Any',lb:'Any Role'},
+    {t:'Tank',lb:'Tank'},{t:'Any',lb:'Any Role'},{t:'Support',lb:'Support'},
+  ]},
+  {key:'p2',label:'Party 2 — Spinner/DPS',prefix:'p2',col:1,slots:[
+    {t:'Any',lb:'Any Role'},{t:'Tank',lb:'Tank'},{t:'Spinner',lb:'Spinner/DPS'},
+    {t:'Spinner',lb:'Spinner/DPS'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},
+  ]},
+  {key:'p3',label:'Party 3 — Flex',prefix:'p3',col:2,slots:[
+    {t:'Any',lb:'Any Role'},{t:'Tank',lb:'Tank'},{t:'DPS',lb:'DPS'},
+    {t:'DPS',lb:'DPS'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},
+  ]},
+  {key:'p4',label:'Party 4 — Flex',prefix:'p4',col:3,slots:[
+    {t:'Any',lb:'Any Role'},{t:'Tank',lb:'Tank'},{t:'DPS',lb:'DPS'},
+    {t:'DPS',lb:'DPS'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},
+  ]},
+  {key:'p5',label:'Party 5 — Flex',prefix:'p5',col:0,slots:[
+    {t:'Any',lb:'Any Role'},{t:'Tank',lb:'Tank'},{t:'DPS',lb:'DPS'},
+    {t:'DPS',lb:'DPS'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},
+  ]},
+  {key:'p6',label:'Party 6 — Flex',prefix:'p6',col:1,slots:[
+    {t:'Any',lb:'Any Role'},{t:'Tank',lb:'Tank'},{t:'DPS',lb:'DPS'},
+    {t:'DPS',lb:'DPS'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},
+  ]},
+  {key:'p7',label:'Party 7 — 3 DPS',prefix:'p7',col:2,slots:[
+    {t:'Tank',lb:'Tank'},{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'},
+    {t:'DPS',lb:'DPS'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},
+  ]},
+  {key:'p8',label:'Party 8 — 3 DPS',prefix:'p8',col:3,slots:[
+    {t:'Tank',lb:'Tank'},{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'},
+    {t:'DPS',lb:'DPS'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},
+  ]},
+];
+
+function buildSlots(){
+  const s={};
+  for(const c of CAPS){
+    const l=[];
+    for(const party of PARTY_DEFS){
+      for(let i=0;i<party.slots.length;i++){
+        l.push({
+          id:`${c.id}-${party.prefix}-s${i}`,
+          party:party.label,
+          sec:party.label,
+          t:party.slots[i].t,
+          lb:party.slots[i].lb,
+          player:null
+        });
+      }
+    }
+    // Subs — 18 slots
+    const subDef=[
+      {t:'Any',lb:'Any Role'},{t:'Any',lb:'Any Role'},{t:'Any',lb:'Any Role'},
+      {t:'Tank',lb:'Tank'},{t:'Tank',lb:'Tank'},{t:'Tank',lb:'Tank'},
+      {t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'},
+      {t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'},
+      {t:'Support',lb:'Support'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},
+      {t:'Support',lb:'Support'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},
+    ];
+    for(let i=0;i<subDef.length;i++){
+      l.push({id:`${c.id}-sub-s${i}`,party:'Subs',sec:'Subs',t:subDef[i].t,lb:subDef[i].lb,player:null});
+    }
+    s[c.id]=l;
+  }
+  return s;
+}
+
+function prePlaceCaptains(slots){
+  const placements=[
+    {capId:'arelite',playerId:'arelite',slotId:'arelite-sub-s0'},
+    {capId:'arelite',playerId:'zaels',  slotId:'arelite-sub-s1'},
+    {capId:'rheggie',playerId:'rheggie',slotId:'rheggie-sub-s0'},
+    {capId:'rheggie',playerId:'ruthless',slotId:'rheggie-sub-s1'},
+    {capId:'bora',   playerId:'bora',   slotId:'bora-sub-s0'},
+    {capId:'bora',   playerId:'soju',   slotId:'bora-sub-s1'},
+    {capId:'wicked', playerId:'wicked', slotId:'wicked-sub-s0'},
+    {capId:'wicked', playerId:'rosie',  slotId:'wicked-sub-s1'},
+  ];
+  for(const p of placements){
+    const slot=slots[p.capId].find(s=>s.id===p.slotId);
+    const player=PL.find(pl=>pl.id===p.playerId);
+    if(slot&&player)slot.player=player;
+  }
+  return slots;
+}
+
 function buildRboard(){
   const slots=S.slots[S.viewCap];
   const cap=CAPS.find(c=>c.id===S.viewCap);
-  const secs=[
-    {title:'Party 1 — Objective / Spinner / Flex / Flex',pre:`${S.viewCap}-p1`,cols:4,rows:6},
-    {title:'Party 2 — Flex / Flex / 3 DPS / 3 DPS',pre:`${S.viewCap}-p2`,cols:4,rows:6},
-    {title:'Subs (18)',pre:`${S.viewCap}-sub`,cols:3,rows:6},
-  ];
-  document.getElementById('rboard').innerHTML=secs.map(sec=>{
-    const ss=slots.filter(s=>s.id.startsWith(sec.pre));
-    const rows=[];
-    for(let r=0;r<sec.rows;r++){
-      const row=ss.filter(s=>s.id.includes(`-r${r}-`)).sort((a,b)=>{
-        const ac=parseInt(a.id.match(/-c(\d+)$/)?.[1]||0);
-        const bc=parseInt(b.id.match(/-c(\d+)$/)?.[1]||0);
-        return ac-bc;
-      });
-      rows.push(row);
-    }
-    return `<div class="rsec"><div class="rsec-title">${sec.title}</div>
-      ${rows.map(row=>`<div style="display:grid;grid-template-columns:repeat(${sec.cols},1fr);gap:3px;margin-bottom:3px">
+
+  // Build party sections
+  const partySections=PARTY_DEFS.map(party=>{
+    const partySlots=slots.filter(s=>s.id.startsWith(`${S.viewCap}-${party.prefix}-`));
+    return `<div class="rsec">
+      <div class="rsec-title" style="color:var(--teal)">${party.label}
+        <span style="float:right;color:var(--text3)">${partySlots.filter(s=>s.player).length}/6</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:3px">
+        ${partySlots.map(s=>{
+          if(s.player){
+            const isCap=s.player.notes&&s.player.notes.includes('Captain');
+            return `<div class="rslot filled" onclick="openMV('${s.id}')" title="Click to move" style="border-color:${isCap?cap.color:'var(--surface3)'}">
+              <div class="rdot ${s.player.role}" style="flex-shrink:0"></div>
+              <span class="splayer">${s.player.n}</span>
+              <span style="font-size:.6rem;color:var(--text3);margin-left:auto">${s.lb}</span>
+              <span style="font-size:.58rem;color:var(--purple);margin-left:.3rem">⇄</span>
+            </div>`;
+          }
+          return `<div class="rslot">
+            <span class="stype ${s.t}">${s.lb}</span>
+            <span class="sempty">empty</span>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  // Subs section
+  const subSlots=slots.filter(s=>s.id.startsWith(`${S.viewCap}-sub-`));
+  const subRows=[];
+  for(let i=0;i<subSlots.length;i+=3){
+    subRows.push(subSlots.slice(i,i+3));
+  }
+  const subSection=`<div class="rsec">
+    <div class="rsec-title" style="color:var(--gold)">Subs (18)
+      <span style="float:right;color:var(--text3)">${subSlots.filter(s=>s.player).length}/18</span>
+    </div>
+    ${subRows.map(row=>`
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:3px">
         ${row.map(s=>{
           if(s.player){
             const isCap=s.player.notes&&s.player.notes.includes('Captain');
-            const borderCol=isCap?cap.color:'var(--surface3)';
-            return `<div class="rslot filled" onclick="openMV('${s.id}')" title="Click to move" style="border-color:${borderCol}">
+            return `<div class="rslot filled" onclick="openMV('${s.id}')" title="Click to move" style="border-color:${isCap?cap.color:'var(--surface3)'}">
               <div class="rdot ${s.player.role}" style="flex-shrink:0"></div>
               <span class="splayer">${s.player.n}</span>
-              <span style="font-size:.58rem;color:var(--purple);opacity:1;margin-left:auto">⇄</span>
+              <span style="font-size:.58rem;color:var(--purple);margin-left:auto">⇄</span>
             </div>`;
           }
           return `<div class="rslot"><span class="stype ${s.t}">${s.lb}</span><span class="sempty">empty</span></div>`;
         }).join('')}
       </div>`).join('')}
-    </div>`;
-  }).join('');
+  </div>`;
+
+  document.getElementById('rboard').innerHTML=partySections+subSection;
 }
 
 function toggleStream(){
