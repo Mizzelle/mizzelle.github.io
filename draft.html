@@ -673,7 +673,7 @@ const PL=[
   {id:'poodlexd',n:'poodlexd',role:'DPS',cls:'Enigma',alts:'Spellblade',notes:'',w:[],x:[]},
   {id:'raitou',n:'Raitou',role:'DPS',cls:'Scorpion',alts:'',notes:'Pref oracle / KS',w:[],x:[]},
 ];
-  // Local UI state (not synced)
+// Local UI state (not synced)
 let localSel=null;
 let localStream=false;
 let localRF='All';
@@ -693,10 +693,7 @@ let DS={
 };
 
 let timerInterval=null;
-let lastPickIdx=-1;
 let isAdmin=false;
-
-// ── FIREBASE SYNC ──────────────────────────────────────────────
 
 function slotsToFirebase(slots){
   const out={};
@@ -714,16 +711,13 @@ function slotsToFirebase(slots){
 
 function slotsFromFirebase(data,localSlots){
   const result=JSON.parse(JSON.stringify(localSlots));
-  // clear all
   for(const capId in result)for(const s of result[capId])s.player=null;
   if(!data)return result;
   for(const capId in data){
     for(const key in data[capId]){
       const fd=data[capId][key];
       const slot=result[capId]?.find(s=>s.id===fd.id);
-      if(slot){
-        slot.player=fd.playerId?PL.find(p=>p.id===fd.playerId)||null:null;
-      }
+      if(slot){slot.player=fd.playerId?PL.find(p=>p.id===fd.playerId)||null:null;}
     }
   }
   return result;
@@ -747,37 +741,24 @@ function initFirebase(){
     const data=snap.val();
     document.getElementById('sync-bar').textContent='✓ Live synced';
     document.getElementById('sync-bar').style.color='var(--teal)';
-    if(!data){
-      // First load — push initial state
-      pushState();
-      return;
-    }
-    const prevIdx=DS.pickIdx;
+    if(!data){pushState();return;}
     DS.pickIdx=data.pickIdx||0;
     DS.paused=data.paused||false;
     DS.slots=slotsFromFirebase(data.slots,prePlaceCaptains(buildSlots()));
     DS.feed=data.feed||[];
     DS.timerStart=data.timerStart||null;
     DS.timerRunning=data.timerRunning||false;
-
-    // Sync timer
     syncTimer();
-
-    // Update pause bar
     document.getElementById('pbar').classList.toggle('on',DS.paused);
-
-    // Rebuild UI
     updateTurnDisplay();
     buildPlist();
     buildRboard();
     buildFeed();
-
     if(localSel)renderDet();
   });
-
   db.ref('.info/connected').on('value',snap=>{
     if(!snap.val()){
-      document.getElementById('sync-bar').textContent='⚠ Disconnected — reconnecting...';
+      document.getElementById('sync-bar').textContent='⚠ Disconnected...';
       document.getElementById('sync-bar').style.color='var(--orange)';
     }
   });
@@ -795,14 +776,10 @@ function syncTimer(){
         const el=Math.floor((Date.now()-DS.timerStart)/1000);
         const rem=Math.max(0,TSEC-el);
         updateTimerDisplay(rem);
-        if(rem<=0){
-          clearInterval(timerInterval);
-          // Only the "admin" browser fires the auto-skip
-          if(isAdmin)doSkip();
-        }
+        if(rem<=0){clearInterval(timerInterval);if(isAdmin)doSkip();}
       },500);
     }
-  } else {
+  }else{
     updateTimerDisplay(TSEC);
   }
 }
@@ -812,14 +789,12 @@ function startNewTimer(){
   DS.timerRunning=true;
 }
 
-// ── LOGIN ──────────────────────────────────────────────────────
-
 function doLogin(){
   const v=document.getElementById('pwin').value;
   if(v===PW){
     document.getElementById('login-screen').style.display='none';
     document.getElementById('app').classList.add('show');
-    isAdmin=true; // first login is admin — in production you'd have a separate admin pw
+    isAdmin=true;
     buildCF();
     buildCtabs();
     buildFTbtns();
@@ -828,8 +803,6 @@ function doLogin(){
     document.getElementById('lerr').textContent='Incorrect password.';
   }
 }
-
-// ── TIMER DISPLAY ──────────────────────────────────────────────
 
 function updateTimerDisplay(sec){
   const n=document.getElementById('tnum');
@@ -840,8 +813,6 @@ function updateTimerDisplay(sec){
   c.style.strokeDashoffset=CIRC*(1-s/TSEC);
   c.style.stroke=s>15?'var(--teal)':s>7?'var(--orange)':'var(--red)';
 }
-
-// ── TURN DISPLAY ───────────────────────────────────────────────
 
 function getCap(){return CAPS[ORD[Math.min(DS.pickIdx,ORD.length-1)].ci];}
 function getNxt(){const ni=DS.pickIdx+1;if(ni>=ORD.length)return null;return CAPS[ORD[ni].ci];}
@@ -856,8 +827,6 @@ function updateTurnDisplay(){
   document.getElementById('pnum').textContent=`${DS.pickIdx+1}/${TOTAL_PICKS}`;
   buildCtabs();
 }
-
-// ── PLAYER LIST ────────────────────────────────────────────────
 
 function getDraftedIds(){
   const s=new Set();
@@ -927,8 +896,6 @@ function buildPlist(){
 
 function selP(id){localSel=PL.find(p=>p.id===id)||null;buildPlist();renderDet();}
 
-// ── DETAIL PANEL ───────────────────────────────────────────────
-
 function renderDet(){
   const panel=document.getElementById('pdet');
   const p=localSel;
@@ -959,23 +926,23 @@ function renderDet(){
 
 function pickP(){if(localSel)openSM(localSel,getCap());}
 
-// ── SLOT MODAL ─────────────────────────────────────────────────
-
 function openSM(player,cap){
   clearInterval(timerInterval);
   document.getElementById('smtitle').textContent=`Place ${player.n} — ${cap.name}`;
   const empty=DS.slots[cap.id].filter(s=>!s.player);
   document.getElementById('smopts').innerHTML=empty.length?empty.map(s=>`
- 
+    <div class="sopt" onclick="confirmPick('${s.id}')">
       <span class="sopt-party">${s.party}</span>
       <span class="sopt-type ${s.t}">${s.lb}</span>
     </div>`).join(''):`<p style="color:var(--text3);font-size:.78rem">No empty slots</p>`;
   document.getElementById('smodal').classList.add('open');
 }
+
 function closeSM(){
   document.getElementById('smodal').classList.remove('open');
   if(localSel){syncTimer();}
 }
+
 function confirmPick(slotId){
   const cap=getCap();
   const slot=DS.slots[cap.id].find(s=>s.id===slotId);
@@ -988,8 +955,6 @@ function confirmPick(slotId){
   localSel=null;
   pushState();
 }
-
-// ── MOVE MODAL ─────────────────────────────────────────────────
 
 function openMV(slotId){
   let ownerCap=null,sourceSlot=null;
@@ -1008,6 +973,7 @@ function openMV(slotId){
     </div>`).join(''):`<p style="color:var(--text3);font-size:.78rem">No other empty slots</p>`;
   document.getElementById('mvmodal').classList.add('open');
 }
+
 function closeMV(){document.getElementById('mvmodal').classList.remove('open');localMovePlayer=null;}
 
 function confirmMove(newSlotId){
@@ -1020,8 +986,6 @@ function confirmMove(newSlotId){
   closeMV();pushState();
 }
 
-// ── FEED ───────────────────────────────────────────────────────
-
 function buildFeed(){
   const feed=document.getElementById('feed-entries');
   feed.innerHTML=(DS.feed||[]).map(f=>`
@@ -1029,11 +993,9 @@ function buildFeed(){
       <span style="color:${f.capColor};font-weight:600;min-width:58px">${f.capName}</span>
       <span class="fe-pick">${f.playerName}</span>
       <span style="color:var(--text3);font-size:.65rem">${f.cls}</span>
-      <span style="color:var(--text3);font-size:.65rem">→ ${f.slot}</span>
+      <span style="color:var(--text3);font-size:.65rem">${f.slot?'→ '+f.slot:''}</span>
     </div>`).join('');
 }
-
-// ── ROSTER BOARD ───────────────────────────────────────────────
 
 function buildCtabs(){
   document.getElementById('ctabs').innerHTML=CAPS.map(c=>`
@@ -1044,11 +1006,17 @@ function buildCtabs(){
 
 function viewCap(id){localViewCap=id;buildCtabs();buildRboard();}
 
+function hexToRgb(hex){
+  const r=parseInt(hex.slice(1,3),16);
+  const g=parseInt(hex.slice(3,5),16);
+  const b=parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
+
 function buildRboard(){
   const slots=DS.slots[localViewCap];
   const cap=CAPS.find(c=>c.id===localViewCap);
 
-  // 8 parties in 3-column grid
   const partyHtml=`<div class="party-grid">
     ${PARTY_DEFS.map(party=>{
       const ps=slots.filter(s=>s.id.startsWith(`${localViewCap}-${party.prefix}-`));
@@ -1074,12 +1042,12 @@ function buildRboard(){
     }).join('')}
   </div>`;
 
-  // Subs in 3 columns
   const subSlots=slots.filter(s=>s.id.startsWith(`${localViewCap}-sub-`));
   const filledSubs=subSlots.filter(s=>s.player).length;
   const col1=subSlots.slice(0,6);
   const col2=subSlots.slice(6,12);
   const col3=subSlots.slice(12,18);
+
   const subHtml=`<div>
     <div class="subs-title">
       <span>Subs</span>
@@ -1107,22 +1075,11 @@ function buildRboard(){
   document.getElementById('rboard').innerHTML=partyHtml+subHtml;
 }
 
-function hexToRgb(hex){
-  const r=parseInt(hex.slice(1,3),16);
-  const g=parseInt(hex.slice(3,5),16);
-  const b=parseInt(hex.slice(5,7),16);
-  return `${r},${g},${b}`;
-}
-
-// ── STREAM MODE ────────────────────────────────────────────────
-
 function toggleStream(){
   localStream=!localStream;
   document.getElementById('stbtn').textContent=localStream?'Notes OFF':'Notes ON';
   if(localSel)renderDet();
 }
-
-// ── ADMIN ──────────────────────────────────────────────────────
 
 function openAdmin(){document.getElementById('amodal').classList.add('open');}
 function closeAdmin(){document.getElementById('amodal').classList.remove('open');}
@@ -1155,7 +1112,6 @@ function adm(a){
     doSkip();closeAdmin();
   }else if(a==='undo'){
     if(DS.pickIdx<=0)return;
-    // Find last actual pick and remove it
     const lastFeed=DS.feed.find(f=>f.playerName!=='— SKIPPED —');
     if(lastFeed){
       for(const c of CAPS){
@@ -1175,8 +1131,6 @@ function adm(a){
     startNewTimer();pushState();closeAdmin();
   }
 }
-
-// ── KEYBOARD ───────────────────────────────────────────────────
 
 document.addEventListener('keydown',e=>{
   if((e.key==='n'||e.key==='N')&&document.activeElement.tagName!=='INPUT')toggleStream();
