@@ -743,6 +743,8 @@ function initFirebase(){
     const data=snap.val();
     document.getElementById('sync-bar').textContent='✓ Live synced';
     document.getElementById('sync-bar').style.color='var(--teal)';
+    document.getElementById('sync-bar').style.fontWeight='400';
+    document.getElementById('sync-bar').style.fontSize='.68rem';
     if(!data){pushState();return;}
     DS.pickIdx=data.pickIdx||0;
     DS.turnIdx=data.turnIdx||0;
@@ -782,11 +784,16 @@ function syncTimer(){
         if(rem<=0){
           clearInterval(timerInterval);
           updateTimerDisplay(0);
-          // Only show warning on the active captain's tab
+          const bar=document.getElementById('sync-bar');
           if(localViewCap===getCap().id){
-            document.getElementById('sync-bar').textContent='⚠ PICK NOW or your turn will be skipped!';
-            document.getElementById('sync-bar').style.color='var(--red)';
+            bar.textContent='⚠ PICK NOW or your turn will be skipped!';
+            bar.style.color='var(--red)';
+          }else{
+            bar.textContent=`⏰ Waiting for ${getCap().name} to pick...`;
+            bar.style.color='var(--orange)';
           }
+          bar.style.fontWeight='700';
+          bar.style.fontSize='.78rem';
         }
       },500);
     }
@@ -969,6 +976,8 @@ function confirmPick(slotId){
   if(DS.pickIdx<TOTAL_PICKS){startNewTimer();}else{DS.timerRunning=false;}
   document.getElementById('sync-bar').textContent='✓ Live synced';
   document.getElementById('sync-bar').style.color='var(--teal)';
+  document.getElementById('sync-bar').style.fontWeight='400';
+  document.getElementById('sync-bar').style.fontSize='.68rem';
   closeSM();
   localSel=null;
   pushState();
@@ -1119,9 +1128,11 @@ function doSkip(){
     playerName:'— SKIPPED —',
     cls:'',slot:'',ts:Date.now()
   });
-  DS.turnIdx++; // advance turn but NOT pickIdx
+  DS.turnIdx++;
   document.getElementById('sync-bar').textContent='✓ Live synced';
   document.getElementById('sync-bar').style.color='var(--teal)';
+  document.getElementById('sync-bar').style.fontWeight='400';
+  document.getElementById('sync-bar').style.fontSize='.68rem';
   startNewTimer();
   pushState();
 }
