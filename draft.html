@@ -646,7 +646,7 @@ function setCF(c,btn){
 
 function setRF(r,btn){
   RF=r;
-  document.querySelectorAll('.frow:first-of-type .fb').forEach(b=>b.classList.remove('act'));
+  document.querySelectorAll('.frow:first-of-type .fb').forEach(b=>b.classList.remove('active'));
   btn.classList.add('act');
   buildPlist();
 }
@@ -687,8 +687,8 @@ function renderDet(){
   if(!p){panel.innerHTML='<div class="nosel">Click a player to view details</div>';return;}
   const cap=getCap();
   let wh='',xh='',nh='';
-  if(p.w.length){wh=`<div class="dsec"><div class="dlbl">Wants to play with</div>${p.w.map(id=>{const pl=PL.find(x=>x.id===id);return`<span class="dtag tw">${pl?pl.n:id}</span>`;}).join('')}</div>`;}
-  if(p.x.length){xh=`<div class="dsec"><div class="dlbl">Won't play with</div>${p.x.map(id=>{const pl=PL.find(x=>x.id===id);return`<span class="dtag tn">${pl?pl.n:id}</span>`;}).join('')}</div>`;}
+  ifif(p.w.length&&!S.stream){wh=`<div class="dsec"><div class="dlbl">Wants to play with</div>${p.w.map(id=>{const pl=PL.find(x=>x.id===id);return`<span class="dtag tw">${pl?pl.n:id}</span>`;}).join('')}</div>`;}
+  if(p.x.length&&!S.stream){xh=`<div class="dsec"><div class="dlbl">Won't play with</div>${p.x.map(id=>{const pl=PL.find(x=>x.id===id);return'<span class="dtag tn">'+(pl?pl.n:id)+'</span>';}).join('')}</div>`;}
   if(p.notes&&!S.stream){nh=`<div class="dsec"><div class="dlbl">Notes</div><div class="dval">${p.notes}</div></div>`;}
   else if(S.stream){nh=`<div class="dsec"><div class="dlbl" style="color:var(--text3)">[Notes hidden]</div></div>`;}
   const avail=p.notes.includes('⚠')?`<div style="margin-bottom:.5rem"><span class="dtag ta">⚠ ${p.notes.split('⚠')[1]?.trim()||'Restriction'}</span></div>`:'';
