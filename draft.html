@@ -962,6 +962,7 @@ function pickP(){if(localSel)openSM(localSel,getCap());}
 // ── SLOT MODAL ─────────────────────────────────────────────────
 
 function openSM(player,cap){
+  DS.timerRunning=false; // pause while placing into slot
   document.getElementById('smtitle').textContent=`Place ${player.n} — ${cap.name}`;
   const empty=DS.slots[cap.id].filter(s=>!s.player);
   document.getElementById('smopts').innerHTML=empty.length?empty.map(s=>`
@@ -971,7 +972,9 @@ function openSM(player,cap){
     </div>`).join(''):`<p style="color:var(--text3);font-size:.78rem">No empty slots</p>`;
   document.getElementById('smodal').classList.add('open');
 }
-function closeSM(){document.getElementById('smodal').classList.remove('open');}
+function closeSM(){
+  document.getElementById('smodal').classList.remove('open');
+  if(localSel){startNewTimer();pushState();} // only restart if they cancelled (localSel still set)
 
 function confirmPick(slotId){
   const cap=getCap();
