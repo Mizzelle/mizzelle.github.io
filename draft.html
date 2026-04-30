@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>T&L Draft Tool - Season 1</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0b14;--surface:#111220;--surface2:#181929;--surface3:#1f2035;
+  --border:#2a2c45;--border2:#353760;
+  --purple:#7c6ff7;--purple2:#5a54c4;--purple3:#3d3882;
+  --teal:#2dd4bf;--teal2:#1a7a6e;
+  --gold:#f0c060;--gold2:#b08840;
+  --red:#f87171;--red2:#991b1b;
+  --green:#4ade80;--green2:#166534;
+  --orange:#fb923c;
+  --text:#e2e4f0;--text2:#9095b8;--text3:#5a5f80;
+  --tank:#60a5fa;--dps:#f87171;--healer:#4ade80;
+}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;font-size:13px;display:flex;flex-direction:column}
+#login-screen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:1000}
+.login-box{background:var(--surface);border:1px solid var(--border2);padding:2.5rem;width:340px;text-align:center}
+.login-box h1{font-size:1.3rem;font-weight:700;color:var(--purple);margin-bottom:0.25rem}
+.login-box p{color:var(--text2);font-size:0.82rem;margin-bottom:1.5rem}
+.login-box input{width:100%;padding:0.55rem 0.8rem;background:var(--surface2);border:1px solid var(--border);color:var(--text);font-size:0.88rem;margin-bottom:0.75rem;outline:none}
+.login-box input:focus{border-color:var(--purple)}
+.login-box button{width:100%;padding:0.6rem;background:var(--purple2);color:#fff;border:none;cursor:pointer;font-size:0.88rem;font-weight:600}
+.login-box button:hover{background:var(--purple)}
+.login-err{color:var(--red);font-size:0.78rem;margin-top:0.4rem;min-height:1rem}
+#app{display:none;flex-direction:column;height:100vh}
+#app.show{display:flex}
+.pause-bar{background:var(--orange);color:#000;text-align:center;padding:0.28rem;font-weight:700;font-size:0.82rem;display:none}
+.pause-bar.on{display:block}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0.45rem 0.9rem;display:flex;align-items:center;gap:1rem;flex-shrink:0}
+.logo{font-size:0.9rem;font-weight:700;color:var(--purple);white-space:nowrap}
+.hcenter{flex:1;display:flex;align-items:center;justify-content:center;gap:1.25rem}
+.tlabel{font-size:0.65rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em}
+.tval{font-size:0.9rem;font-weight:700}
+.timer-wrap{position:relative;width:44px;height:44px}
+.timer-wrap svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.timer-wrap circle{fill:none;stroke-width:3}
+.tbg{stroke:var(--border)}.tfg{stroke:var(--teal);stroke-dasharray:126;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear,stroke .5s}
+.tnum{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:700}
+.hright{display:flex;align-items:center;gap:0.45rem}
+.btn{padding:.3rem .7rem;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;font-size:.72rem;border-radius:2px;white-space:nowrap}
+.btn:hover{border-color:var(--border2);background:var(--surface3)}
+.btn.danger{border-color:var(--red2);color:var(--red)}.btn.danger:hover{background:var(--red2)}
+.btn.ok{border-color:var(--teal2);color:var(--teal)}.btn.ok:hover{background:var(--teal2)}
+.btn.primary{border-color:var(--purple2);background:var(--purple2);color:#fff}.btn.primary:hover{background:var(--purple)}
+main{flex:1;display:grid;grid-template-columns:300px 1fr 260px;overflow:hidden}
+#pool-panel{background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.ph{padding:.55rem .65rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.45rem;flex-shrink:0}
+.ptitle{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text2)}
+.pbadge{background:var(--surface3);color:var(--text2);padding:.08rem .4rem;border-radius:2px;font-size:.68rem}
+.sbar{padding:.45rem .65rem;border-bottom:1px solid var(--border);flex-shrink:0;display:flex;flex-direction:column;gap:.35rem}
+.sbar input{width:100%;padding:.35rem .55rem;background:var(--surface2);border:1px solid var(--border);color:var(--text);font-size:.78rem;outline:none}
+.sbar input:focus{border-color:var(--purple)}
+.frow{display:flex;gap:.25rem;flex-wrap:wrap}
+.fb{padding:.18rem .45rem;border:1px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;font-size:.67rem;border-radius:2px}
+.fb.act{background:var(--purple3);border-color:var(--purple2);color:var(--text)}
+.fb.rt.act{background:#1e3a5f;border-color:var(--tank);color:var(--tank)}
+.fb.rd.act{background:#4a1515;border-color:var(--dps);color:var(--dps)}
+.fb.rh.act{background:#14432a;border-color:var(--healer);color:var(--healer)}
+.plist{flex:1;overflow-y:auto;padding:.2rem}
+.pi{padding:.4rem .55rem;cursor:pointer;border:1px solid transparent;border-radius:2px;margin-bottom:2px;display:flex;align-items:center;gap:.4rem}
+.pi:hover{background:var(--surface2);border-color:var(--border)}
+.pi.sel{background:var(--surface3);border-color:var(--purple2)}
+.pi.hw{background:#0d2a1a;border-color:var(--green2)}
+.pi.hn{background:#2a0d0d;border-color:var(--red2);opacity:.5}
+.rdot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.rdot.Tank{background:var(--tank)}.rdot.DPS{background:var(--dps)}.rdot.Healer{background:var(--healer)}
+.pname{font-size:.78rem;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pcls{font-size:.67rem;color:var(--text2);white-space:nowrap}
+.wi{font-size:.62rem;color:var(--green);margin-left:auto}.ni{font-size:.62rem;color:var(--red);margin-left:auto}
+#roster-panel{background:var(--bg);overflow-y:auto;padding:.65rem}
+.ctabs{display:flex;gap:.25rem;margin-bottom:.65rem}
+.ctab{padding:.35rem .8rem;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:.72rem;border-radius:2px;color:var(--text2)}
+.ctab.act{border-color:var(--purple2);background:var(--purple3);color:var(--text)}
+.rsec{margin-bottom:.85rem}
+.rsec-title{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:.35rem;padding:.15rem .35rem;border-left:2px solid var(--border2)}
+.rslot{background:var(--surface);border:1px solid var(--border);padding:.28rem .45rem;min-height:30px;display:flex;align-items:center;gap:.35rem;cursor:pointer;border-radius:2px}
+.rslot:hover{border-color:var(--border2)}.rslot.filled:hover{border-color:var(--red2)}
+.stype{font-size:.6rem;color:var(--text3);white-space:nowrap;min-width:52px}
+.stype.Any{color:var(--text2)}.stype.Tank{color:var(--tank)}.stype.DPS{color:var(--dps)}.stype.Support{color:var(--healer)}.stype.Spinner{color:var(--orange)}
+.splayer{font-size:.75rem;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srem{font-size:.67rem;color:var(--red);margin-left:auto;opacity:0;padding:0 .18rem}.rslot:hover .srem{opacity:1}
+.sempty{font-size:.68rem;color:var(--text3);font-style:italic}
+#info-panel{background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.pdet{padding:.7rem;flex:1;overflow-y:auto}
+.dname{font-size:.95rem;font-weight:700;margin-bottom:.18rem}
+.dcls{font-size:.75rem;color:var(--text2);margin-bottom:.65rem}
+.dsec{margin-bottom:.65rem}.dlbl{font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:.22rem}
+.dval{font-size:.78rem;color:var(--text);background:var(--surface2);padding:.35rem .55rem;border-radius:2px}
+.dtag{display:inline-block;padding:.12rem .45rem;border-radius:2px;font-size:.68rem;margin:.08rem;border:1px solid}
+.tw{background:#0d2a1a;border-color:var(--green2);color:var(--green)}
+.tn{background:#2a0d0d;border-color:var(--red2);color:var(--red)}
+.ta{background:#2a1d00;border-color:var(--gold2);color:var(--gold)}
+.pbtn{width:100%;padding:.55rem;background:var(--purple2);color:#fff;border:none;cursor:pointer;font-size:.82rem;font-weight:600;margin-top:.45rem;border-radius:2px}
+.pbtn:hover{background:var(--purple)}.pbtn:disabled{background:var(--surface3);color:var(--text3);cursor:not-allowed}
+.nosel{padding:.85rem;color:var(--text3);font-size:.78rem;text-align:center}
+.hkhint{font-size:.65rem;color:var(--text3);text-align:center;padding:.3rem;border-top:1px solid var(--border)}
+#logpanel{background:var(--surface2);border-top:1px solid var(--border);max-height:110px;overflow-y:auto;flex-shrink:0}
+.le{padding:.18rem .65rem;font-size:.7rem;color:var(--text2);border-bottom:1px solid var(--border);display:flex;gap:.65rem}
+#smodal,#amodal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:500}
+#smodal.open,#amodal.open{display:flex}
+.mbox{background:var(--surface);border:1px solid var(--border2);padding:1.2rem;width:370px;max-height:78vh;overflow-y:auto}
+.mbox h3{font-size:.88rem;font-weight:600;margin-bottom:.9rem;color:var(--purple)}
+.sopt{padding:.45rem .7rem;border:1px solid var(--border);cursor:pointer;margin-bottom:.28rem;border-radius:2px;display:flex;align-items:center;gap:.45rem;font-size:.78rem}
+.sopt:hover{border-color:var(--purple2);background:var(--surface2)}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;margin-bottom:.85rem}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--surface)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+</style>
+</head>
+<body>
+<div id="login-screen">
+  <div class="login-box">
+    <h1>T&amp;L Draft Tool</h1>
+    <p>Season 1 · Captain Access</p>
+    <input type="password" id="pwin" placeholder="Enter password..." onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button onclick="doLogin()">Enter Draft Room</button>
+    <div class="login-err" id="lerr"></div>
+  </div>
+</div>
+<div id="app">
+  <div class="pause-bar" id="pbar">⏸ DRAFT PAUSED</div>
+  <header>
+    <div class="logo">T&amp;L Draft S1</div>
+    <div class="hcenter">
+      <div><div class="tlabel">Now Picking</div><div class="tval" id="tcap" style="color:var(--purple)">—</div></div>
+      <div class="timer-wrap">
+        <svg viewBox="0 0 44 44"><circle class="tbg" cx="22" cy="22" r="20"/><circle class="tfg" id="tcirc" cx="22" cy="22" r="20"/></svg>
+        <div class="tnum" id="tnum">40</div>
+      </div>
+      <div><div class="tlabel">Up Next</div><div class="tval" id="tnext" style="font-size:.82rem;color:var(--text2)">—</div></div>
+      <div style="text-align:center"><div class="tlabel">Round</div><div class="tval" style="color:var(--teal)" id="rnum">1</div></div>
+      <div style="text-align:center"><div class="tlabel">Pick</div><div class="tval" id="pnum">1/192</div></div>
+      <div style="text-align:center"><div class="tlabel">Pool</div><div class="tval" id="premain">330</div></div>
+    </div>
+    <div class="hright">
+      <span style="font-size:.68rem;color:var(--text3)">Stream:</span>
+      <button class="btn" id="stbtn" onclick="toggleStream()">Notes ON</button>
+      <button class="btn" onclick="openAdmin()">Admin</button>
+    </div>
+  </header>
+  <main>
+    <div id="pool-panel">
+      <div class="ph"><span class="ptitle">Player Pool</span><span class="pbadge" id="pcbadge">330</span></div>
+      <div class="sbar">
+        <input type="text" id="srch" placeholder="Search name or class..." oninput="filterP()"/>
+        <div class="frow">
+          <button class="fb act" onclick="setRF('All',this)">All</button>
+          <button class="fb rt" onclick="setRF('Tank',this)">Tank</button>
+          <button class="fb rd" onclick="setRF('DPS',this)">DPS</button>
+          <button class="fb rh" onclick="setRF('Healer',this)">Healer</button>
+        </div>
+        <div class="frow" id="cfrow" style="max-height:55px;overflow-y:auto;gap:.22rem"></div>
+      </div>
+      <div class="plist" id="plist"></div>
+    </div>
+    <div id="roster-panel">
+      <div class="ctabs" id="ctabs"></div>
+      <div id="rboard"></div>
+    </div>
+    <div id="info-panel">
+      <div class="ph"><span class="ptitle">Player Info</span></div>
+      <div class="pdet" id="pdet"><div class="nosel">Click a player to view details</div></div>
+      <div class="hkhint">Press N to toggle notes</div>
+    </div>
+  </main>
+  <div id="logpanel"></div>
+</div>
+<div id="smodal">
+  <div class="mbox">
+    <h3 id="smtitle">Place player</h3>
+    <div id="smopts"></div>
+    <button class="btn" style="margin-top:.45rem;width:100%" onclick="closeSM()">Cancel</button>
+  </div>
+</div>
+<div id="amodal">
+  <div class="mbox">
+    <h3>Admin Controls</h3>
+    <div class="agrid">
+      <button class="btn ok" onclick="adm('pause')">⏸ Pause</button>
+      <button class="btn primary" onclick="adm('resume')">▶ Resume</button>
+      <button class="btn" onclick="adm('undo')">↩ Undo Pick</button>
+      <button class="btn" onclick="adm('skip')">⏭ Skip Turn</button>
+      <button class="btn" onclick="adm('rtimer')">⏱ Reset Timer</button>
+      <button class="btn danger" onclick="adm('reset')">⚠ Reset All</button>
+    </div>
+    <div style="margin-bottom:.65rem">
+      <div class="dlbl" style="margin-bottom:.35rem">Force turn:</div>
+      <div style="display:flex;gap:.35rem;flex-wrap:wrap" id="ftbtns"></div>
+    </div>
+    <button class="btn" style="width:100%" onclick="closeAdmin()">Close</button>
+  </div>
+</div>
+  <script>
+const PW='mizzelleisthebest';
+const CIRC=2*Math.PI*20;
+const TSEC=40;
+const CAPS=[
+  {id:'arelite',name:'Arelite',color:'#7c6ff7',co:'Zaels'},
+  {id:'rheggie',name:'Rheggie',color:'#2dd4bf',co:'Ruthless'},
+  {id:'bora',name:'Bora',color:'#f0c060',co:'Soju'},
+  {id:'wicked',name:'Wicked',color:'#f87171',co:'Rosie'},
+];
+function genOrder(n){const o=[];let r=1,pk=0;while(pk<n){const ev=r%2===0;const seq=ev?[3,2,1,0]:[0,1,2,3];for(const i of seq){if(pk>=n)break;o.push({ci:i,r});pk++;}r++;}return o;}
+const ORD=genOrder(192);
+
+function buildSlots(){
+  const s={};
+  for(const c of CAPS){
+    const l=[];
+    const p1=[
+      [{t:'Any',lb:'Any Role'},{t:'Any',lb:'Any Role'},{t:'Any',lb:'Any Role'},{t:'Any',lb:'Any Role'}],
+      [{t:'Any',lb:'Any Role'},{t:'Tank',lb:'Tank'},{t:'Tank',lb:'Tank'},{t:'Tank',lb:'Tank'}],
+      [{t:'Any',lb:'Any Role'},{t:'Spinner',lb:'Spinner/DPS'},{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'}],
+      [{t:'Tank',lb:'Tank'},{t:'Spinner',lb:'Spinner/DPS'},{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'}],
+      [{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'}],
+      [{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'}],
+    ];
+    const p2=[
+      [{t:'Any',lb:'Any Role'},{t:'Any',lb:'Any Role'},{t:'Tank',lb:'Tank'},{t:'Tank',lb:'Tank'}],
+      [{t:'Tank',lb:'Tank'},{t:'Tank',lb:'Tank'},{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'}],
+      [{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'}],
+      [{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'}],
+      [{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'}],
+      [{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'}],
+    ];
+    const sub=[
+      [{t:'Any',lb:'Any Role'},{t:'Any',lb:'Any Role'},{t:'Any',lb:'Any Role'}],
+      [{t:'Tank',lb:'Tank'},{t:'Tank',lb:'Tank'},{t:'Tank',lb:'Tank'}],
+      [{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'}],
+      [{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'},{t:'DPS',lb:'DPS'}],
+      [{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'}],
+      [{t:'Support',lb:'Support'},{t:'Support',lb:'Support'},{t:'Support',lb:'Support'}],
+    ];
+    for(let r=0;r<p1.length;r++)for(let cc=0;cc<p1[r].length;cc++)l.push({id:`${c.id}-p1-r${r}-c${cc}`,sec:'Party 1 — Objective / Spinner / Flex / Flex',t:p1[r][cc].t,lb:p1[r][cc].lb,player:null});
+    for(let r=0;r<p2.length;r++)for(let cc=0;cc<p2[r].length;cc++)l.push({id:`${c.id}-p2-r${r}-c${cc}`,sec:'Party 2 — Flex / Flex / 3 DPS / 3 DPS',t:p2[r][cc].t,lb:p2[r][cc].lb,player:null});
+    for(let r=0;r<sub.length;r++)for(let cc=0;cc<sub[r].length;cc++)l.push({id:`${c.id}-sub-r${r}-c${cc}`,sec:'Subs (18)',t:sub[r][cc].t,lb:sub[r][cc].lb,player:null});
+    s[c.id]=l;
+  }
+  return s;
+}
+
+const PL=[
+  {id:'keraunosv',n:'Keraunosツ',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
+  {id:'pewf',n:'Pewf',role:'DPS',cls:'Fury',alts:'',notes:'',w:[],x:[]},
+  {id:'ruthless',n:'Ruthlessssssss',role:'Tank',cls:'Steelheart',alts:'Crusader',notes:'Co-captain Rheggie team',w:[],x:[]},
+  {id:'bearsawed',n:'BEARSAWED',role:'Healer',cls:'Oracle',alts:'Fury, Scout',notes:'',w:[],x:[]},
+  {id:'katie',n:'Katie',role:'DPS',cls:'Enigma',alts:'Liberator',notes:'',w:[],x:[]},
+  {id:'micheru',n:'Micheruメ',role:'Tank',cls:'Crusader',alts:'',notes:'Mainball/KS',w:[],x:[]},
+  {id:'levityy',n:'Levityy',role:'Tank',cls:'Steelheart',alts:'Crusader',notes:'',w:[],x:[]},
+  {id:'drav',n:'drav',role:'DPS',cls:'Ravager',alts:'',notes:'Killsquad. Prefers ムlexa and Plumb3rcrack as healers.',w:['mlexa','plumb3rcrack'],x:[]},
+  {id:'desserti',n:'Desserti',role:'Healer',cls:'Oracle',alts:'',notes:'Built for spinner team.',w:[],x:[]},
+  {id:'wolferwolf',n:'Wolferwolf',role:'Tank',cls:'Steelheart',alts:'',notes:'Tank party preferred',w:[],x:[]},
+  {id:'trazodone',n:'Trazodone ッ',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
+  {id:'dioxin',n:'Dioxin',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'justin',n:'Justin',role:'DPS',cls:'Scorpion',alts:'Lunarch',notes:'Normalized from Curse Bomber',w:[],x:[]},
+  {id:'cyclingpig',n:'cyclingpig',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'',w:[],x:[]},
+  {id:'plumb3rcrack',n:'Plumb3rcrack',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
+  {id:'hammyjammy',n:'hammyjammy',role:'Healer',cls:'Seeker',alts:'Infiltrator, Spellblade',notes:'Can play anything anywhere',w:[],x:[]},
+  {id:'egirlwaifu',n:'egirlwaifu',role:'Healer',cls:'Seeker',alts:'Oracle',notes:'Cordy orb/wand. Melee party preferred.',w:[],x:[]},
+  {id:'shifood',n:'ShiFood',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'lordthygod',n:'LordThyGod',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'faytcrus',n:'FaytCrus',role:'DPS',cls:'Ravager',alts:'',notes:'Killsquad preferred',w:[],x:[]},
+  {id:'elrokiii',n:'Elrokiii',role:'Healer',cls:'Seeker',alts:'Oracle',notes:'Any role',w:[],x:[]},
+  {id:'zakovs',n:'Zakovs',role:'DPS',cls:'Scorpion',alts:'Shadowdancer',notes:'',w:[],x:[]},
+  {id:'ragebait',n:'Ragebait',role:'DPS',cls:'Gladiator',alts:'',notes:'',w:[],x:[]},
+  {id:'akaru',n:'Akaru',role:'Healer',cls:'Ranger',alts:'Oracle, Seeker',notes:'⚠ Will not play for Ruthless team - handle manually',w:[],x:['eshaberry']},
+  {id:'wibunnie',n:'ゐunnie',role:'Healer',cls:'Seeker',alts:'',notes:'WON\'T play with jillweezee (not in pool)',w:[],x:[]},
+  {id:'mednev',n:'Mednev',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'',w:[],x:[]},
+  {id:'hoonii',n:'HooniiTツ',role:'DPS',cls:'Raider',alts:'Spellblade',notes:'',w:[],x:[]},
+  {id:'jackie',n:'Jackie',role:'DPS',cls:'Raider',alts:'Shadowdancer, Scorpion',notes:'',w:[],x:[]},
+  {id:'d0wnl0w',n:'D0wnl0w',role:'DPS',cls:'Crusader',alts:'Shadowdancer, Berserker, Guardian, Raider, Ravager',notes:'AOE Crusader build. Can play anywhere.',w:[],x:[]},
+  {id:'zombraya',n:'Zombraya',role:'DPS',cls:'Ravager',alts:'Berserker',notes:'Hit/Heavy Rav 8447GS',w:[],x:[]},
+  {id:'xflame',n:'xFlame',role:'DPS',cls:'Gladiator',alts:'Crusader',notes:'',w:[],x:[]},
+  {id:'narlynar',n:'narlynar',role:'Healer',cls:'Seeker',alts:'Oracle, Ranger',notes:'',w:[],x:[]},
+  {id:'saint',n:'Saint',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'',w:[],x:[]},
+  {id:'epoche',n:'Epoche',role:'DPS',cls:'Justicar',alts:'Ranger, Gladiator',notes:'Orb DPS party preferred',w:[],x:[]},
+  {id:'mlexa',n:'ムlexa',role:'Healer',cls:'Seeker',alts:'Oracle',notes:'Killsquad.',w:['drav','plumb3rcrack'],x:[]},
+  {id:'stepbro',n:'stepbro',role:'DPS',cls:'Ravager',alts:'',notes:'Killsquad only',w:[],x:[]},
+  {id:'dyefy',n:'Dyefy',role:'Tank',cls:'Steelheart',alts:'',notes:'Multiple swaps',w:[],x:[]},
+  {id:'keppy',n:'Keppy',role:'Healer',cls:'Seeker',alts:'Ranger',notes:'Prefers melee party.',w:['melee'],x:[]},
+  {id:'kenpachi',n:'kenpachi',role:'DPS',cls:'Raider',alts:'',notes:'',w:[],x:[]},
+  {id:'yuzurain',n:'Yuzurain',role:'Tank',cls:'Crusader',alts:'Warden',notes:'',w:[],x:[]},
+  {id:'mostley',n:'Mostley',role:'Healer',cls:'Oracle',alts:'Warden, Ranger',notes:'Mainball/Bombs/Spinner',w:[],x:[]},
+  {id:'eeiv',n:'eeiv',role:'DPS',cls:'Infiltrator',alts:'Shadowdancer',notes:'',w:[],x:[]},
+  {id:'regardless',n:'Regardless弓',role:'DPS',cls:'Infiltrator',alts:'Scorpion',notes:'Interchangeable Scorp/Infil',w:[],x:[]},
+  {id:'xdemonx',n:'xDemonx',role:'Tank',cls:'Steelheart',alts:'Crusader, Ravager, Gladiator',notes:'',w:[],x:[]},
+  {id:'toputasso',n:'toputasso',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
+  {id:'ellie',n:'Ellie・',role:'Healer',cls:'Seeker',alts:'Oracle',notes:'Flexible',w:[],x:[]},
+  {id:'fae',n:'Fae゗゚',role:'Healer',cls:'Oracle',alts:'',notes:'Pho pocket. Wants raider party.',w:['pho'],x:[]},
+  {id:'wintrr',n:'Wintrr',role:'DPS',cls:'Gladiator',alts:'',notes:'',w:[],x:[]},
+  {id:'andrebalada',n:'AndreBalada',role:'DPS',cls:'Raider',alts:'',notes:'',w:[],x:[]},
+  {id:'stun',n:'stun',role:'Tank',cls:'Crusader',alts:'Steelheart',notes:'Mainball devo tank',w:[],x:[]},
+  {id:'spraymachine',n:'SprayMachine',role:'DPS',cls:'Scorpion',alts:'',notes:'Killsquad',w:[],x:[]},
+  {id:'forrest',n:'Forrest',role:'Tank',cls:'Steelheart',alts:'Crusader, Warden, Infiltrator',notes:'No shot calling.',w:['xsouless'],x:[]},
+  {id:'lucky',n:'Lucky呪い',role:'Tank',cls:'Berserker',alts:'Crusader',notes:'Positive affirmations required',w:[],x:[]},
+  {id:'xkanekiitv',n:'xKanekiiTV',role:'Tank',cls:'Crusader',alts:'Ranger',notes:'KS and Mainball tank',w:[],x:[]},
+  {id:'lexapro',n:'Lexaproツ',role:'Tank',cls:'Warden',alts:'Crusader',notes:'',w:[],x:[]},
+  {id:'cimed',n:'Cimedッ',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'Flank/zer build not frontline',w:[],x:[]},
+  {id:'poor',n:'Poor',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'aiya',n:'AIYAメ厲害',role:'DPS',cls:'Raider',alts:'Shadowdancer',notes:'',w:[],x:[]},
+  {id:'xsouless',n:'xSouless',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'mgmt',n:'Mgmt',role:'Healer',cls:'Seeker',alts:'Oracle',notes:'Prefers raider party',w:[],x:[]},
+  {id:'america',n:'America',role:'Tank',cls:'Steelheart',alts:'',notes:'',w:[],x:[]},
+  {id:'raypeat',n:'RayPeat',role:'DPS',cls:'Ravager',alts:'Paladin',notes:'Killsquad',w:[],x:[]},
+  {id:'encore',n:'encore',role:'Tank',cls:'Crusader',alts:'Gladiator',notes:'',w:[],x:[]},
+  {id:'alice',n:'鿫゚alice',role:'Healer',cls:'Oracle',alts:'Enigma',notes:'Special chars in IGN — Alice must send party invite',w:[],x:[]},
+  {id:'marruh',n:'Marruh',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'meow',n:'Meow',role:'Healer',cls:'Oracle',alts:'Steelheart, Crusader',notes:'',w:[],x:[]},
+  {id:'akaroyoshi',n:'Akaroyoshi',role:'Tank',cls:'Crusader',alts:'',notes:'Hit/CC/buff bot. No capping.',w:[],x:[]},
+  {id:'mcdo',n:'McDo',role:'Tank',cls:'Warden',alts:'Crusader',notes:'',w:[],x:[]},
+  {id:'amaterasu',n:'amaterasu',role:'DPS',cls:'Gladiator',alts:'Enigma, Infiltrator, Scryer',notes:'Flexible flank/KS/main',w:[],x:[]},
+  {id:'xburntpeanut',n:'xTheBurntPeanut',role:'DPS',cls:'Gladiator',alts:'',notes:'Mainball',w:[],x:[]},
+  {id:'koiv',n:'Koiv',role:'Tank',cls:'Crusader',alts:'Warden, Ranger',notes:'Mainball only',w:[],x:[]},
+  {id:'lzari',n:'lzari',role:'Tank',cls:'Crusader',alts:'',notes:'No capping',w:[],x:[]},
+  {id:'realix',n:'Realix',role:'Tank',cls:'Steelheart',alts:'Crusader',notes:'',w:['selumii'],x:[]},
+  {id:'selumii',n:'Selumii',role:'Healer',cls:'Seeker',alts:'',notes:'',w:['realix'],x:[]},
+  {id:'rabidbaboon',n:'Rabidbaboon',role:'DPS',cls:'Gladiator',alts:'Spellblade, Enigma, Shadowdancer',notes:'',w:[],x:[]},
+  {id:'jendryx',n:'Jendryx',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
+  {id:'amidalarose',n:'Amidalarose',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
+  {id:'sakki',n:'Sakki',role:'DPS',cls:'Scorpion',alts:'Shadowdancer',notes:'KS preferred',w:[],x:[]},
+  {id:'prozac',n:'Prozacツ',role:'Tank',cls:'Crusader',alts:'',notes:'Link/clamp or buff/clump',w:[],x:[]},
+  {id:'eddygslayer',n:'EddyGSlayer',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
+  {id:'lairal',n:'Lairal',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'',w:[],x:[]},
+  {id:'lumooo',n:'LuMooo',role:'DPS',cls:'Shadowdancer',alts:'',notes:'',w:[],x:[]},
+  {id:'riikuu',n:'Riikuu',role:'Tank',cls:'Berserker',alts:'Warden, Crusader',notes:'Spinner parties but flexible',w:[],x:[]},
+  {id:'omen',n:'Omen',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'mr99',n:'・MR99・',role:'Tank',cls:'Crusader',alts:'',notes:'Zero English',w:[],x:[]},
+  {id:'zyrwolf',n:'Zyrwolf',role:'Healer',cls:'Seeker',alts:'',notes:'Tank/point or KS',w:[],x:[]},
+  {id:'vital',n:'VitaL十',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'',w:[],x:[]},
+  {id:'yiyuan',n:'议员',role:'DPS',cls:'Spellblade',alts:'Ravager',notes:'',w:[],x:[]},
+  {id:'rhaysha',n:'Rhayshaツ',role:'DPS',cls:'Raider',alts:'',notes:'Cordy/Xbow only',w:[],x:[]},
+  {id:'rhythmics',n:'Rhythmics',role:'Healer',cls:'Seeker',alts:'',notes:'Mostly KS',w:[],x:[]},
+  {id:'onpoint',n:'OnPoint゜',role:'DPS',cls:'Scryer',alts:'Spellblade',notes:'',w:[],x:[]},
+  {id:'adalane',n:'AdalaneShadow',role:'Healer',cls:'Seeker',alts:'',notes:'Melee/spinner. Swift healer.',w:[],x:[]},
+  {id:'evansxd',n:'EvansXD',role:'Tank',cls:'Crusader',alts:'',notes:'Link/clamp or melee',w:[],x:[]},
+  {id:'frutlooops',n:'frutlooops',role:'DPS',cls:'Raider',alts:'Scorpion',notes:'May be 5-10 late Mondays.',w:[],x:[]},
+  {id:'ohmylantas',n:'Ohmylantas',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'clysmm',n:'Clysmm',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
+  {id:'ayojohn',n:'AyoJohn',role:'DPS',cls:'Enigma',alts:'',notes:'',w:[],x:[]},
+  {id:'zelark',n:'zelark',role:'DPS',cls:'Gladiator',alts:'',notes:'',w:[],x:[]},
+  {id:'glennthewolf',n:'GlennTheWolf',role:'Tank',cls:'Steelheart',alts:'Crusader',notes:'8.3K GS',w:[],x:[]},
+  {id:'dot6',n:'゙゙6',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'',w:[],x:[]},
+  {id:'xytos',n:'Xytos',role:'DPS',cls:'Scorpion',alts:'Infiltrator',notes:'',w:[],x:[]},
+  {id:'zeromaycry',n:'ZeroMayCry',role:'DPS',cls:'Ravager',alts:'Gladiator, Lunarch',notes:'',w:[],x:[]},
+  {id:'flaviz',n:'・Flaviz',role:'DPS',cls:'Gladiator',alts:'Ravager, Shadowdancer',notes:'',w:[],x:[]},
+  {id:'queenofcurses',n:'QueenOfCurses',role:'DPS',cls:'Spellblade',alts:'Berserker',notes:'',w:[],x:[]},
+  {id:'qiqzhou',n:'Qiqzhou',role:'Healer',cls:'Oracle',alts:'',notes:'',w:['artay'],x:[]},
+  {id:'parallax',n:'•ParaLLax•',role:'Healer',cls:'Seeker',alts:'Ranger, Scryer, Oracle',notes:'',w:[],x:[]},
+  {id:'artay',n:'lllIIlI',role:'DPS',cls:'Lunarch',alts:'Guardian, Enigma, Spellblade',notes:'',w:['qiqzhou'],x:[]},
+  {id:'chowskie',n:'Chowskie',role:'DPS',cls:'Ravager',alts:'',notes:'Killsquad only',w:[],x:[]},
+  {id:'attrail',n:'Attrail',role:'DPS',cls:'Shadowdancer',alts:'Berserker, Lunarch',notes:'',w:[],x:[]},
+  {id:'shaco',n:'Shaco',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
+  {id:'silch',n:'Silch',role:'Healer',cls:'Seeker',alts:'Oracle, Templar, Warden',notes:'',w:[],x:[]},
+  {id:'technodroid',n:'technodroid',role:'DPS',cls:'Spellblade',alts:'Enigma',notes:'',w:[],x:[]},
+  {id:'adub187',n:'ADub187',role:'Tank',cls:'Crusader',alts:'Berserker',notes:'',w:[],x:[]},
+  {id:'suricata',n:'Suricata',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
+  {id:'indra',n:'Indraメ',role:'Tank',cls:'Steelheart',alts:'Berserker',notes:'',w:[],x:[]},
+  {id:'eheals',n:'ェHeals六',role:'Healer',cls:'Oracle',alts:'',notes:'Double cordy avg 50k+',w:[],x:[]},
+  {id:'legal',n:'Legal薬',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'',w:[],x:[]},
+  {id:'bini',n:'Biniッ',role:'DPS',cls:'Spellblade',alts:'Infiltrator',notes:'Mainball',w:[],x:[]},
+  {id:'jamessss',n:'jaMESSSSSS',role:'DPS',cls:'Templar',alts:'',notes:'',w:[],x:[]},
+  {id:'of',n:'of',role:'DPS',cls:'Gladiator',alts:'Ravager',notes:'Mainball glad',w:[],x:[]},
+  {id:'migatte',n:'Migatte死',role:'DPS',cls:'Enigma',alts:'Spellblade',notes:'No hit chance',w:[],x:[]},
+  {id:'mew',n:'MEW',role:'Tank',cls:'Crusader',alts:'Raider',notes:'',w:[],x:[]},
+  {id:'kyr1n',n:'Kyr1n',role:'Tank',cls:'Steelheart',alts:'',notes:'Tank/clumper party preferred',w:[],x:[]},
+  {id:'sanai',n:'伞艾',role:'DPS',cls:'Scorpion',alts:'',notes:'',w:['nahe'],x:[]},
+  {id:'nahe',n:'の和',role:'Healer',cls:'Oracle',alts:'',notes:'',w:['sanai'],x:[]},
+  {id:'udon',n:'Udon',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'egame',n:'E゗゚',role:'Healer',cls:'Seeker',alts:'Oracle',notes:'KS healer experience',w:[],x:[]},
+  {id:'eshaberry',n:'Eshaberry',role:'DPS',cls:'Infiltrator',alts:'',notes:'KS only.',w:[],x:['akaru']},
+  {id:'franks',n:'Franks',role:'Healer',cls:'Ranger',alts:'Seeker, Oracle',notes:'',w:[],x:[]},
+  {id:'feelix',n:'Feelix',role:'DPS',cls:'Gladiator',alts:'Crusader, Berserker',notes:'',w:[],x:[]},
+  {id:'bladurken',n:'Bladurken',role:'Tank',cls:'Steelheart',alts:'',notes:'Point party',w:[],x:[]},
+  {id:'awsmhhh',n:'awsmhhh',role:'Tank',cls:'Crusader',alts:'Steelheart',notes:'',w:[],x:[]},
+  {id:'warredeemer',n:'WarReDeeMeR',role:'Tank',cls:'Crusader',alts:'',notes:'Buff bot',w:[],x:[]},
+  {id:'tankmezaddy',n:'Tankmezaddyyyy',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
+  {id:'natchi',n:'Natchiヅ',role:'DPS',cls:'Ravager',alts:'',notes:'',w:[],x:[]},
+  {id:'chuuku',n:'中空・',role:'DPS',cls:'Gladiator',alts:'',notes:'',w:[],x:[]},
+  {id:'edd',n:'EDD',role:'Healer',cls:'Seeker',alts:'Oracle, Paladin, Crusader',notes:'Killsquad',w:[],x:[]},
+  {id:'redcamper',n:'RedCamper',role:'Tank',cls:'Crusader',alts:'Ranger',notes:'Mainball or KS',w:[],x:[]},
+  {id:'mrcantoni',n:'MrCantoni',role:'Tank',cls:'Warden',alts:'Steelheart, Crusader, Raider',notes:'⚠ NO KS/SPIN. Tank party with Loudpack OR ranged with Edmun/Arelite.',w:['loudpack'],x:[]},
+  {id:'shawarmashuf',n:'ShawarmaShuffle',role:'DPS',cls:'Ravager',alts:'',notes:'KS hunting prio targets',w:[],x:[]},
+  {id:'jharol',n:'Jharol',role:'DPS',cls:'Raider',alts:'Berserker, Spellblade',notes:'',w:['felpyk'],x:[]},
+  {id:'cleared',n:'Clearedメ',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
+  {id:'mnoe',n:'Mnoe',role:'Tank',cls:'Crusader',alts:'Seeker, Oracle',notes:'',w:[],x:[]},
+  {id:'moon',n:'Moon乂',role:'Tank',cls:'Crusader',alts:'Oracle, Steelheart',notes:'Open to anything',w:[],x:[]},
+  {id:'greeto',n:'Greeto',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'zero',n:'Zero',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
+  {id:'nightghost1',n:'nightghost1',role:'DPS',cls:'Gladiator',alts:'',notes:'',w:[],x:[]},
+  {id:'legolasa',n:'Legolasa',role:'DPS',cls:'Raider',alts:'Scorpion',notes:'Spinner party',w:[],x:[]},
+  {id:'notfutu',n:'notfutu',role:'Healer',cls:'Seeker',alts:'Crusader',notes:'',w:[],x:[]},
+  {id:'zigzag',n:'ZigZagRule',role:'DPS',cls:'Enigma',alts:'Spellblade, Lunarch',notes:'Triple support party',w:[],x:[]},
+  {id:'aeriels',n:'Aerielsツ',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
+  {id:'r',n:'R',role:'DPS',cls:'Raider',alts:'Gladiator',notes:'Mainball/bombing with wardens',w:[],x:[]},
+  {id:'gotha',n:'g0tha',role:'Tank',cls:'Crusader',alts:'Steelheart',notes:'',w:[],x:[]},
+  {id:'dizzydreamz',n:'DizzyDreamz',role:'Healer',cls:'Paladin',alts:'Scryer',notes:'',w:[],x:[]},
+  {id:'deio',n:'Deio',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'topdawg',n:'TOPDAWG照',role:'Healer',cls:'Oracle',alts:'',notes:'Front party preferred',w:[],x:[]},
+  {id:'badbeatbrad',n:'BadBeatBrad',role:'Healer',cls:'Seeker',alts:'Oracle',notes:'Any party. Multiple builds.',w:[],x:[]},
+  {id:'amu',n:'Amu',role:'DPS',cls:'Spellblade',alts:'',notes:'',w:[],x:[]},
+  {id:'atheling',n:'Atheling',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'',w:['migatte'],x:[]},
+  {id:'eddston',n:'Eddston',role:'Healer',cls:'Seeker',alts:'Oracle',notes:'',w:[],x:[]},
+  {id:'dagnerus',n:'Dagnerus',role:'Tank',cls:'Crusader',alts:'',notes:'No cordy spinner parties',w:[],x:[]},
+  {id:'mesaint',n:'メsaint',role:'DPS',cls:'Lunarch',alts:'Spellblade',notes:'',w:[],x:[]},
+  {id:'reinakertia',n:'ReinaKertia',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'',w:['temporalrage'],x:[]},
+  {id:'tagato',n:'Tagato',role:'Healer',cls:'Oracle',alts:'Seeker, Gladiator, Crusader, Ranger, Steelheart',notes:'',w:[],x:[]},
+  {id:'fade',n:'Fade',role:'DPS',cls:'Ravager',alts:'Gladiator',notes:'',w:[],x:[]},
+  {id:'temporalrage',n:'TemporalRage',role:'Tank',cls:'Crusader',alts:'',notes:'',w:['reinakertia'],x:[]},
+  {id:'slayismo',n:'Slayismo',role:'Tank',cls:'Crusader',alts:'',notes:'Buff bot',w:[],x:[]},
+  {id:'yaga',n:'Yagaッ',role:'DPS',cls:'Spellblade',alts:'',notes:'KS and AoE',w:[],x:[]},
+  {id:'grimjowjj',n:'GrimjowJJ',role:'DPS',cls:'Gladiator',alts:'Spellblade',notes:'Mainball only',w:[],x:[]},
+  {id:'panpan',n:'一IニPANPANニフ',role:'DPS',cls:'Fury',alts:'',notes:'',w:[],x:[]},
+  {id:'van',n:'Van',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'KS only.',w:['smallbutwhole'],x:[]},
+  {id:'smallbutwhole',n:'SmallButWhole',role:'DPS',cls:'Ravager',alts:'',notes:'KS only.',w:['van'],x:[]},
+  {id:'jdawg',n:'JDAWGGGG',role:'DPS',cls:'Ravager',alts:'',notes:'',w:[],x:[]},
+  {id:'krippler',n:'Krippler',role:'Healer',cls:'Oracle',alts:'Seeker, Liberator, Ravager',notes:'',w:[],x:[]},
+  {id:'kyrious',n:'Kyrious',role:'DPS',cls:'Spellblade',alts:'Guardian',notes:'Flexible',w:[],x:[]},
+  {id:'zakim',n:'Zakim',role:'Tank',cls:'Crusader',alts:'',notes:'Linker/Front/KS/Mainball',w:[],x:[]},
+  {id:'pullonme',n:'PullOnMe',role:'Tank',cls:'Steelheart',alts:'Berserker, Crusader',notes:'',w:[],x:[]},
+  {id:'xdebo',n:'xDebo',role:'Tank',cls:'Crusader',alts:'Steelheart',notes:'',w:[],x:[]},
+  {id:'margheritaa',n:'Margheritaa',role:'DPS',cls:'Gladiator',alts:'',notes:'Mainball key target',w:[],x:[]},
+  {id:'leo',n:'・Leo・',role:'Tank',cls:'Warden',alts:'Crusader, Raider',notes:'',w:[],x:[]},
+  {id:'pho',n:'Pho',role:'DPS',cls:'Raider',alts:'',notes:'Needs Cordy wand in party.',w:[],x:[]},
+  {id:'laiza',n:'萊扎',role:'Healer',cls:'Oracle',alts:'',notes:'',w:['yiyuan'],x:[]},
+  {id:'elitaone',n:'ElitaOne',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'adelynne',n:'Adelynne',role:'Healer',cls:'Oracle',alts:'',notes:'⚠ Available from May 9 only - misses first match day',w:[],x:[]},
+  {id:'picklesnaus',n:'Picklesnaus',role:'Tank',cls:'Berserker',alts:'',notes:'',w:[],x:[]},
+  {id:'twix',n:'Twix金',role:'Healer',cls:'Oracle',alts:'',notes:'Heals tank/mainball',w:[],x:[]},
+  {id:'artemis',n:'Artemis',role:'DPS',cls:'Spellblade',alts:'Enigma',notes:'',w:[],x:[]},
+  {id:'paella',n:'Paella',role:'DPS',cls:'Gladiator',alts:'Berserker',notes:'',w:[],x:[]},
+  {id:'coot',n:'Coot',role:'DPS',cls:'Raider',alts:'',notes:'Prefers healers who have healed spinners',w:[],x:[]},
+  {id:'eepy',n:'eepY-EXE',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'fab',n:'Fab゗',role:'Healer',cls:'Seeker',alts:'Oracle, Crusader, Warden',notes:'Flexible',w:[],x:[]},
+  {id:'dboost',n:'dboost',role:'DPS',cls:'Gladiator',alts:'Oracle',notes:'',w:[],x:[]},
+  {id:'riemann',n:'Riemann',role:'Healer',cls:'Seeker',alts:'Oracle',notes:'',w:[],x:[]},
+  {id:'dugthias',n:'Dugthias',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
+  {id:'luwuna',n:'Luwuna',role:'Healer',cls:'Seeker',alts:'',notes:'Wants Asaka static',w:['asaka'],x:[]},
+  {id:'punched',n:'Punched',role:'DPS',cls:'Raider',alts:'',notes:'',w:[],x:[]},
+  {id:'terrormisu',n:'Terrormisu狐',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'Hard pair with yopurrt.',w:['yopurrt'],x:[]},
+  {id:'yopurrt',n:'yopurrt',role:'DPS',cls:'Shadowdancer',alts:'Steelheart',notes:'Hard pair with Terrormisu.',w:['terrormisu'],x:[]},
+  {id:'jehoo',n:'Jehoo',role:'DPS',cls:'Gladiator',alts:'',notes:'',w:[],x:[]},
+  {id:'mars',n:'mars',role:'DPS',cls:'Ravager',alts:'',notes:'Killsquad only',w:[],x:[]},
+  {id:'duthias',n:'Duthias',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
+  {id:'srdrake',n:'SrDrake',role:'Healer',cls:'Seeker',alts:'Ranger, Paladin, Invocator',notes:'',w:[],x:[]},
+  {id:'jindo',n:'진동',role:'DPS',cls:'Shadowdancer',alts:'Lunarch',notes:'Mainball',w:[],x:[]},
+  {id:'nathias',n:'Nathias',role:'DPS',cls:'Gladiator',alts:'Shadowdancer',notes:'Wants static: Dugthias, Duthias, nightghost1, xSouless',w:['dugthias','duthias','nightghost1','xsouless'],x:[]},
+  {id:'gayfurrytank',n:'GayFurryTank',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
+  {id:'kincaed',n:'Kincaed',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
+  {id:'tangeuray',n:'Tangeuray',role:'Healer',cls:'Oracle',alts:'Seeker, Templar',notes:'',w:[],x:[]},
+  {id:'msgrayness',n:'msgrayness',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'ryujin',n:'Ryujin皇',role:'DPS',cls:'Guardian',alts:'Enigma, Lunarch, Spellblade',notes:'',w:[],x:[]},
+  {id:'bloomy',n:'bloomy耂',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'Killsquad only',w:[],x:[]},
+  {id:'shesds',n:'Shesdshewaslv18',role:'Healer',cls:'Oracle',alts:'Gladiator',notes:'',w:[],x:[]},
+  {id:'asaka',n:'Asaka',role:'DPS',cls:'Raider',alts:'Gladiator',notes:'Wants static: Luwuna + others (some not in pool)',w:['luwuna'],x:[]},
+  {id:'mrussxd',n:'MrUssxd',role:'DPS',cls:'Gladiator',alts:'',notes:'',w:[],x:[]},
+  {id:'benji',n:'乃enji',role:'Tank',cls:'Crusader',alts:'',notes:'Devo build',w:[],x:[]},
+  {id:'uselesspantys',n:'UselessPantys',role:'Healer',cls:'Seeker',alts:'Crusader, Warden',notes:'Full EVA - KS worst for this build',w:[],x:[]},
+  {id:'edmun',n:'edmun',role:'DPS',cls:'Lunarch',alts:'Enigma, Spellblade',notes:'',w:[],x:[]},
+  {id:'spydur',n:'Spydur耂',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
+  {id:'mclovin',n:'Mclovin',role:'DPS',cls:'Spellblade',alts:'Berserker',notes:'',w:[],x:[]},
+  {id:'rhearos',n:'Rhearos',role:'DPS',cls:'Sentinel',alts:'Enigma, Oracle',notes:'',w:[],x:[]},
+  {id:'irockz',n:'iRockz',role:'DPS',cls:'Enigma',alts:'',notes:'',w:[],x:[]},
+  {id:'tazzz',n:'tazzz',role:'DPS',cls:'Shadowdancer',alts:'',notes:'Mainball',w:[],x:[]},
+  {id:'apgonzo',n:'apgonzo',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'shihtzu',n:'ShihTzu小',role:'DPS',cls:'Shadowdancer',alts:'Gladiator, Spellblade',notes:'Mainball. Needs pocket oracle.',w:[],x:[]},
+  {id:'kaia',n:'Kaia',role:'Healer',cls:'Oracle',alts:'',notes:'Pocket healing squishy DPS',w:[],x:[]},
+  {id:'reedboys2',n:'ReedBoys2',role:'Healer',cls:'Oracle',alts:'',notes:'Flexible',w:[],x:[]},
+  {id:'notthehealer',n:'NotTheHealer火',role:'Healer',cls:'Oracle',alts:'Steelheart, Crusader',notes:'Mainball',w:[],x:[]},
+  {id:'cream',n:'Cream',role:'Healer',cls:'Oracle',alts:'',notes:'Hard pair: KS only with Cookies.',w:['cookies'],x:[]},
+  {id:'gundwulf',n:'Gundwulf',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
+  {id:'yoonj',n:'YooNJ',role:'DPS',cls:'Shadowdancer',alts:'',notes:'',w:[],x:[]},
+  {id:'stepsis',n:'stepsis耂',role:'Healer',cls:'Seeker',alts:'',notes:'KS only.',w:[],x:['xkanekiitv']},
+  {id:'stepson',n:'stepson耂',role:'Tank',cls:'Crusader',alts:'Templar',notes:'KS only.',w:[],x:['xkanekiitv']},
+  {id:'turnip',n:'Turnip',role:'Tank',cls:'Crusader',alts:'',notes:'NOT killsquad',w:[],x:[]},
+  {id:'xnodx',n:'xNODx',role:'DPS',cls:'Enigma',alts:'',notes:'Flexible',w:[],x:[]},
+  {id:'tiantian',n:'天天天',role:'DPS',cls:'Spellblade',alts:'Scorpion',notes:'More exp on Scorp',w:[],x:[]},
+  {id:'ganjagoku',n:'Ganjagoku420',role:'Tank',cls:'Crusader',alts:'Berserker, Gladiator',notes:'',w:[],x:[]},
+  {id:'itsmigo',n:'ItsMigo',role:'DPS',cls:'Infiltrator',alts:'',notes:'⚠ Not available around 9:30PM EST',w:[],x:[]},
+  {id:'phopapi',n:'PhoPapi',role:'DPS',cls:'Gladiator',alts:'Scout',notes:'',w:[],x:[]},
+  {id:'loudpack',n:'Loudpack',role:'Tank',cls:'Berserker',alts:'Ravager',notes:'Evasion tank.',w:[],x:[]},
+  {id:'xelline',n:'Xelline',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
+  {id:'dank',n:'Dank',role:'DPS',cls:'Spellblade',alts:'',notes:'',w:[],x:[]},
+  {id:'kresos',n:'Kresos',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
+  {id:'brandissimo',n:'Brandissimo丷',role:'DPS',cls:'Enigma',alts:'Lunarch',notes:'Mainball only',w:[],x:[]},
+  {id:'sunny',n:'Sunny',role:'DPS',cls:'Ravager',alts:'',notes:'',w:[],x:[]},
+  {id:'nwghost',n:'NWGhost',role:'Tank',cls:'Steelheart',alts:'',notes:'Flexible',w:[],x:[]},
+  {id:'dsdayn',n:'Dsdayn',role:'Tank',cls:'Warden',alts:'Steelheart',notes:'',w:[],x:[]},
+  {id:'chouxcreme',n:'ChouxCreme',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
+  {id:'gg',n:'GG゗゚',role:'Healer',cls:'Seeker',alts:'',notes:'Multiple builds. Spinner/frontline/KS.',w:[],x:[]},
+  {id:'kxle',n:'Kxle',role:'DPS',cls:'Infiltrator',alts:'Shadowdancer, Scorpion',notes:'Flexible',w:[],x:[]},
+  {id:'vietnam',n:'Vietnam゗゚',role:'DPS',cls:'Ravager',alts:'Scorpion, Enigma, Spellblade',notes:'',w:[],x:[]},
+  {id:'germany',n:'゗゚Germany',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'switch8k',n:'Switch8K',role:'Tank',cls:'Warden',alts:'Gladiator, Ravager, Crusader',notes:'',w:[],x:[]},
+  {id:'cosmicbrisket',n:'CosmicBrisket',role:'DPS',cls:'Ravager',alts:'',notes:'KS only.',w:['gongsang'],x:[]},
+  {id:'gongsang',n:'공상',role:'Healer',cls:'Oracle',alts:'Paladin, Ranger',notes:'KS only.',w:['cosmicbrisket'],x:[]},
+  {id:'ditto1',n:'dit゗゚to',role:'DPS',cls:'Shadowdancer',alts:'Lunarch',notes:'Ditto group.',w:['ditto2','ditto3'],x:[]},
+  {id:'ditto2',n:'ditt゗゚゗゚o',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'Ditto group.',w:['ditto1','ditto3'],x:[]},
+  {id:'ditto3',n:'ditto゗゚゗゚',role:'DPS',cls:'Gladiator',alts:'Guardian, Steelheart, Crusader',notes:'Ditto group.',w:['ditto1','ditto2'],x:[]},
+  {id:'natejas',n:'Natejas',role:'Healer',cls:'Oracle',alts:'Seeker, Ranger, Crusader',notes:'',w:[],x:[]},
+  {id:'poopsy',n:'Poopsy',role:'Healer',cls:'Paladin',alts:'',notes:'KS',w:[],x:[]},
+  {id:'dusk',n:'Dusk风暴',role:'Healer',cls:'Oracle',alts:'',notes:'⚠ Gone May 14th',w:[],x:[]},
+  {id:'xvitox',n:'xVITOx',role:'Healer',cls:'Seeker',alts:'Oracle, Spellblade',notes:'',w:[],x:[]},
+  {id:'pukei',n:'Pukei',role:'Tank',cls:'Berserker',alts:'Steelheart',notes:'Smoke bot for spinners.',w:[],x:[]},
+  {id:'noravusz',n:'のravusz',role:'DPS',cls:'Spellblade',alts:'',notes:'Evasion builds',w:[],x:[]},
+  {id:'prefire',n:'Prefire',role:'Healer',cls:'Oracle',alts:'Ravager',notes:'Refer to as Shalisa in comms',w:[],x:[]},
+  {id:'melee',n:'Melee',role:'Tank',cls:'Steelheart',alts:'Crusader, Gladiator, Shadowdancer',notes:'',w:['keppy'],x:[]},
+  {id:'revioli',n:'Revioli',role:'DPS',cls:'Gladiator',alts:'Ravager',notes:'Mainball or KS',w:[],x:[]},
+  {id:'makevelli',n:'Makevelli',role:'DPS',cls:'Raider',alts:'',notes:'',w:[],x:[]},
+  {id:'soxy',n:'Soxy',role:'DPS',cls:'Shadowdancer',alts:'Scout',notes:'',w:[],x:[]},
+  {id:'afky',n:'AFKy',role:'DPS',cls:'Raider',alts:'Outrider',notes:'',w:[],x:[]},
+  {id:'poutine',n:'Poutine',role:'DPS',cls:'Spellblade',alts:'Ravager',notes:'',w:[],x:[]},
+  {id:'delirax',n:'Delirax',role:'DPS',cls:'Raider',alts:'Scorpion',notes:'Spin/AoE clump. Needs good pull/lockdown.',w:[],x:[]},
+  {id:'jamisjojo',n:'Jamisjojo',role:'Tank',cls:'Steelheart',alts:'Crusader',notes:'',w:[],x:[]},
+  {id:'gale',n:'gale',role:'DPS',cls:'Raider',alts:'',notes:'',w:[],x:[]},
+  {id:'yamz',n:'Yamz',role:'Tank',cls:'Infiltrator',alts:'Berserker',notes:'⚠ Tank/Infiltrator unusual',w:[],x:[]},
+  {id:'zenfu',n:'・全父・',role:'DPS',cls:'Shadowdancer',alts:'Lunarch, Guardian',notes:'',w:[],x:[]},
+  {id:'soppressatta',n:'Soppressatta',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'Flexible',w:[],x:[]},
+  {id:'earthquake',n:'Earthquake',role:'DPS',cls:'Raider',alts:'Scorpion',notes:'',w:['raye'],x:[]},
+  {id:'raye',n:'Raye',role:'Healer',cls:'Seeker',alts:'',notes:'',w:['earthquake'],x:[]},
+  {id:'bigboybjorn',n:'BigBoyBjorn',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
+  {id:'mishmera',n:'MishMeera',role:'DPS',cls:'Raider',alts:'Spellblade',notes:'',w:[],x:[]},
+  {id:'drmurk',n:'DrMurk',role:'DPS',cls:'Invocator',alts:'',notes:'KS - Tank/Healer deleter',w:[],x:[]},
+  {id:'bet',n:'Betッ',role:'Healer',cls:'Seeker',alts:'Oracle',notes:'Mainball preferred',w:[],x:[]},
+  {id:'bbbom',n:'bbbommobbb',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'sweden',n:'Swedenメ',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
+  {id:'deutschland',n:'Deutschlandツ',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'noodle',n:'Noodle',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'',w:[],x:[]},
+  {id:'shq',n:'shq',role:'Healer',cls:'Oracle',alts:'Warden, Seeker, Ranger',notes:'',w:[],x:[]},
+  {id:'memomo',n:'メmomo',role:'DPS',cls:'Spellblade',alts:'Shadowdancer',notes:'',w:[],x:[]},
+  {id:'elli',n:'Elli',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'',w:[],x:[]},
+  {id:'darkko',n:'dark光',role:'Tank',cls:'Crusader',alts:'',notes:'Mainball or KS',w:[],x:[]},
+  {id:'chunky',n:'ChunkyBruhdaツ',role:'DPS',cls:'Spellblade',alts:'Lunarch, Enigma, Infiltrator',notes:'',w:[],x:[]},
+  {id:'cookies',n:'Cookies',role:'DPS',cls:'Scorpion',alts:'',notes:'',w:['cream'],x:[]},
+  {id:'shaze',n:'汁SHaze汁',role:'DPS',cls:'Raider',alts:'',notes:'Normalized from Rider',w:[],x:[]},
+  {id:'mudin',n:'Mudin',role:'DPS',cls:'Raider',alts:'',notes:'Raider only',w:[],x:[]},
+  {id:'nitzera',n:'ツNiTzera',role:'Healer',cls:'Seeker',alts:'',notes:'Portuguese speaker only',w:[],x:[]},
+  {id:'fairangel',n:'Fairangel',role:'DPS',cls:'Shadowdancer',alts:'Spellblade, Enigma, Gladiator',notes:'Flexible',w:[],x:[]},
+  {id:'stormynips',n:'StormyNips',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
+  {id:'alphu',n:'Alphu',role:'Healer',cls:'Ranger',alts:'Spellblade',notes:'',w:[],x:[]},
+  {id:'hubertc',n:'HubertCumbrdale',role:'Tank',cls:'Steelheart',alts:'Oracle',notes:'⚠ Regularly late until 8:45PM EST M-F',w:[],x:[]},
+  {id:'tulkas',n:'Tulkas式',role:'DPS',cls:'Shadowdancer',alts:'Lunarch',notes:'Zerg AoE or flank',w:[],x:[]},
+  {id:'wildez',n:'Wildez',role:'Healer',cls:'Oracle',alts:'Gladiator, Spellblade',notes:'',w:['mcdo'],x:[]},
+  {id:'gaske',n:'Gaske',role:'Tank',cls:'Steelheart',alts:'Warden',notes:'',w:[],x:[]},
+  {id:'b33rus',n:'b33RUS',role:'DPS',cls:'Enigma',alts:'Spellblade',notes:'',w:[],x:[]},
+  {id:'kiersii',n:'kiersii',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'8.4k GS double cordy',w:[],x:[]},
+  {id:'blindiq',n:'彼BlindIQ',role:'Healer',cls:'Seeker',alts:'Warden',notes:'',w:[],x:[]},
+  {id:'seb',n:'Sebせぶ',role:'Healer',cls:'Seeker',alts:'Warden',notes:'Coll res/mainball. Cordy wand.',w:[],x:[]},
+  {id:'dih',n:'Dih゜',role:'DPS',cls:'Ravager',alts:'',notes:'',w:[],x:[]},
+  {id:'krul',n:'KruI',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'enrique',n:'enrique',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'aquillo',n:'aquillo寶',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'',w:[],x:[]},
+  {id:'goodboy',n:'GOOD゗゚BOY',role:'DPS',cls:'Spellblade',alts:'Lunarch',notes:'',w:[],x:[]},
+  {id:'be',n:'be',role:'DPS',cls:'Gladiator',alts:'Enigma',notes:'',w:[],x:[]},
+  {id:'sharkjitsu',n:'Sharkjitsu',role:'Healer',cls:'Seeker',alts:'',notes:'Flexible',w:[],x:[]},
+  {id:'hitz',n:'Hitzッ',role:'DPS',cls:'Enigma',alts:'Oracle',notes:'',w:['krowck'],x:[]},
+  {id:'rosie',n:'Rosie・',role:'Healer',cls:'Seeker',alts:'',notes:'Wicked co-captain.',w:['ossenagon'],x:[]},
+  {id:'ossenagon',n:'Ossenagon',role:'DPS',cls:'Guardian',alts:'Berserker, Gladiator',notes:'',w:['rosie'],x:[]},
+  {id:'felpyk',n:'FelpyK',role:'Tank',cls:'Warden',alts:'Steelheart',notes:'',w:['jharol'],x:[]},
+  {id:'valensi',n:'Valensi',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'justintime',n:'JustinTime',role:'Healer',cls:'Seeker',alts:'',notes:'',w:[],x:[]},
+  {id:'jalinss',n:'Jalinss',role:'Healer',cls:'Seeker',alts:'',notes:'Flexible',w:[],x:[]},
+  {id:'madmizz',n:'MadMizz',role:'DPS',cls:'Shadowdancer',alts:'Ravager',notes:'',w:[],x:[]},
+  {id:'strygwyr',n:'Strygwyr',role:'DPS',cls:'Infiltrator',alts:'Shadowdancer',notes:'Spinner',w:[],x:[]},
+  {id:'y',n:'Y',role:'Healer',cls:'Seeker',alts:'Oracle',notes:'',w:[],x:[]},
+  {id:'elkor',n:'Elkor',role:'Healer',cls:'Seeker',alts:'Oracle',notes:'',w:[],x:[]},
+  {id:'inoki',n:'inoki',role:'DPS',cls:'Enigma',alts:'Shadowdancer, Spellblade',notes:'Hard pair: only with ilybear.',w:['ilybear'],x:[]},
+  {id:'ilybear',n:'ilybear',role:'Healer',cls:'Oracle',alts:'',notes:'Hard pair: only with inoki.',w:['inoki'],x:[]},
+  {id:'smooshie',n:'Smooshieル',role:'Tank',cls:'Warden',alts:'Crusader',notes:'',w:[],x:[]},
+  {id:'miffy',n:'miffyる',role:'Healer',cls:'Oracle',alts:'',notes:'',w:[],x:[]},
+  {id:'krowck',n:'Krowck神',role:'Healer',cls:'Oracle',alts:'Seeker',notes:'',w:['hitz'],x:[]},
+  {id:'poodlexd',n:'poodlexd',role:'DPS',cls:'Enigma',alts:'Spellblade',notes:'',w:[],x:[]},
+];
+let S={pickIdx:0,tsec:TSEC,tint:null,paused:false,log:[],slots:buildSlots(),sel:null,viewCap:CAPS[0].id,stream:false};
+let RF='All',ST='',CF='';
+
+function doLogin(){
+  if(document.getElementById('pwin').value===PW){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app').classList.add('show');
+    init();
+  }else{document.getElementById('lerr').textContent='Incorrect password.';}
+}
+
+function init(){buildCF();buildCtabs();buildRboard();buildFTbtns();updateTurn();startTimer();}
+
+function startTimer(){
+  clearInterval(S.tint);S.tsec=TSEC;updTimer();
+  S.tint=setInterval(()=>{if(S.paused)return;S.tsec--;updTimer();if(S.tsec<=0)skipTurn();},1000);
+}
+
+function updTimer(){
+  const n=document.getElementById('tnum');
+  const c=document.getElementById('tcirc');
+  if(!n||!c)return;
+  n.textContent=S.tsec;
+  c.style.strokeDashoffset=CIRC*(1-S.tsec/TSEC);
+  c.style.stroke=S.tsec>15?'var(--teal)':S.tsec>7?'var(--orange)':'var(--red)';
+}
+
+function getCap(){return CAPS[ORD[Math.min(S.pickIdx,ORD.length-1)].ci];}
+function getNxt(){const ni=S.pickIdx+1;if(ni>=ORD.length)return null;return CAPS[ORD[ni].ci];}
+
+function updateTurn(){
+  const c=getCap(),nx=getNxt();
+  const rnd=ORD[Math.min(S.pickIdx,ORD.length-1)].r;
+  document.getElementById('tcap').textContent=c.name;
+  document.getElementById('tcap').style.color=c.color;
+  document.getElementById('tnext').textContent=nx?nx.name:'—';
+  document.getElementById('rnum').textContent=rnd;
+  document.getElementById('pnum').textContent=`${S.pickIdx+1}/192`;
+  S.viewCap=c.id;
+  buildCtabs();buildRboard();
+}
+
+function skipTurn(){addLog(null,getCap().name,'');advTurn();}
+
+function advTurn(){
+  S.pickIdx++;
+  if(S.pickIdx>=ORD.length){clearInterval(S.tint);alert('Draft Complete!');return;}
+  updateTurn();startTimer();
+}
+
+function getDraftedIds(){
+  const s=new Set();
+  for(const c of CAPS)for(const sl of S.slots[c.id])if(sl.player)s.add(sl.player.id);
+  return s;
+}
+
+function buildCF(){
+  const cls=[...new Set(PL.map(p=>p.cls))].sort();
+  document.getElementById('cfrow').innerHTML=cls.map(c=>`<button class="fb" onclick="setCF('${c}',this)">${c}</button>`).join('');
+}
+
+function setCF(c,btn){
+  CF=CF===c?'':c;
+  document.querySelectorAll('#cfrow .fb').forEach(b=>b.classList.remove('act'));
+  if(CF)btn.classList.add('act');
+  buildPlist();
+}
+
+function setRF(r,btn){
+  RF=r;
+  document.querySelectorAll('.frow:first-of-type .fb').forEach(b=>b.classList.remove('act'));
+  btn.classList.add('act');
+  buildPlist();
+}
+
+function filterP(){ST=document.getElementById('srch').value.toLowerCase();buildPlist();}
+
+function buildPlist(){
+  const drafted=getDraftedIds();
+  const wids=new Set(S.sel?S.sel.w:[]);
+  const xids=new Set(S.sel?S.sel.x:[]);
+  const fl=PL.filter(p=>{
+    if(drafted.has(p.id))return false;
+    if(RF!=='All'&&p.role!==RF)return false;
+    if(CF&&p.cls!==CF)return false;
+    if(ST&&!p.n.toLowerCase().includes(ST)&&!p.cls.toLowerCase().includes(ST))return false;
+    return true;
+  });
+  document.getElementById('pcbadge').textContent=fl.length;
+  document.getElementById('premain').textContent=PL.length-drafted.size;
+  document.getElementById('plist').innerHTML=fl.map(p=>{
+    const iw=wids.has(p.id),ix=xids.has(p.id),is=S.sel?.id===p.id;
+    let cls='pi';
+    if(is)cls+=' sel';else if(iw)cls+=' hw';else if(ix)cls+=' hn';
+    return `<div class="${cls}" onclick="selP('${p.id}')">
+      <div class="rdot ${p.role}"></div>
+      <span class="pname">${p.n}</span>
+      <span class="pcls">${p.cls}</span>
+      ${iw?'<span class="wi">♥</span>':ix?'<span class="ni">✕</span>':''}
+    </div>`;
+  }).join('');
+}
+
+function selP(id){S.sel=PL.find(p=>p.id===id)||null;buildPlist();renderDet();}
+
+function renderDet(){
+  const panel=document.getElementById('pdet');
+  const p=S.sel;
+  if(!p){panel.innerHTML='<div class="nosel">Click a player to view details</div>';return;}
+  const cap=getCap();
+  let wh='',xh='',nh='';
+  if(p.w.length){wh=`<div class="dsec"><div class="dlbl">Wants to play with</div>${p.w.map(id=>{const pl=PL.find(x=>x.id===id);return`<span class="dtag tw">${pl?pl.n:id}</span>`;}).join('')}</div>`;}
+  if(p.x.length){xh=`<div class="dsec"><div class="dlbl">Won't play with</div>${p.x.map(id=>{const pl=PL.find(x=>x.id===id);return`<span class="dtag tn">${pl?pl.n:id}</span>`;}).join('')}</div>`;}
+  if(p.notes&&!S.stream){nh=`<div class="dsec"><div class="dlbl">Notes</div><div class="dval">${p.notes}</div></div>`;}
+  else if(S.stream){nh=`<div class="dsec"><div class="dlbl" style="color:var(--text3)">[Notes hidden]</div></div>`;}
+  const avail=p.notes.includes('⚠')?`<div style="margin-bottom:.5rem"><span class="dtag ta">⚠ ${p.notes.split('⚠')[1]?.trim()||'Restriction'}</span></div>`:'';
+  panel.innerHTML=`
+    <div class="dname">${p.n}</div>
+    <div class="dcls">${p.cls} · ${p.role}</div>
+    ${avail}
+    <div class="dsec"><div class="dlbl">Alt classes</div><div class="dval">${p.alts||'None'}</div></div>
+    ${wh}${xh}${nh}
+    <button class="pbtn" onclick="pickP()">Draft for ${cap.name}</button>`;
+}
+
+function pickP(){if(S.sel)openSM(S.sel,getCap());}
+
+function openSM(player,cap){
+  document.getElementById('smtitle').textContent=`Place ${player.n} — ${cap.name}`;
+  const empty=S.slots[cap.id].filter(s=>!s.player);
+  document.getElementById('smopts').innerHTML=empty.length?empty.map(s=>`
+    <div class="sopt" onclick="confirmPick('${s.id}')">
+      <span class="stype ${s.t}">${s.lb}</span>
+      <span style="flex:1;font-size:.72rem;color:var(--text2)">${s.sec}</span>
+    </div>`).join(''):`<p style="color:var(--text3);font-size:.78rem">No empty slots</p>`;
+  document.getElementById('smodal').classList.add('open');
+}
+
+function closeSM(){document.getElementById('smodal').classList.remove('open');}
+
+function confirmPick(slotId){
+  const cap=getCap();
+  const slot=S.slots[cap.id].find(s=>s.id===slotId);
+  if(!slot||!S.sel)return;
+  slot.player=S.sel;
+  addLog(S.sel,cap.name,slot.lb);
+  closeSM();S.sel=null;
+  buildPlist();renderDet();buildRboard();advTurn();
+}
+
+function addLog(player,cap,slot){
+  const log=document.getElementById('logpanel');
+  const e=document.createElement('div');e.className='le';
+  const c=getCap();
+  if(player){e.innerHTML=`<span style="color:var(--text3)">#${S.pickIdx+1}</span><span style="color:${c.color};font-weight:600">${cap}</span><span style="color:var(--gold)">${player.n}</span><span style="color:var(--text3)">${player.cls} → ${slot}</span>`;}
+  else{e.innerHTML=`<span style="color:var(--text3)">#${S.pickIdx+1}</span><span style="color:var(--orange)">SKIP — ${cap}</span>`;}
+  log.insertBefore(e,log.firstChild);
+  S.log.push({idx:S.pickIdx,player,cap,slot});
+}
+
+function buildCtabs(){
+  document.getElementById('ctabs').innerHTML=CAPS.map(c=>`
+    <button class="ctab ${S.viewCap===c.id?'act':''}" onclick="viewCap('${c.id}')" style="${S.viewCap===c.id?`border-color:${c.color};color:${c.color}`:''}">
+      ${c.name} <span style="font-size:.65rem;color:var(--text3)">${S.slots[c.id].filter(s=>s.player).length}/66</span>
+    </button>`).join('');
+}
+
+function viewCap(id){S.viewCap=id;buildCtabs();buildRboard();}
+
+function buildRboard(){
+  const slots=S.slots[S.viewCap];
+  const secs=[
+    {title:'Party 1 — Objective / Spinner / Flex / Flex',pre:`${S.viewCap}-p1`,cols:4,rows:6},
+    {title:'Party 2 — Flex / Flex / 3 DPS / 3 DPS',pre:`${S.viewCap}-p2`,cols:4,rows:6},
+    {title:'Subs (18)',pre:`${S.viewCap}-sub`,cols:3,rows:6},
+  ];
+  document.getElementById('rboard').innerHTML=secs.map(sec=>{
+    const ss=slots.filter(s=>s.id.startsWith(sec.pre));
+    const rows=[];
+    for(let r=0;r<sec.rows;r++){
+      const row=ss.filter(s=>s.id.includes(`-r${r}-`)).sort((a,b)=>{
+        const ac=parseInt(a.id.match(/-c(\d+)$/)?.[1]||0);
+        const bc=parseInt(b.id.match(/-c(\d+)$/)?.[1]||0);
+        return ac-bc;
+      });
+      rows.push(row);
+    }
+    return `<div class="rsec"><div class="rsec-title">${sec.title}</div>
+      ${rows.map(row=>`<div style="display:grid;grid-template-columns:repeat(${sec.cols},1fr);gap:3px;margin-bottom:3px">
+        ${row.map(s=>s.player?
+          `<div class="rslot filled" onclick="remSlot('${s.id}')" title="Click to remove">
+            <div class="rdot ${s.player.role}" style="flex-shrink:0"></div>
+            <span class="splayer">${s.player.n}</span>
+            <span class="srem">✕</span>
+          </div>`:
+          `<div class="rslot"><span class="stype ${s.t}">${s.lb}</span><span class="sempty">empty</span></div>`
+        ).join('')}
+      </div>`).join('')}
+    </div>`;
+  }).join('');
+}
+
+function remSlot(id){
+  for(const c of CAPS){
+    const sl=S.slots[c.id].find(s=>s.id===id);
+    if(sl&&sl.player){
+      if(!confirm(`Remove ${sl.player.n}?`))return;
+      sl.player=null;buildRboard();buildPlist();return;
+    }
+  }
+}
+
+function toggleStream(){
+  S.stream=!S.stream;
+  document.getElementById('stbtn').textContent=S.stream?'Notes OFF':'Notes ON';
+  if(S.sel)renderDet();
+}
+
+function openAdmin(){document.getElementById('amodal').classList.add('open');}
+function closeAdmin(){document.getElementById('amodal').classList.remove('open');}
+
+function buildFTbtns(){
+  document.getElementById('ftbtns').innerHTML=CAPS.map((c,i)=>
+    `<button class="btn" style="border-color:${c.color};color:${c.color}" onclick="forceTurn(${i})">${c.name}</button>`).join('');
+}
+
+function forceTurn(idx){
+  clearInterval(S.tint);
+  for(let i=S.pickIdx;i<ORD.length;i++){if(ORD[i].ci===idx){S.pickIdx=i;break;}}
+  updateTurn();startTimer();closeAdmin();
+}
+
+function adm(a){
+  if(a==='pause'){S.paused=true;document.getElementById('pbar').classList.add('on');}
+  else if(a==='resume'){S.paused=false;document.getElementById('pbar').classList.remove('on');}
+  else if(a==='skip'){skipTurn();closeAdmin();}
+  else if(a==='undo'){
+    if(!S.log.length)return;
+    const last=S.log.pop();
+    if(last.player){for(const c of CAPS){const sl=S.slots[c.id].find(s=>s.player?.id===last.player.id);if(sl){sl.player=null;break;}}}
+    S.pickIdx=Math.max(0,S.pickIdx-1);
+    updateTurn();startTimer();buildPlist();buildRboard();closeAdmin();
+  }
+  else if(a==='rtimer'){startTimer();closeAdmin();}
+  else if(a==='reset'){
+    if(!confirm('Reset entire draft? All picks lost!'))return;
+    S.slots=buildSlots();S.pickIdx=0;S.log=[];S.sel=null;
+    updateTurn();startTimer();buildPlist();buildRboard();
+    document.getElementById('logpanel').innerHTML='';closeAdmin();
+  }
+}
+
+document.addEventListener('keydown',e=>{if((e.key==='n'||e.key==='N')&&document.activeElement.tagName!=='INPUT')toggleStream();});
+document.getElementById('smodal').addEventListener('click',e=>{if(e.target===document.getElementById('smodal'))closeSM();});
+document.getElementById('amodal').addEventListener('click',e=>{if(e.target===document.getElementById('amodal'))closeAdmin();});
+</script>
+</body>
+</html>
