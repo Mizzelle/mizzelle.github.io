@@ -309,8 +309,7 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
 </footer>
 
 <script>
-const CLIENT_ID = 'h6pkl1mbejjeyohtu544ilgcu2gdx5';
-const REDIRECT_URI = 'https://www.tnltourney.com';
+const WORKER_URL = 'https://tnl-twitch.sophie-donnelly.workers.dev';
 const streamers = [
   { name: 'Arelite', login: 'arelite', role: 'Captain · Undercooked', url: 'https://www.twitch.tv/arelite' },
   { name: 'Jehoo', login: 'jehoo1', role: 'Caster', url: 'https://www.twitch.tv/jehoo1' },
@@ -338,59 +337,27 @@ function renderCard(s, live) {
   </a>`;
 }
 
-function getTokenFromHash() {
-  const hash = window.location.hash;
-  if (!hash) return null;
-  const params = new URLSearchParams(hash.replace('#', '?'));
-  return params.get('access_token');
-}
-function saveToken(t) { try { localStorage.setItem('twitch_token', t); } catch(e) {} }
-function loadToken() { try { return localStorage.getItem('twitch_token'); } catch(e) { return null; } }
-function clearToken() { try { localStorage.removeItem('twitch_token'); } catch(e) {} }
-
-function twitchAuthRedirect() {
-  const url = `https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=&force_verify=false`;
-  window.location.href = url;
-}
-
-async function fetchStreams(token) {
-  const logins = streamers.map(s => `user_login=${s.login}`).join('&');
-  const res = await fetch(`https://api.twitch.tv/helix/streams?${logins}`, {
-    headers: { 'Client-ID': CLIENT_ID, 'Authorization': `Bearer ${token}` }
-  });
-  if (res.status === 401) { clearToken(); return null; }
-  const data = await res.json();
-  return data.data || [];
-}
-
 async function initTwitchSection() {
-  // Support both possible container IDs
   const container = document.getElementById('stream-cards') || document.getElementById('watch-grid');
   if (!container) return;
 
+  // Show offline state while loading
   container.innerHTML = streamers.map(s => renderCard(s, null)).join('');
 
-  let token = getTokenFromHash();
-  if (token) {
-    saveToken(token);
-    history.replaceState(null, '', window.location.pathname);
-  } else {
-    token = loadToken();
+  try {
+    const res = await fetch(WORKER_URL);
+    const streams = await res.json();
+    const liveMap = {};
+    for (const s of streams) liveMap[s.user_login.toLowerCase()] = s;
+    container.innerHTML = streamers.map(s =>
+      renderCard(s, liveMap[s.login.toLowerCase()] || null)
+    ).join('');
+  } catch(e) {
+    // Keep offline state on error
+    console.error('Twitch fetch failed:', e);
   }
-
-  if (!token) { twitchAuthRedirect(); return; }
-
-  const streams = await fetchStreams(token);
-  if (streams === null) { twitchAuthRedirect(); return; }
-
-  const liveMap = {};
-  for (const s of streams) liveMap[s.user_login.toLowerCase()] = s;
-
-  container.innerHTML = streamers.map(s =>
-    renderCard(s, liveMap[s.login.toLowerCase()] || null)
-  ).join('');
 }
-  
+
 initTwitchSection();
 </script>
 // Initial skeleton
