@@ -310,6 +310,7 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
 
 <script>
 const CLIENT_ID = 'b78tx41mpqxdjtip3gpfz77or7dp8w';
+const REDIRECT_URI = 'https://www.tnltourney.com';
 const streamers = [
   { name: 'Arelite', login: 'arelite', role: 'Captain · Undercooked', url: 'https://www.twitch.tv/arelite' },
   { name: 'Jehoo', login: 'jehoo1', role: 'Caster', url: 'https://www.twitch.tv/jehoo1' },
@@ -336,6 +337,88 @@ function renderCard(s, live) {
     </div>
   </a>`;
 }
+
+function getTokenFromHash() {
+  const hash = window.location.hash;
+  if (!hash) return null;
+  const params = new URLSearchParams(hash.replace('#', '?'));
+  return params.get('access_token');
+}
+
+function saveToken(token) {
+  try { localStorage.setItem('twitch_token', token); } catch(e) {}
+}
+
+function loadToken() {
+  try { return localStorage.getItem('twitch_token'); } catch(e) { return null; }
+}
+
+function clearToken() {
+  try { localStorage.removeItem('twitch_token'); } catch(e) {}
+}
+
+function twitchAuthRedirect() {
+  const url = `https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=&force_verify=false`;
+  window.location.href = url;
+}
+
+async function fetchStreams(token) {
+  const logins = streamers.map(s => `user_login=${s.login}`).join('&');
+  const res = await fetch(`https://api.twitch.tv/helix/streams?${logins}`, {
+    headers: {
+      'Client-ID': CLIENT_ID,
+      'Authorization': `Bearer ${token}`
+    }
+  });
+  if (res.status === 401) {
+    clearToken();
+    return null;
+  }
+  const data = await res.json();
+  return data.data || [];
+}
+
+async function initTwitchSection() {
+  const container = document.getElementById('stream-cards');
+  if (!container) return;
+
+  // Show loading state
+  container.innerHTML = streamers.map(s => renderCard(s, null)).join('');
+
+  // Check for token in URL hash first (returning from auth)
+  let token = getTokenFromHash();
+  if (token) {
+    saveToken(token);
+    // Clean hash from URL without reload
+    history.replaceState(null, '', window.location.pathname);
+  } else {
+    token = loadToken();
+  }
+
+  if (!token) {
+    // No token — silently redirect to get one
+    twitchAuthRedirect();
+    return;
+  }
+
+  const streams = await fetchStreams(token);
+  if (streams === null) {
+    // Token expired — get a new one
+    twitchAuthRedirect();
+    return;
+  }
+
+  // Map login → stream data
+  const liveMap = {};
+  for (const s of streams) liveMap[s.user_login.toLowerCase()] = s;
+
+  container.innerHTML = streamers.map(s =>
+    renderCard(s, liveMap[s.login.toLowerCase()] || null)
+  ).join('');
+}
+
+// Run on page load
+initTwitchSection();
 
 async function checkLive() {
   const grid = document.getElementById('watch-grid');
