@@ -674,8 +674,9 @@ const PL=[
   {id:'cappuccino',n:'Cappuccino',role:'DPS',cls:'Enigma',alts:'',notes:'',w:[],x:[]},
   {id:'barcode',n:'Barcode',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
 ];
-const WORKER_URL='https://tnl-draft.sophie-donnelly.workers.dev';
+const FIREBASE_SECRET='tnl-s1-2025-secure';
 
+let pollPaused=false;
 let localSel=null;
 let localStream=false;
 let localRF='All';
@@ -739,42 +740,38 @@ function pushState(){
     feed:DS.feed.slice(-50),
     timerStart:DS.timerStart,
     timerRunning:DS.timerRunning,
+    secret:FIREBASE_SECRET,
     ts:Date.now()
   };
-  fetch(`${WORKER_URL}/draft`,{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify(payload)
-  }).catch(e=>setSyncBar('⚠ Write failed','var(--red)'));
+  db.ref('draft').set(payload).catch(e=>{
+    setSyncBar('⚠ Write blocked','var(--red)');
+  });
 }
 
-function initWorker(){
-  async function poll(){
-    try{
-      const res=await fetch(`${WORKER_URL}/draft`);
-      const data=await res.json();
-      setSyncBar('✓ Live synced','var(--teal)','.68rem','400');
-      if(!data){pushState();return;}
-      DS.pickIdx=data.pickIdx||0;
-      DS.turnIdx=data.turnIdx||0;
-      DS.paused=data.paused||false;
-      DS.slots=slotsFromFirebase(data.slots,prePlaceCaptains(buildSlots()));
-      DS.feed=data.feed||[];
-      DS.timerStart=data.timerStart||null;
-      DS.timerRunning=data.timerRunning||false;
-      syncTimer();
-      document.getElementById('pbar').classList.toggle('on',DS.paused);
-      updateTurnDisplay();
-      buildPlist();
-      buildRboard();
-      buildFeed();
-      if(localSel)renderDet();
-    }catch(e){
-      setSyncBar('⚠ Disconnected...','var(--orange)');
-    }
-  }
-  poll();
-  setInterval(poll,2000);
+function initFirebase(){
+  db.ref('draft').on('value',snap=>{
+    if(pollPaused)return;
+    const data=snap.val();
+    setSyncBar('✓ Live synced','var(--teal)','.68rem','400');
+    if(!data){pushState();return;}
+    DS.pickIdx=data.pickIdx||0;
+    DS.turnIdx=data.turnIdx||0;
+    DS.paused=data.paused||false;
+    DS.slots=slotsFromFirebase(data.slots,prePlaceCaptains(buildSlots()));
+    DS.feed=data.feed||[];
+    DS.timerStart=data.timerStart||null;
+    DS.timerRunning=data.timerRunning||false;
+    syncTimer();
+    document.getElementById('pbar').classList.toggle('on',DS.paused);
+    updateTurnDisplay();
+    buildPlist();
+    buildRboard();
+    buildFeed();
+    if(localSel)renderDet();
+  });
+  db.ref('.info/connected').on('value',snap=>{
+    if(!snap.val())setSyncBar('⚠ Disconnected...','var(--orange)');
+  });
 }
 
 function setSyncBar(txt,color,size,weight){
@@ -828,7 +825,7 @@ function doLogin(){
     buildCF();
     buildCtabs();
     buildFTbtns();
-    initWorker();
+    initFirebase();
   }else{
     document.getElementById('lerr').textContent='Incorrect password.';
   }
@@ -1019,8 +1016,6 @@ function closeMV(){
   localMovePlayer=null;
 }
 
-let pollPaused=false;
-
 function confirmMove(newSlotId){
   if(!localMovePlayer)return;
   const{player,sourceSlotId,capId}=localMovePlayer;
@@ -1031,42 +1026,11 @@ function confirmMove(newSlotId){
   dst.player=player;
   src.player=dstPlayer;
   closeMV();
+  pollPaused=true;
   buildRboard();
   buildPlist();
-  pollPaused=true;
   pushState();
-  // Resume polling after 4 seconds to let the write complete
-  setTimeout(()=>{pollPaused=false;},4000);
-}
-
-function initWorker(){
-  async function poll(){
-    if(pollPaused)return;
-    try{
-      const res=await fetch(`${WORKER_URL}/draft`);
-      const data=await res.json();
-      setSyncBar('✓ Live synced','var(--teal)','.68rem','400');
-      if(!data){pushState();return;}
-      DS.pickIdx=data.pickIdx||0;
-      DS.turnIdx=data.turnIdx||0;
-      DS.paused=data.paused||false;
-      DS.slots=slotsFromFirebase(data.slots,prePlaceCaptains(buildSlots()));
-      DS.feed=data.feed||[];
-      DS.timerStart=data.timerStart||null;
-      DS.timerRunning=data.timerRunning||false;
-      syncTimer();
-      document.getElementById('pbar').classList.toggle('on',DS.paused);
-      updateTurnDisplay();
-      buildPlist();
-      buildRboard();
-      buildFeed();
-      if(localSel)renderDet();
-    }catch(e){
-      setSyncBar('⚠ Disconnected...','var(--orange)');
-    }
-  }
-  poll();
-  setInterval(poll,2000);
+  setTimeout(()=>{pollPaused=false;},5000);
 }
 
 function buildFeed(){
