@@ -676,7 +676,6 @@ const PL=[
 ];
 const WORKER_URL='https://tnl-draft.sophie-donnelly.workers.dev';
 
-// Local UI state (not synced)
 let localSel=null;
 let localStream=false;
 let localRF='All';
@@ -686,7 +685,6 @@ let localViewCap=CAPS[0].id;
 let localMovePlayer=null;
 let localLoggedIn=false;
 
-// Shared draft state
 let DS={
   pickIdx:0,
   turnIdx:0,
@@ -699,7 +697,6 @@ let DS={
 
 let timerInterval=null;
 
-// ── PASSWORDS (obfuscated) ─────────────────────────────────────
 const _a=[116,97,107,101,50];
 const _b=[110,111,104,97,99,107,105,110,103];
 const PW=_a.map(c=>String.fromCharCode(c)).join('');
@@ -751,7 +748,7 @@ function pushState(){
   }).catch(e=>setSyncBar('⚠ Write failed','var(--red)'));
 }
 
-function initFirebase(){
+function initWorker(){
   async function poll(){
     try{
       const res=await fetch(`${WORKER_URL}/draft`);
@@ -782,6 +779,7 @@ function initFirebase(){
 
 function setSyncBar(txt,color,size,weight){
   const b=document.getElementById('sync-bar');
+  if(!b)return;
   b.textContent=txt;
   b.style.color=color||'var(--teal)';
   b.style.fontSize=size||'.68rem';
@@ -830,7 +828,7 @@ function doLogin(){
     buildCF();
     buildCtabs();
     buildFTbtns();
-    initFirebase();
+    initWorker();
   }else{
     document.getElementById('lerr').textContent='Incorrect password.';
   }
@@ -971,8 +969,8 @@ function openSM(player,cap){
   const empty=DS.slots[cap.id].filter(s=>!s.player);
   document.getElementById('smopts').innerHTML=empty.length?empty.map(s=>`
     <div class="sopt" onclick="confirmPick('${s.id}')">
-      <span class="sopt-party">${s.party}</span>
-      <span class="sopt-type ${s.t}">${s.lb}</span>
+      <span class="sopt-party" style="pointer-events:none">${s.party}</span>
+      <span class="sopt-type ${s.t}" style="pointer-events:none">${s.lb}</span>
     </div>`).join(''):`<p style="color:var(--text3);font-size:.78rem">No empty slots</p>`;
   document.getElementById('smodal').classList.add('open');
 }
@@ -1005,15 +1003,20 @@ function openMV(slotId){
   }
   if(!ownerCap||!sourceSlot)return;
   localMovePlayer={player:sourceSlot.player,sourceSlotId:slotId,capId:ownerCap.id};
-  document.getElementById('mvtitle').textContent=`Move ${sourceSlot.player.n}`;
+  document.getElementById('mvtitle').textContent=`Move / Swap ${sourceSlot.player.n}`;
   const allSlots=DS.slots[ownerCap.id].filter(s=>s.id!==slotId);
-  document.getElementById('mvopts').innerHTML=allSlots.length?allSlots.map(s=>`
-    <div class="sopt" style="cursor:pointer;${s.player?'border-color:var(--orange)':''}" onclick="confirmMove('${s.id}')">
-      <span class="sopt-party" style="pointer-events:none">${s.party}</span>
-      <span class="sopt-type ${s.t}" style="pointer-events:none">${s.lb}</span>
-      ${s.player?`<span style="font-size:.65rem;color:var(--orange);margin-left:auto;pointer-events:none">${s.player.n}</span>`:'<span style="font-size:.65rem;color:var(--text3);margin-left:auto;pointer-events:none">empty</span>'}
-    </div>`).join(''):`<p style="color:var(--text3);font-size:.78rem">No other slots</p>`;
+  document.getElementById('mvopts').innerHTML=allSlots.map(s=>`
+    <div onclick="confirmMove('${s.id}')" style="padding:.42rem .65rem;border:1px solid ${s.player?'var(--orange)':'var(--border)'};cursor:pointer;margin-bottom:.25rem;border-radius:2px;display:flex;align-items:center;gap:.42rem;font-size:.76rem;background:var(--surface2)">
+      <span style="font-size:.65rem;color:var(--teal);min-width:120px;font-weight:600;pointer-events:none">${s.party}</span>
+      <span style="font-size:.62rem;color:var(--text2);pointer-events:none">${s.lb}</span>
+      <span style="font-size:.65rem;color:${s.player?'var(--orange)':'var(--text3)'};margin-left:auto;pointer-events:none">${s.player?s.player.n:'empty'}</span>
+    </div>`).join('');
   document.getElementById('mvmodal').classList.add('open');
+}
+
+function closeMV(){
+  document.getElementById('mvmodal').classList.remove('open');
+  localMovePlayer=null;
 }
 
 function confirmMove(newSlotId){
@@ -1022,11 +1025,11 @@ function confirmMove(newSlotId){
   const src=DS.slots[capId].find(s=>s.id===sourceSlotId);
   const dst=DS.slots[capId].find(s=>s.id===newSlotId);
   if(!src||!dst)return;
-  // Swap players if destination is filled
-  const dstPlayer=dst.player;
+  const dstPlayer=dst.player||null;
   dst.player=player;
-  src.player=dstPlayer||null;
-  closeMV();pushState();
+  src.player=dstPlayer;
+  closeMV();
+  pushState();
 }
 
 function buildFeed(){
@@ -1066,7 +1069,6 @@ function hexToRgb(hex){
 function buildRboard(){
   const slots=DS.slots[localViewCap];
   const cap=CAPS.find(c=>c.id===localViewCap);
-
   const partyHtml=`<div class="party-grid">
     ${PARTY_DEFS.map(party=>{
       const ps=slots.filter(s=>s.id.startsWith(`${localViewCap}-${party.prefix}-`));
@@ -1079,7 +1081,7 @@ function buildRboard(){
         ${ps.map(s=>{
           if(s.player){
             const isCap=s.player.notes==='Captain'||s.player.notes.includes('Co-Captain');
-            return `<div class="rslot filled" onclick="openMV('${s.id}')" title="Click to move" style="${isCap?`background:rgba(${hexToRgb(cap.color)},.08)`:''}">
+            return `<div class="rslot filled" onclick="openMV('${s.id}')" title="Click to move/swap" style="${isCap?`background:rgba(${hexToRgb(cap.color)},.08)`:''}">
               <div class="rdot ${s.player.role}" style="flex-shrink:0"></div>
               <span class="splayer">${s.player.n}</span>
               <span style="font-size:.56rem;color:var(--text3);margin-left:auto;white-space:nowrap">${s.lb}</span>
@@ -1110,7 +1112,7 @@ function buildRboard(){
           ${col.map(s=>{
             if(s.player){
               const isCap=s.player.notes==='Captain'||s.player.notes.includes('Co-Captain');
-              return `<div class="rslot filled" onclick="openMV('${s.id}')" title="Click to move" style="${isCap?`background:rgba(${hexToRgb(cap.color)},.08);`:''}">
+              return `<div class="rslot filled" onclick="openMV('${s.id}')" title="Click to move/swap" style="${isCap?`background:rgba(${hexToRgb(cap.color)},.08);`:''}">
                 <div class="rdot ${s.player.role}" style="flex-shrink:0"></div>
                 <span class="splayer">${s.player.n}</span>
                 <span style="font-size:.58rem;color:var(--purple2);margin-left:auto;flex-shrink:0">⇄</span>
