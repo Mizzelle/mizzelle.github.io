@@ -681,6 +681,7 @@ let localST='';
 let localCF='';
 let localViewCap=CAPS[0].id;
 let localMovePlayer=null;
+let localLoggedIn=false;
 
 // Shared draft state (synced via Firebase)
 let DS={
@@ -694,7 +695,15 @@ let DS={
 };
 
 let timerInterval=null;
-let isAdmin=false;
+
+// ── PASSWORDS (obfuscated) ─────────────────────────────────────
+const _a=[116,97,107,101,50];
+const _b=[110,111,104,97,99,107,105,110,103];
+const PW=_a.map(c=>String.fromCharCode(c)).join('');
+const APW=_b.map(c=>String.fromCharCode(c)).join('');
+
+// Firebase secret for writes
+const FB_SECRET='tnl-draft-s1-secure-2025';
 
 function slotsToFirebase(slots){
   const out={};
@@ -733,18 +742,18 @@ function pushState(){
     feed:DS.feed.slice(-50),
     timerStart:DS.timerStart,
     timerRunning:DS.timerRunning,
+    secret:FB_SECRET,
     ts:Date.now()
   };
-  db.ref('draft').set(payload);
+  db.ref('draft').set(payload).catch(e=>{
+    setSyncBar('⚠ Write blocked — check Firebase rules','var(--red)');
+  });
 }
 
 function initFirebase(){
   db.ref('draft').on('value',snap=>{
     const data=snap.val();
-    document.getElementById('sync-bar').textContent='✓ Live synced';
-    document.getElementById('sync-bar').style.color='var(--teal)';
-    document.getElementById('sync-bar').style.fontWeight='400';
-    document.getElementById('sync-bar').style.fontSize='.68rem';
+    setSyncBar('✓ Live synced','var(--teal)','.68rem','400');
     if(!data){pushState();return;}
     DS.pickIdx=data.pickIdx||0;
     DS.turnIdx=data.turnIdx||0;
@@ -762,11 +771,16 @@ function initFirebase(){
     if(localSel)renderDet();
   });
   db.ref('.info/connected').on('value',snap=>{
-    if(!snap.val()){
-      document.getElementById('sync-bar').textContent='⚠ Disconnected...';
-      document.getElementById('sync-bar').style.color='var(--orange)';
-    }
+    if(!snap.val())setSyncBar('⚠ Disconnected...','var(--orange)');
   });
+}
+
+function setSyncBar(txt,color,size,weight){
+  const b=document.getElementById('sync-bar');
+  b.textContent=txt;
+  b.style.color=color||'var(--teal)';
+  b.style.fontSize=size||'.68rem';
+  b.style.fontWeight=weight||'400';
 }
 
 function syncTimer(){
@@ -784,16 +798,11 @@ function syncTimer(){
         if(rem<=0){
           clearInterval(timerInterval);
           updateTimerDisplay(0);
-          const bar=document.getElementById('sync-bar');
           if(localViewCap===getCap().id){
-            bar.textContent='⚠ PICK NOW or your turn will be skipped!';
-            bar.style.color='var(--red)';
+            setSyncBar('⚠ PICK NOW or your turn will be skipped!','var(--red)','.78rem','700');
           }else{
-            bar.textContent=`⏰ Waiting for ${getCap().name} to pick...`;
-            bar.style.color='var(--orange)';
+            setSyncBar(`⏰ Waiting for ${getCap().name} to pick...`,'var(--orange)','.78rem','700');
           }
-          bar.style.fontWeight='700';
-          bar.style.fontSize='.78rem';
         }
       },500);
     }
@@ -807,12 +816,14 @@ function startNewTimer(){
   DS.timerRunning=true;
 }
 
+// ── LOGIN ──────────────────────────────────────────────────────
+
 function doLogin(){
   const v=document.getElementById('pwin').value;
-  if(v===PW){
+  if(v===PW||v===APW){
     document.getElementById('login-screen').style.display='none';
     document.getElementById('app').classList.add('show');
-    isAdmin=true;
+    localLoggedIn=true;
     buildCF();
     buildCtabs();
     buildFTbtns();
@@ -821,6 +832,14 @@ function doLogin(){
     document.getElementById('lerr').textContent='Incorrect password.';
   }
 }
+
+function requireAdmin(fn){
+  const p=prompt('Enter admin password:');
+  if(p===APW){fn();}
+  else if(p!==null){alert('Incorrect admin password.');}
+}
+
+// ── TIMER DISPLAY ──────────────────────────────────────────────
 
 function updateTimerDisplay(sec){
   const n=document.getElementById('tnum');
@@ -845,6 +864,8 @@ function updateTurnDisplay(){
   document.getElementById('pnum').textContent=`${DS.pickIdx+1}/${TOTAL_PICKS}`;
   buildCtabs();
 }
+
+// ── PLAYER LIST ────────────────────────────────────────────────
 
 function getDraftedIds(){
   const s=new Set();
@@ -914,6 +935,8 @@ function buildPlist(){
 
 function selP(id){localSel=PL.find(p=>p.id===id)||null;buildPlist();renderDet();}
 
+// ── DETAIL PANEL ───────────────────────────────────────────────
+
 function renderDet(){
   const panel=document.getElementById('pdet');
   const p=localSel;
@@ -944,6 +967,8 @@ function renderDet(){
 
 function pickP(){if(localSel)openSM(localSel,getCap());}
 
+// ── SLOT MODAL ─────────────────────────────────────────────────
+
 function openSM(player,cap){
   DS.timerRunning=false;
   pushState();
@@ -959,10 +984,7 @@ function openSM(player,cap){
 
 function closeSM(){
   document.getElementById('smodal').classList.remove('open');
-  if(localSel){
-    startNewTimer();
-    pushState();
-  }
+  if(localSel){startNewTimer();pushState();}
 }
 
 function confirmPick(slotId){
@@ -974,14 +996,13 @@ function confirmPick(slotId){
   DS.pickIdx++;
   DS.turnIdx++;
   if(DS.pickIdx<TOTAL_PICKS){startNewTimer();}else{DS.timerRunning=false;}
-  document.getElementById('sync-bar').textContent='✓ Live synced';
-  document.getElementById('sync-bar').style.color='var(--teal)';
-  document.getElementById('sync-bar').style.fontWeight='400';
-  document.getElementById('sync-bar').style.fontSize='.68rem';
+  setSyncBar('✓ Live synced','var(--teal)','.68rem','400');
   closeSM();
   localSel=null;
   pushState();
 }
+
+// ── MOVE MODAL ─────────────────────────────────────────────────
 
 function openMV(slotId){
   let ownerCap=null,sourceSlot=null;
@@ -1013,16 +1034,28 @@ function confirmMove(newSlotId){
   closeMV();pushState();
 }
 
+// ── FEED ───────────────────────────────────────────────────────
+
 function buildFeed(){
   const feed=document.getElementById('feed-entries');
-  feed.innerHTML=(DS.feed||[]).map(f=>`
+  if(!feed)return;
+  const entries=DS.feed||[];
+  if(entries.length===0){
+    feed.innerHTML='<div class="fe" style="color:var(--text3);font-style:italic">No picks yet</div>';
+    return;
+  }
+  feed.innerHTML=entries.map(f=>`
     <div class="fe">
-      <span style="color:${f.capColor};font-weight:600;min-width:58px">${f.capName}</span>
-      <span class="fe-pick">${f.playerName}</span>
-      <span style="color:var(--text3);font-size:.65rem">${f.cls}</span>
+      <span style="color:${f.capColor||'var(--purple)'};font-weight:600;min-width:58px;flex-shrink:0">${f.capName||'?'}</span>
+      <span class="fe-pick">${f.playerName||'?'}</span>
+      <span style="color:var(--text3);font-size:.65rem;flex-shrink:0">${f.cls||''}</span>
       <span style="color:var(--text3);font-size:.65rem">${f.slot?'→ '+f.slot:''}</span>
     </div>`).join('');
+  // Auto scroll to top to show latest
+  feed.scrollTop=0;
 }
+
+// ── ROSTER BOARD ───────────────────────────────────────────────
 
 function buildCtabs(){
   document.getElementById('ctabs').innerHTML=CAPS.map(c=>`
@@ -1102,11 +1135,15 @@ function buildRboard(){
   document.getElementById('rboard').innerHTML=partyHtml+subHtml;
 }
 
+// ── STREAM MODE ────────────────────────────────────────────────
+
 function toggleStream(){
   localStream=!localStream;
   document.getElementById('stbtn').textContent=localStream?'Notes OFF':'Notes ON';
   if(localSel)renderDet();
 }
+
+// ── ADMIN ──────────────────────────────────────────────────────
 
 function openAdmin(){document.getElementById('amodal').classList.add('open');}
 function closeAdmin(){document.getElementById('amodal').classList.remove('open');}
@@ -1117,59 +1154,56 @@ function buildFTbtns(){
 }
 
 function forceTurn(idx){
-  for(let i=DS.turnIdx;i<ORD.length;i++){if(ORD[i].ci===idx){DS.turnIdx=i;break;}}
-  startNewTimer();pushState();closeAdmin();
+  requireAdmin(()=>{
+    for(let i=DS.turnIdx;i<ORD.length;i++){if(ORD[i].ci===idx){DS.turnIdx=i;break;}}
+    startNewTimer();pushState();closeAdmin();
+  });
 }
 
 function doSkip(){
-  DS.feed.unshift({
-    capName:getCap().name,
-    capColor:getCap().color,
-    playerName:'— SKIPPED —',
-    cls:'',slot:'',ts:Date.now()
-  });
+  DS.feed.unshift({capName:getCap().name,capColor:getCap().color,playerName:'— SKIPPED —',cls:'',slot:'',ts:Date.now()});
   DS.turnIdx++;
-  document.getElementById('sync-bar').textContent='✓ Live synced';
-  document.getElementById('sync-bar').style.color='var(--teal)';
-  document.getElementById('sync-bar').style.fontWeight='400';
-  document.getElementById('sync-bar').style.fontSize='.68rem';
+  setSyncBar('✓ Live synced','var(--teal)','.68rem','400');
   startNewTimer();
   pushState();
 }
 
 function adm(a){
   if(a==='pause'){
-    DS.paused=true;DS.timerRunning=false;
-    pushState();
+    requireAdmin(()=>{DS.paused=true;DS.timerRunning=false;pushState();});
   }else if(a==='resume'){
-    DS.paused=false;startNewTimer();
-    pushState();
+    requireAdmin(()=>{DS.paused=false;startNewTimer();pushState();});
   }else if(a==='skip'){
-    doSkip();closeAdmin();
+    requireAdmin(()=>{doSkip();closeAdmin();});
   }else if(a==='undo'){
-    if(DS.turnIdx<=0)return;
-    const lastFeed=DS.feed.find(f=>f.playerName!=='— SKIPPED —');
-    if(lastFeed){
-      for(const c of CAPS){
-        const sl=DS.slots[c.id].find(s=>s.player&&s.player.n===lastFeed.playerName);
-        if(sl){sl.player=null;break;}
+    requireAdmin(()=>{
+      if(DS.turnIdx<=0)return;
+      const lastFeed=DS.feed.find(f=>f.playerName!=='— SKIPPED —');
+      if(lastFeed){
+        for(const c of CAPS){
+          const sl=DS.slots[c.id].find(s=>s.player&&s.player.n===lastFeed.playerName);
+          if(sl){sl.player=null;break;}
+        }
+        DS.feed=DS.feed.filter(f=>f!==lastFeed);
+        DS.pickIdx=Math.max(0,DS.pickIdx-1);
       }
-      DS.feed=DS.feed.filter(f=>f!==lastFeed);
-      DS.pickIdx=Math.max(0,DS.pickIdx-1);
-    }
-    DS.turnIdx=Math.max(0,DS.turnIdx-1);
-    startNewTimer();pushState();closeAdmin();
+      DS.turnIdx=Math.max(0,DS.turnIdx-1);
+      startNewTimer();pushState();closeAdmin();
+    });
   }else if(a==='rtimer'){
-    startNewTimer();pushState();closeAdmin();
+    requireAdmin(()=>{startNewTimer();pushState();closeAdmin();});
   }else if(a==='reset'){
-    if(!confirm('Reset entire draft? All picks will be lost!'))return;
-    DS.slots=prePlaceCaptains(buildSlots());
-    DS.pickIdx=0;
-    DS.turnIdx=0;
-    DS.feed=[];DS.paused=false;
-    startNewTimer();pushState();closeAdmin();
+    requireAdmin(()=>{
+      if(!confirm('Reset entire draft? All picks will be lost!'))return;
+      DS.slots=prePlaceCaptains(buildSlots());
+      DS.pickIdx=0;DS.turnIdx=0;
+      DS.feed=[];DS.paused=false;
+      startNewTimer();pushState();closeAdmin();
+    });
   }
 }
+
+// ── KEYBOARD & EVENTS ──────────────────────────────────────────
 
 document.addEventListener('keydown',e=>{
   if((e.key==='n'||e.key==='N')&&document.activeElement.tagName!=='INPUT')toggleStream();
