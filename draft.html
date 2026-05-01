@@ -674,6 +674,8 @@ const PL=[
   {id:'cappuccino',n:'Cappuccino',role:'DPS',cls:'Enigma',alts:'',notes:'',w:[],x:[]},
   {id:'barcode',n:'Barcode',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
 ];
+const WORKER_URL='https://tnl-draft.sophie-donnelly.workers.dev';
+
 // Local UI state (not synced)
 let localSel=null;
 let localStream=false;
@@ -684,7 +686,7 @@ let localViewCap=CAPS[0].id;
 let localMovePlayer=null;
 let localLoggedIn=false;
 
-// Shared draft state (synced via Firebase)
+// Shared draft state
 let DS={
   pickIdx:0,
   turnIdx:0,
@@ -702,9 +704,6 @@ const _a=[116,97,107,101,50];
 const _b=[110,111,104,97,99,107,105,110,103];
 const PW=_a.map(c=>String.fromCharCode(c)).join('');
 const APW=_b.map(c=>String.fromCharCode(c)).join('');
-
-// Firebase secret for writes
-const FB_SECRET='tnl-draft-s1-secure-2025';
 
 function slotsToFirebase(slots){
   const out={};
@@ -743,37 +742,42 @@ function pushState(){
     feed:DS.feed.slice(-50),
     timerStart:DS.timerStart,
     timerRunning:DS.timerRunning,
-    secret:FB_SECRET,
     ts:Date.now()
   };
-  db.ref('draft').set(payload).catch(e=>{
-    setSyncBar('⚠ Write blocked — check Firebase rules','var(--red)');
-  });
+  fetch(`${WORKER_URL}/draft`,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(payload)
+  }).catch(e=>setSyncBar('⚠ Write failed','var(--red)'));
 }
 
 function initFirebase(){
-  db.ref('draft').on('value',snap=>{
-    const data=snap.val();
-    setSyncBar('✓ Live synced','var(--teal)','.68rem','400');
-    if(!data){pushState();return;}
-    DS.pickIdx=data.pickIdx||0;
-    DS.turnIdx=data.turnIdx||0;
-    DS.paused=data.paused||false;
-    DS.slots=slotsFromFirebase(data.slots,prePlaceCaptains(buildSlots()));
-    DS.feed=data.feed||[];
-    DS.timerStart=data.timerStart||null;
-    DS.timerRunning=data.timerRunning||false;
-    syncTimer();
-    document.getElementById('pbar').classList.toggle('on',DS.paused);
-    updateTurnDisplay();
-    buildPlist();
-    buildRboard();
-    buildFeed();
-    if(localSel)renderDet();
-  });
-  db.ref('.info/connected').on('value',snap=>{
-    if(!snap.val())setSyncBar('⚠ Disconnected...','var(--orange)');
-  });
+  async function poll(){
+    try{
+      const res=await fetch(`${WORKER_URL}/draft`);
+      const data=await res.json();
+      setSyncBar('✓ Live synced','var(--teal)','.68rem','400');
+      if(!data){pushState();return;}
+      DS.pickIdx=data.pickIdx||0;
+      DS.turnIdx=data.turnIdx||0;
+      DS.paused=data.paused||false;
+      DS.slots=slotsFromFirebase(data.slots,prePlaceCaptains(buildSlots()));
+      DS.feed=data.feed||[];
+      DS.timerStart=data.timerStart||null;
+      DS.timerRunning=data.timerRunning||false;
+      syncTimer();
+      document.getElementById('pbar').classList.toggle('on',DS.paused);
+      updateTurnDisplay();
+      buildPlist();
+      buildRboard();
+      buildFeed();
+      if(localSel)renderDet();
+    }catch(e){
+      setSyncBar('⚠ Disconnected...','var(--orange)');
+    }
+  }
+  poll();
+  setInterval(poll,2000);
 }
 
 function setSyncBar(txt,color,size,weight){
@@ -817,8 +821,6 @@ function startNewTimer(){
   DS.timerRunning=true;
 }
 
-// ── LOGIN ──────────────────────────────────────────────────────
-
 function doLogin(){
   const v=document.getElementById('pwin').value;
   if(v===PW||v===APW){
@@ -839,8 +841,6 @@ function requireAdmin(fn){
   if(p===APW){fn();}
   else if(p!==null){alert('Incorrect admin password.');}
 }
-
-// ── TIMER DISPLAY ──────────────────────────────────────────────
 
 function updateTimerDisplay(sec){
   const n=document.getElementById('tnum');
@@ -865,8 +865,6 @@ function updateTurnDisplay(){
   document.getElementById('pnum').textContent=`${DS.pickIdx+1}/${TOTAL_PICKS}`;
   buildCtabs();
 }
-
-// ── PLAYER LIST ────────────────────────────────────────────────
 
 function getDraftedIds(){
   const s=new Set();
@@ -936,8 +934,6 @@ function buildPlist(){
 
 function selP(id){localSel=PL.find(p=>p.id===id)||null;buildPlist();renderDet();}
 
-// ── DETAIL PANEL ───────────────────────────────────────────────
-
 function renderDet(){
   const panel=document.getElementById('pdet');
   const p=localSel;
@@ -967,8 +963,6 @@ function renderDet(){
 }
 
 function pickP(){if(localSel)openSM(localSel,getCap());}
-
-// ── SLOT MODAL ─────────────────────────────────────────────────
 
 function openSM(player,cap){
   DS.timerRunning=false;
@@ -1003,8 +997,6 @@ function confirmPick(slotId){
   pushState();
 }
 
-// ── MOVE MODAL ─────────────────────────────────────────────────
-
 function openMV(slotId){
   let ownerCap=null,sourceSlot=null;
   for(const c of CAPS){
@@ -1035,8 +1027,6 @@ function confirmMove(newSlotId){
   closeMV();pushState();
 }
 
-// ── FEED ───────────────────────────────────────────────────────
-
 function buildFeed(){
   const feed=document.getElementById('feed-entries');
   if(!feed)return;
@@ -1052,11 +1042,8 @@ function buildFeed(){
       <span style="color:var(--text3);font-size:.65rem;flex-shrink:0">${f.cls||''}</span>
       <span style="color:var(--text3);font-size:.65rem">${f.slot?'→ '+f.slot:''}</span>
     </div>`).join('');
-  // Auto scroll to top to show latest
   feed.scrollTop=0;
 }
-
-// ── ROSTER BOARD ───────────────────────────────────────────────
 
 function buildCtabs(){
   document.getElementById('ctabs').innerHTML=CAPS.map(c=>`
@@ -1136,15 +1123,11 @@ function buildRboard(){
   document.getElementById('rboard').innerHTML=partyHtml+subHtml;
 }
 
-// ── STREAM MODE ────────────────────────────────────────────────
-
 function toggleStream(){
   localStream=!localStream;
   document.getElementById('stbtn').textContent=localStream?'Notes OFF':'Notes ON';
   if(localSel)renderDet();
 }
-
-// ── ADMIN ──────────────────────────────────────────────────────
 
 function openAdmin(){document.getElementById('amodal').classList.add('open');}
 function closeAdmin(){document.getElementById('amodal').classList.remove('open');}
@@ -1203,8 +1186,6 @@ function adm(a){
     });
   }
 }
-
-// ── KEYBOARD & EVENTS ──────────────────────────────────────────
 
 document.addEventListener('keydown',e=>{
   if((e.key==='n'||e.key==='N')&&document.activeElement.tagName!=='INPUT')toggleStream();
