@@ -1006,16 +1006,16 @@ function openMV(slotId){
   if(!ownerCap||!sourceSlot)return;
   localMovePlayer={player:sourceSlot.player,sourceSlotId:slotId,capId:ownerCap.id};
   document.getElementById('mvtitle').textContent=`Move ${sourceSlot.player.n}`;
-  const empty=DS.slots[ownerCap.id].filter(s=>!s.player);
-  document.getElementById('mvopts').innerHTML=empty.length?empty.map(s=>`
-    <div class="sopt" onclick="confirmMove('${s.id}')">
+  // Show ALL slots except the source slot itself
+  const allSlots=DS.slots[ownerCap.id].filter(s=>s.id!==slotId);
+  document.getElementById('mvopts').innerHTML=allSlots.length?allSlots.map(s=>`
+    <div class="sopt" onclick="confirmMove('${s.id}')" style="${s.player?'border-color:var(--orange)':''}">
       <span class="sopt-party">${s.party}</span>
       <span class="sopt-type ${s.t}">${s.lb}</span>
-    </div>`).join(''):`<p style="color:var(--text3);font-size:.78rem">No other empty slots</p>`;
+      ${s.player?`<span style="font-size:.65rem;color:var(--orange);margin-left:auto">${s.player.n}</span>`:'<span style="font-size:.65rem;color:var(--text3);margin-left:auto">empty</span>'}
+    </div>`).join(''):`<p style="color:var(--text3);font-size:.78rem">No other slots</p>`;
   document.getElementById('mvmodal').classList.add('open');
 }
-
-function closeMV(){document.getElementById('mvmodal').classList.remove('open');localMovePlayer=null;}
 
 function confirmMove(newSlotId){
   if(!localMovePlayer)return;
@@ -1023,7 +1023,10 @@ function confirmMove(newSlotId){
   const src=DS.slots[capId].find(s=>s.id===sourceSlotId);
   const dst=DS.slots[capId].find(s=>s.id===newSlotId);
   if(!src||!dst)return;
-  src.player=null;dst.player=player;
+  // Swap players if destination is filled
+  const dstPlayer=dst.player;
+  dst.player=player;
+  src.player=dstPlayer||null;
   closeMV();pushState();
 }
 
