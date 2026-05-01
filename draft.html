@@ -1019,6 +1019,8 @@ function closeMV(){
   localMovePlayer=null;
 }
 
+let pollPaused=false;
+
 function confirmMove(newSlotId){
   if(!localMovePlayer)return;
   const{player,sourceSlotId,capId}=localMovePlayer;
@@ -1031,7 +1033,40 @@ function confirmMove(newSlotId){
   closeMV();
   buildRboard();
   buildPlist();
+  pollPaused=true;
   pushState();
+  // Resume polling after 4 seconds to let the write complete
+  setTimeout(()=>{pollPaused=false;},4000);
+}
+
+function initWorker(){
+  async function poll(){
+    if(pollPaused)return;
+    try{
+      const res=await fetch(`${WORKER_URL}/draft`);
+      const data=await res.json();
+      setSyncBar('✓ Live synced','var(--teal)','.68rem','400');
+      if(!data){pushState();return;}
+      DS.pickIdx=data.pickIdx||0;
+      DS.turnIdx=data.turnIdx||0;
+      DS.paused=data.paused||false;
+      DS.slots=slotsFromFirebase(data.slots,prePlaceCaptains(buildSlots()));
+      DS.feed=data.feed||[];
+      DS.timerStart=data.timerStart||null;
+      DS.timerRunning=data.timerRunning||false;
+      syncTimer();
+      document.getElementById('pbar').classList.toggle('on',DS.paused);
+      updateTurnDisplay();
+      buildPlist();
+      buildRboard();
+      buildFeed();
+      if(localSel)renderDet();
+    }catch(e){
+      setSyncBar('⚠ Disconnected...','var(--orange)');
+    }
+  }
+  poll();
+  setInterval(poll,2000);
 }
 
 function buildFeed(){
