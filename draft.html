@@ -1006,13 +1006,12 @@ function openMV(slotId){
   if(!ownerCap||!sourceSlot)return;
   localMovePlayer={player:sourceSlot.player,sourceSlotId:slotId,capId:ownerCap.id};
   document.getElementById('mvtitle').textContent=`Move ${sourceSlot.player.n}`;
-  // Show ALL slots except the source slot itself
   const allSlots=DS.slots[ownerCap.id].filter(s=>s.id!==slotId);
   document.getElementById('mvopts').innerHTML=allSlots.length?allSlots.map(s=>`
-    <div class="sopt" onclick="confirmMove('${s.id}')" style="${s.player?'border-color:var(--orange)':''}">
-      <span class="sopt-party">${s.party}</span>
-      <span class="sopt-type ${s.t}">${s.lb}</span>
-      ${s.player?`<span style="font-size:.65rem;color:var(--orange);margin-left:auto">${s.player.n}</span>`:'<span style="font-size:.65rem;color:var(--text3);margin-left:auto">empty</span>'}
+    <div class="sopt" style="cursor:pointer;${s.player?'border-color:var(--orange)':''}" onclick="confirmMove('${s.id}')">
+      <span class="sopt-party" style="pointer-events:none">${s.party}</span>
+      <span class="sopt-type ${s.t}" style="pointer-events:none">${s.lb}</span>
+      ${s.player?`<span style="font-size:.65rem;color:var(--orange);margin-left:auto;pointer-events:none">${s.player.n}</span>`:'<span style="font-size:.65rem;color:var(--text3);margin-left:auto;pointer-events:none">empty</span>'}
     </div>`).join(''):`<p style="color:var(--text3);font-size:.78rem">No other slots</p>`;
   document.getElementById('mvmodal').classList.add('open');
 }
