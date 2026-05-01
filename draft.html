@@ -1029,6 +1029,8 @@ function confirmMove(newSlotId){
   dst.player=player;
   src.player=dstPlayer;
   closeMV();
+  buildRboard();
+  buildPlist();
   pushState();
 }
 
