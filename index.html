@@ -345,14 +345,11 @@ function renderCard(s, live) {
 }
 
 async function initTwitchSection() {
-  const container = document.getElementById('stream-cards') || document.getElementById('watch-grid');
+  const container = document.getElementById('watch-grid');
   if (!container) return;
-
-  // Show offline state while loading
   container.innerHTML = streamers.map(s => renderCard(s, null)).join('');
-
   try {
-    const res = await fetch(WORKER_URL);
+    const res = await fetch(`${WORKER_URL}/twitch`);
     const streams = await res.json();
     const liveMap = {};
     for (const s of streams) liveMap[s.user_login.toLowerCase()] = s;
@@ -360,7 +357,11 @@ async function initTwitchSection() {
       renderCard(s, liveMap[s.login.toLowerCase()] || null)
     ).join('');
   } catch(e) {
-    // Keep offline state on error
     console.error('Twitch fetch failed:', e);
   }
 }
+
+initTwitchSection();
+</script>
+</body>
+</html>
