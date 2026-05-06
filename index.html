@@ -364,21 +364,3 @@ async function initTwitchSection() {
     console.error('Twitch fetch failed:', e);
   }
 }
-
-initTwitchSection();
-</script>
-// Initial skeleton
-document.getElementById('watch-grid').innerHTML = streamers.map(s => `
-  <a href="${s.url}" target="_blank" class="stream-card">
-    <div class="stream-thumb">${placeholderHTML}<span class="offline-badge">Checking...</span></div>
-    <div class="stream-info">
-      <p class="stream-name">${s.name}</p>
-      <p class="stream-role">${s.role}</p>
-      <p class="stream-title" style="font-style:italic;font-size:0.75rem">Loading...</p>
-      <p class="stream-link">${twitchSVG} twitch.tv/${s.login}</p>
-    </div>
-  </a>`).join('');
-
-checkLive();
-setInterval(checkLive, 120000);
-</script>
