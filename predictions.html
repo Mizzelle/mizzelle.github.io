@@ -27,6 +27,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .section-title{font-family:'Cinzel Decorative',cursive;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:1.25rem;display:flex;align-items:center;gap:.8rem;}
 .section-title::after{content:'';flex:1;height:1px;background:var(--border);}
 .section-title span{color:var(--teal);}
+
+/* POLLS */
 .match-day-section{margin-bottom:2.5rem;}
 .match-day-header{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;}
 .match-day-header::after{content:'';flex:1;height:1px;background:rgba(240,192,96,.2);}
@@ -51,6 +53,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .result-bar{height:100%;border-radius:2px;transition:width .8s ease;display:flex;align-items:center;padding-left:.3rem;font-size:.58rem;color:#fff;font-weight:500;min-width:0;}
 .result-pct{font-size:.65rem;color:var(--text2);min-width:34px;text-align:right;}
 .poll-total{font-size:.62rem;color:var(--text3);margin-top:.5rem;}
+
+/* STAT CARDS */
 .predictions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;margin-bottom:2.5rem;}
 .stat-card{background:var(--surface);border:1px solid var(--border);padding:1.2rem;position:relative;overflow:hidden;animation:fadeUp .7s ease both;}
 .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent,var(--purple));}
@@ -63,17 +67,50 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .stat-bar-wrap{width:80px;height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;}
 .stat-bar{height:100%;border-radius:2px;background:var(--accent,var(--purple));transition:width 1s ease;}
 .stat-votes{font-size:.68rem;color:var(--text3);min-width:28px;text-align:right;}
+
+/* MAPS */
 .maps-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2.5rem;}
 @media(max-width:600px){.maps-grid{grid-template-columns:1fr;}}
+
+/* MOROKAI BANNER */
+.morokai-banner{
+  background:linear-gradient(135deg,rgba(240,192,96,.08),rgba(124,111,247,.08));
+  border:1px solid rgba(240,192,96,.3);
+  padding:1rem 1.25rem;margin-bottom:2rem;
+  display:flex;align-items:flex-start;gap:.75rem;
+  animation:fadeUp .7s ease both;
+}
+.morokai-banner-icon{font-size:1.4rem;flex-shrink:0;margin-top:.1rem;}
+.morokai-banner-text{font-size:.8rem;color:var(--text2);line-height:1.6;}
+.morokai-banner-text strong{color:var(--gold);}
+.morokai-banner-text .shoutout{color:var(--teal);font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.08em;}
+
+/* MOROKAI VOTERS */
+.morokai-voters{margin-bottom:2.5rem;}
+.voter-grid{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.75rem;}
+.voter-tag{font-size:.68rem;color:var(--text2);padding:.2rem .55rem;background:rgba(240,192,96,.07);border:1px solid rgba(240,192,96,.2);font-family:'Cinzel',serif;}
+.voter-tag.struck{text-decoration:line-through;color:var(--text3);background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.2);}
+
+/* ROTATING 90/50/10 */
 .bonus-section{margin-bottom:3rem;}
-.bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;}
-@media(max-width:700px){.bonus-grid{grid-template-columns:1fr;}}
-.bonus-card{background:var(--surface);border:1px solid var(--border);padding:1rem;animation:fadeUp .8s ease both;}
+.bonus-carousel{position:relative;}
+.bonus-slide{display:none;animation:fadeUp .4s ease both;}
+.bonus-slide.active{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;}
+@media(max-width:700px){.bonus-slide.active{grid-template-columns:1fr;}}
+.bonus-card{background:var(--surface);border:1px solid var(--border);padding:1rem;}
 .bonus-pct{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;margin-bottom:.4rem;}
 .bonus-pct.p90{color:var(--green);}.bonus-pct.p50{color:var(--gold);}.bonus-pct.p10{color:var(--red);}
-.bonus-label{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:.6rem;}
-.bonus-items{display:flex;flex-direction:column;gap:.3rem;}
-.bonus-item{font-size:.74rem;color:var(--text2);padding:.3rem .5rem;background:rgba(255,255,255,.03);border-left:2px solid var(--accent-color);line-height:1.4;}
+.bonus-label{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:.5rem;}
+.bonus-submitter{font-size:.62rem;color:var(--purple);margin-bottom:.6rem;font-family:'Cinzel',serif;}
+.bonus-prediction{font-size:.76rem;color:var(--text2);padding:.3rem .5rem;background:rgba(255,255,255,.03);border-left:2px solid var(--accent-color);line-height:1.4;margin-bottom:.25rem;}
+.bonus-nav{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1rem;}
+.bonus-nav-btn{background:transparent;border:1px solid var(--border);color:var(--text2);font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:.4rem 1rem;cursor:pointer;transition:all .2s;}
+.bonus-nav-btn:hover{border-color:var(--teal);color:var(--teal);}
+.bonus-counter{font-family:'Cinzel',serif;font-size:.65rem;color:var(--text3);}
+.bonus-dots{display:flex;gap:.4rem;justify-content:center;margin-top:.6rem;flex-wrap:wrap;}
+.bonus-dot{width:6px;height:6px;border-radius:50%;background:var(--border);cursor:pointer;transition:background .2s;}
+.bonus-dot.active{background:var(--teal);}
+
 footer{text-align:center;padding:2rem 1rem 3rem;font-size:.65rem;color:var(--text3);letter-spacing:.08em;}
 footer a{color:var(--teal);text-decoration:none;}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
@@ -90,6 +127,7 @@ footer a{color:var(--teal);text-decoration:none;}
     <p class="hero-sub">What the community thinks will happen</p>
   </div>
 
+  <!-- MATCH POLLS -->
   <div style="margin-top:1.5rem;">
     <div class="section-title"><span>⚔</span> Match Predictions — Vote Now</div>
 
@@ -98,11 +136,7 @@ footer a{color:var(--teal);text-decoration:none;}
       <div class="match-polls">
         <div class="poll-card" style="--c1:var(--arelite);--c2:var(--bora)">
           <div class="poll-time">8:30pm EST</div>
-          <div class="poll-matchup">
-            <span class="poll-team" style="--tc:var(--arelite)">Arelite</span>
-            <span class="poll-vs">VS</span>
-            <span class="poll-team right" style="--tc:var(--bora)">Bora</span>
-          </div>
+          <div class="poll-matchup"><span class="poll-team" style="--tc:var(--arelite)">Arelite</span><span class="poll-vs">VS</span><span class="poll-team right" style="--tc:var(--bora)">Bora</span></div>
           <div class="poll-btns" id="btns-arelite-bora">
             <button class="poll-btn" style="--bc:var(--arelite)" onclick="handleVote('arelite-bora','arelite',this)">Arelite Win</button>
             <button class="poll-btn" style="--bc:var(--bora)" onclick="handleVote('arelite-bora','bora',this)">Bora Win</button>
@@ -115,11 +149,7 @@ footer a{color:var(--teal);text-decoration:none;}
         </div>
         <div class="poll-card" style="--c1:var(--rheggie);--c2:var(--wicked)">
           <div class="poll-time">9:30pm EST</div>
-          <div class="poll-matchup">
-            <span class="poll-team" style="--tc:var(--rheggie)">Rheggie</span>
-            <span class="poll-vs">VS</span>
-            <span class="poll-team right" style="--tc:var(--wicked)">Wicked</span>
-          </div>
+          <div class="poll-matchup"><span class="poll-team" style="--tc:var(--rheggie)">Rheggie</span><span class="poll-vs">VS</span><span class="poll-team right" style="--tc:var(--wicked)">Wicked</span></div>
           <div class="poll-btns" id="btns-rheggie-wicked">
             <button class="poll-btn" style="--bc:var(--rheggie)" onclick="handleVote('rheggie-wicked','rheggie',this)">Rheggie Win</button>
             <button class="poll-btn" style="--bc:var(--wicked)" onclick="handleVote('rheggie-wicked','wicked',this)">Wicked Win</button>
@@ -138,11 +168,7 @@ footer a{color:var(--teal);text-decoration:none;}
       <div class="match-polls">
         <div class="poll-card" style="--c1:var(--arelite);--c2:var(--wicked)">
           <div class="poll-time">8:30pm EST</div>
-          <div class="poll-matchup">
-            <span class="poll-team" style="--tc:var(--arelite)">Arelite</span>
-            <span class="poll-vs">VS</span>
-            <span class="poll-team right" style="--tc:var(--wicked)">Wicked</span>
-          </div>
+          <div class="poll-matchup"><span class="poll-team" style="--tc:var(--arelite)">Arelite</span><span class="poll-vs">VS</span><span class="poll-team right" style="--tc:var(--wicked)">Wicked</span></div>
           <div class="poll-btns" id="btns-arelite-wicked">
             <button class="poll-btn" style="--bc:var(--arelite)" onclick="handleVote('arelite-wicked','arelite',this)">Arelite Win</button>
             <button class="poll-btn" style="--bc:var(--wicked)" onclick="handleVote('arelite-wicked','wicked',this)">Wicked Win</button>
@@ -155,11 +181,7 @@ footer a{color:var(--teal);text-decoration:none;}
         </div>
         <div class="poll-card" style="--c1:var(--bora);--c2:var(--wicked)">
           <div class="poll-time">9:30pm EST</div>
-          <div class="poll-matchup">
-            <span class="poll-team" style="--tc:var(--bora)">Bora</span>
-            <span class="poll-vs">VS</span>
-            <span class="poll-team right" style="--tc:var(--wicked)">Wicked</span>
-          </div>
+          <div class="poll-matchup"><span class="poll-team" style="--tc:var(--bora)">Bora</span><span class="poll-vs">VS</span><span class="poll-team right" style="--tc:var(--wicked)">Wicked</span></div>
           <div class="poll-btns" id="btns-bora-wicked">
             <button class="poll-btn" style="--bc:var(--bora)" onclick="handleVote('bora-wicked','bora',this)">Bora Win</button>
             <button class="poll-btn" style="--bc:var(--wicked)" onclick="handleVote('bora-wicked','wicked',this)">Wicked Win</button>
@@ -178,11 +200,7 @@ footer a{color:var(--teal);text-decoration:none;}
       <div class="match-polls">
         <div class="poll-card" style="--c1:var(--bora);--c2:var(--rheggie)">
           <div class="poll-time">8:30pm EST</div>
-          <div class="poll-matchup">
-            <span class="poll-team" style="--tc:var(--bora)">Bora</span>
-            <span class="poll-vs">VS</span>
-            <span class="poll-team right" style="--tc:var(--rheggie)">Rheggie</span>
-          </div>
+          <div class="poll-matchup"><span class="poll-team" style="--tc:var(--bora)">Bora</span><span class="poll-vs">VS</span><span class="poll-team right" style="--tc:var(--rheggie)">Rheggie</span></div>
           <div class="poll-btns" id="btns-bora-rheggie">
             <button class="poll-btn" style="--bc:var(--bora)" onclick="handleVote('bora-rheggie','bora',this)">Bora Win</button>
             <button class="poll-btn" style="--bc:var(--rheggie)" onclick="handleVote('bora-rheggie','rheggie',this)">Rheggie Win</button>
@@ -195,11 +213,7 @@ footer a{color:var(--teal);text-decoration:none;}
         </div>
         <div class="poll-card" style="--c1:var(--arelite);--c2:var(--rheggie)">
           <div class="poll-time">9:30pm EST</div>
-          <div class="poll-matchup">
-            <span class="poll-team" style="--tc:var(--arelite)">Arelite</span>
-            <span class="poll-vs">VS</span>
-            <span class="poll-team right" style="--tc:var(--rheggie)">Rheggie</span>
-          </div>
+          <div class="poll-matchup"><span class="poll-team" style="--tc:var(--arelite)">Arelite</span><span class="poll-vs">VS</span><span class="poll-team right" style="--tc:var(--rheggie)">Rheggie</span></div>
           <div class="poll-btns" id="btns-arelite-rheggie">
             <button class="poll-btn" style="--bc:var(--arelite)" onclick="handleVote('arelite-rheggie','arelite',this)">Arelite Win</button>
             <button class="poll-btn" style="--bc:var(--rheggie)" onclick="handleVote('arelite-rheggie','rheggie',this)">Rheggie Win</button>
@@ -214,95 +228,104 @@ footer a{color:var(--teal);text-decoration:none;}
     </div>
   </div>
 
+  <!-- PLAYER PREDICTIONS -->
   <div class="section-title"><span>🎯</span> Player Performance Predictions</div>
   <div class="predictions-grid">
     <div class="stat-card" style="--accent:var(--red)">
       <div class="stat-card-title">🗡 Most Predicted — Top Kills</div>
-      <div class="stat-item"><span class="stat-rank gold">1</span><span class="stat-name">Edmun</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div><span class="stat-votes">9</span></div>
-      <div class="stat-item"><span class="stat-rank gold">1</span><span class="stat-name">Delirax</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div><span class="stat-votes">9</span></div>
-      <div class="stat-item"><span class="stat-rank silver">3</span><span class="stat-name">Technodroid</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:56%"></div></div><span class="stat-votes">5</span></div>
-      <div class="stat-item"><span class="stat-rank bronze">4</span><span class="stat-name">Artay (lllIIlI)</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:22%"></div></div><span class="stat-votes">2</span></div>
-      <div class="stat-item"><span class="stat-rank">5</span><span class="stat-name">Earthquake / Pho / Mclovin</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:11%"></div></div><span class="stat-votes">1ea</span></div>
+      <div class="stat-item"><span class="stat-rank gold">1</span><span class="stat-name">Edmun</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div><span class="stat-votes">30</span></div>
+      <div class="stat-item"><span class="stat-rank silver">2</span><span class="stat-name">Delirax</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:47%"></div></div><span class="stat-votes">14</span></div>
+      <div class="stat-item"><span class="stat-rank bronze">3</span><span class="stat-name">Technodroid</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:23%"></div></div><span class="stat-votes">7</span></div>
+      <div class="stat-item"><span class="stat-rank">4</span><span class="stat-name">Artay (lllIIlI) / Jharol</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:13%"></div></div><span class="stat-votes">4ea</span></div>
+      <div class="stat-item"><span class="stat-rank">5</span><span class="stat-name">Pho / AFKy</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:7%"></div></div><span class="stat-votes">2ea</span></div>
     </div>
     <div class="stat-card" style="--accent:var(--teal)">
       <div class="stat-card-title">🤝 Most Predicted — Top Assists</div>
-      <div class="stat-item"><span class="stat-rank gold">1</span><span class="stat-name">Delirax</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div><span class="stat-votes">8</span></div>
-      <div class="stat-item"><span class="stat-rank silver">2</span><span class="stat-name">Technodroid</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:88%"></div></div><span class="stat-votes">7</span></div>
-      <div class="stat-item"><span class="stat-rank bronze">3</span><span class="stat-name">Edmun</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:38%"></div></div><span class="stat-votes">3</span></div>
-      <div class="stat-item"><span class="stat-rank">4</span><span class="stat-name">Mclovin / nightghost1 / Pho</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:25%"></div></div><span class="stat-votes">2ea</span></div>
-      <div class="stat-item"><span class="stat-rank">5</span><span class="stat-name">Katie / Raye / AFKy</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:13%"></div></div><span class="stat-votes">1ea</span></div>
+      <div class="stat-item"><span class="stat-rank gold">1</span><span class="stat-name">Technodroid</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div><span class="stat-votes">12</span></div>
+      <div class="stat-item"><span class="stat-rank gold">1</span><span class="stat-name">Edmun</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div><span class="stat-votes">12</span></div>
+      <div class="stat-item"><span class="stat-rank silver">3</span><span class="stat-name">Delirax</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:75%"></div></div><span class="stat-votes">9</span></div>
+      <div class="stat-item"><span class="stat-rank bronze">4</span><span class="stat-name">Mclovin</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:50%"></div></div><span class="stat-votes">6</span></div>
+      <div class="stat-item"><span class="stat-rank">5</span><span class="stat-name">nightghost1</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:25%"></div></div><span class="stat-votes">3</span></div>
     </div>
     <div class="stat-card" style="--accent:var(--orange)">
       <div class="stat-card-title">💥 Most Predicted — Top Damage</div>
-      <div class="stat-item"><span class="stat-rank gold">1</span><span class="stat-name">Edmun</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div><span class="stat-votes">12</span></div>
-      <div class="stat-item"><span class="stat-rank silver">2</span><span class="stat-name">Delirax</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:50%"></div></div><span class="stat-votes">6</span></div>
-      <div class="stat-item"><span class="stat-rank bronze">3</span><span class="stat-name">Earthquake</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:25%"></div></div><span class="stat-votes">3</span></div>
-      <div class="stat-item"><span class="stat-rank">4</span><span class="stat-name">Technodroid</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:17%"></div></div><span class="stat-votes">2</span></div>
-      <div class="stat-item"><span class="stat-rank">5</span><span class="stat-name">Jharol / Hitz / Pho / Wintrr</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:8%"></div></div><span class="stat-votes">1ea</span></div>
+      <div class="stat-item"><span class="stat-rank gold">1</span><span class="stat-name">Edmun</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div><span class="stat-votes">34</span></div>
+      <div class="stat-item"><span class="stat-rank silver">2</span><span class="stat-name">Delirax</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:29%"></div></div><span class="stat-votes">10</span></div>
+      <div class="stat-item"><span class="stat-rank bronze">3</span><span class="stat-name">Technodroid</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:18%"></div></div><span class="stat-votes">6</span></div>
+      <div class="stat-item"><span class="stat-rank">4</span><span class="stat-name">Earthquake</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:12%"></div></div><span class="stat-votes">4</span></div>
+      <div class="stat-item"><span class="stat-rank">5</span><span class="stat-name">Mclovin</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:9%"></div></div><span class="stat-votes">3</span></div>
     </div>
   </div>
 
+  <!-- MAPS -->
   <div class="section-title"><span>🗺</span> Map Predictions</div>
+
+  <!-- MOROKAI BANNER -->
+  <div class="morokai-banner">
+    <div class="morokai-banner-icon">🎯</div>
+    <div class="morokai-banner-text">
+      <strong>Morokai was globally banned before the tournament began</strong> — making it unavailable for any match. A huge thank you to <span class="shoutout">Levityy</span> for getting it banned! The 20 community members who predicted Morokai as the most picked map were robbed of their prediction coming true.<br/>
+      <span style="font-size:.68rem;color:var(--text3);margin-top:.3rem;display:block">Ahzreil now leads as the most predicted picked map.</span>
+    </div>
+  </div>
+
+  <!-- MOROKAI VOTERS -->
+  <div class="morokai-voters">
+    <div class="section-title"><span>😔</span> The Morokai Believers — RIP</div>
+    <p style="font-size:.78rem;color:var(--text2);margin-bottom:.75rem">These 20 community members predicted Morokai as the most picked map. They were right in spirit — but Levityy had other plans.</p>
+    <div class="voter-grid">
+      <span class="voter-tag struck">SrDrake</span>
+      <span class="voter-tag struck">Scotland ツ</span>
+      <span class="voter-tag struck">Caffeine</span>
+      <span class="voter-tag struck">Mew</span>
+      <span class="voter-tag struck">LuckyBlackat</span>
+      <span class="voter-tag struck">Justin</span>
+      <span class="voter-tag struck">Kiersii</span>
+      <span class="voter-tag struck">Trazodone</span>
+      <span class="voter-tag struck">Natejas</span>
+      <span class="voter-tag struck">awsmhhh</span>
+      <span class="voter-tag struck">nightghost1</span>
+      <span class="voter-tag struck">msgrayness</span>
+      <span class="voter-tag struck">Franks</span>
+      <span class="voter-tag struck">PhoPapi</span>
+      <span class="voter-tag struck">adventurous_puppy</span>
+      <span class="voter-tag struck">idle.igloo</span>
+      <span class="voter-tag struck">darkstealer</span>
+      <span class="voter-tag struck">Phaded</span>
+      <span class="voter-tag struck">ben4467</span>
+      <span class="voter-tag struck">justintime</span>
+    </div>
+  </div>
+
   <div class="maps-grid">
     <div class="stat-card" style="--accent:var(--red)">
       <div class="stat-card-title">🚫 Most Predicted — Banned Map</div>
-      <div class="stat-item"><span class="stat-rank gold">1</span><span class="stat-name">Pakilo</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div><span class="stat-votes">12</span></div>
-      <div class="stat-item"><span class="stat-rank silver">2</span><span class="stat-name">Cherno</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:33%"></div></div><span class="stat-votes">4</span></div>
-      <div class="stat-item"><span class="stat-rank bronze">3</span><span class="stat-name">Daigon / Kowazan / Aelon / Ahzreil</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:25%"></div></div><span class="stat-votes">3ea</span></div>
-      <div class="stat-item"><span class="stat-rank">4</span><span class="stat-name">Leviathan / Manticus</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:17%"></div></div><span class="stat-votes">2ea</span></div>
+      <div class="stat-item"><span class="stat-rank gold">1</span><span class="stat-name">Pakilo</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div><span class="stat-votes">26</span></div>
+      <div class="stat-item"><span class="stat-rank silver">2</span><span class="stat-name">Aelon</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:31%"></div></div><span class="stat-votes">8</span></div>
+      <div class="stat-item"><span class="stat-rank silver">2</span><span class="stat-name">Cherno</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:31%"></div></div><span class="stat-votes">8</span></div>
+      <div class="stat-item"><span class="stat-rank bronze">4</span><span class="stat-name">Kowazan</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:23%"></div></div><span class="stat-votes">6</span></div>
+      <div class="stat-item"><span class="stat-rank">5</span><span class="stat-name">Daigon / Ahzreil</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:19%"></div></div><span class="stat-votes">5ea</span></div>
     </div>
     <div class="stat-card" style="--accent:var(--green)">
       <div class="stat-card-title">✅ Most Predicted — Picked Map</div>
-      <div class="stat-item"><span class="stat-rank gold">1</span><span class="stat-name">Morokai</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div><span class="stat-votes">15</span></div>
-      <div class="stat-item"><span class="stat-rank silver">2</span><span class="stat-name">Ahzreil</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:53%"></div></div><span class="stat-votes">8</span></div>
-      <div class="stat-item"><span class="stat-rank bronze">3</span><span class="stat-name">Talus</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:27%"></div></div><span class="stat-votes">4</span></div>
-      <div class="stat-item"><span class="stat-rank">4</span><span class="stat-name">Cherno</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:20%"></div></div><span class="stat-votes">3</span></div>
+      <div class="stat-item"><span class="stat-rank" style="color:var(--red);font-size:.6rem">BAN</span><span class="stat-name" style="color:var(--text3);text-decoration:line-through">Morokai</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:100%;background:var(--red);opacity:.4"></div></div><span class="stat-votes" style="color:var(--red)">banned</span></div>
+      <div class="stat-item"><span class="stat-rank gold">1</span><span class="stat-name">Ahzreil</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div><span class="stat-votes">23</span></div>
+      <div class="stat-item"><span class="stat-rank silver">2</span><span class="stat-name">Talus</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:70%"></div></div><span class="stat-votes">16</span></div>
+      <div class="stat-item"><span class="stat-rank bronze">3</span><span class="stat-name">Cherno</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:17%"></div></div><span class="stat-votes">4</span></div>
+      <div class="stat-item"><span class="stat-rank">4</span><span class="stat-name">Kowazan / Adentus</span><div class="stat-bar-wrap"><div class="stat-bar" style="width:9%"></div></div><span class="stat-votes">2ea</span></div>
     </div>
   </div>
 
+  <!-- ROTATING 90/50/10 -->
   <div class="section-title"><span>🎲</span> Community 90 / 50 / 10 Predictions</div>
   <div class="bonus-section">
-    <div class="bonus-grid">
-      <div class="bonus-card">
-        <div class="bonus-pct p90">90%</div>
-        <div class="bonus-label">Almost certain to happen</div>
-        <div class="bonus-items">
-          <div class="bonus-item" style="--accent-color:var(--green)">Late start to at least one game</div>
-          <div class="bonus-item" style="--accent-color:var(--green)">Someone gets stuck / bugged under the map</div>
-          <div class="bonus-item" style="--accent-color:var(--green)">At least one shotcaller crashes out</div>
-          <div class="bonus-item" style="--accent-color:var(--green)">Someone from Team Wicked drops before tourney ends</div>
-          <div class="bonus-item" style="--accent-color:var(--green)">Edmun is top scorer for his team</div>
-          <div class="bonus-item" style="--accent-color:var(--green)">At least 10 remakes across the whole tournament</div>
-          <div class="bonus-item" style="--accent-color:var(--green)">Ruthless does not leave the bench</div>
-        </div>
-      </div>
-      <div class="bonus-card">
-        <div class="bonus-pct p50">50%</div>
-        <div class="bonus-label">Could go either way</div>
-        <div class="bonus-items">
-          <div class="bonus-item" style="--accent-color:var(--gold)">Someone DCs every game</div>
-          <div class="bonus-item" style="--accent-color:var(--gold)">The meta shifts mid-tournament</div>
-          <div class="bonus-item" style="--accent-color:var(--gold)">At least one match needs a remake due to DCs</div>
-          <div class="bonus-item" style="--accent-color:var(--gold)">Someone forgets to turn up to their wargame</div>
-          <div class="bonus-item" style="--accent-color:var(--gold)">Team Wicked can't field a full 48-man roster</div>
-          <div class="bonus-item" style="--accent-color:var(--gold)">Mclovin doesn't get over 30 kills in a single game</div>
-          <div class="bonus-item" style="--accent-color:var(--gold)">Someone complains about spinners</div>
-        </div>
-      </div>
-      <div class="bonus-card">
-        <div class="bonus-pct p10">10%</div>
-        <div class="bonus-label">Long shots — stranger things have happened</div>
-        <div class="bonus-items">
-          <div class="bonus-item" style="--accent-color:var(--red)">Team Wicked wins the tournament</div>
-          <div class="bonus-item" style="--accent-color:var(--red)">12+ players under the map in a single match</div>
-          <div class="bonus-item" style="--accent-color:var(--red)">Nobody caps in a game</div>
-          <div class="bonus-item" style="--accent-color:var(--red)">A game played on Aelon</div>
-          <div class="bonus-item" style="--accent-color:var(--red)">Someone publicly accuses Arelite of rigging the draft</div>
-          <div class="bonus-item" style="--accent-color:var(--red)">A DPS gets 0 kills in a wargame</div>
-          <div class="bonus-item" style="--accent-color:var(--red)">Every game starts with zero DCs</div>
-        </div>
-      </div>
+    <div class="bonus-carousel" id="bonus-carousel"></div>
+    <div class="bonus-nav">
+      <button class="bonus-nav-btn" onclick="prevSlide()">← Prev</button>
+      <span class="bonus-counter" id="bonus-counter">1 / 1</span>
+      <button class="bonus-nav-btn" onclick="nextSlide()">Next →</button>
     </div>
+    <div class="bonus-dots" id="bonus-dots"></div>
   </div>
 
   <footer>
@@ -311,7 +334,7 @@ footer a{color:var(--teal);text-decoration:none;}
 </div>
 
 <script>
-// ── FIREBASE CONFIG ──
+// ── FIREBASE ──
 const firebaseConfig={
   apiKey:'AIzaSyBFoZE4Oem9WVb3iF1YStRvIQX67vmve6A',
   authDomain:'tnltourney.firebaseapp.com',
@@ -324,6 +347,7 @@ const firebaseConfig={
 firebase.initializeApp(firebaseConfig);
 const db=firebase.database();
 
+// ── POLLS ──
 const MATCHES=[
   {id:'arelite-bora',teams:['arelite','bora']},
   {id:'rheggie-wicked',teams:['rheggie','wicked']},
@@ -341,8 +365,7 @@ function saveVoted(){try{localStorage.setItem(VOTED_KEY,JSON.stringify(voted));}
 function updateResults(matchId,data){
   const match=MATCHES.find(m=>m.id===matchId);
   if(!match)return;
-  let total=0;
-  const totals={};
+  let total=0;const totals={};
   match.teams.forEach(t=>{totals[t]=(data&&data[t])||0;total+=totals[t];});
   match.teams.forEach(t=>{
     const pct=total>0?Math.round(totals[t]/total*100):0;
@@ -366,20 +389,90 @@ function disableButtons(matchId,votedTeam){
 
 function handleVote(matchId,team,btn){
   if(voted[matchId])return;
-  voted[matchId]=team;
-  saveVoted();
+  voted[matchId]=team;saveVoted();
   disableButtons(matchId,team);
-  // Increment in Firebase using transaction
   db.ref('polls/'+matchId+'/'+team).transaction(current=>(current||0)+1);
 }
 
-// Listen to all polls in real time
 MATCHES.forEach(m=>{
-  db.ref('polls/'+m.id).on('value',snap=>{
-    updateResults(m.id,snap.val());
-  });
+  db.ref('polls/'+m.id).on('value',snap=>updateResults(m.id,snap.val()));
   if(voted[m.id])disableButtons(m.id,voted[m.id]);
 });
+
+// ── ROTATING 90/50/10 ──
+const bonusData=[
+  {submitter:'nightghost1',p90:'One of the shotcallers will crash out',p50:'Less than half will answer this question',p10:'This answer will actually be read'},
+  {submitter:'Levityy',p90:'At least one person gets stuck under the map',p50:'Someone will forget to turn up to their wargame',p10:'Someone will class swap in the middle of a wargame'},
+  {submitter:'Kiersii',p90:'At least 10 remakes in the whole tournament',p50:'At least one lobby will take more than 25 mins to start',p10:'At least one DPS will get 0 kills in one of the wargames'},
+  {submitter:'awsmhhh',p90:'Someone from Team Wicked drops before tourney ends',p50:'Team Wicked will not be able to field a 48-man roster',p10:'Someone publicly accuses Arelite of rigging the draft'},
+  {submitter:'Trazodone',p90:'Late start to at least one game',p50:'The meta shifts mid-tournament',p10:'12 or more players are under the map in 1 match'},
+  {submitter:'Franks',p90:'Late start',p50:'Of games will have subs',p10:'A game played on Aelon'},
+  {submitter:'PhoPapi',p90:'90% chance hamster crashes out on someone — Narly says "f***" every time someone on his team dies',p50:'Mclovin doesn\'t get over 30 kills in a single wargame',p10:'Arelite\'s group loses'},
+  {submitter:'msgrayness',p90:'Edmun is the top scorer for his team',p50:'Red team wins',p10:'Every game starts with no DCs'},
+  {submitter:'SrDrake',p90:'Ruthless does not leave the bench',p50:'Someone DCs every game',p10:'There will be a game where no one caps'},
+  {submitter:'justintime',p90:'Ruthless will forget to charge his controller',p50:'Someone will complain about spinners',p10:'Wicked wins it all'},
+  {submitter:'adventurous_puppy',p90:'No 2nd games in a 2-game day will start on time',p50:'1 non-sub player doesn\'t play any official match',p10:'A team leader uninstalls'},
+  {submitter:'Community',p90:'Someone will DC during a game',p50:'Someone will quit mid-tournament',p10:'Someone will quit TnL as a result of this tourney'},
+  {submitter:'Community',p90:'At least 1 remake',p50:'Someone gets glitched underground',p10:'Team Rheggie doesn\'t get any higher than 4th place'},
+  {submitter:'Community',p90:'Edmun\'s name gets called every minute',p50:'Edmun gets tossed around',p10:'Edmun static full wipes'},
+  {submitter:'Community',p90:'Killsquads getting blamed',p50:'Shotcaller calls someone regarded',p10:'Ruthless\' controller low battery / disconnects'},
+  {submitter:'Community',p90:'Team Wicked can\'t field 48',p50:'Someone crashes out mid match',p10:'Wicked doesn\'t get a single cap throughout'},
+  {submitter:'Community',p90:'The tournament is decided by Arelite vs Bora',p50:'Soju saved this draft league',p10:'Selecting me first round was a good idea'},
+  {submitter:'Community',p90:'Someone will DC',p50:'Late start',p10:'No one caps'},
+  {submitter:'Community',p90:'CTA conflicts',p50:'Guilds complain about player pocket',p10:'It goes smooth without problems'},
+  {submitter:'Community',p90:'Sure Team Bora will win the tournament',p50:'Someone will be bugged / stuck inside a wall',p10:'Someone playing will rage on a live stream'},
+];
+
+let currentSlide=0;
+
+function buildCarousel(){
+  const carousel=document.getElementById('bonus-carousel');
+  const dots=document.getElementById('bonus-dots');
+  carousel.innerHTML=bonusData.map((b,i)=>`
+    <div class="bonus-slide${i===0?' active':''}" id="slide-${i}">
+      <div class="bonus-card">
+        <div class="bonus-pct p90">90%</div>
+        <div class="bonus-label">Almost certain</div>
+        <div class="bonus-submitter">— ${b.submitter}</div>
+        <div class="bonus-prediction" style="--accent-color:var(--green)">${b.p90}</div>
+      </div>
+      <div class="bonus-card">
+        <div class="bonus-pct p50">50%</div>
+        <div class="bonus-label">Could go either way</div>
+        <div class="bonus-submitter">— ${b.submitter}</div>
+        <div class="bonus-prediction" style="--accent-color:var(--gold)">${b.p50}</div>
+      </div>
+      <div class="bonus-card">
+        <div class="bonus-pct p10">10%</div>
+        <div class="bonus-label">Long shot</div>
+        <div class="bonus-submitter">— ${b.submitter}</div>
+        <div class="bonus-prediction" style="--accent-color:var(--red)">${b.p10}</div>
+      </div>
+    </div>`).join('');
+  dots.innerHTML=bonusData.map((_,i)=>
+    `<div class="bonus-dot${i===0?' active':''}" onclick="goToSlide(${i})"></div>`
+  ).join('');
+  updateCounter();
+}
+
+function updateCounter(){
+  document.getElementById('bonus-counter').textContent=(currentSlide+1)+' / '+bonusData.length;
+  document.querySelectorAll('.bonus-dot').forEach((d,i)=>d.classList.toggle('active',i===currentSlide));
+}
+
+function goToSlide(n){
+  document.getElementById('slide-'+currentSlide).classList.remove('active');
+  currentSlide=((n%bonusData.length)+bonusData.length)%bonusData.length;
+  document.getElementById('slide-'+currentSlide).classList.add('active');
+  updateCounter();
+}
+
+function nextSlide(){goToSlide(currentSlide+1);}
+function prevSlide(){goToSlide(currentSlide-1);}
+
+// Auto-rotate every 8 seconds
+setInterval(nextSlide,8000);
+buildCarousel();
 
 // ── STARFIELD ──
 const canvas=document.getElementById('stars-canvas');
