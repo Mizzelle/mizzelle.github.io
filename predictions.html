@@ -395,19 +395,8 @@ window.addEventListener('resize',()=>{resize();initStars();});
 resize();initStars();drawStars();
 
 // ── FIREBASE ──
-const firebaseConfig={
-  apiKey:"AIzaSyBFoZE4Oem9WVb3iF1YStRvIQX67vmve6A",
-  authDomain:"tnltourney.firebaseapp.com",
-  databaseURL:"https://tnltourney-default-rtdb.firebaseio.com",
-  projectId:"tnltourney",
-  storageBucket:"tnltourney.firebasestorage.app",
-  messagingSenderId:"218077176790",
-  appId:"1:218077176790:web:4c875af2c39a0050903a77"
-};
-firebase.initializeApp(firebaseConfig);
-const db=firebase.database();
+const WORKER_URL='https://green-mud-aca8.mizzelle.workers.dev';
 
-// ── POLL IDS ──
 const MATCHES=[
   {id:'arelite-bora', teams:['arelite','bora']},
   {id:'rheggie-wicked', teams:['rheggie','wicked']},
@@ -417,18 +406,15 @@ const MATCHES=[
   {id:'arelite-rheggie', teams:['arelite','rheggie']},
 ];
 
-// ── VOTED STATE (localStorage per browser) ──
 const VOTED_KEY='tnl-s1-voted-v2';
 let voted={};
 try{voted=JSON.parse(localStorage.getItem(VOTED_KEY)||'{}');}catch(e){}
-
 function saveVoted(){try{localStorage.setItem(VOTED_KEY,JSON.stringify(voted));}catch(e){}}
 
-// ── UPDATE UI FROM DATA ──
-function updateResults(matchId, data){
+function updateResults(matchId,data){
   const teams=MATCHES.find(m=>m.id===matchId)?.teams||[];
-  const totals={};
   let total=0;
+  const totals={};
   teams.forEach(t=>{totals[t]=(data&&data[t])||0;total+=totals[t];});
   teams.forEach(t=>{
     const pct=total>0?Math.round(totals[t]/total*100):0;
@@ -441,51 +427,42 @@ function updateResults(matchId, data){
   if(totalEl)totalEl.textContent=`${total} vote${total!==1?'s':''}`;
 }
 
-// ── DISABLE BUTTONS FOR VOTED MATCH ──
-function disableButtons(matchId, votedTeam){
+function disableButtons(matchId,votedTeam){
   const btns=document.querySelectorAll(`#btns-${matchId} .poll-btn`);
   btns.forEach(btn=>{
     btn.disabled=true;
-    // Check if this button is for the voted team
-    if(btn.getAttribute('onclick').includes(`,'${votedTeam}'`)){
-      btn.classList.add('voted');
-    }
+    if(btn.getAttribute('onclick')?.includes(`,'${votedTeam}'`))btn.classList.add('voted');
   });
 }
 
-// ── VOTE ──
-function vote(matchId, team, btn){
+async function vote(matchId,team,btn){
   if(voted[matchId])return;
   voted[matchId]=team;
   saveVoted();
-  disableButtons(matchId, team);
-  // Increment in Firebase using transaction
-  db.ref(`polls/${matchId}/${team}`).transaction(current=>(current||0)+1);
+  disableButtons(matchId,team);
+  try{
+    await fetch(`${WORKER_URL}/polls/vote`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({matchId,team})
+    });
+  }catch(e){console.error('Vote failed:',e);}
+  loadPolls();
 }
 
-// ── INIT — listen to all polls in real time ──
-MATCHES.forEach(match=>{
-  db.ref(`polls/${match.id}`).on('value', snap=>{
-    updateResults(match.id, snap.val());
-  });
-  // Restore voted state
-  if(voted[match.id]){
-    disableButtons(match.id, voted[match.id]);
-  }
-});
+async function loadPolls(){
+  try{
+    const res=await fetch(`${WORKER_URL}/polls`);
+    const data=await res.json();
+    MATCHES.forEach(m=>{
+      updateResults(m.id,data&&data[m.id]);
+    });
+  }catch(e){console.error('Poll load failed:',e);}
+}
 
-// ── ANIMATE STAT BARS ──
-const observer=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.querySelectorAll('.stat-bar').forEach(bar=>{
-        const w=bar.style.width;bar.style.width='0';
-        setTimeout(()=>{bar.style.width=w;},100);
-      });
-    }
-  });
-},{threshold:0.2});
-document.querySelectorAll('.stat-card').forEach(el=>observer.observe(el));
-</script>
-</body>
-</html>
+// Init
+MATCHES.forEach(m=>{
+  if(voted[m.id])disableButtons(m.id,voted[m.id]);
+});
+loadPolls();
+setInterval(loadPolls,10000);
