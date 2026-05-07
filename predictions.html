@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>T&L S1 — Community Predictions</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -34,54 +36,33 @@ body::before{
 
 /* ── MATCH POLLS ── */
 .match-day-section{margin-bottom:2.5rem;}
-.match-day-header{
-  font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:1rem;
-  display:flex;align-items:center;gap:.75rem;
-}
+.match-day-header{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;}
 .match-day-header::after{content:'';flex:1;height:1px;background:rgba(240,192,96,.2);}
 .match-polls{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:1rem;}
 @media(max-width:500px){.match-polls{grid-template-columns:1fr;}}
 
-.poll-card{
-  background:var(--surface);border:1px solid var(--border);
-  padding:1.4rem;position:relative;overflow:hidden;
-  animation:fadeUp .7s ease both;
-}
+.poll-card{background:var(--surface);border:1px solid var(--border);padding:1.4rem;position:relative;overflow:hidden;animation:fadeUp .7s ease both;}
 .poll-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--c1),var(--c2));}
 .poll-time{font-size:.65rem;color:var(--text3);letter-spacing:.08em;margin-bottom:.9rem;}
-.poll-matchup{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:.5rem;margin-bottom:1.2rem;
-}
-.poll-team{
-  font-family:'Cinzel Decorative',cursive;font-size:.85rem;font-weight:700;
-  color:var(--tc);flex:1;
-}
+.poll-matchup{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:1.2rem;}
+.poll-team{font-family:'Cinzel Decorative',cursive;font-size:.85rem;font-weight:700;color:var(--tc);flex:1;}
 .poll-team.right{text-align:right;}
 .poll-vs{font-size:.65rem;color:var(--text3);letter-spacing:.1em;padding:0 .5rem;}
 
-/* Vote buttons */
 .poll-btns{display:flex;gap:.5rem;margin-bottom:.9rem;}
-.poll-btn{
-  flex:1;padding:.55rem .5rem;
-  background:transparent;border:1px solid var(--bc);
-  color:var(--bc);font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.1em;
-  text-transform:uppercase;cursor:pointer;transition:all .2s;
-  white-space:nowrap;
-}
-.poll-btn:hover{background:var(--bc);color:var(--bg);}
+.poll-btn{flex:1;padding:.55rem .5rem;background:transparent;border:1px solid var(--bc);color:var(--bc);font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.poll-btn:hover:not(:disabled){background:var(--bc);color:var(--bg);}
 .poll-btn.voted{background:var(--bc);color:var(--bg);cursor:default;}
+.poll-btn:disabled{cursor:default;opacity:.8;}
 
-/* Results bars */
-.poll-results{display:none;}
-.poll-results.show{display:block;}
+.poll-results{margin-top:.5rem;}
 .result-row{display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem;}
 .result-label{font-family:'Cinzel',serif;font-size:.62rem;color:var(--text2);min-width:70px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .result-bar-wrap{flex:1;height:14px;background:rgba(255,255,255,.04);border-radius:2px;overflow:hidden;}
-.result-bar{height:100%;border-radius:2px;transition:width 1s ease;display:flex;align-items:center;padding-left:.3rem;font-size:.58rem;color:#fff;font-weight:500;}
+.result-bar{height:100%;border-radius:2px;transition:width .8s ease;display:flex;align-items:center;padding-left:.3rem;font-size:.58rem;color:#fff;font-weight:500;min-width:0;}
 .result-pct{font-size:.65rem;color:var(--text2);min-width:34px;text-align:right;}
 .poll-total{font-size:.62rem;color:var(--text3);margin-top:.5rem;}
+.poll-loading{font-size:.7rem;color:var(--text3);font-style:italic;}
 
 /* ── PLAYER STAT CARDS ── */
 .predictions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;margin-bottom:2.5rem;}
@@ -97,11 +78,9 @@ body::before{
 .stat-bar{height:100%;border-radius:2px;background:var(--accent,var(--purple));transition:width 1s ease;}
 .stat-votes{font-size:.68rem;color:var(--text3);min-width:28px;text-align:right;}
 
-/* ── MAPS ── */
 .maps-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2.5rem;}
 @media(max-width:600px){.maps-grid{grid-template-columns:1fr;}}
 
-/* ── BONUS ── */
 .bonus-section{margin-bottom:3rem;}
 .bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;}
 @media(max-width:700px){.bonus-grid{grid-template-columns:1fr;}}
@@ -133,56 +112,55 @@ footer a{color:var(--teal);text-decoration:none;}
   <div style="margin-top:1.5rem;">
     <div class="section-title"><span>⚔</span> Match Predictions — Vote Now</div>
 
-    <!-- THURSDAY 7TH -->
     <div class="match-day-section">
       <div class="match-day-header">Thursday 7th May</div>
       <div class="match-polls">
-        <div class="poll-card" style="--c1:var(--arelite);--c2:var(--bora)">
+        <div class="poll-card" style="--c1:var(--arelite);--c2:var(--bora)" id="card-arelite-bora">
           <div class="poll-time">8:30pm EST</div>
           <div class="poll-matchup">
             <span class="poll-team" style="--tc:var(--arelite)">Arelite</span>
             <span class="poll-vs">VS</span>
             <span class="poll-team right" style="--tc:var(--bora)">Bora</span>
           </div>
-          <div class="poll-btns">
-            <button class="poll-btn" style="--bc:var(--arelite)" onclick="vote(this,'arelite-bora','arelite')">Arelite Win</button>
-            <button class="poll-btn" style="--bc:var(--bora)" onclick="vote(this,'arelite-bora','bora')">Bora Win</button>
+          <div class="poll-btns" id="btns-arelite-bora">
+            <button class="poll-btn" style="--bc:var(--arelite)" onclick="vote('arelite-bora','arelite',this)">Arelite Win</button>
+            <button class="poll-btn" style="--bc:var(--bora)" onclick="vote('arelite-bora','bora',this)">Bora Win</button>
           </div>
-          <div class="poll-results" id="results-arelite-bora">
+          <div id="results-arelite-bora">
             <div class="result-row">
               <span class="result-label" style="color:var(--arelite)">Arelite</span>
-              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--arelite)" id="bar-arelite-bora-arelite"></div></div>
+              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--arelite);width:0%" id="bar-arelite-bora-arelite"></div></div>
               <span class="result-pct" id="pct-arelite-bora-arelite">0%</span>
             </div>
             <div class="result-row">
               <span class="result-label" style="color:var(--bora)">Bora</span>
-              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--bora)" id="bar-arelite-bora-bora"></div></div>
+              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--bora);width:0%" id="bar-arelite-bora-bora"></div></div>
               <span class="result-pct" id="pct-arelite-bora-bora">0%</span>
             </div>
             <div class="poll-total" id="total-arelite-bora">0 votes</div>
           </div>
         </div>
 
-        <div class="poll-card" style="--c1:var(--rheggie);--c2:var(--wicked)">
+        <div class="poll-card" style="--c1:var(--rheggie);--c2:var(--wicked)" id="card-rheggie-wicked">
           <div class="poll-time">9:30pm EST</div>
           <div class="poll-matchup">
             <span class="poll-team" style="--tc:var(--rheggie)">Rheggie</span>
             <span class="poll-vs">VS</span>
             <span class="poll-team right" style="--tc:var(--wicked)">Wicked</span>
           </div>
-          <div class="poll-btns">
-            <button class="poll-btn" style="--bc:var(--rheggie)" onclick="vote(this,'rheggie-wicked','rheggie')">Rheggie Win</button>
-            <button class="poll-btn" style="--bc:var(--wicked)" onclick="vote(this,'rheggie-wicked','wicked')">Wicked Win</button>
+          <div class="poll-btns" id="btns-rheggie-wicked">
+            <button class="poll-btn" style="--bc:var(--rheggie)" onclick="vote('rheggie-wicked','rheggie',this)">Rheggie Win</button>
+            <button class="poll-btn" style="--bc:var(--wicked)" onclick="vote('rheggie-wicked','wicked',this)">Wicked Win</button>
           </div>
-          <div class="poll-results" id="results-rheggie-wicked">
+          <div id="results-rheggie-wicked">
             <div class="result-row">
               <span class="result-label" style="color:var(--rheggie)">Rheggie</span>
-              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--rheggie)" id="bar-rheggie-wicked-rheggie"></div></div>
+              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--rheggie);width:0%" id="bar-rheggie-wicked-rheggie"></div></div>
               <span class="result-pct" id="pct-rheggie-wicked-rheggie">0%</span>
             </div>
             <div class="result-row">
               <span class="result-label" style="color:var(--wicked)">Wicked</span>
-              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--wicked)" id="bar-rheggie-wicked-wicked"></div></div>
+              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--wicked);width:0%" id="bar-rheggie-wicked-wicked"></div></div>
               <span class="result-pct" id="pct-rheggie-wicked-wicked">0%</span>
             </div>
             <div class="poll-total" id="total-rheggie-wicked">0 votes</div>
@@ -191,56 +169,55 @@ footer a{color:var(--teal);text-decoration:none;}
       </div>
     </div>
 
-    <!-- MONDAY 11TH -->
     <div class="match-day-section">
       <div class="match-day-header">Monday 11th May</div>
       <div class="match-polls">
-        <div class="poll-card" style="--c1:var(--arelite);--c2:var(--wicked)">
+        <div class="poll-card" style="--c1:var(--arelite);--c2:var(--wicked)" id="card-arelite-wicked">
           <div class="poll-time">8:30pm EST</div>
           <div class="poll-matchup">
             <span class="poll-team" style="--tc:var(--arelite)">Arelite</span>
             <span class="poll-vs">VS</span>
             <span class="poll-team right" style="--tc:var(--wicked)">Wicked</span>
           </div>
-          <div class="poll-btns">
-            <button class="poll-btn" style="--bc:var(--arelite)" onclick="vote(this,'arelite-wicked','arelite')">Arelite Win</button>
-            <button class="poll-btn" style="--bc:var(--wicked)" onclick="vote(this,'arelite-wicked','wicked')">Wicked Win</button>
+          <div class="poll-btns" id="btns-arelite-wicked">
+            <button class="poll-btn" style="--bc:var(--arelite)" onclick="vote('arelite-wicked','arelite',this)">Arelite Win</button>
+            <button class="poll-btn" style="--bc:var(--wicked)" onclick="vote('arelite-wicked','wicked',this)">Wicked Win</button>
           </div>
-          <div class="poll-results" id="results-arelite-wicked">
+          <div id="results-arelite-wicked">
             <div class="result-row">
               <span class="result-label" style="color:var(--arelite)">Arelite</span>
-              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--arelite)" id="bar-arelite-wicked-arelite"></div></div>
+              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--arelite);width:0%" id="bar-arelite-wicked-arelite"></div></div>
               <span class="result-pct" id="pct-arelite-wicked-arelite">0%</span>
             </div>
             <div class="result-row">
               <span class="result-label" style="color:var(--wicked)">Wicked</span>
-              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--wicked)" id="bar-arelite-wicked-wicked"></div></div>
+              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--wicked);width:0%" id="bar-arelite-wicked-wicked"></div></div>
               <span class="result-pct" id="pct-arelite-wicked-wicked">0%</span>
             </div>
             <div class="poll-total" id="total-arelite-wicked">0 votes</div>
           </div>
         </div>
 
-        <div class="poll-card" style="--c1:var(--bora);--c2:var(--wicked)">
+        <div class="poll-card" style="--c1:var(--bora);--c2:var(--wicked)" id="card-bora-wicked">
           <div class="poll-time">9:30pm EST</div>
           <div class="poll-matchup">
             <span class="poll-team" style="--tc:var(--bora)">Bora</span>
             <span class="poll-vs">VS</span>
             <span class="poll-team right" style="--tc:var(--wicked)">Wicked</span>
           </div>
-          <div class="poll-btns">
-            <button class="poll-btn" style="--bc:var(--bora)" onclick="vote(this,'bora-wicked','bora')">Bora Win</button>
-            <button class="poll-btn" style="--bc:var(--wicked)" onclick="vote(this,'bora-wicked','wicked')">Wicked Win</button>
+          <div class="poll-btns" id="btns-bora-wicked">
+            <button class="poll-btn" style="--bc:var(--bora)" onclick="vote('bora-wicked','bora',this)">Bora Win</button>
+            <button class="poll-btn" style="--bc:var(--wicked)" onclick="vote('bora-wicked','wicked',this)">Wicked Win</button>
           </div>
-          <div class="poll-results" id="results-bora-wicked">
+          <div id="results-bora-wicked">
             <div class="result-row">
               <span class="result-label" style="color:var(--bora)">Bora</span>
-              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--bora)" id="bar-bora-wicked-bora"></div></div>
+              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--bora);width:0%" id="bar-bora-wicked-bora"></div></div>
               <span class="result-pct" id="pct-bora-wicked-bora">0%</span>
             </div>
             <div class="result-row">
               <span class="result-label" style="color:var(--wicked)">Wicked</span>
-              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--wicked)" id="bar-bora-wicked-wicked"></div></div>
+              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--wicked);width:0%" id="bar-bora-wicked-wicked"></div></div>
               <span class="result-pct" id="pct-bora-wicked-wicked">0%</span>
             </div>
             <div class="poll-total" id="total-bora-wicked">0 votes</div>
@@ -249,56 +226,55 @@ footer a{color:var(--teal);text-decoration:none;}
       </div>
     </div>
 
-    <!-- THURSDAY 14TH -->
     <div class="match-day-section">
       <div class="match-day-header">Thursday 14th May</div>
       <div class="match-polls">
-        <div class="poll-card" style="--c1:var(--bora);--c2:var(--rheggie)">
+        <div class="poll-card" style="--c1:var(--bora);--c2:var(--rheggie)" id="card-bora-rheggie">
           <div class="poll-time">8:30pm EST</div>
           <div class="poll-matchup">
             <span class="poll-team" style="--tc:var(--bora)">Bora</span>
             <span class="poll-vs">VS</span>
             <span class="poll-team right" style="--tc:var(--rheggie)">Rheggie</span>
           </div>
-          <div class="poll-btns">
-            <button class="poll-btn" style="--bc:var(--bora)" onclick="vote(this,'bora-rheggie','bora')">Bora Win</button>
-            <button class="poll-btn" style="--bc:var(--rheggie)" onclick="vote(this,'bora-rheggie','rheggie')">Rheggie Win</button>
+          <div class="poll-btns" id="btns-bora-rheggie">
+            <button class="poll-btn" style="--bc:var(--bora)" onclick="vote('bora-rheggie','bora',this)">Bora Win</button>
+            <button class="poll-btn" style="--bc:var(--rheggie)" onclick="vote('bora-rheggie','rheggie',this)">Rheggie Win</button>
           </div>
-          <div class="poll-results" id="results-bora-rheggie">
+          <div id="results-bora-rheggie">
             <div class="result-row">
               <span class="result-label" style="color:var(--bora)">Bora</span>
-              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--bora)" id="bar-bora-rheggie-bora"></div></div>
+              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--bora);width:0%" id="bar-bora-rheggie-bora"></div></div>
               <span class="result-pct" id="pct-bora-rheggie-bora">0%</span>
             </div>
             <div class="result-row">
               <span class="result-label" style="color:var(--rheggie)">Rheggie</span>
-              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--rheggie)" id="bar-bora-rheggie-rheggie"></div></div>
+              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--rheggie);width:0%" id="bar-bora-rheggie-rheggie"></div></div>
               <span class="result-pct" id="pct-bora-rheggie-rheggie">0%</span>
             </div>
             <div class="poll-total" id="total-bora-rheggie">0 votes</div>
           </div>
         </div>
 
-        <div class="poll-card" style="--c1:var(--arelite);--c2:var(--rheggie)">
+        <div class="poll-card" style="--c1:var(--arelite);--c2:var(--rheggie)" id="card-arelite-rheggie">
           <div class="poll-time">9:30pm EST</div>
           <div class="poll-matchup">
             <span class="poll-team" style="--tc:var(--arelite)">Arelite</span>
             <span class="poll-vs">VS</span>
             <span class="poll-team right" style="--tc:var(--rheggie)">Rheggie</span>
           </div>
-          <div class="poll-btns">
-            <button class="poll-btn" style="--bc:var(--arelite)" onclick="vote(this,'arelite-rheggie','arelite')">Arelite Win</button>
-            <button class="poll-btn" style="--bc:var(--rheggie)" onclick="vote(this,'arelite-rheggie','rheggie')">Rheggie Win</button>
+          <div class="poll-btns" id="btns-arelite-rheggie">
+            <button class="poll-btn" style="--bc:var(--arelite)" onclick="vote('arelite-rheggie','arelite',this)">Arelite Win</button>
+            <button class="poll-btn" style="--bc:var(--rheggie)" onclick="vote('arelite-rheggie','rheggie',this)">Rheggie Win</button>
           </div>
-          <div class="poll-results" id="results-arelite-rheggie">
+          <div id="results-arelite-rheggie">
             <div class="result-row">
               <span class="result-label" style="color:var(--arelite)">Arelite</span>
-              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--arelite)" id="bar-arelite-rheggie-arelite"></div></div>
+              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--arelite);width:0%" id="bar-arelite-rheggie-arelite"></div></div>
               <span class="result-pct" id="pct-arelite-rheggie-arelite">0%</span>
             </div>
             <div class="result-row">
               <span class="result-label" style="color:var(--rheggie)">Rheggie</span>
-              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--rheggie)" id="bar-arelite-rheggie-rheggie"></div></div>
+              <div class="result-bar-wrap"><div class="result-bar" style="background:var(--rheggie);width:0%" id="bar-arelite-rheggie-rheggie"></div></div>
               <span class="result-pct" id="pct-arelite-rheggie-rheggie">0%</span>
             </div>
             <div class="poll-total" id="total-arelite-rheggie">0 votes</div>
@@ -418,41 +394,46 @@ function drawStars(){ctx.clearRect(0,0,canvas.width,canvas.height);for(const s o
 window.addEventListener('resize',()=>{resize();initStars();});
 resize();initStars();drawStars();
 
-// ── POLL LOGIC ──
-// votes stored in memory (resets on refresh — for persistence you'd need a backend)
-const votes={
-  'arelite-bora':{arelite:0,bora:0},
-  'rheggie-wicked':{rheggie:0,wicked:0},
-  'arelite-wicked':{arelite:0,wicked:0},
-  'bora-wicked':{bora:0,wicked:0},
-  'bora-rheggie':{bora:0,rheggie:0},
-  'arelite-rheggie':{arelite:0,rheggie:0},
+// ── FIREBASE ──
+const firebaseConfig={
+  apiKey:"AIzaSyBFoZE4Oem9WVb3iF1YStRvIQX67vmve6A",
+  authDomain:"tnltourney.firebaseapp.com",
+  databaseURL:"https://tnltourney-default-rtdb.firebaseio.com",
+  projectId:"tnltourney",
+  storageBucket:"tnltourney.firebasestorage.app",
+  messagingSenderId:"218077176790",
+  appId:"1:218077176790:web:4c875af2c39a0050903a77"
 };
+firebase.initializeApp(firebaseConfig);
+const db=firebase.database();
 
-const voted={};
+// ── POLL IDS ──
+const MATCHES=[
+  {id:'arelite-bora', teams:['arelite','bora']},
+  {id:'rheggie-wicked', teams:['rheggie','wicked']},
+  {id:'arelite-wicked', teams:['arelite','wicked']},
+  {id:'bora-wicked', teams:['bora','wicked']},
+  {id:'bora-rheggie', teams:['bora','rheggie']},
+  {id:'arelite-rheggie', teams:['arelite','rheggie']},
+];
 
-// Load from localStorage
-const STORAGE_KEY='tnl-s1-poll-votes';
-const VOTED_KEY='tnl-s1-poll-voted';
-try{
-  const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
-  Object.assign(votes,saved);
-  const savedVoted=JSON.parse(localStorage.getItem(VOTED_KEY)||'{}');
-  Object.assign(voted,savedVoted);
-}catch(e){}
+// ── VOTED STATE (localStorage per browser) ──
+const VOTED_KEY='tnl-s1-voted-v2';
+let voted={};
+try{voted=JSON.parse(localStorage.getItem(VOTED_KEY)||'{}');}catch(e){}
 
-function saveVotes(){
-  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(votes));localStorage.setItem(VOTED_KEY,JSON.stringify(voted));}catch(e){}
-}
+function saveVoted(){try{localStorage.setItem(VOTED_KEY,JSON.stringify(voted));}catch(e){}}
 
-function updateResults(matchId){
-  const matchVotes=votes[matchId];
-  const teams=Object.keys(matchVotes);
-  const total=teams.reduce((s,t)=>s+matchVotes[t],0);
-  teams.forEach(team=>{
-    const pct=total>0?Math.round(matchVotes[team]/total*100):0;
-    const bar=document.getElementById(`bar-${matchId}-${team}`);
-    const pctEl=document.getElementById(`pct-${matchId}-${team}`);
+// ── UPDATE UI FROM DATA ──
+function updateResults(matchId, data){
+  const teams=MATCHES.find(m=>m.id===matchId)?.teams||[];
+  const totals={};
+  let total=0;
+  teams.forEach(t=>{totals[t]=(data&&data[t])||0;total+=totals[t];});
+  teams.forEach(t=>{
+    const pct=total>0?Math.round(totals[t]/total*100):0;
+    const bar=document.getElementById(`bar-${matchId}-${t}`);
+    const pctEl=document.getElementById(`pct-${matchId}-${t}`);
     if(bar)bar.style.width=pct+'%';
     if(pctEl)pctEl.textContent=pct+'%';
   });
@@ -460,38 +441,36 @@ function updateResults(matchId){
   if(totalEl)totalEl.textContent=`${total} vote${total!==1?'s':''}`;
 }
 
-function vote(btn,matchId,team){
-  if(voted[matchId])return;
-  voted[matchId]=team;
-  votes[matchId][team]++;
-  saveVotes();
-
-  // Disable all buttons for this match
-  const card=btn.closest('.poll-card');
-  card.querySelectorAll('.poll-btn').forEach(b=>{
-    b.classList.remove('voted');
-    if(b.getAttribute('onclick').includes(`,'${team}'`))b.classList.add('voted');
-    b.onclick=null;b.style.cursor='default';
+// ── DISABLE BUTTONS FOR VOTED MATCH ──
+function disableButtons(matchId, votedTeam){
+  const btns=document.querySelectorAll(`#btns-${matchId} .poll-btn`);
+  btns.forEach(btn=>{
+    btn.disabled=true;
+    // Check if this button is for the voted team
+    if(btn.getAttribute('onclick').includes(`,'${votedTeam}'`)){
+      btn.classList.add('voted');
+    }
   });
-
-  // Show results
-  const results=document.getElementById(`results-${matchId}`);
-  if(results)results.classList.add('show');
-  updateResults(matchId);
 }
 
-// On load — show results for already-voted matches and restore state
-Object.keys(voted).forEach(matchId=>{
-  const results=document.getElementById(`results-${matchId}`);
-  if(results)results.classList.add('show');
-  updateResults(matchId);
-  // Disable buttons
-  const card=results?.closest('.poll-card');
-  if(card){
-    card.querySelectorAll('.poll-btn').forEach(b=>{
-      if(b.getAttribute('onclick')?.includes(`,'${voted[matchId]}'`))b.classList.add('voted');
-      b.onclick=null;b.style.cursor='default';
-    });
+// ── VOTE ──
+function vote(matchId, team, btn){
+  if(voted[matchId])return;
+  voted[matchId]=team;
+  saveVoted();
+  disableButtons(matchId, team);
+  // Increment in Firebase using transaction
+  db.ref(`polls/${matchId}/${team}`).transaction(current=>(current||0)+1);
+}
+
+// ── INIT — listen to all polls in real time ──
+MATCHES.forEach(match=>{
+  db.ref(`polls/${match.id}`).on('value', snap=>{
+    updateResults(match.id, snap.val());
+  });
+  // Restore voted state
+  if(voted[match.id]){
+    disableButtons(match.id, voted[match.id]);
   }
 });
 
