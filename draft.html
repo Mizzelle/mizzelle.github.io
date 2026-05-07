@@ -674,6 +674,7 @@ const PL=[
   {id:'cappuccino',n:'Cappuccino',role:'DPS',cls:'Enigma',alts:'',notes:'',w:[],x:[]},
   {id:'barcode',n:'Barcode',role:'Tank',cls:'Crusader',alts:'',notes:'',w:[],x:[]},
 ];
+const WORKER_URL='https://green-mud-aca8.mizzelle.workers.dev';
 const FIREBASE_SECRET='tnl-s1-2025-secure';
 
 let pollPaused=false;
@@ -743,35 +744,43 @@ function pushState(){
     secret:FIREBASE_SECRET,
     ts:Date.now()
   };
-  db.ref('draft').set(payload).catch(e=>{
-    setSyncBar('⚠ Write blocked','var(--red)');
-  });
+  fetch(`${WORKER_URL}/draft`,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(payload)
+  }).catch(e=>setSyncBar('⚠ Write failed','var(--red)'));
 }
 
+let pollInterval=null;
+
 function initFirebase(){
-  db.ref('draft').on('value',snap=>{
+  async function poll(){
     if(pollPaused)return;
-    const data=snap.val();
-    setSyncBar('✓ Live synced','var(--teal)','.68rem','400');
-    if(!data){pushState();return;}
-    DS.pickIdx=data.pickIdx||0;
-    DS.turnIdx=data.turnIdx||0;
-    DS.paused=data.paused||false;
-    DS.slots=slotsFromFirebase(data.slots,prePlaceCaptains(buildSlots()));
-    DS.feed=data.feed||[];
-    DS.timerStart=data.timerStart||null;
-    DS.timerRunning=data.timerRunning||false;
-    syncTimer();
-    document.getElementById('pbar').classList.toggle('on',DS.paused);
-    updateTurnDisplay();
-    buildPlist();
-    buildRboard();
-    buildFeed();
-    if(localSel)renderDet();
-  });
-  db.ref('.info/connected').on('value',snap=>{
-    if(!snap.val())setSyncBar('⚠ Disconnected...','var(--orange)');
-  });
+    try{
+      const res=await fetch(`${WORKER_URL}/draft`);
+      const data=await res.json();
+      setSyncBar('✓ Live synced','var(--teal)','.68rem','400');
+      if(!data){pushState();return;}
+      DS.pickIdx=data.pickIdx||0;
+      DS.turnIdx=data.turnIdx||0;
+      DS.paused=data.paused||false;
+      DS.slots=slotsFromFirebase(data.slots,prePlaceCaptains(buildSlots()));
+      DS.feed=data.feed||[];
+      DS.timerStart=data.timerStart||null;
+      DS.timerRunning=data.timerRunning||false;
+      syncTimer();
+      document.getElementById('pbar').classList.toggle('on',DS.paused);
+      updateTurnDisplay();
+      buildPlist();
+      buildRboard();
+      buildFeed();
+      if(localSel)renderDet();
+    }catch(e){
+      setSyncBar('⚠ Disconnected...','var(--orange)');
+    }
+  }
+  poll();
+  pollInterval=setInterval(poll,2000);
 }
 
 function setSyncBar(txt,color,size,weight){
