@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>T&L S1 — Community Predictions</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -309,7 +311,18 @@ footer a{color:var(--teal);text-decoration:none;}
 </div>
 
 <script>
-const WORKER_URL='https://green-mud-aca8.mizzelle.workers.dev';
+// ── FIREBASE CONFIG ──
+const firebaseConfig={
+  apiKey:'AIzaSyBFoZE4Oem9WVb3iF1YStRvIQX67vmve6A',
+  authDomain:'tnltourney.firebaseapp.com',
+  databaseURL:'https://tnltourney-default-rtdb.firebaseio.com',
+  projectId:'tnltourney',
+  storageBucket:'tnltourney.firebasestorage.app',
+  messagingSenderId:'218077176790',
+  appId:'1:218077176790:web:4c875af2c39a0050903a77'
+};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.database();
 
 const MATCHES=[
   {id:'arelite-bora',teams:['arelite','bora']},
@@ -351,30 +364,24 @@ function disableButtons(matchId,votedTeam){
   });
 }
 
-async function handleVote(matchId,team,btn){
+function handleVote(matchId,team,btn){
   if(voted[matchId])return;
   voted[matchId]=team;
   saveVoted();
   disableButtons(matchId,team);
-  try{
-    await fetch(WORKER_URL+'/polls/vote',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({matchId,team})
-    });
-  }catch(e){console.error('Vote failed:',e);}
-  loadPolls();
+  // Increment in Firebase using transaction
+  db.ref('polls/'+matchId+'/'+team).transaction(current=>(current||0)+1);
 }
 
-async function loadPolls(){
-  try{
-    const res=await fetch(WORKER_URL+'/polls');
-    const data=await res.json();
-    MATCHES.forEach(m=>updateResults(m.id,data&&data[m.id]));
-  }catch(e){console.error('Poll load failed:',e);}
-}
+// Listen to all polls in real time
+MATCHES.forEach(m=>{
+  db.ref('polls/'+m.id).on('value',snap=>{
+    updateResults(m.id,snap.val());
+  });
+  if(voted[m.id])disableButtons(m.id,voted[m.id]);
+});
 
-// Starfield
+// ── STARFIELD ──
 const canvas=document.getElementById('stars-canvas');
 const ctx=canvas.getContext('2d');
 let stars=[];
@@ -384,14 +391,9 @@ function drawStars(){ctx.clearRect(0,0,canvas.width,canvas.height);for(const s o
 window.addEventListener('resize',()=>{resize();initStars();});
 resize();initStars();drawStars();
 
-// Stat bar animation
+// ── STAT BAR ANIMATION ──
 const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.stat-bar').forEach(bar=>{const w=bar.style.width;bar.style.width='0';setTimeout(()=>{bar.style.width=w;},100);});}});},{threshold:0.2});
 document.querySelectorAll('.stat-card').forEach(el=>observer.observe(el));
-
-// Init polls
-MATCHES.forEach(m=>{if(voted[m.id])disableButtons(m.id,voted[m.id]);});
-loadPolls();
-setInterval(loadPolls,10000);
 </script>
 </body>
 </html>
