@@ -20,9 +20,10 @@ body{background:var(--void);color:var(--text);font-family:'Raleway',sans-serif;f
 body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(1px 1px at 10% 15%,rgba(255,255,255,0.7) 0%,transparent 100%),radial-gradient(1px 1px at 25% 40%,rgba(255,255,255,0.5) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 40% 8%,rgba(255,255,255,0.8) 0%,transparent 100%),radial-gradient(1px 1px at 55% 30%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(1px 1px at 70% 55%,rgba(255,255,255,0.6) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 80% 20%,rgba(255,255,255,0.7) 0%,transparent 100%),radial-gradient(1px 1px at 90% 70%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(1px 1px at 15% 75%,rgba(255,255,255,0.5) 0%,transparent 100%),radial-gradient(1px 1px at 35% 60%,rgba(255,255,255,0.6) 0%,transparent 100%),radial-gradient(1px 1px at 60% 85%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 75% 10%,rgba(180,160,255,0.7) 0%,transparent 100%),radial-gradient(1px 1px at 92% 45%,rgba(255,255,255,0.5) 0%,transparent 100%),radial-gradient(1px 1px at 5% 50%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(1px 1px at 48% 48%,rgba(180,160,255,0.6) 0%,transparent 100%),radial-gradient(1px 1px at 85% 88%,rgba(255,255,255,0.5) 0%,transparent 100%);pointer-events:none;z-index:0}
 nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.9rem 2.5rem;background:rgba(4,5,15,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
 .nav-logo{font-family:'Cinzel Decorative',serif;font-size:0.85rem;color:var(--purple-light);letter-spacing:0.15em;text-decoration:none}
-.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
 .nav-links a{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;transition:color 0.2s}
 .nav-links a:hover{color:var(--teal)}
+.nav-links a.highlight{color:var(--teal)}
 .nav-cta-closed{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.5rem 1.25rem;background:rgba(120,130,160,0.15);color:var(--text-muted);border:1px solid rgba(120,130,160,0.3);cursor:default}
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 2rem 4rem;overflow:hidden;z-index:1}
 .hero-bg{position:absolute;inset:0;background:url('https://images.ctfassets.net/z7aj1lm9rbu3/44aSRg5DMP4CILz0T4E7Nc/c54c15f6bb5418f6e42bcede9052fbf7/SoliseumsAwakening-hero.jpg') center/cover no-repeat;filter:brightness(0.18) saturate(0.6) hue-rotate(200deg)}
@@ -75,12 +76,23 @@ section{position:relative;padding:5rem 2rem;z-index:1}
 .schedule-list{display:flex;flex-direction:column;gap:0.75rem}
 .schedule-item{display:flex;align-items:center;gap:1.25rem;background:var(--panel-light);border:1px solid var(--border);padding:1rem 1.5rem;transition:border-color 0.2s}
 .schedule-item:hover{border-color:rgba(108,63,160,0.5)}
+.schedule-item.live{border-color:rgba(45,212,191,0.3);background:rgba(45,212,191,0.04)}
 .schedule-date{font-family:'Cinzel',serif;font-size:0.72rem;font-weight:700;color:var(--purple-light);min-width:140px}
 .schedule-event{font-size:0.86rem;color:var(--text);flex:1}
 .schedule-time{font-family:'Cinzel',serif;font-size:0.65rem;color:var(--text-muted);letter-spacing:0.1em;white-space:nowrap}
 .s-badge{display:inline-block;padding:0.12rem 0.55rem;font-size:0.55rem;font-family:'Cinzel',serif;letter-spacing:0.15em;text-transform:uppercase;border:1px solid;margin-left:0.6rem;vertical-align:middle}
 .b-closed{color:#f87171;border-color:rgba(248,113,113,0.4);background:rgba(248,113,113,0.07)}
-.b-next{color:var(--purple-light);border-color:rgba(176,127,224,0.4);background:rgba(176,127,224,0.07)}
+.b-complete{color:var(--text-muted);border-color:rgba(120,130,160,0.3);background:rgba(120,130,160,0.07)}
+.b-live{color:var(--teal);border-color:rgba(45,212,191,0.4);background:rgba(45,212,191,0.07)}
+.schedule-group-label{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin:1.25rem 0 0.5rem;padding-left:0.25rem}
+
+/* QUICK LINKS */
+.quick-links{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+.quick-link{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;padding:0.7rem 1.5rem;border:1px solid;text-decoration:none;transition:all 0.3s;display:inline-flex;align-items:center;gap:0.5rem}
+.quick-link-teal{border-color:var(--border-teal);color:var(--teal);background:rgba(45,212,191,0.05)}
+.quick-link-teal:hover{background:rgba(45,212,191,0.1);box-shadow:0 0 20px var(--teal-glow)}
+.quick-link-purple{border-color:var(--border);color:var(--purple-light);background:rgba(108,63,160,0.05)}
+.quick-link-purple:hover{background:rgba(108,63,160,0.1);box-shadow:0 0 20px rgba(108,63,160,0.2)}
 
 /* WATCH LIVE */
 .watch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;align-items:start}
@@ -100,7 +112,6 @@ section{position:relative;padding:5rem 2rem;z-index:1}
 .stream-link{display:flex;align-items:center;gap:0.4rem;margin-top:0.75rem;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--twitch)}
 .stream-link svg{width:13px;height:13px;flex-shrink:0}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-
 .predictions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.25rem}
 .prediction-card{background:var(--panel-light);border:1px solid var(--border);padding:1.5rem;text-align:center;transition:border-color 0.3s,box-shadow 0.3s}
 .prediction-card:hover{border-color:rgba(108,63,160,0.5);box-shadow:0 0 25px rgba(108,63,160,0.15)}
@@ -146,9 +157,10 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
     <li><a href="#watch">Watch</a></li>
     <li><a href="#predictions">Predictions</a></li>
     <li><a href="#rules">Rules</a></li>
-    <li><a href="teams.html">Teams</a></li>
-    <li><a href="predictions.html">Community Predictions</a></li>
     <li><a href="#prizes">Prizes</a></li>
+    <li><a href="teams.html" class="highlight">Teams</a></li>
+    <li><a href="predictions.html" class="highlight">Community Predictions</a></li>
+    <li><a href="results.html" class="highlight">Results</a></li>
   </ul>
   <span class="nav-cta-closed">Sign Up Closed</span>
 </nav>
@@ -163,13 +175,15 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
     <div class="hero-divider"></div>
     <div class="hero-meta-row">
       <span class="hero-pill">4 Teams · 48 Players Each</span>
-      <span class="hero-pill">Draft Stream Apr 30 · 8PM EST</span>
-      <span class="hero-pill">Games Start May 7</span>
+      <span class="hero-pill">Draft Complete · Apr 30</span>
+      <span class="hero-pill">Games Started May 7</span>
       <span class="hero-pill">Mon &amp; Thu · 8:30PM EST</span>
     </div>
     <div class="btn-group">
       <a href="https://discord.gg/etH67YK6" target="_blank" class="btn btn-teal">Join Discord</a>
-      <a href="#format" class="btn btn-outline">How It Works</a>
+      <a href="teams.html" class="btn btn-outline">View Teams</a>
+      <a href="predictions.html" class="btn btn-outline">Community Predictions</a>
+      <a href="results.html" class="btn btn-outline">Match Results</a>
     </div>
   </div>
 </section>
@@ -195,7 +209,11 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
       <div class="captain-card"><p class="captain-role">✦ Captain</p><p class="captain-name">Bora</p><p class="captain-guild">Ma Vontade</p><span class="cocaptain-label">Co-Captain</span><span class="cocaptain-name">Soju</span></div>
       <div class="captain-card"><p class="captain-role">✦ Captain</p><p class="captain-name">Wicked</p><p class="captain-guild">Milk</p><span class="cocaptain-label">Co-Captain</span><span class="cocaptain-name">Rosie</span></div>
     </div>
-    <p style="margin-top:1.5rem;font-size:0.82rem;color:var(--text-muted)">Rosters are assembled through a reverse snake style draft during the live stream on April 30th at 8PM EST.</p>
+    <p style="margin-top:1.5rem;font-size:0.82rem;color:var(--text-muted)">Rosters were assembled through a reverse snake style draft during the live stream on April 30th at 8PM EST.</p>
+    <div class="quick-links">
+      <a href="teams.html" class="quick-link quick-link-teal">✦ View Full Rosters</a>
+      <a href="predictions.html" class="quick-link quick-link-purple">✦ Community Predictions</a>
+    </div>
   </div>
 </section>
 
@@ -222,27 +240,31 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
     <div class="section-divider"></div>
     <div class="schedule-list">
       <div class="schedule-item"><span class="schedule-date">Apr 28 EST</span><span class="schedule-event">Player Sign-Up Window — registrations are now closed <span class="s-badge b-closed">Closed</span></span></div>
-      <div class="schedule-item"><span class="schedule-date">Apr 30 · Thu EST</span><span class="schedule-event">Live Draft Stream — reverse snake draft to build rosters <span class="s-badge b-closed">Complete</span></span><span class="schedule-time">8:00PM EST</span></div>
-      <div class="schedule-item"><span class="schedule-date">May 7 · Thu EST</span><span class="schedule-event">Arelite vs Bora</span><span class="schedule-time">8:30PM EST</span></div>
-      <div class="schedule-item"><span class="schedule-date">May 7 · Thu EST</span><span class="schedule-event">Rheggie vs Wicked</span><span class="schedule-time">9:30PM EST</span></div>
-      <div class="schedule-item"><span class="schedule-date">May 11 · Mon EST</span><span class="schedule-event">Arelite vs Wicked</span><span class="schedule-time">9:30PM EST</span></div>
-      <div class="schedule-item"><span class="schedule-date">May 11 · Mon EST</span><span class="schedule-event">Bora vs Rheggie</span><span class="schedule-time">8:30PM EST</span></div>
-      <div class="schedule-item"><span class="schedule-date">May 14 · Thu EST</span><span class="schedule-event">Arelite vs Rheggie</span><span class="schedule-time">9:30PM EST</span></div>
-      <div class="schedule-item"><span class="schedule-date">May 18 · Mon EST</span><span class="schedule-event">Bora vs Wicked</span><span class="schedule-time">9:30PM EST</span></div>
-      <div class="schedule-item"><span class="schedule-date">~May 21–28 EST</span><span class="schedule-event">Season 1 Finals — standings determine tiebreakers</span><span class="schedule-time">TBA</span></div>
+      <div class="schedule-item"><span class="schedule-date">Apr 30 · Thu EST</span><span class="schedule-event">Live Draft Stream — reverse snake draft to build rosters <span class="s-badge b-complete">Complete</span></span><span class="schedule-time">8:00PM EST</span></div>
+
+      <p class="schedule-group-label">Thursday 7th May</p>
+      <div class="schedule-item"><span class="schedule-date">May 7 · Thu EST</span><span class="schedule-event">Arelite vs Bora <span class="s-badge b-complete">Complete</span></span><span class="schedule-time"><a href="results.html" style="color:var(--teal);font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.1em;text-decoration:none;">View Results →</a></span></div>
+      <div class="schedule-item"><span class="schedule-date">May 7 · Thu EST</span><span class="schedule-event">Rheggie vs Wicked <span class="s-badge b-complete">Complete</span></span><span class="schedule-time"><a href="results.html" style="color:var(--teal);font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.1em;text-decoration:none;">View Results →</a></span></div>
+
+      <p class="schedule-group-label">Monday 11th May</p>
+      <div class="schedule-item"><span class="schedule-date">May 11 · Mon EST</span><span class="schedule-event">Arelite vs Wicked</span><span class="schedule-time">8:30PM EST</span></div>
+      <div class="schedule-item"><span class="schedule-date">May 11 · Mon EST</span><span class="schedule-event">Bora vs Rheggie</span><span class="schedule-time">9:30PM EST</span></div>
+
+      <p class="schedule-group-label">Thursday 14th May</p>
+      <div class="schedule-item"><span class="schedule-date">May 14 · Thu EST</span><span class="schedule-event">Arelite vs Rheggie</span><span class="schedule-time">8:30PM EST</span></div>
+
+      <p class="schedule-group-label">Sunday 18th May</p>
+      <div class="schedule-item"><span class="schedule-date">May 18 · Sun EST</span><span class="schedule-event">Bora vs Wicked</span><span class="schedule-time">TBA</span></div>
     </div>
   </div>
 </section>
 
-<!-- WATCH LIVE -->
 <section id="watch" class="alt-bg">
   <div class="container">
     <span class="section-label">Watch Live</span>
     <h2 class="section-title">Stream <span>Coverage</span></h2>
     <div class="section-divider"></div>
-    <div class="watch-grid" id="watch-grid">
-      <!-- injected by JS -->
-    </div>
+    <div class="watch-grid" id="watch-grid"></div>
   </div>
 </section>
 
@@ -259,6 +281,9 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
       <div class="prediction-card"><svg class="pred-icon" viewBox="0 0 52 52" fill="none"><line x1="26" y1="10" x2="26" y2="46" stroke="#8b55c0" stroke-width="2" stroke-linecap="round"/><path d="M26 10 L40 16 L26 22 Z" fill="#b07fe0" opacity="0.9"/><line x1="6" y1="34" x2="20" y2="34" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round"/><polygon points="20,30 26,34 20,38" fill="#2dd4bf"/><line x1="46" y1="34" x2="32" y2="34" stroke="#f87171" stroke-width="2" stroke-linecap="round"/><polygon points="32,30 26,34 32,38" fill="#f87171"/><circle cx="26" cy="34" r="4" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/></svg><p class="prediction-title">Longest Contested Cap</p><p class="prediction-desc">The longest standoff where both teams fought for the same capture point.</p></div>
       <div class="prediction-card"><svg class="pred-icon" viewBox="0 0 52 52" fill="none"><defs><radialGradient id="skull" cx="45%" cy="35%" r="60%"><stop offset="0%" stop-color="rgba(176,127,224,0.4)"/><stop offset="100%" stop-color="rgba(108,63,160,0.1)"/></radialGradient></defs><path d="M14 29 C14 18, 38 18, 38 29 C38 35, 35 38, 32 39 L32 43 L20 43 L20 39 C17 38, 14 35, 14 29Z" fill="url(#skull)" stroke="#b07fe0" stroke-width="1.5"/><ellipse cx="21" cy="29" rx="4" ry="4.5" fill="rgba(4,5,15,0.8)" stroke="#6c3fa0" stroke-width="0.8"/><ellipse cx="31" cy="29" rx="4" ry="4.5" fill="rgba(4,5,15,0.8)" stroke="#6c3fa0" stroke-width="0.8"/><ellipse cx="21" cy="29" rx="2" ry="2.5" fill="#b07fe0" opacity="0.6"/><ellipse cx="31" cy="29" rx="2" ry="2.5" fill="#b07fe0" opacity="0.6"/><line x1="22" y1="40" x2="22" y2="43" stroke="#b07fe0" stroke-width="1.2"/><line x1="26" y1="40" x2="26" y2="43" stroke="#b07fe0" stroke-width="1.2"/><line x1="30" y1="40" x2="30" y2="43" stroke="#b07fe0" stroke-width="1.2"/><text x="35" y="19" font-size="8" fill="#2dd4bf" font-family="Cinzel,serif" opacity="0.9">K/D</text></svg><p class="prediction-title">Kill / Death Leaders</p><p class="prediction-desc">Individual K/D stats tracked per match and aggregated across the full season.</p></div>
       <div class="prediction-card"><svg class="pred-icon" viewBox="0 0 52 52" fill="none"><defs><linearGradient id="lb1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8cc8f"/><stop offset="100%" stop-color="#c8a96e"/></linearGradient><linearGradient id="lb2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#b07fe0"/><stop offset="100%" stop-color="#6c3fa0"/></linearGradient><linearGradient id="lb3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf"/><stop offset="100%" stop-color="#1a7a6e"/></linearGradient></defs><line x1="6" y1="46" x2="46" y2="46" stroke="#8b55c0" stroke-width="1.5" stroke-linecap="round"/><rect x="20" y="18" width="12" height="28" rx="1" fill="url(#lb1)"/><path d="M21 20 L23 17 L26 19 L29 17 L31 20 Z" fill="#e8cc8f" opacity="0.8"/><text x="24" y="15" font-size="7" fill="#e8cc8f" font-family="Cinzel,serif" font-weight="bold">1</text><rect x="6" y="28" width="12" height="18" rx="1" fill="url(#lb2)"/><text x="10" y="25" font-size="7" fill="#b07fe0" font-family="Cinzel,serif">2</text><rect x="34" y="32" width="12" height="14" rx="1" fill="url(#lb3)"/><text x="38" y="29" font-size="7" fill="#2dd4bf" font-family="Cinzel,serif">3</text></svg><p class="prediction-title">Season Leaderboard</p><p class="prediction-desc">Running standings updated after every match day so you always know where teams stand.</p></div>
+    </div>
+    <div class="quick-links" style="margin-top:2rem">
+      <a href="predictions.html" class="quick-link quick-link-teal">✦ View Community Predictions &amp; Match Polls</a>
     </div>
   </div>
 </section>
@@ -296,10 +321,13 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
   <div class="cta-content">
     <span class="section-label" style="display:block;text-align:center;margin-bottom:0.75rem">Season 1</span>
     <span class="cta-closed-badge">✦ Sign-Ups Closed ✦</span>
-   <h2 class="section-title" style="text-align:center">Games Underway — <span>Season 1</span></h2>
-    <p class="cta-desc">The draft is complete and Season 1 is live! Follow on Discord for match updates, schedules, and all the action.</p>
+    <h2 class="section-title" style="text-align:center">Games Underway — <span>Season 1</span></h2>
+    <p class="cta-desc">The draft is complete and Season 1 is live! Follow on Discord for match updates, schedules, team rosters, and all the action.</p>
     <div class="btn-group">
       <a href="https://discord.gg/etH67YK6" target="_blank" class="btn btn-teal">Join the Discord</a>
+      <a href="teams.html" class="btn btn-outline">View Teams</a>
+      <a href="predictions.html" class="btn btn-outline">Community Predictions</a>
+      <a href="results.html" class="btn btn-outline">Match Results</a>
     </div>
   </div>
 </section>
@@ -310,6 +338,7 @@ footer{border-top:1px solid var(--border);padding:2.25rem 2rem;text-align:center
     <a href="https://discord.gg/etH67YK6" target="_blank">Discord</a>
     <a href="teams.html">Teams</a>
     <a href="predictions.html">Community Predictions</a>
+    <a href="results.html">Results</a>
     <a href="https://www.playthroneandliberty.com/en-us/" target="_blank">Official T&amp;L Site</a>
   </div>
   <p class="footer-text">NA/SA Region · Community Run Event · Not affiliated with NCSoft or Amazon Games</p>
