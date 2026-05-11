@@ -94,6 +94,9 @@ tbody td:nth-child(4){font-weight:600;color:var(--text);}
 
 footer{text-align:center;padding:2rem 1rem;font-size:.65rem;color:var(--text3);letter-spacing:.08em;}
 footer a{color:var(--teal);text-decoration:none;}
+.filter-btn{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .8rem;background:transparent;border:1px solid var(--border);color:var(--text3);cursor:pointer;transition:all .2s;}
+.filter-btn:hover{border-color:var(--fc,var(--purple));color:var(--fc,var(--purple));}
+.filter-btn.active{border-color:var(--fc,var(--teal));color:var(--fc,var(--teal));background:rgba(255,255,255,.04);}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
@@ -165,12 +168,26 @@ footer a{color:var(--teal);text-decoration:none;}
         <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">Delirax</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:96%"></div></div><span class="stat-val">129</span></div>
         <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">AFKy</div><div class="stat-guild">RA山R · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:90%"></div></div><span class="stat-val">121</span></div>
         <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">Earthquake</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:82%"></div></div><span class="stat-val">111</span></div>
-        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">be</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:72%"></div></div><span class="stat-val">97</span></div>
-        <div class="stat-row"><span class="stat-pos">6</span><div class="stat-info"><div class="stat-name">edmun</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:71%"></div></div><span class="stat-val">96</span></div>
-        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">TechnoDroid</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:70%"></div></div><span class="stat-val">94</span></div>
-        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">Justin</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:68%"></div></div><span class="stat-val">92</span></div>
-        <div class="stat-row"><span class="stat-pos">9</span><div class="stat-info"><div class="stat-name">Nathias</div><div class="stat-guild">JAILEDシ · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:66%"></div></div><span class="stat-val">89</span></div>
-        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">YoonJ</div><div class="stat-guild">Boba Tea · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:64%"></div></div><span class="stat-val">87</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">尸ho</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:81%"></div></div><span class="stat-val">109</span></div>
+        <div class="stat-row"><span class="stat-pos">6</span><div class="stat-info"><div class="stat-name">be</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:72%"></div></div><span class="stat-val">97</span></div>
+        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">edmun</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:71%"></div></div><span class="stat-val">96</span></div>
+        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">豆犬</div><div class="stat-guild">Boba Tea · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:70%"></div></div><span class="stat-val">95</span></div>
+        <div class="stat-row"><span class="stat-pos">9</span><div class="stat-info"><div class="stat-name">TechnoDroid</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:70%"></div></div><span class="stat-val">94</span></div>
+        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">Justin</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:68%"></div></div><span class="stat-val">92</span></div>
+      </div>
+
+      <div class="stat-block" style="--accent:var(--teal)">
+        <div class="stat-block-title">🤝 Top Assists</div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">Delirax</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">264</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">Biniツ</div><div class="stat-guild">BackShotz骨 · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:87%"></div></div><span class="stat-val">230</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">AFKy</div><div class="stat-guild">RA山R · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:87%"></div></div><span class="stat-val">230</span></div>
+        <div class="stat-row"><span class="stat-pos b">4</span><div class="stat-info"><div class="stat-name">IIIIIII</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:85%"></div></div><span class="stat-val">224</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">be</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:84%"></div></div><span class="stat-val">222</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">·Flaviz</div><div class="stat-guild">Ma Vontade · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:84%"></div></div><span class="stat-val">222</span></div>
+        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">尸ho</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:82%"></div></div><span class="stat-val">217</span></div>
+        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">Margheritaa</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:82%"></div></div><span class="stat-val">216</span></div>
+        <div class="stat-row"><span class="stat-pos">9</span><div class="stat-info"><div class="stat-name">YoonJ</div><div class="stat-guild">Boba Tea · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:81%"></div></div><span class="stat-val">215</span></div>
+        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">Justin</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:77%"></div></div><span class="stat-val">204</span></div>
       </div>
 
       <div class="stat-block" style="--accent:var(--orange)">
@@ -190,30 +207,56 @@ footer a{color:var(--teal);text-decoration:none;}
       <div class="stat-block" style="--accent:var(--green)">
         <div class="stat-block-title">💚 Top Healing</div>
         <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">xSouless</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">8.6M</span></div>
-        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">apgonzo</div><div class="stat-guild">PUSH · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:80%"></div></div><span class="stat-val">6.9M</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">apgonzo</div><div class="stat-guild">PUSH · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:79%"></div></div><span class="stat-val">6.9M</span></div>
         <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">Jalinss</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:75%"></div></div><span class="stat-val">6.4M</span></div>
-        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">Selumii</div><div class="stat-guild">Unhinged肉 · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:65%"></div></div><span class="stat-val">5.6M</span></div>
-        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">Greeto</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:63%"></div></div><span class="stat-val">5.4M</span></div>
-        <div class="stat-row"><span class="stat-pos">6</span><div class="stat-info"><div class="stat-name">Zyrwolf</div><div class="stat-guild">Bubble blowers · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:61%"></div></div><span class="stat-val">5.3M</span></div>
-        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">msgrayness</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:54%"></div></div><span class="stat-val">4.6M</span></div>
-        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">EgirlWaifu</div><div class="stat-guild">PUSH · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:53%"></div></div><span class="stat-val">4.6M</span></div>
-        <div class="stat-row"><span class="stat-pos">9</span><div class="stat-info"><div class="stat-name">narlynar</div><div class="stat-guild">Undercooked · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:53%"></div></div><span class="stat-val">4.6M</span></div>
-        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">Marruh</div><div class="stat-guild">Ma Vontade · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:53%"></div></div><span class="stat-val">4.6M</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">Rosie·</div><div class="stat-guild">MILK° · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:70%"></div></div><span class="stat-val">6.1M</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">Selumii</div><div class="stat-guild">Unhinged肉 · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:65%"></div></div><span class="stat-val">5.6M</span></div>
+        <div class="stat-row"><span class="stat-pos">6</span><div class="stat-info"><div class="stat-name">Greeto</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:63%"></div></div><span class="stat-val">5.4M</span></div>
+        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">Zyrwolf</div><div class="stat-guild">Bubble blowers · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:61%"></div></div><span class="stat-val">5.3M</span></div>
+        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">msgrayness</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:54%"></div></div><span class="stat-val">4.6M</span></div>
+        <div class="stat-row"><span class="stat-pos">9</span><div class="stat-info"><div class="stat-name">Marruh</div><div class="stat-guild">Ma Vontade · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:53%"></div></div><span class="stat-val">4.6M</span></div>
+        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">Mqmt</div><div class="stat-guild">Undercooked · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:53%"></div></div><span class="stat-val">4.6M</span></div>
       </div>
 
-      <div class="stat-block" style="--accent:var(--teal)">
-        <div class="stat-block-title">🤝 Top Assists</div>
-        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">Delirax</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">264</span></div>
-        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">AFKy</div><div class="stat-guild">RA山R · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:87%"></div></div><span class="stat-val">230</span></div>
-        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">Biniツ</div><div class="stat-guild">BackShotz骨 · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:87%"></div></div><span class="stat-val">230</span></div>
-        <div class="stat-row"><span class="stat-pos b">4</span><div class="stat-info"><div class="stat-name">be</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:84%"></div></div><span class="stat-val">222</span></div>
-        <div class="stat-row"><span class="stat-pos b">4</span><div class="stat-info"><div class="stat-name">·Flaviz</div><div class="stat-guild">Ma Vontade · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:84%"></div></div><span class="stat-val">222</span></div>
-        <div class="stat-row"><span class="stat-pos">6</span><div class="stat-info"><div class="stat-name">Justin</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:77%"></div></div><span class="stat-val">204</span></div>
-        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">TechnoDroid</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:74%"></div></div><span class="stat-val">195</span></div>
-        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">Earthquake</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:73%"></div></div><span class="stat-val">193</span></div>
-        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">Nathias</div><div class="stat-guild">JAILEDシ · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:73%"></div></div><span class="stat-val">193</span></div>
-        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">YoonJ</div><div class="stat-guild">Boba Tea · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:81%"></div></div><span class="stat-val">215</span></div>
+      <div class="stat-block" style="--accent:var(--blue)">
+        <div class="stat-block-title">🛡 Top Damage Taken</div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">Wintrr</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">4.9M</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">nightghost1</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:95%"></div></div><span class="stat-val">4.7M</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">Paella</div><div class="stat-guild">Undercooked · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:94%"></div></div><span class="stat-val">4.6M</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">eeiv</div><div class="stat-guild">JAILEDシ · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:92%"></div></div><span class="stat-val">4.5M</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">be</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:89%"></div></div><span class="stat-val">4.3M</span></div>
+        <div class="stat-row"><span class="stat-pos">6</span><div class="stat-info"><div class="stat-name">Vietnam</div><div class="stat-guild">Unknown · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:82%"></div></div><span class="stat-val">4.0M</span></div>
+        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">Revioli</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:81%"></div></div><span class="stat-val">4.0M</span></div>
+        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">Margheritaa</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:80%"></div></div><span class="stat-val">3.9M</span></div>
+        <div class="stat-row"><span class="stat-pos">9</span><div class="stat-info"><div class="stat-name">RedCamper</div><div class="stat-guild">PUSH · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:80%"></div></div><span class="stat-val">3.9M</span></div>
+        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">豆犬</div><div class="stat-guild">Boba Tea · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:74%"></div></div><span class="stat-val">3.6M</span></div>
       </div>
+    </div>
+
+    <div class="section-title" style="margin-top:2rem;"><span>📋</span> Full Player Stats</div>
+    <div style="margin-bottom:.75rem;display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;">
+      <span style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;">Filter by team:</span>
+      <button onclick="filterTable('all')" class="filter-btn active" id="f-all">All</button>
+      <button onclick="filterTable('Arelite')" class="filter-btn" id="f-Arelite" style="--fc:var(--arelite)">Arelite</button>
+      <button onclick="filterTable('Bora')" class="filter-btn" id="f-Bora" style="--fc:var(--bora)">Bora</button>
+      <button onclick="filterTable('Rheggie')" class="filter-btn" id="f-Rheggie" style="--fc:var(--rheggie)">Rheggie</button>
+      <button onclick="filterTable('Wicked')" class="filter-btn" id="f-Wicked" style="--fc:var(--wicked)">Wicked</button>
+    </div>
+    <div class="table-wrap" style="max-height:520px;overflow-y:auto;">
+      <table id="full-stats-table">
+        <thead><tr>
+          <th onclick="sortTable(0)" style="cursor:pointer">Player ↕</th>
+          <th onclick="sortTable(1)" style="cursor:pointer">Guild ↕</th>
+          <th onclick="sortTable(2)" style="cursor:pointer">Team ↕</th>
+          <th onclick="sortTable(3)" style="cursor:pointer;text-align:right">GP ↕</th>
+          <th onclick="sortTable(4)" style="cursor:pointer;text-align:right">Kills ↕</th>
+          <th onclick="sortTable(5)" style="cursor:pointer;text-align:right">Assists ↕</th>
+          <th onclick="sortTable(6)" style="cursor:pointer;text-align:right">Damage ↕</th>
+          <th onclick="sortTable(7)" style="cursor:pointer;text-align:right">Taken ↕</th>
+          <th onclick="sortTable(8)" style="cursor:pointer;text-align:right">Healing ↕</th>
+        </tr></thead>
+        <tbody id="full-stats-body"></tbody>
+      </table>
     </div>
   </div>
 
@@ -490,7 +533,166 @@ buildTable('rw1-red',rw1,'Red');
 buildTable('rw2-yellow',rw2,'Yellow');
 buildTable('rw2-red',rw2,'Red');
 
-// Starfield
+// Full combined roster
+const fullRoster = [
+  ["IIIIIII","JAILEDシ","Rheggie",2,135,224,10144485,1288002,17952],
+  ["Delirax","Unhinged肉","Arelite",2,129,264,9196657,1462419,29141],
+  ["Earthquake","Undercooked","Wicked",2,111,193,8797812,2062872,109484],
+  ["xSouless","JAILEDシ","Rheggie",2,1,114,126435,1786151,8635283],
+  ["Biniツ","BackShotz骨","Wicked",2,85,230,8718444,2379464,5652],
+  ["Nathias","JAILEDシ","Wicked",2,89,193,8200110,3291895,64267],
+  ["YoonJ","Boba Tea","Bora",2,87,215,8210788,3185930,15699],
+  ["edmun","ICE","Bora",2,96,142,8001902,2109198,0],
+  ["be","ICE","Bora",2,97,222,7785710,4338447,83887],
+  ["尸ho","Undercooked","Wicked",2,109,217,7549250,1870829,151868],
+  ["Katie","Ma Vontade","Wicked",2,75,168,7637716,2314179,27274],
+  ["AFKy","RAШR","Arelite",2,121,230,7564978,1090298,30009],
+  ["こigこagRule","Unknown","Arelite",2,66,131,7000052,3354894,54558],
+  ["Justin","JAILEDシ","Rheggie",2,92,204,6862279,1713864,184323],
+  ["apgonzo","PUSH","Arelite",2,1,109,137333,1329615,6858703],
+  ["Margheritaa","Undercooked","Wicked",2,63,216,6787765,3922807,196903],
+  ["Strygwyr°","MILK°","Wicked",2,76,154,6745973,1259661,96630],
+  ["Jharol","Ma Vontade","Bora",2,75,139,6648882,797589,31097],
+  ["inoki","MILK°","Wicked",2,82,116,6605598,2657006,11296],
+  ["Jalinss","JAILEDシ","Rheggie",2,0,108,82695,1610660,6447806],
+  ["皇狼I","PUSH","Arelite",2,88,112,6346640,2386002,0],
+  ["豆犬","Boba Tea","Bora",2,95,183,6278244,3628265,16194],
+  ["Migatte死","MILK°","Wicked",2,65,118,6256452,1987242,17996],
+  ["Rosie·","MILK°","Wicked",2,0,13,177926,1792785,6078319],
+  ["TechnoDroid","JAILEDシ","Rheggie",2,94,195,6080436,1784379,0],
+  ["McLovinッ","JAILEDシ","Rheggie",2,59,146,5714818,3584382,12582],
+  ["Selumii","Unhinged肉","Wicked",2,1,98,121259,1236023,5593595],
+  ["nightghost1","JAILEDシ","Rheggie",2,74,189,5669697,4662124,43058],
+  ["Ossenagon","MILK°","Arelite",2,68,127,5630410,2437183,70006],
+  ["Greeto","JAILEDシ","Rheggie",2,0,127,110585,2067010,5445927],
+  ["CosmicBrisket","ICE","Arelite",2,75,149,5519650,1641830,20600],
+  ["Artemis°","JAILEDシ","Bora",2,50,131,5511462,3395073,10434],
+  ["Mudin","Ma Vontade","Bora",2,54,157,5428120,1035836,41888],
+  ["Zyrwolf","Bubble blowers","Rheggie",2,1,120,136419,2433889,5259013],
+  ["of","BackShotz骨","Wicked",2,71,145,5116105,2700455,166992],
+  ["·Flaviz","Ma Vontade","Bora",2,54,222,5231495,1811886,13893],
+  ["メsaint","SOUP","Wicked",2,58,108,4916870,1027516,50565],
+  ["Revioli","Undercooked","Wicked",2,66,186,4716574,3976344,126302],
+  ["narlynar","Undercooked","Arelite",2,1,163,258795,2003874,4553548],
+  ["msgrayness","ICE","Bora",2,2,131,112082,604131,4625129],
+  ["Marruh","Ma Vontade","Arelite",2,0,113,109932,1962363,4606684],
+  ["Mqmt","Undercooked","Rheggie",2,0,111,109655,1918665,4589218],
+  ["EgirlWaifu","PUSH","Rheggie",2,2,171,118234,766869,4579443],
+  ["Rhythmics","Unknown","Bora",2,0,15,179140,2132079,4504864],
+  ["stepsis芝","JAILEDシ","Bora",2,1,156,120202,609441,4424129],
+  ["eeiv","JAILEDシ","Arelite",2,53,129,4342690,4518949,52762],
+  ["Amu","MILK°","Wicked",2,64,128,4373257,1523761,15515],
+  ["Krul","Ma Vontade","Bora",2,1,81,191794,815650,4160665],
+  ["Jehoo","Ma Vontade","Bora",2,55,116,4116408,3543115,157411],
+  ["bbbommobbb","MILK°","Wicked",2,0,101,85941,985470,4151550],
+  ["ShiFood","Undercooked","Arelite",2,0,27,274832,1313015,3908324],
+  ["ShawarmaShuffle","PUSH","Bora",2,78,139,4166676,1893492,8922],
+  ["Paella","Undercooked","Arelite",2,48,153,4121750,4594126,37104],
+  ["ChunkyBruhdaツ","JAILEDシ","Wicked",2,75,119,3990072,2855604,61888],
+  ["Eddston","JAILEDシ","Rheggie",2,1,171,116093,534910,3930369],
+  ["BadBeatBrad","MILK°","Wicked",2,1,108,398847,1121929,3645844],
+  ["Udon","Undercooked","Wicked",2,2,15,137420,2229031,3835770],
+  ["尺","MILK°","Wicked",2,32,129,3856020,2556582,96298],
+  ["Hitzッ","Ma Vontade","Arelite",2,33,127,3888897,2503837,36526],
+  ["Keppy","Undercooked","Arelite",2,0,39,360422,1327863,3559809],
+  ["Ellie·","BackShotz骨","Wicked",2,0,48,246521,975569,3563105],
+  ["stepbro岁","JAILEDシ","Bora",2,65,113,3752050,3003265,56053],
+  ["Sharkjitsu","ICE","Bora",2,0,111,145060,1518986,3647992],
+  ["SmallButWhole","Disregarded","Wicked",2,72,90,3732366,2517259,0],
+  ["Wintrr","Undercooked","Wicked",2,46,120,3519885,4889405,165557],
+  ["Panda","MILK°","Wicked",2,65,93,3641042,1607253,30282],
+  ["TazzZ悪","MILK°","Arelite",2,57,106,3647802,2238376,10455],
+  ["Vietnam","Unknown","Arelite",2,63,115,3597236,3996248,57404],
+  ["Yagaッ","Ma Vontade","Bora",2,32,108,3618969,3053296,14789],
+  ["Omen","Wild","Arelite",2,1,97,87867,793343,3521475],
+  ["Raye","Undercooked","Wicked",2,0,113,182209,1256179,3390040],
+  ["xTheBurntPeanut","JAILEDシ","Rheggie",2,60,145,3456187,2898482,44692],
+  ["·enrique·","JAILEDシ","Rheggie",2,1,28,193675,1070547,3305499],
+  ["mars","JAILEDシ","Rheggie",2,63,79,3411300,3356295,79865],
+  ["Elrokiii","Unhinged肉","Arelite",2,1,139,202301,1101165,3242649],
+  ["Cookies","Undercooked","Wicked",2,62,96,3410046,1261090,0],
+  ["RayPeat","PUSH","Rheggie",2,52,102,3343873,3568944,65685],
+  ["Dioxin","JAILEDシ","Rheggie",2,0,104,105296,1204747,3303711],
+  ["Van","Disregarded","Rheggie",2,0,165,37967,753799,3344684],
+  ["ムlexa","Unhinged肉","Arelite",2,0,133,163579,1321301,3052952],
+  ["Elliツ","ICE","Bora",2,0,141,84123,728767,3092104],
+  ["fruitlooops","ICE","Bora",1,39,93,3103610,766753,47805],
+  ["FairAngel尹","JAILEDシ","Rheggie",2,49,123,3071002,2298910,66332],
+  ["SprayMachine","ICE","Bora",2,47,98,3042960,1819351,0],
+  ["FaytCrus","Unhinged肉","Arelite",2,37,111,3007237,1530452,32387],
+  ["Fab","JAILEDシ","Arelite",2,0,84,36795,1174362,2961807],
+  ["Mostley","Unknown","Arelite",2,0,103,162381,2040874,2828785],
+  ["amaterasu","Unknown","Wicked",2,51,116,2833831,2376483,79232],
+  ["요마마","Boba Tea","Bora",2,0,128,2623,1000907,2841772],
+  ["·ParaLLax·","Ma Vontade","Bora",2,1,80,252839,2067551,2573168],
+  ["Xytosぺ","Unhinged肉","Arelite",2,52,65,2771731,2174360,0],
+  ["SrDrake","PUSH","Arelite",2,1,91,137413,1291046,2543814],
+  ["Raitou","Bubble blowers","Rheggie",2,62,81,2658090,1500888,0],
+  ["Saint","Goths","Bora",2,0,98,24187,690674,2616711],
+  ["Feelix","PUSH","Wicked",2,19,90,2544843,2385960,45547],
+  ["Coot","JAILEDシ","Rheggie",1,27,87,2378219,1665782,113049],
+  ["Riemann","Undercooked","Wicked",2,1,154,43345,878061,2384499],
+  ["Justin","Ma Vontade","Bora",2,0,88,66717,1363568,2333864],
+  ["Dusk风暴","PUSH","Arelite",2,0,86,39754,1206886,2311910],
+  ["Dravメ","Unhinged肉","Arelite",2,42,89,2290376,1217116,0],
+  ["Fae","Undercooked","Wicked",2,0,116,44704,1166832,2137781],
+  ["Noodle","JAILEDシ","Rheggie",2,0,106,26976,1133922,2080557],
+  ["sunny㕯","JAILEDシ","Bora",2,45,70,2009548,3197807,87077],
+  ["Natejas","Ma Vontade","Wicked",2,1,76,246086,1628407,1801317],
+  ["Franks","PUSH","Arelite",2,0,116,130061,3583373,1916226],
+  ["bloomyㄘ","JAILEDシ","Rheggie",2,0,164,11568,631658,2029450],
+  ["ditto","Pokopia","Arelite",2,0,147,37707,1291148,1958862],
+  ["Spydur芝","JAILEDシ","Rheggie",2,0,78,6157,1486828,1926179],
+  ["Tangueray","MILK°","Wicked",2,0,109,7355,1369710,1915732],
+  ["Tagato","PUSH","Arelite",2,0,69,21824,1242465,1844883],
+  ["amidalarose","MILK°","Wicked",2,1,6,28700,1396021,1829821],
+  ["Akaru华","Disregarded","Arelite",2,2,81,258347,1286150,1541935],
+];
+
+const teamColors = {Arelite:'var(--arelite)',Bora:'var(--bora)',Rheggie:'var(--rheggie)',Wicked:'var(--wicked)'};
+let sortCol = 4, sortDir = -1, activeFilter = 'all';
+
+function fmtN(n){
+  if(n>=1000000)return(n/1000000).toFixed(2)+'M';
+  if(n>=1000)return(n/1000).toFixed(0)+'K';
+  return n.toString();
+}
+
+function renderFullTable(){
+  let data = activeFilter==='all' ? [...fullRoster] : fullRoster.filter(r=>r[2]===activeFilter);
+  data.sort((a,b)=>{
+    const av=a[sortCol], bv=b[sortCol];
+    if(typeof av==='string') return sortDir*(av.localeCompare(bv));
+    return sortDir*(bv-av);
+  });
+  const tbody = document.getElementById('full-stats-body');
+  const numCols = [3,4,5,6,7,8];
+  tbody.innerHTML = data.map((r,i)=>`<tr>
+    <td style="font-weight:600;color:var(--text)">${r[0]}</td>
+    <td style="color:var(--text3);font-size:.65rem">${r[1]}</td>
+    <td><span style="font-family:'Cinzel',serif;font-size:.6rem;color:${teamColors[r[2]]||'var(--text3)'}">${r[2]}</span></td>
+    <td>${r[3]}</td>
+    <td style="color:var(--red);font-weight:600">${r[4]}</td>
+    <td style="color:var(--teal)">${r[5]}</td>
+    <td style="color:var(--orange)">${fmtN(r[6])}</td>
+    <td style="color:var(--blue)">${fmtN(r[7])}</td>
+    <td style="color:var(--green)">${fmtN(r[8])}</td>
+  </tr>`).join('');
+}
+
+function sortTable(col){
+  if(sortCol===col) sortDir*=-1; else {sortCol=col;sortDir=-1;}
+  renderFullTable();
+}
+
+function filterTable(team){
+  activeFilter=team;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('f-'+team).classList.add('active');
+  renderFullTable();
+}
+
+renderFullTable();
 const canvas=document.getElementById('stars-canvas');
 const ctx=canvas.getContext('2d');
 let stars=[];
