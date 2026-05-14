@@ -116,11 +116,15 @@ footer a{color:var(--teal);text-decoration:none;}
     <button class="match-tab" onclick="showPanel('ba2',this)">Bora vs Arelite · G2</button>
     <button class="match-tab" onclick="showPanel('rw1',this)">Rheggie vs Wicked · G1</button>
     <button class="match-tab" onclick="showPanel('rw2',this)">Rheggie vs Wicked · G2</button>
+    <button class="match-tab" onclick="showPanel('br1',this)">Bora vs Rheggie · G1</button>
+    <button class="match-tab" onclick="showPanel('br2',this)">Bora vs Rheggie · G2</button>
+    <button class="match-tab" onclick="showPanel('aw1',this)">Arelite vs Wicked · G1</button>
+    <button class="match-tab" onclick="showPanel('aw2',this)">Arelite vs Wicked · G2</button>
   </div>
 
   <!-- ══ OVERALL ══ -->
   <div class="match-panel active" id="panel-overall">
-    <div class="section-title"><span>🏆</span> Series Results — Week 1</div>
+    <div class="section-title"><span>🏆</span> Series Results</div>
     <div class="series-grid">
       <div class="series-card" style="--c1:var(--bora);--c2:var(--arelite)">
         <div style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem;">May 7th · Adentus + Talus</div>
@@ -158,78 +162,114 @@ footer a{color:var(--teal);text-decoration:none;}
         </div>
         <div style="font-size:.65rem;color:var(--gold);margin-top:.4rem;">Draw — Series continues</div>
       </div>
+      <div class="series-card" style="--c1:var(--bora);--c2:var(--rheggie)">
+        <div style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem;">May 11th · Game 1 + Game 2</div>
+        <div style="font-family:'Cinzel Decorative',cursive;font-size:1rem;margin-bottom:.7rem;">Bora vs Rheggie</div>
+        <div style="display:flex;gap:1.5rem;align-items:center;margin-bottom:.4rem;">
+          <div style="text-align:center;">
+            <div style="color:var(--bora);font-family:'Cinzel',serif;font-size:1.8rem;font-weight:700;line-height:1;">2</div>
+            <div style="font-family:'Cinzel Decorative',cursive;font-size:.62rem;color:var(--bora);">Bora</div>
+            <div style="font-size:.58rem;color:var(--text3);">Won G1 · Won G2</div>
+          </div>
+          <div style="color:var(--text3);font-family:'Cinzel',serif;font-size:1.2rem;">—</div>
+          <div style="text-align:center;">
+            <div style="color:var(--rheggie);font-family:'Cinzel',serif;font-size:1.8rem;font-weight:700;line-height:1;">0</div>
+            <div style="font-family:'Cinzel Decorative',cursive;font-size:.62rem;color:var(--rheggie);">Rheggie</div>
+            <div style="font-size:.58rem;color:var(--text3);">&nbsp;</div>
+          </div>
+        </div>
+        <div style="font-size:.65rem;color:var(--bora);margin-top:.4rem;">🏆 Bora win the series 2–0</div>
+      </div>
+      <div class="series-card" style="--c1:var(--arelite);--c2:var(--wicked)">
+        <div style="font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem;">May 14th · Game 1 + Game 2</div>
+        <div style="font-family:'Cinzel Decorative',cursive;font-size:1rem;margin-bottom:.7rem;">Arelite vs Wicked</div>
+        <div style="display:flex;gap:1.5rem;align-items:center;margin-bottom:.4rem;">
+          <div style="text-align:center;">
+            <div style="color:var(--arelite);font-family:'Cinzel',serif;font-size:1.8rem;font-weight:700;line-height:1;">2</div>
+            <div style="font-family:'Cinzel Decorative',cursive;font-size:.62rem;color:var(--arelite);">Arelite</div>
+            <div style="font-size:.58rem;color:var(--text3);">Won G1 · Won G2</div>
+          </div>
+          <div style="color:var(--text3);font-family:'Cinzel',serif;font-size:1.2rem;">—</div>
+          <div style="text-align:center;">
+            <div style="color:var(--wicked);font-family:'Cinzel',serif;font-size:1.8rem;font-weight:700;line-height:1;">0</div>
+            <div style="font-family:'Cinzel Decorative',cursive;font-size:.62rem;color:var(--wicked);">Wicked</div>
+            <div style="font-size:.58rem;color:var(--text3);">&nbsp;</div>
+          </div>
+        </div>
+        <div style="font-size:.65rem;color:var(--arelite);margin-top:.4rem;">🏆 Arelite win the series 2–0</div>
+      </div>
     </div>
 
     <div class="section-title"><span>📊</span> Overall Tournament Leaders</div>
     <div class="overall-top">
       <div class="stat-block" style="--accent:var(--red)">
         <div class="stat-block-title">🗡 Top Kills</div>
-        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">IIIIIII</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">135</span></div>
-        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">Delirax</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:96%"></div></div><span class="stat-val">129</span></div>
-        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">AFKy</div><div class="stat-guild">RA山R · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:90%"></div></div><span class="stat-val">121</span></div>
-        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">Earthquake</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:82%"></div></div><span class="stat-val">111</span></div>
-        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">尸ho</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:81%"></div></div><span class="stat-val">109</span></div>
-        <div class="stat-row"><span class="stat-pos">6</span><div class="stat-info"><div class="stat-name">be</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:72%"></div></div><span class="stat-val">97</span></div>
-        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">edmun</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:71%"></div></div><span class="stat-val">96</span></div>
-        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">豆犬</div><div class="stat-guild">Boba Tea · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:70%"></div></div><span class="stat-val">95</span></div>
-        <div class="stat-row"><span class="stat-pos">9</span><div class="stat-info"><div class="stat-name">TechnoDroid</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:70%"></div></div><span class="stat-val">94</span></div>
-        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">Justin</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:68%"></div></div><span class="stat-val">92</span></div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">IIIIIII</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">249</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">AFKy</div><div class="stat-guild">RA山R · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:94%"></div></div><span class="stat-val">233</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">尸ho</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:90%"></div></div><span class="stat-val">225</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">Delirax</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:90%"></div></div><span class="stat-val">223</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">edmun</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:85%"></div></div><span class="stat-val">211</span></div>
+        <div class="stat-row"><span class="stat-pos">6</span><div class="stat-info"><div class="stat-name">TechnoDroid</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:84%"></div></div><span class="stat-val">209</span></div>
+        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">豆犬</div><div class="stat-guild">Boba Tea · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:76%"></div></div><span class="stat-val">189</span></div>
+        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">Jharol</div><div class="stat-guild">Ma Vontade · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:74%"></div></div><span class="stat-val">184</span></div>
+        <div class="stat-row"><span class="stat-pos">9</span><div class="stat-info"><div class="stat-name">CosmicBrisket</div><div class="stat-guild">ICE · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:72%"></div></div><span class="stat-val">180</span></div>
+        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">be</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:68%"></div></div><span class="stat-val">169</span></div>
       </div>
 
       <div class="stat-block" style="--accent:var(--teal)">
         <div class="stat-block-title">🤝 Top Assists</div>
-        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">Delirax</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">264</span></div>
-        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">Biniツ</div><div class="stat-guild">BackShotz骨 · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:87%"></div></div><span class="stat-val">230</span></div>
-        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">AFKy</div><div class="stat-guild">RA山R · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:87%"></div></div><span class="stat-val">230</span></div>
-        <div class="stat-row"><span class="stat-pos b">4</span><div class="stat-info"><div class="stat-name">IIIIIII</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:85%"></div></div><span class="stat-val">224</span></div>
-        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">be</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:84%"></div></div><span class="stat-val">222</span></div>
-        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">·Flaviz</div><div class="stat-guild">Ma Vontade · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:84%"></div></div><span class="stat-val">222</span></div>
-        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">尸ho</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:82%"></div></div><span class="stat-val">217</span></div>
-        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">Margheritaa</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:82%"></div></div><span class="stat-val">216</span></div>
-        <div class="stat-row"><span class="stat-pos">9</span><div class="stat-info"><div class="stat-name">YoonJ</div><div class="stat-guild">Boba Tea · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:81%"></div></div><span class="stat-val">215</span></div>
-        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">Justin</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:77%"></div></div><span class="stat-val">204</span></div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">Delirax</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">476</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">尸ho</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:99%"></div></div><span class="stat-val">471</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">AFKy</div><div class="stat-guild">RA山R · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:96%"></div></div><span class="stat-val">456</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">·Flaviz</div><div class="stat-guild">Ma Vontade · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:88%"></div></div><span class="stat-val">418</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">be</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:87%"></div></div><span class="stat-val">414</span></div>
+        <div class="stat-row"><span class="stat-pos">6</span><div class="stat-info"><div class="stat-name">IIIIIII</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:85%"></div></div><span class="stat-val">405</span></div>
+        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">nightghost1</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:82%"></div></div><span class="stat-val">391</span></div>
+        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">Revioli</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:81%"></div></div><span class="stat-val">384</span></div>
+        <div class="stat-row"><span class="stat-pos">9</span><div class="stat-info"><div class="stat-name">McLovinッ</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:80%"></div></div><span class="stat-val">382</span></div>
+        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">TechnoDroid</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:78%"></div></div><span class="stat-val">373</span></div>
       </div>
 
       <div class="stat-block" style="--accent:var(--orange)">
         <div class="stat-block-title">💥 Top Damage Dealt</div>
-        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">IIIIIII</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">10.1M</span></div>
-        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">Delirax</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:91%"></div></div><span class="stat-val">9.2M</span></div>
-        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">Earthquake</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:87%"></div></div><span class="stat-val">8.8M</span></div>
-        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">Biniツ</div><div class="stat-guild">BackShotz骨 · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:86%"></div></div><span class="stat-val">8.7M</span></div>
-        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">YoonJ</div><div class="stat-guild">Boba Tea · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:81%"></div></div><span class="stat-val">8.2M</span></div>
-        <div class="stat-row"><span class="stat-pos">6</span><div class="stat-info"><div class="stat-name">Nathias</div><div class="stat-guild">JAILEDシ · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:81%"></div></div><span class="stat-val">8.2M</span></div>
-        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">edmun</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:79%"></div></div><span class="stat-val">8.0M</span></div>
-        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">be</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:77%"></div></div><span class="stat-val">7.8M</span></div>
-        <div class="stat-row"><span class="stat-pos">9</span><div class="stat-info"><div class="stat-name">Katie</div><div class="stat-guild">Ma Vontade · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:75%"></div></div><span class="stat-val">7.6M</span></div>
-        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">AFKy</div><div class="stat-guild">RA山R · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:75%"></div></div><span class="stat-val">7.6M</span></div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">IIIIIII</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">18.9M</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">edmun</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:99%"></div></div><span class="stat-val">18.7M</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">尸ho</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:86%"></div></div><span class="stat-val">16.3M</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">Earthquake</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:85%"></div></div><span class="stat-val">16.1M</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">Delirax</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:82%"></div></div><span class="stat-val">15.4M</span></div>
+        <div class="stat-row"><span class="stat-pos">6</span><div class="stat-info"><div class="stat-name">be</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:79%"></div></div><span class="stat-val">14.9M</span></div>
+        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">Nathias</div><div class="stat-guild">JAILEDシ · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:78%"></div></div><span class="stat-val">14.8M</span></div>
+        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">AFKy</div><div class="stat-guild">RA山R · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:76%"></div></div><span class="stat-val">14.4M</span></div>
+        <div class="stat-row"><span class="stat-pos">9</span><div class="stat-info"><div class="stat-name">Jharol</div><div class="stat-guild">Ma Vontade · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:73%"></div></div><span class="stat-val">13.8M</span></div>
+        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">Biniツ</div><div class="stat-guild">BackShotz骨 · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:72%"></div></div><span class="stat-val">13.7M</span></div>
       </div>
 
       <div class="stat-block" style="--accent:var(--green)">
         <div class="stat-block-title">💚 Top Healing</div>
-        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">xSouless</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">8.6M</span></div>
-        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">apgonzo</div><div class="stat-guild">PUSH · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:79%"></div></div><span class="stat-val">6.9M</span></div>
-        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">Jalinss</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:75%"></div></div><span class="stat-val">6.4M</span></div>
-        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">Rosie·</div><div class="stat-guild">MILK° · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:70%"></div></div><span class="stat-val">6.1M</span></div>
-        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">Selumii</div><div class="stat-guild">Unhinged肉 · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:65%"></div></div><span class="stat-val">5.6M</span></div>
-        <div class="stat-row"><span class="stat-pos">6</span><div class="stat-info"><div class="stat-name">Greeto</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:63%"></div></div><span class="stat-val">5.4M</span></div>
-        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">Zyrwolf</div><div class="stat-guild">Bubble blowers · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:61%"></div></div><span class="stat-val">5.3M</span></div>
-        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">msgrayness</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:54%"></div></div><span class="stat-val">4.6M</span></div>
-        <div class="stat-row"><span class="stat-pos">9</span><div class="stat-info"><div class="stat-name">Marruh</div><div class="stat-guild">Ma Vontade · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:53%"></div></div><span class="stat-val">4.6M</span></div>
-        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">Mqmt</div><div class="stat-guild">Undercooked · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:53%"></div></div><span class="stat-val">4.6M</span></div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">xSouless</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">16.2M</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">apgonzo</div><div class="stat-guild">PUSH · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:69%"></div></div><span class="stat-val">11.2M</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">Jalinss</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:68%"></div></div><span class="stat-val">11.0M</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">Rosie·</div><div class="stat-guild">MILK° · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:67%"></div></div><span class="stat-val">10.9M</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">Selumii</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:64%"></div></div><span class="stat-val">10.4M</span></div>
+        <div class="stat-row"><span class="stat-pos">6</span><div class="stat-info"><div class="stat-name">Greeto</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:63%"></div></div><span class="stat-val">10.2M</span></div>
+        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">Zyrwolf</div><div class="stat-guild">Bubble blowers · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:59%"></div></div><span class="stat-val">9.5M</span></div>
+        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">Marruh</div><div class="stat-guild">Ma Vontade · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:55%"></div></div><span class="stat-val">8.9M</span></div>
+        <div class="stat-row"><span class="stat-pos">9</span><div class="stat-info"><div class="stat-name">Krul</div><div class="stat-guild">Ma Vontade · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:54%"></div></div><span class="stat-val">8.8M</span></div>
+        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">Mgmt</div><div class="stat-guild">Undercooked · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:53%"></div></div><span class="stat-val">8.6M</span></div>
       </div>
 
       <div class="stat-block" style="--accent:var(--blue)">
         <div class="stat-block-title">🛡 Top Damage Taken</div>
-        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">Wintrr</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">4.9M</span></div>
-        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">nightghost1</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:95%"></div></div><span class="stat-val">4.7M</span></div>
-        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">Paella</div><div class="stat-guild">Undercooked · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:94%"></div></div><span class="stat-val">4.6M</span></div>
-        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">eeiv</div><div class="stat-guild">JAILEDシ · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:92%"></div></div><span class="stat-val">4.5M</span></div>
-        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">be</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:89%"></div></div><span class="stat-val">4.3M</span></div>
-        <div class="stat-row"><span class="stat-pos">6</span><div class="stat-info"><div class="stat-name">Vietnam</div><div class="stat-guild">Unknown · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:82%"></div></div><span class="stat-val">4.0M</span></div>
-        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">Revioli</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:81%"></div></div><span class="stat-val">4.0M</span></div>
-        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">Margheritaa</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:80%"></div></div><span class="stat-val">3.9M</span></div>
-        <div class="stat-row"><span class="stat-pos">9</span><div class="stat-info"><div class="stat-name">RedCamper</div><div class="stat-guild">PUSH · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:80%"></div></div><span class="stat-val">3.9M</span></div>
-        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">豆犬</div><div class="stat-guild">Boba Tea · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:74%"></div></div><span class="stat-val">3.6M</span></div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">nightghost1</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">10.1M</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">Wintrr</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:91%"></div></div><span class="stat-val">9.2M</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">be</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:80%"></div></div><span class="stat-val">8.1M</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">Revioli</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:78%"></div></div><span class="stat-val">7.8M</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">Paella</div><div class="stat-guild">Undercooked · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:77%"></div></div><span class="stat-val">7.8M</span></div>
+        <div class="stat-row"><span class="stat-pos">6</span><div class="stat-info"><div class="stat-name">eeiv</div><div class="stat-guild">JAILEDシ · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:74%"></div></div><span class="stat-val">7.4M</span></div>
+        <div class="stat-row"><span class="stat-pos">7</span><div class="stat-info"><div class="stat-name">Vietnam</div><div class="stat-guild">Melancholy · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:73%"></div></div><span class="stat-val">7.4M</span></div>
+        <div class="stat-row"><span class="stat-pos">8</span><div class="stat-info"><div class="stat-name">Margheritaa</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:72%"></div></div><span class="stat-val">7.3M</span></div>
+        <div class="stat-row"><span class="stat-pos">9</span><div class="stat-info"><div class="stat-name">Nathias</div><div class="stat-guild">JAILEDシ · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:69%"></div></div><span class="stat-val">6.9M</span></div>
+        <div class="stat-row"><span class="stat-pos">10</span><div class="stat-info"><div class="stat-name">Jehoo</div><div class="stat-guild">Ma Vontade · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:69%"></div></div><span class="stat-val">6.9M</span></div>
       </div>
     </div>
 
@@ -484,6 +524,192 @@ footer a{color:var(--teal);text-decoration:none;}
     <div class="table-wrap"><table><thead><tr><th>#</th><th>Weapons</th><th>Guild</th><th>Player</th><th>Kills</th><th>Assists</th><th>Damage</th><th>Taken</th><th>Healing</th></tr></thead><tbody id="rw2-red"></tbody></table></div>
   </div>
 
+  <!-- ══ BORA vs RHEGGIE G1 ══ -->
+  <div class="match-panel" id="panel-br1">
+    <div class="match-header" style="--c1:var(--bora);--c2:var(--purple);--c3:var(--rheggie)">
+      <div class="match-meta">Monday 11th May · Game 1 of 2</div>
+      <div class="match-title">Team Bora vs Team Rheggie</div>
+      <div class="score-row">
+        <div class="score-team">
+          <div class="score-team-name" style="color:var(--bora)">Team Bora</div>
+          <div class="score-kills" style="color:var(--bora)">646</div>
+          <div class="score-label">Total Kills</div>
+          <div class="winner-badge" style="background:rgba(240,192,96,.12);color:var(--bora);border:1px solid rgba(240,192,96,.3)">🏆 Winner</div>
+        </div>
+        <div class="score-vs">VS</div>
+        <div class="score-team">
+          <div class="score-team-name" style="color:var(--rheggie)">Team Rheggie</div>
+          <div class="score-kills" style="color:var(--rheggie)">479</div>
+          <div class="score-label">Total Kills</div>
+        </div>
+      </div>
+    </div>
+    <div class="match-stats-grid">
+      <div class="stat-block" style="--accent:var(--red)"><div class="stat-block-title">🗡 Top Kills</div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">TechnoDroid</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">65</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">IIIIIII</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:91%"></div></div><span class="stat-val">59</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">fruitlooops</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:83%"></div></div><span class="stat-val">54</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">Jharol</div><div class="stat-guild">Ma Vontade · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:80%"></div></div><span class="stat-val">52</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">edmun</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:69%"></div></div><span class="stat-val">45</span></div>
+      </div>
+      <div class="stat-block" style="--accent:var(--orange)"><div class="stat-block-title">💥 Top Damage</div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">edmun</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">4.6M</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">IIIIIII</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:89%"></div></div><span class="stat-val">4.1M</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">TechnoDroid</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:85%"></div></div><span class="stat-val">3.9M</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">Jharol</div><div class="stat-guild">Ma Vontade · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:75%"></div></div><span class="stat-val">3.4M</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">be</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:68%"></div></div><span class="stat-val">3.1M</span></div>
+      </div>
+      <div class="stat-block" style="--accent:var(--green)"><div class="stat-block-title">💚 Top Healing</div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">xSouless</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">3.5M</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">Dioxin</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:55%"></div></div><span class="stat-val">1.9M</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">Greeto</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:55%"></div></div><span class="stat-val">1.9M</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">Mgmt</div><div class="stat-guild">Undercooked · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:52%"></div></div><span class="stat-val">1.8M</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">Sharkjitsu</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:40%"></div></div><span class="stat-val">1.4M</span></div>
+      </div>
+    </div>
+    <div class="roster-title">Full Roster — Team Bora</div>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Weapons</th><th>Guild</th><th>Player</th><th>Kills</th><th>Assists</th><th>Damage</th><th>Taken</th><th>Healing</th></tr></thead><tbody id="br1-bora"></tbody></table></div>
+    <div class="roster-title">Full Roster — Team Rheggie</div>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Weapons</th><th>Guild</th><th>Player</th><th>Kills</th><th>Assists</th><th>Damage</th><th>Taken</th><th>Healing</th></tr></thead><tbody id="br1-rheggie"></tbody></table></div>
+  </div>
+
+  <!-- ══ BORA vs RHEGGIE G2 ══ -->
+  <div class="match-panel" id="panel-br2">
+    <div class="match-header" style="--c1:var(--bora);--c2:var(--purple);--c3:var(--rheggie)">
+      <div class="match-meta">Monday 11th May · Game 2 of 2</div>
+      <div class="match-title">Team Bora vs Team Rheggie</div>
+      <div class="score-row">
+        <div class="score-team">
+          <div class="score-team-name" style="color:var(--bora)">Team Bora</div>
+          <div class="score-kills" style="color:var(--bora)">727</div>
+          <div class="score-label">Total Kills</div>
+          <div class="winner-badge" style="background:rgba(240,192,96,.12);color:var(--bora);border:1px solid rgba(240,192,96,.3)">🏆 Winner</div>
+        </div>
+        <div class="score-vs">VS</div>
+        <div class="score-team">
+          <div class="score-team-name" style="color:var(--rheggie)">Team Rheggie</div>
+          <div class="score-kills" style="color:var(--rheggie)">565</div>
+          <div class="score-label">Total Kills</div>
+        </div>
+      </div>
+    </div>
+    <div class="match-stats-grid">
+      <div class="stat-block" style="--accent:var(--red)"><div class="stat-block-title">🗡 Top Kills</div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">尸ho</div><div class="stat-guild">Undercooked · Wicked (sub)</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">75</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">edmun</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:93%"></div></div><span class="stat-val">70</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">fruitlooops</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:79%"></div></div><span class="stat-val">59</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">Jharol</div><div class="stat-guild">Ma Vontade · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:76%"></div></div><span class="stat-val">57</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">IIIIIII</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:73%"></div></div><span class="stat-val">55</span></div>
+      </div>
+      <div class="stat-block" style="--accent:var(--orange)"><div class="stat-block-title">💥 Top Damage</div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">edmun</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">6.1M</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">尸ho</div><div class="stat-guild">Undercooked · Wicked (sub)</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:88%"></div></div><span class="stat-val">5.4M</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">IIIIIII</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:75%"></div></div><span class="stat-val">4.6M</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">fruitlooops</div><div class="stat-guild">ICE · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:72%"></div></div><span class="stat-val">4.4M</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">·Flaviz</div><div class="stat-guild">Ma Vontade · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:56%"></div></div><span class="stat-val">3.4M</span></div>
+      </div>
+      <div class="stat-block" style="--accent:var(--green)"><div class="stat-block-title">💚 Top Healing</div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">xSouless</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">4.1M</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">Krul</div><div class="stat-guild">Ma Vontade · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:85%"></div></div><span class="stat-val">3.5M</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">Greeto</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:68%"></div></div><span class="stat-val">2.8M</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">Dioxin</div><div class="stat-guild">JAILEDシ · Rheggie</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:47%"></div></div><span class="stat-val">1.9M</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">·ParaLLax·</div><div class="stat-guild">Ma Vontade · Bora</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:46%"></div></div><span class="stat-val">1.9M</span></div>
+      </div>
+    </div>
+    <div class="roster-title">Full Roster — Team Bora</div>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Weapons</th><th>Guild</th><th>Player</th><th>Kills</th><th>Assists</th><th>Damage</th><th>Taken</th><th>Healing</th></tr></thead><tbody id="br2-bora"></tbody></table></div>
+    <div class="roster-title">Full Roster — Team Rheggie</div>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Weapons</th><th>Guild</th><th>Player</th><th>Kills</th><th>Assists</th><th>Damage</th><th>Taken</th><th>Healing</th></tr></thead><tbody id="br2-rheggie"></tbody></table></div>
+  </div>
+
+  <!-- ══ ARELITE vs WICKED G1 ══ -->
+  <div class="match-panel" id="panel-aw1">
+    <div class="match-header" style="--c1:var(--arelite);--c2:var(--purple);--c3:var(--wicked)">
+      <div class="match-meta">Thursday 14th May · Game 1 of 2</div>
+      <div class="match-title">Team Arelite vs Team Wicked</div>
+      <div class="score-row">
+        <div class="score-team">
+          <div class="score-team-name" style="color:var(--arelite)">Team Arelite</div>
+          <div class="score-kills" style="color:var(--arelite)">492</div>
+          <div class="score-label">Total Kills</div>
+          <div class="winner-badge" style="background:rgba(124,111,247,.12);color:var(--arelite);border:1px solid rgba(124,111,247,.3)">🏆 Winner</div>
+        </div>
+        <div class="score-vs">VS</div>
+        <div class="score-team">
+          <div class="score-team-name" style="color:var(--wicked)">Team Wicked</div>
+          <div class="score-kills" style="color:var(--wicked)">400</div>
+          <div class="score-label">Total Kills</div>
+        </div><div class="stat-guild">RA山R · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">56</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">TazzZ悪</div><div class="stat-guild">MILK° · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:84%"></div></div><span class="stat-val">47</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">CosmicBrisket</div><div class="stat-guild">ICE · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:84%"></div></div><span class="stat-val">47</span></div>
+        <div class="stat-row"><span class="stat-pos b">4</span><div class="stat-info"><div class="stat-name">McLovinッ</div><div class="stat-guild">JAILEDシ · Rheggie (sub)</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:75%"></div></div><span class="stat-val">42</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">豆犬</div><div class="stat-guild">Boba Tea · Bora (sub)</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:73%"></div></div><span class="stat-val">41</span></div>
+      </div>
+      <div class="stat-block" style="--accent:var(--orange)"><div class="stat-block-title">💥 Top Damage</div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">Earthquake</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">3.3M</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">皇狼I</div><div class="stat-guild">PUSH · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:92%"></div></div><span class="stat-val">3.0M</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">McLovinッ</div><div class="stat-guild">JAILEDシ · Rheggie (sub)</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:89%"></div></div><span class="stat-val">2.9M</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">Delirax</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:87%"></div></div><span class="stat-val">2.9M</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">AFKy</div><div class="stat-guild">RA山R · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:82%"></div></div><span class="stat-val">2.7M</span></div>
+      </div>
+      <div class="stat-block" style="--accent:var(--green)"><div class="stat-block-title">💚 Top Healing</div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">apgonzo</div><div class="stat-guild">PUSH · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">2.5M</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">Rosie</div><div class="stat-guild">MILK° · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:98%"></div></div><span class="stat-val">2.5M</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">Selumii</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:80%"></div></div><span class="stat-val">2.0M</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">EgirlWaifu</div><div class="stat-guild">PUSH · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:64%"></div></div><span class="stat-val">1.6M</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">Marruh</div><div class="stat-guild">Ma Vontade · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:63%"></div></div><span class="stat-val">1.6M</span></div>
+      </div>
+    </div>
+    <div class="roster-title">Full Roster — Team Arelite</div>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Weapons</th><th>Guild</th><th>Player</th><th>Kills</th><th>Assists</th><th>Damage</th><th>Taken</th><th>Healing</th></tr></thead><tbody id="aw1-arelite"></tbody></table></div>
+    <div class="roster-title">Full Roster — Team Wicked</div>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Weapons</th><th>Guild</th><th>Player</th><th>Kills</th><th>Assists</th><th>Damage</th><th>Taken</th><th>Healing</th></tr></thead><tbody id="aw1-wicked"></tbody></table></div>
+  </div>
+
+  <!-- ══ ARELITE vs WICKED G2 ══ -->
+  <div class="match-panel" id="panel-aw2">
+    <div class="match-header" style="--c1:var(--arelite);--c2:var(--purple);--c3:var(--wicked)">
+      <div class="match-meta">Thursday 14th May · Game 2 of 2</div>
+      <div class="match-title">Team Arelite vs Team Wicked</div>
+      <div class="score-row">
+        <div class="score-team">
+          <div class="score-team-name" style="color:var(--arelite)">Team Arelite</div>
+          <div class="score-kills" style="color:var(--arelite)">574</div>
+          <div class="score-label">Total Kills</div>
+          <div class="winner-badge" style="background:rgba(124,111,247,.12);color:var(--arelite);border:1px solid rgba(124,111,247,.3)">🏆 Winner</div>
+        </div>
+        <div class="score-vs">VS</div>
+        <div class="score-team">
+          <div class="score-team-name" style="color:var(--wicked)">Team Wicked</div>
+          <div class="score-kills" style="color:var(--wicked)">398</div>
+          <div class="score-label">Total Kills</div>
+        </div><div class="stat-guild">ICE · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">58</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">AFKy</div><div class="stat-guild">RA山R · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:97%"></div></div><span class="stat-val">56</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">Delirax</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:97%"></div></div><span class="stat-val">56</span></div>
+        <div class="stat-row"><span class="stat-pos b">4</span><div class="stat-info"><div class="stat-name">豆犬</div><div class="stat-guild">Boba Tea · Bora (sub)</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:91%"></div></div><span class="stat-val">53</span></div>
+        <div class="stat-row"><span class="stat-pos b">4</span><div class="stat-info"><div class="stat-name">议员</div><div class="stat-guild">PUSH · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:91%"></div></div><span class="stat-val">53</span></div>
+      </div>
+      <div class="stat-block" style="--accent:var(--orange)"><div class="stat-block-title">💥 Top Damage</div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">Earthquake</div><div class="stat-guild">Undercooked · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">4.0M</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">Nathias</div><div class="stat-guild">JAILEDシ · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:99%"></div></div><span class="stat-val">4.0M</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">皇狼I</div><div class="stat-guild">PUSH · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:95%"></div></div><span class="stat-val">3.8M</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">McLovinッ</div><div class="stat-guild">JAILEDシ · Rheggie (sub)</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:93%"></div></div><span class="stat-val">3.7M</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">Delirax</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:84%"></div></div><span class="stat-val">3.4M</span></div>
+      </div>
+      <div class="stat-block" style="--accent:var(--green)"><div class="stat-block-title">💚 Top Healing</div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">Selumii</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">2.8M</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">Rosie•</div><div class="stat-guild">MILK° · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:83%"></div></div><span class="stat-val">2.3M</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">Marruh</div><div class="stat-guild">Ma Vontade · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:86%"></div></div><span class="stat-val">2.4M</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">apgonzo</div><div class="stat-guild">PUSH · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:69%"></div></div><span class="stat-val">1.9M</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">EgirlWaifu</div><div class="stat-guild">PUSH · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:83%"></div></div><span class="stat-val">2.3M</span></div>
+      </div>
+    </div>
+    <div class="roster-title">Full Roster — Team Arelite</div>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Weapons</th><th>Guild</th><th>Player</th><th>Kills</th><th>Assists</th><th>Damage</th><th>Taken</th><th>Healing</th></tr></thead><tbody id="aw2-arelite"></tbody></table></div>
+    <div class="roster-title">Full Roster — Team Wicked</div>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Weapons</th><th>Guild</th><th>Player</th><th>Kills</th><th>Assists</th><th>Damage</th><th>Taken</th><th>Healing</th></tr></thead><tbody id="aw2-wicked"></tbody></table></div>
+  </div>
+
   <footer><p>T&amp;L Tournament Season 1 &nbsp;·&nbsp; <a href="https://www.tnltourney.com">tnltourney.com</a></p></footer>
 </div>
 
@@ -533,120 +759,614 @@ buildTable('rw1-red',rw1,'Red');
 buildTable('rw2-yellow',rw2,'Yellow');
 buildTable('rw2-red',rw2,'Red');
 
+// ── BR G1 ──
+const br1=[
+  {rank:1,weapon_1:"Staff",weapon_2:"Dagger",guild_name:"JAILEDシ",player_name:"TechnoDroid",team:"Rheggie",kills:65,assists:90,damage_dealt:3869490,damage_taken:1527510,healing:0},
+  {rank:2,weapon_1:"SnS",weapon_2:"Orb",guild_name:"JAILEDシ",player_name:"IIIIII",team:"Rheggie",kills:59,assists:77,damage_dealt:4075942,damage_taken:747978,healing:21064},
+  {rank:3,weapon_1:"SnS",weapon_2:"Crossbow",guild_name:"ICE",player_name:"fruitlooops",team:"Bora",kills:54,assists:84,damage_dealt:2780870,damage_taken:1121015,healing:90014},
+  {rank:4,weapon_1:"SnS",weapon_2:"Crossbow",guild_name:"Ma Vontade",player_name:"Jharol",team:"Bora",kills:52,assists:91,damage_dealt:3449689,damage_taken:608935,healing:31432},
+  {rank:5,weapon_1:"Orb",weapon_2:"Staff",guild_name:"ICE",player_name:"edmun",team:"Bora",kills:45,assists:73,damage_dealt:4570828,damage_taken:944313,healing:0},
+  {rank:6,weapon_1:"Greatsword",weapon_2:"Dagger",guild_name:"JAILEDシ",player_name:"mars",team:"Rheggie",kills:43,assists:51,damage_dealt:1924215,damage_taken:1368468,healing:0},
+  {rank:7,weapon_1:"SnS",weapon_2:"Crossbow",guild_name:"Undercooked",player_name:"尸ho",team:"Bora",kills:41,assists:113,damage_dealt:3320928,damage_taken:489362,healing:29143},
+  {rank:8,weapon_1:"Staff",weapon_2:"Dagger",guild_name:"JAILEDシ",player_name:"ChunkyBruhdaツ",team:"Rheggie",kills:40,assists:58,damage_dealt:2224804,damage_taken:1241663,healing:30659},
+  {rank:9,weapon_1:"Dagger",weapon_2:"Crossbow",guild_name:"Bubble blowers",player_name:"Raitou",team:"Rheggie",kills:39,assists:37,damage_dealt:1612723,damage_taken:710857,healing:0},
+  {rank:10,weapon_1:"SnS",weapon_2:"Orb",guild_name:"JAILEDシ",player_name:"Justin",team:"Rheggie",kills:36,assists:77,damage_dealt:2722616,damage_taken:925880,healing:138513},
+  {rank:11,weapon_1:"Spear",weapon_2:"Greatsword",guild_name:"ICE",player_name:"be",team:"Bora",kills:36,assists:66,damage_dealt:3130011,damage_taken:1325929,healing:53430},
+  {rank:12,weapon_1:"SnS",weapon_2:"Crossbow",guild_name:"Ma Vontade",player_name:"Mudin",team:"Bora",kills:34,assists:102,damage_dealt:2967067,damage_taken:693990,healing:49783},
+  {rank:13,weapon_1:"Staff",weapon_2:"Orb",guild_name:"Unhinged肉",player_name:"AjoJohn",team:"Rheggie",kills:32,assists:42,damage_dealt:2481815,damage_taken:1433253,healing:0},
+  {rank:14,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"Ma Vontade",player_name:"Jehoo",team:"Bora",kills:31,assists:39,damage_dealt:1873401,damage_taken:1145302,healing:37148},
+  {rank:15,weapon_1:"Crossbow",weapon_2:"Dagger",guild_name:"Undercooked",player_name:"Cookies",team:"Bora",kills:31,assists:34,damage_dealt:1450713,damage_taken:703052,healing:2971},
+  {rank:16,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"JAILEDシ",player_name:"nightghost1",team:"Rheggie",kills:29,assists:88,damage_dealt:3010269,damage_taken:2468324,healing:14131},
+  {rank:17,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"PUSH",player_name:"ShawarmaShuffle",team:"Bora",kills:28,assists:69,damage_dealt:2116397,damage_taken:1079730,healing:13645},
+  {rank:18,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"JAILEDシ",player_name:"sunny芝",team:"Rheggie",kills:28,assists:31,damage_dealt:1275235,damage_taken:1047049,healing:44781},
+  {rank:19,weapon_1:"Staff",weapon_2:"Orb",guild_name:"JAILEDシ",player_name:"Artemis°",team:"Rheggie",kills:27,assists:66,damage_dealt:2650409,damage_taken:1376837,healing:0},
+  {rank:20,weapon_1:"Spear",weapon_2:"Greatsword",guild_name:"Undercooked",player_name:"Wintrr",team:"Bora",kills:27,assists:59,damage_dealt:1633055,damage_taken:1971171,healing:29248},
+  {rank:21,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"Ma Vontade",player_name:"·Flaviz",team:"Bora",kills:25,assists:79,damage_dealt:3010990,damage_taken:1533480,healing:15621},
+  {rank:22,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"Undercooked",player_name:"Revioli",team:"Bora",kills:23,assists:92,damage_dealt:2414444,damage_taken:1840667,healing:54358},
+  {rank:23,weapon_1:"Dagger",weapon_2:"Greatsword",guild_name:"PUSH",player_name:"RayPeat",team:"Bora",kills:23,assists:42,damage_dealt:1180628,damage_taken:1400951,healing:13538},
+  {rank:24,weapon_1:"Dagger",weapon_2:"Greatsword",guild_name:"JAILEDシ",player_name:"stepbro乡",team:"Rheggie",kills:22,assists:46,damage_dealt:1376280,damage_taken:1182071,healing:91721},
+  {rank:25,weapon_1:"Dagger",weapon_2:"Greatsword",guild_name:"JAILEDシ",player_name:"FairAngel乡",team:"Rheggie",kills:22,assists:22,damage_dealt:1054710,damage_taken:1223216,healing:46103},
+  {rank:26,weapon_1:"Crossbow",weapon_2:"Dagger",guild_name:"ICE",player_name:"SprayMachine",team:"Bora",kills:21,assists:42,damage_dealt:1210737,damage_taken:724771,healing:0},
+  {rank:27,weapon_1:"Crossbow",weapon_2:"Dagger",guild_name:"Melancholy",player_name:"Sakki",team:"Bora",kills:20,assists:47,damage_dealt:1182973,damage_taken:831528,healing:8262},
+  {rank:28,weapon_1:"Orb",weapon_2:"Staff",guild_name:"Undercooked",player_name:"こigこagRule",team:"Bora",kills:19,assists:52,damage_dealt:2205780,damage_taken:1334599,healing:0},
+  {rank:29,weapon_1:"Spear",weapon_2:"Greatsword",guild_name:"ICE",player_name:"Fade",team:"Bora",kills:18,assists:32,damage_dealt:1406625,damage_taken:1639434,healing:17435},
+  {rank:30,weapon_1:"Dagger",weapon_2:"Greatsword",guild_name:"Unhinged肉",player_name:"FaytCrus",team:"Rheggie",kills:16,assists:53,damage_dealt:1340290,damage_taken:680161,healing:22039},
+  {rank:31,weapon_1:"Dagger",weapon_2:"Spear",guild_name:"JAILEDシ",player_name:"Coot",team:"Rheggie",kills:11,assists:73,damage_dealt:1503187,damage_taken:1095736,healing:8422},
+  {rank:32,weapon_1:"Longbow",weapon_2:"Dagger",guild_name:"Melancholy",player_name:"Kxle",team:"Bora",kills:7,assists:20,damage_dealt:409181,damage_taken:748483,healing:11407},
+  {rank:33,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"PUSH",player_name:"Micheruメ",team:"Bora",kills:3,assists:37,damage_dealt:398007,damage_taken:940150,healing:43555},
+  {rank:34,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"Melancholy",player_name:"Silch",team:"Bora",kills:2,assists:16,damage_dealt:124138,damage_taken:865008,healing:1502218},
+  {rank:35,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"Dioxin",team:"Rheggie",kills:1,assists:68,damage_dealt:54619,damage_taken:385798,healing:1917206},
+  {rank:36,weapon_1:"Greatsword",weapon_2:"Longbow",guild_name:"PUSH",player_name:"SrDrake",team:"Bora",kills:1,assists:40,damage_dealt:44187,damage_taken:633506,healing:880794},
+  {rank:37,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"PUSH",player_name:"Moon乂",team:"Bora",kills:1,assists:33,damage_dealt:44217,damage_taken:258318,healing:16967},
+  {rank:38,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"ICE",player_name:"Sharkjitsu",team:"Bora",kills:1,assists:29,damage_dealt:68818,damage_taken:658596,healing:1384209},
+  {rank:39,weapon_1:"Greatsword",weapon_2:"SnS",guild_name:"JAILEDシ",player_name:"encore",team:"Rheggie",kills:1,assists:29,damage_dealt:61566,damage_taken:997936,healing:18833},
+  {rank:40,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"JAILEDシ",player_name:"Cleared乂",team:"Rheggie",kills:1,assists:28,damage_dealt:161729,damage_taken:1206364,healing:79513},
+  {rank:41,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"PUSH",player_name:"Prozacツ",team:"Bora",kills:1,assists:27,damage_dealt:161316,damage_taken:761222,healing:31576},
+  {rank:42,weapon_1:"SnS",weapon_2:"Spear",guild_name:"JAILEDシ",player_name:"Forrest",team:"Rheggie",kills:1,assists:22,damage_dealt:54867,damage_taken:327845,healing:8133},
+  {rank:43,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"Disregarded",player_name:"xDebo",team:"Rheggie",kills:1,assists:17,damage_dealt:61107,damage_taken:576918,healing:31683},
+  {rank:44,weapon_1:"Orb",weapon_2:"Wand",guild_name:"Disregarded",player_name:"Van",team:"Rheggie",kills:0,assists:69,damage_dealt:7215,damage_taken:201661,healing:1246531},
+  {rank:45,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"PUSH",player_name:"EgirlWaifu",team:"Bora",kills:0,assists:67,damage_dealt:58852,damage_taken:142584,healing:1601343},
+  {rank:46,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"Undercooked",player_name:"Mgmt",team:"Bora",kills:0,assists:63,damage_dealt:58503,damage_taken:689875,healing:1820804},
+  {rank:47,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Undercooked",player_name:"Desserti",team:"Bora",kills:0,assists:62,damage_dealt:21154,damage_taken:303348,healing:681455},
+  {rank:48,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"stepsisㄔ",team:"Rheggie",kills:0,assists:61,damage_dealt:39988,damage_taken:286413,healing:1390732},
+  {rank:49,weapon_1:"Wand",weapon_2:"Orb",guild_name:"JAILEDシ",player_name:"Trazodoneツ",team:"Rheggie",kills:0,assists:60,damage_dealt:11007,damage_taken:361492,healing:719477},
+  {rank:50,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"JAILEDシ",player_name:"Greeto",team:"Rheggie",kills:0,assists:58,damage_dealt:71018,damage_taken:436270,healing:1913739},
+  {rank:51,weapon_1:"Wand",weapon_2:"Orb",guild_name:"JAILEDシ",player_name:"Qigzhou",team:"Rheggie",kills:0,assists:57,damage_dealt:10410,damage_taken:309258,healing:427132},
+  {rank:52,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Undercooked",player_name:"Cream",team:"Bora",kills:0,assists:55,damage_dealt:9954,damage_taken:234757,healing:506471},
+  {rank:53,weapon_1:"Wand",weapon_2:"Orb",guild_name:"JAILEDシ",player_name:"이쁘니",team:"Rheggie",kills:0,assists:55,damage_dealt:3178,damage_taken:221266,healing:339236},
+  {rank:54,weapon_1:"Wand",weapon_2:"Orb",guild_name:"ICE",player_name:"shq",team:"Bora",kills:0,assists:54,damage_dealt:11972,damage_taken:306097,healing:323814},
+  {rank:55,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"xSouless",team:"Rheggie",kills:0,assists:52,damage_dealt:66526,damage_taken:372251,healing:3499997},
+  {rank:56,weapon_1:"Orb",weapon_2:"Wand",guild_name:"Ma Vontade",player_name:"TOPDAWG照",team:"Bora",kills:0,assists:52,damage_dealt:11672,damage_taken:403522,healing:516825},
+  {rank:57,weapon_1:"Orb",weapon_2:"Wand",guild_name:"Undercooked",player_name:"cyclingpig",team:"Bora",kills:0,assists:52,damage_dealt:7041,damage_taken:568607,healing:347713},
+  {rank:58,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Ma Vontade",player_name:"Mednev",team:"Bora",kills:0,assists:50,damage_dealt:91644,damage_taken:247361,healing:708081},
+  {rank:59,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"Undercooked",player_name:"Riemann",team:"Bora",kills:0,assists:50,damage_dealt:53339,damage_taken:673190,healing:2425364},
+  {rank:60,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Ma Vontade",player_name:"Krowck神",team:"Bora",kills:0,assists:50,damage_dealt:32849,damage_taken:616074,healing:469489},
+  {rank:61,weapon_1:"Wand",weapon_2:"Orb",guild_name:"ICE",player_name:"meow",team:"Bora",kills:0,assists:46,damage_dealt:2105,damage_taken:422745,healing:535752},
+  {rank:62,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Goths",player_name:"Saint",team:"Bora",kills:0,assists:45,damage_dealt:6360,damage_taken:516909,healing:1231660},
+  {rank:63,weapon_1:"Wand",weapon_2:"Orb",guild_name:"ICE",player_name:"Elliッ",team:"Bora",kills:0,assists:42,damage_dealt:37442,damage_taken:383892,healing:718283},
+  {rank:64,weapon_1:"Wand",weapon_2:"Orb",guild_name:"PUSH",player_name:"ReinaKertia",team:"Bora",kills:0,assists:42,damage_dealt:6469,damage_taken:149089,healing:547459},
+  {rank:65,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"ICE",player_name:"msgrayness",team:"Bora",kills:0,assists:40,damage_dealt:64725,damage_taken:533556,healing:1308001},
+  {rank:66,weapon_1:"Wand",weapon_2:"Orb",guild_name:"JAILEDシ",player_name:"Spydur岁",team:"Rheggie",kills:0,assists:38,damage_dealt:4872,damage_taken:619950,healing:1031229},
+  {rank:67,weapon_1:"Orb",weapon_2:"Wand",guild_name:"JAILEDシ",player_name:"Noodle",team:"Rheggie",kills:0,assists:36,damage_dealt:15014,damage_taken:301740,healing:889921},
+  {rank:68,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"Ma Vontade",player_name:"·ParaLLax·",team:"Bora",kills:0,assists:35,damage_dealt:67032,damage_taken:746653,healing:1240615},
+  {rank:69,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"Ma Vontade",player_name:"Krul",team:"Bora",kills:0,assists:35,damage_dealt:46011,damage_taken:490785,healing:1130111},
+  {rank:70,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"Bubble blowers",player_name:"Zyrwolf",team:"Rheggie",kills:0,assists:34,damage_dealt:78916,damage_taken:719979,healing:1782436},
+  {rank:71,weapon_1:"SnS",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"Yuzurain",team:"Rheggie",kills:0,assists:32,damage_dealt:78446,damage_taken:895946,healing:293968},
+  {rank:72,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"Jalinss",team:"Rheggie",kills:0,assists:32,damage_dealt:50892,damage_taken:431184,healing:2216121},
+  {rank:73,weapon_1:"Orb",weapon_2:"Wand",guild_name:"Undercooked",player_name:"Terrormisu狐",team:"Bora",kills:0,assists:31,damage_dealt:9948,damage_taken:310619,healing:828869},
+  {rank:74,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Ma Vontade",player_name:"Cimedッ",team:"Bora",kills:0,assists:26,damage_dealt:3903,damage_taken:441455,healing:1302672},
+  {rank:75,weapon_1:"Wand",weapon_2:"Orb",guild_name:"JAILEDシ",player_name:"ェHeals六",team:"Rheggie",kills:0,assists:26,damage_dealt:3519,damage_taken:257187,healing:409194},
+  {rank:76,weapon_1:"SnS",weapon_2:"Dagger",guild_name:"Disregarded",player_name:"Loudpack",team:"Rheggie",kills:0,assists:25,damage_dealt:271056,damage_taken:1116160,healing:82362},
+  {rank:77,weapon_1:"Orb",weapon_2:"Wand",guild_name:"BackShotz骨",player_name:"kiersii",team:"Bora",kills:0,assists:24,damage_dealt:2419,damage_taken:272453,healing:363517},
+  {rank:78,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"PUSH",player_name:"RedCamper",team:"Bora",kills:0,assists:19,damage_dealt:106906,damage_taken:1262900,healing:30707},
+  {rank:79,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"JAILEDシ",player_name:"Noah",team:"Rheggie",kills:0,assists:19,damage_dealt:67103,damage_taken:703022,healing:59935},
+  {rank:80,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"Undercooked",player_name:"Turnip",team:"Bora",kills:0,assists:19,damage_dealt:28556,damage_taken:587769,healing:33820},
+  {rank:81,weapon_1:"SnS",weapon_2:"Spear",guild_name:"BackShotz骨",player_name:"Kyr1n",team:"Bora",kills:0,assists:17,damage_dealt:214187,damage_taken:841637,healing:49618},
+  {rank:82,weapon_1:"SnS",weapon_2:"Dagger",guild_name:"Undercooked",player_name:"Picklesnaus",team:"Bora",kills:0,assists:16,damage_dealt:78025,damage_taken:630083,healing:21641},
+  {rank:83,weapon_1:"SnS",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"Lexaproツ",team:"Rheggie",kills:0,assists:14,damage_dealt:49063,damage_taken:872394,healing:162677},
+  {rank:84,weapon_1:"SnS",weapon_2:"Longbow",guild_name:"Undercooked",player_name:"RheGGie",team:"Bora",kills:0,assists:14,damage_dealt:47015,damage_taken:826648,healing:113833},
+  {rank:85,weapon_1:"SnS",weapon_2:"Longbow",guild_name:"Ma Vontade",player_name:"FelpyK",team:"Bora",kills:0,assists:13,damage_dealt:53425,damage_taken:767533,healing:267902},
+  {rank:86,weapon_1:"Greatsword",weapon_2:"SnS",guild_name:"JAILEDシ",player_name:"stepson茅",team:"Rheggie",kills:0,assists:13,damage_dealt:36102,damage_taken:409083,healing:24726},
+  {rank:87,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"Ma Vontade",player_name:"toputasso",team:"Bora",kills:0,assists:12,damage_dealt:114100,damage_taken:533802,healing:11293},
+  {rank:88,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"Undercooked",player_name:"Udon",team:"Bora",kills:0,assists:11,damage_dealt:83234,damage_taken:969889,healing:1487604},
+  {rank:89,weapon_1:"Longbow",weapon_2:"SnS",guild_name:"ICE",player_name:"GayFurryTank",team:"Bora",kills:0,assists:11,damage_dealt:26169,damage_taken:1001044,healing:201565},
+  {rank:90,weapon_1:"SnS",weapon_2:"Spear",guild_name:"Unhinged肉",player_name:"NWGhost",team:"Rheggie",kills:0,assists:10,damage_dealt:30585,damage_taken:780796,healing:7528},
+  {rank:91,weapon_1:"SnS",weapon_2:"Dagger",guild_name:"JAILEDシ",player_name:"ADub187",team:"Rheggie",kills:0,assists:9,damage_dealt:29102,damage_taken:604429,healing:30949},
+  {rank:92,weapon_1:"Spear",weapon_2:"SnS",guild_name:"Undercooked",player_name:"Ruthlesssssss",team:"Bora",kills:0,assists:9,damage_dealt:28660,damage_taken:708835,healing:10055},
+  {rank:93,weapon_1:"SnS",weapon_2:"Spear",guild_name:"PUSH",player_name:"YaBoom雅博姆",team:"Bora",kills:0,assists:8,damage_dealt:19573,damage_taken:779024,healing:23654},
+  {rank:94,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"Unknown",player_name:"Rhythmics",team:"Bora",kills:0,assists:7,damage_dealt:65295,damage_taken:1036981,healing:2837665},
+  {rank:95,weapon_1:"SnS",weapon_2:"Spear",guild_name:"Unknown",player_name:"Gaske",team:"Bora",kills:0,assists:3,damage_dealt:14889,damage_taken:1186276,healing:27994},
+  {rank:96,weapon_1:"Wand",weapon_2:"Orb",guild_name:"BackShotz骨",player_name:"Twix金",team:"Bora",kills:0,assists:3,damage_dealt:11444,damage_taken:825908,healing:864491}
+];
+
+// ── BR G2 ──
+const br2=[
+  {rank:1,weapon_1:"SnS",weapon_2:"Crossbow",guild_name:"Undercooked",player_name:"尸ho",team:"Bora",kills:75,assists:141,damage_dealt:5416706,damage_taken:468541,healing:71882},
+  {rank:2,weapon_1:"Orb",weapon_2:"Dagger",guild_name:"ICE",player_name:"edmun",team:"Bora",kills:70,assists:110,damage_dealt:6149104,damage_taken:939005,healing:0},
+  {rank:3,weapon_1:"SnS",weapon_2:"Crossbow",guild_name:"ICE",player_name:"fruitlooops",team:"Bora",kills:59,assists:137,damage_dealt:4420611,damage_taken:1046840,healing:67330},
+  {rank:4,weapon_1:"SnS",weapon_2:"Crossbow",guild_name:"Ma Vontade",player_name:"Jharol",team:"Bora",kills:57,assists:99,damage_dealt:3693909,damage_taken:857332,healing:35162},
+  {rank:5,weapon_1:"Orb",weapon_2:"SnS",guild_name:"JAILEDシ",player_name:"IIIIII",team:"Rheggie",kills:55,assists:104,damage_dealt:4631533,damage_taken:1412328,healing:34631},
+  {rank:6,weapon_1:"Staff",weapon_2:"Dagger",guild_name:"JAILEDシ",player_name:"TechnoDroid",team:"Rheggie",kills:50,assists:88,damage_dealt:3471252,damage_taken:1736726,healing:0},
+  {rank:7,weapon_1:"SnS",weapon_2:"Crossbow",guild_name:"Ma Vontade",player_name:"汁SHaz汁",team:"Bora",kills:49,assists:116,damage_dealt:3896116,damage_taken:485516,healing:22799},
+  {rank:8,weapon_1:"Greatsword",weapon_2:"Dagger",guild_name:"JAILEDシ",player_name:"stepbro歹",team:"Rheggie",kills:42,assists:49,damage_dealt:2230361,damage_taken:1448175,healing:145671},
+  {rank:9,weapon_1:"Staff",weapon_2:"Orb",guild_name:"Unhinged肉",player_name:"AyoJohn",team:"Rheggie",kills:41,assists:84,damage_dealt:4181807,damage_taken:1531858,healing:0},
+  {rank:10,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"Undercooked",player_name:"Revioli",team:"Bora",kills:40,assists:106,damage_dealt:3149206,damage_taken:2001594,healing:61728},
+  {rank:11,weapon_1:"Staff",weapon_2:"Dagger",guild_name:"JAILEDシ",player_name:"ChunkyBruhdaツ",team:"Rheggie",kills:39,assists:76,damage_dealt:2963958,damage_taken:1858890,healing:36507},
+  {rank:12,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"JAILEDシ",player_name:"nightghost1",team:"Rheggie",kills:38,assists:114,damage_dealt:3957365,damage_taken:2919781,healing:26894},
+  {rank:13,weapon_1:"Spear",weapon_2:"Greatsword",guild_name:"ICE",player_name:"be",team:"Bora",kills:36,assists:126,damage_dealt:3985987,damage_taken:2401588,healing:35131},
+  {rank:14,weapon_1:"Dagger",weapon_2:"Crossbow",guild_name:"Undercooked",player_name:"Cookies",team:"Bora",kills:36,assists:61,damage_dealt:1724893,damage_taken:528729,healing:4589},
+  {rank:15,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"Ma Vontade",player_name:"Jehoo",team:"Bora",kills:34,assists:70,damage_dealt:2509145,damage_taken:2219653,healing:69477},
+  {rank:16,weapon_1:"Greatsword",weapon_2:"Dagger",guild_name:"PUSH",player_name:"ShawarmaShuffle",team:"Bora",kills:32,assists:71,damage_dealt:1937479,damage_taken:1064494,healing:4484},
+  {rank:17,weapon_1:"Greatsword",weapon_2:"Dagger",guild_name:"JAILEDシ",player_name:"sunny乡",team:"Rheggie",kills:31,assists:39,damage_dealt:1243287,damage_taken:1529417,healing:56818},
+  {rank:18,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"Ma Vontade",player_name:"·Flaviz",team:"Bora",kills:30,assists:117,damage_dealt:3434703,damage_taken:1737091,healing:48012},
+  {rank:19,weapon_1:"Orb",weapon_2:"SnS",guild_name:"JAILEDシ",player_name:"Justin",team:"Rheggie",kills:29,assists:73,damage_dealt:2525891,damage_taken:1805427,healing:223656},
+  {rank:20,weapon_1:"Dagger",weapon_2:"Crossbow",guild_name:"ICE",player_name:"SprayMachine",team:"Bora",kills:29,assists:67,damage_dealt:1720770,damage_taken:586458,healing:0},
+  {rank:21,weapon_1:"Dagger",weapon_2:"Greatsword",guild_name:"JAILEDシ",player_name:"mars",team:"Rheggie",kills:27,assists:61,damage_dealt:1980112,damage_taken:1594550,healing:0},
+  {rank:22,weapon_1:"Dagger",weapon_2:"Crossbow",guild_name:"Bubble blowers",player_name:"Raitou",team:"Rheggie",kills:27,assists:50,damage_dealt:1404784,damage_taken:813932,healing:0},
+  {rank:23,weapon_1:"Staff",weapon_2:"Dagger",guild_name:"Undercooked",player_name:"こigこagRule",team:"Bora",kills:24,assists:78,damage_dealt:2557765,damage_taken:1922732,healing:10304},
+  {rank:24,weapon_1:"Dagger",weapon_2:"Greatsword",guild_name:"PUSH",player_name:"RayPeat",team:"Bora",kills:23,assists:45,damage_dealt:1184534,damage_taken:1824608,healing:71503},
+  {rank:25,weapon_1:"Staff",weapon_2:"Dagger",guild_name:"JAILEDシ",player_name:"Artemis°",team:"Rheggie",kills:22,assists:69,damage_dealt:2885842,damage_taken:1192995,healing:0},
+  {rank:26,weapon_1:"Spear",weapon_2:"Greatsword",guild_name:"ICE",player_name:"Fade",team:"Bora",kills:22,assists:55,damage_dealt:1709020,damage_taken:1797115,healing:20385},
+  {rank:27,weapon_1:"Crossbow",weapon_2:"Dagger",guild_name:"Melancholy",player_name:"Sakki",team:"Bora",kills:22,assists:51,damage_dealt:1200845,damage_taken:1226589,healing:8552},
+  {rank:28,weapon_1:"Dagger",weapon_2:"Greatsword",guild_name:"JAILEDシ",player_name:"FairAngelヲ",team:"Rheggie",kills:21,assists:42,damage_dealt:1341377,damage_taken:1867576,healing:23006},
+  {rank:29,weapon_1:"Dagger",weapon_2:"Greatsword",guild_name:"Unhinged肉",player_name:"FaytCrus",team:"Rheggie",kills:20,assists:62,damage_dealt:1288355,damage_taken:752740,healing:23497},
+  {rank:30,weapon_1:"Spear",weapon_2:"Greatsword",guild_name:"Undercooked",player_name:"Wintrr",team:"Bora",kills:18,assists:60,damage_dealt:1648018,damage_taken:2317617,healing:55454},
+  {rank:31,weapon_1:"Dagger",weapon_2:"Spear",guild_name:"JAILEDシ",player_name:"Coot",team:"Rheggie",kills:17,assists:64,damage_dealt:1858868,damage_taken:1448703,healing:9999},
+  {rank:32,weapon_1:"Longbow",weapon_2:"Dagger",guild_name:"Melancholy",player_name:"Kxle",team:"Bora",kills:11,assists:26,damage_dealt:629343,damage_taken:850584,healing:16768},
+  {rank:33,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"PUSH",player_name:"Micheru×",team:"Bora",kills:5,assists:26,damage_dealt:504339,damage_taken:1508492,healing:67985},
+  {rank:34,weapon_1:"Longbow",weapon_2:"Greatsword",guild_name:"Ma Vontade",player_name:"·ParaLLax·",team:"Bora",kills:3,assists:50,damage_dealt:128336,damage_taken:1605380,healing:1881859},
+  {rank:35,weapon_1:"SnS",weapon_2:"Longbow",guild_name:"·NIGHT",player_name:"·Leo·",team:"Bora",kills:3,assists:32,damage_dealt:412495,damage_taken:1084586,healing:288330},
+  {rank:36,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"Ma Vontade",player_name:"Zero",team:"Bora",kills:3,assists:10,damage_dealt:95350,damage_taken:1267629,healing:36566},
+  {rank:37,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"Bubble blowers",player_name:"Zyrwolf",team:"Rheggie",kills:2,assists:57,damage_dealt:97056,damage_taken:680679,healing:2499824},
+  {rank:38,weapon_1:"SnS",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"Yuzurain",team:"Rheggie",kills:2,assists:11,damage_dealt:71217,damage_taken:888431,healing:188022},
+  {rank:39,weapon_1:"SnS",weapon_2:"Spear",guild_name:"Unhinged肉",player_name:"NWGhost",team:"Rheggie",kills:2,assists:10,damage_dealt:41368,damage_taken:1109624,healing:24627},
+  {rank:40,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Ma Vontade",player_name:"Krowck神",team:"Bora",kills:1,assists:84,damage_dealt:58948,damage_taken:758686,healing:504032},
+  {rank:41,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Undercooked",player_name:"Desserti",team:"Bora",kills:1,assists:79,damage_dealt:20060,damage_taken:265676,healing:553498},
+  {rank:42,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"PUSH",player_name:"EgirlWaifu",team:"Bora",kills:1,assists:73,damage_dealt:66913,damage_taken:387799,healing:2322864},
+  {rank:43,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"Dioxin",team:"Rheggie",kills:1,assists:71,damage_dealt:50533,damage_taken:362756,healing:1945920},
+  {rank:44,weapon_1:"Wand",weapon_2:"Orb",guild_name:"ICE",player_name:"Elliッ",team:"Bora",kills:1,assists:64,damage_dealt:40276,damage_taken:476074,healing:1346631},
+  {rank:45,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"Undercooked",player_name:"Turnip",team:"Bora",kills:1,assists:33,damage_dealt:32573,damage_taken:578610,healing:37409},
+  {rank:46,weapon_1:"SnS",weapon_2:"Spear",guild_name:"BackShotz骨",player_name:"Kyr1n",team:"Bora",kills:1,assists:32,damage_dealt:361299,damage_taken:1067430,healing:21297},
+  {rank:47,weapon_1:"SnS",weapon_2:"Dagger",guild_name:"Undercooked",player_name:"Picklesnaus",team:"Bora",kills:1,assists:22,damage_dealt:111592,damage_taken:544112,healing:34787},
+  {rank:48,weapon_1:"SnS",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"Forrest",team:"Rheggie",kills:1,assists:22,damage_dealt:99310,damage_taken:1299640,healing:213456},
+  {rank:49,weapon_1:"SnS",weapon_2:"Longbow",guild_name:"Ma Vontade",player_name:"FelpyK",team:"Bora",kills:1,assists:21,damage_dealt:84020,damage_taken:537774,healing:204580},
+  {rank:50,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"JAILEDシ",player_name:"encore",team:"Rheggie",kills:1,assists:20,damage_dealt:77524,damage_taken:888503,healing:18119},
+  {rank:51,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"JAILEDシ",player_name:"Cleared×",team:"Rheggie",kills:1,assists:19,damage_dealt:101696,damage_taken:1373952,healing:104525},
+  {rank:52,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"Ma Vontade",player_name:"toputasso",team:"Bora",kills:1,assists:13,damage_dealt:139988,damage_taken:729440,healing:37045},
+  {rank:53,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"JAILEDシ",player_name:"stepsis",team:"Rheggie",kills:0,assists:89,damage_dealt:58254,damage_taken:424602,healing:2001059},
+  {rank:54,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Undercooked",player_name:"Cream",team:"Bora",kills:0,assists:87,damage_dealt:21399,damage_taken:317123,healing:620148},
+  {rank:55,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"Undercooked",player_name:"Mgmt",team:"Bora",kills:0,assists:86,damage_dealt:116244,damage_taken:948147,healing:2143371},
+  {rank:56,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"Undercooked",player_name:"Riemann",team:"Bora",kills:0,assists:80,damage_dealt:122087,damage_taken:561381,healing:2948419},
+  {rank:57,weapon_1:"Wand",weapon_2:"Orb",guild_name:"ICE",player_name:"shq",team:"Bora",kills:0,assists:75,damage_dealt:16907,damage_taken:159286,healing:387842},
+  {rank:58,weapon_1:"Wand",weapon_2:"Orb",guild_name:"ICE",player_name:"meow",team:"Bora",kills:0,assists:74,damage_dealt:8732,damage_taken:475242,healing:560135},
+  {rank:59,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"Ma Vontade",player_name:"Krul",team:"Bora",kills:0,assists:70,damage_dealt:123995,damage_taken:755653,healing:3497763},
+  {rank:60,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Disregarded",player_name:"Van",team:"Rheggie",kills:0,assists:68,damage_dealt:19179,damage_taken:201924,healing:1502892},
+  {rank:61,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Undercooked",player_name:"cyclingpig",team:"Bora",kills:0,assists:65,damage_dealt:9749,damage_taken:480254,healing:429899},
+  {rank:62,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"Greeto",team:"Rheggie",kills:0,assists:62,damage_dealt:55195,damage_taken:405048,healing:2790790},
+  {rank:63,weapon_1:"Wand",weapon_2:"Orb",guild_name:"JAILEDシ",player_name:"Trazodoneツ",team:"Rheggie",kills:0,assists:62,damage_dealt:17236,damage_taken:469155,healing:856521},
+  {rank:64,weapon_1:"Greatsword",weapon_2:"Longbow",guild_name:"PUSH",player_name:"SrDrake",team:"Bora",kills:0,assists:59,damage_dealt:96190,damage_taken:942594,healing:1075711},
+  {rank:65,weapon_1:"Wand",weapon_2:"Orb",guild_name:"PUSH",player_name:"ReinaKertia",team:"Bora",kills:0,assists:58,damage_dealt:9175,damage_taken:223583,healing:681063},
+  {rank:66,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Ma Vontade",player_name:"TOPDAWG照",team:"Bora",kills:0,assists:57,damage_dealt:27656,damage_taken:412230,healing:578201},
+  {rank:67,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Goths",player_name:"Saint",team:"Bora",kills:0,assists:56,damage_dealt:21018,damage_taken:232766,healing:1073993},
+  {rank:68,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"Jalinss",team:"Rheggie",kills:0,assists:55,damage_dealt:114798,damage_taken:539226,healing:2371879},
+  {rank:69,weapon_1:"Wand",weapon_2:"Orb",guild_name:"JAILEDシ",player_name:"Qigzhou",team:"Rheggie",kills:0,assists:55,damage_dealt:17470,damage_taken:388803,healing:625710},
+  {rank:70,weapon_1:"Wand",weapon_2:"Orb",guild_name:"JAILEDシ",player_name:"Spydur茅",team:"Rheggie",kills:0,assists:53,damage_dealt:17164,damage_taken:654349,healing:1362614},
+  {rank:71,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Ma Vontade",player_name:"Mednev",team:"Bora",kills:0,assists:52,damage_dealt:110757,damage_taken:513674,healing:895155},
+  {rank:72,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"xSouless",team:"Rheggie",kills:0,assists:51,damage_dealt:84833,damage_taken:704228,healing:4111681},
+  {rank:73,weapon_1:"Wand",weapon_2:"Orb",guild_name:"JAILEDシ",player_name:"Noodle",team:"Rheggie",kills:0,assists:51,damage_dealt:24942,damage_taken:375493,healing:1345185},
+  {rank:74,weapon_1:"Wand",weapon_2:"Orb",guild_name:"JAILEDシ",player_name:"이쁘니",team:"Rheggie",kills:0,assists:51,damage_dealt:8068,damage_taken:358287,healing:491820},
+  {rank:75,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"ICE",player_name:"Sharkjitsu",team:"Bora",kills:0,assists:40,damage_dealt:81412,damage_taken:572535,healing:1740343},
+  {rank:76,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"Bubble blowers",player_name:"Mnoe",team:"Rheggie",kills:0,assists:39,damage_dealt:77595,damage_taken:402022,healing:1594971},
+  {rank:77,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Undercooked",player_name:"Terrormisu狐",team:"Bora",kills:0,assists:36,damage_dealt:8837,damage_taken:373655,healing:1323024},
+  {rank:78,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Ma Vontade",player_name:"Cimedッ",team:"Bora",kills:0,assists:35,damage_dealt:11983,damage_taken:492323,healing:1429036},
+  {rank:79,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"PUSH",player_name:"RedCamper",team:"Bora",kills:0,assists:29,damage_dealt:140123,damage_taken:1608692,healing:12643},
+  {rank:80,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"PUSH",player_name:"Moon乂",team:"Bora",kills:0,assists:27,damage_dealt:36691,damage_taken:536277,healing:28909},
+  {rank:81,weapon_1:"Wand",weapon_2:"Orb",guild_name:"BackShotz骨",player_name:"kiersii",team:"Bora",kills:0,assists:27,damage_dealt:14789,damage_taken:371298,healing:343735},
+  {rank:82,weapon_1:"SnS",weapon_2:"Spear",guild_name:"JAILEDシ",player_name:"Noah",team:"Rheggie",kills:0,assists:26,damage_dealt:57558,damage_taken:791190,healing:49202},
+  {rank:83,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"Disregarded",player_name:"xDebo",team:"Rheggie",kills:0,assists:25,damage_dealt:79657,damage_taken:1081411,healing:50985},
+  {rank:84,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"PUSH",player_name:"Prozacツ",team:"Bora",kills:0,assists:21,damage_dealt:159867,damage_taken:970533,healing:48870},
+  {rank:85,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"JAILEDシ",player_name:"stepson歹",team:"Rheggie",kills:0,assists:20,damage_dealt:52627,damage_taken:559026,healing:41889},
+  {rank:86,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"Melancholy",player_name:"Silch",team:"Bora",kills:0,assists:17,damage_dealt:122398,damage_taken:1088641,healing:1790745},
+  {rank:87,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"Unhinged肉",player_name:"Elrokiii",team:"Rheggie",kills:0,assists:14,damage_dealt:122416,damage_taken:672586,healing:2617242},
+  {rank:88,weapon_1:"SnS",weapon_2:"Dagger",guild_name:"JAILEDシ",player_name:"ADub187",team:"Rheggie",kills:0,assists:14,damage_dealt:27163,damage_taken:515131,healing:36930},
+  {rank:89,weapon_1:"SnS",weapon_2:"Spear",guild_name:"PUSH",player_name:"YaBoom雅博姆",team:"Bora",kills:0,assists:10,damage_dealt:56177,damage_taken:1277198,healing:40220},
+  {rank:90,weapon_1:"SnS",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"Lexaproツ",team:"Rheggie",kills:0,assists:9,damage_dealt:50563,damage_taken:1097958,healing:195962},
+  {rank:91,weapon_1:"SnS",weapon_2:"Longbow",guild_name:"Undercooked",player_name:"RheGGie",team:"Bora",kills:0,assists:9,damage_dealt:35541,damage_taken:875057,healing:100158},
+  {rank:92,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"Undercooked",player_name:"Udon",team:"Bora",kills:0,assists:8,damage_dealt:86492,damage_taken:1016459,healing:1898846},
+  {rank:93,weapon_1:"Spear",weapon_2:"SnS",guild_name:"Undercooked",player_name:"Ruthlesssssss",team:"Bora",kills:0,assists:7,damage_dealt:55185,damage_taken:1182748,healing:17094},
+  {rank:94,weapon_1:"Longbow",weapon_2:"SnS",guild_name:"ICE",player_name:"GayFurryTank",team:"Bora",kills:0,assists:7,damage_dealt:28063,damage_taken:1221118,healing:269017},
+  {rank:95,weapon_1:"Wand",weapon_2:"Orb",guild_name:"PUSH",player_name:"Keraunos ッ",team:"Bora",kills:0,assists:4,damage_dealt:12068,damage_taken:480983,healing:902261},
+  {rank:96,weapon_1:"SnS",weapon_2:"Longbow",guild_name:"Unknown",player_name:"Gaske",team:"Bora",kills:0,assists:3,damage_dealt:6932,damage_taken:618678,healing:8234}
+];
+
+// ── AW G1 ──
+const aw1=[
+  {rank:1,weapon_1:"SnS",weapon_2:"Crossbow",guild_name:"RAшR",player_name:"AFKy",team:"Arelite",kills:56,assists:108,damage_dealt:3158074,damage_taken:198183,healing:6084},
+  {rank:2,weapon_1:"Dagger",weapon_2:"Spear",guild_name:"MILK°",player_name:"TazzZ悪",team:"Wicked",kills:47,assists:92,damage_dealt:3155371,damage_taken:990151,healing:0},
+  {rank:3,weapon_1:"Dagger",weapon_2:"Greatsword",guild_name:"ICE",player_name:"CosmicBrisket",team:"Arelite",kills:47,assists:59,damage_dealt:2351534,damage_taken:645481,healing:28688},
+  {rank:4,weapon_1:"Staff",weapon_2:"Dagger",guild_name:"JAILEDシ",player_name:"McLovinッ",team:"Rheggie",kills:42,assists:112,damage_dealt:3405437,damage_taken:1248816,healing:0},
+  {rank:5,weapon_1:"Spear",weapon_2:"Dagger",guild_name:"Boba Tea",player_name:"豆犬",team:"Bora",kills:41,assists:68,damage_dealt:2220122,damage_taken:1010708,healing:23346},
+  {rank:6,weapon_1:"Spear",weapon_2:"Dagger",guild_name:"JAILEDシ",player_name:"eeiv",team:"Rheggie",kills:40,assists:74,damage_dealt:2008106,damage_taken:1137991,healing:10670},
+  {rank:7,weapon_1:"SnS",weapon_2:"Crossbow",guild_name:"Unhinged肉",player_name:"Delirax",team:"Arelite",kills:38,assists:108,damage_dealt:2880609,damage_taken:346398,healing:5510},
+  {rank:8,weapon_1:"Dagger",weapon_2:"Greatsword",guild_name:"PUSH",player_name:"议员",team:"Arelite",kills:36,assists:58,damage_dealt:2082008,damage_taken:1702639,healing:37663},
+  {rank:9,weapon_1:"Crossbow",weapon_2:"Dagger",guild_name:"Melancholy",player_name:"天天天",team:"Arelite",kills:36,assists:45,damage_dealt:2049264,damage_taken:969397,healing:21510},
+  {rank:10,weapon_1:"Dagger",weapon_2:"Greatsword",guild_name:"BackShotz骨",player_name:"of",team:"Arelite",kills:36,assists:40,damage_dealt:1671141,damage_taken:1272943,healing:13665},
+  {rank:11,weapon_1:"Staff",weapon_2:"Dagger",guild_name:"PUSH",player_name:"皇狼I",team:"Arelite",kills:32,assists:82,damage_dealt:3045185,damage_taken:1115069,healing:0},
+  {rank:12,weapon_1:"Staff",weapon_2:"Greatsword",guild_name:"Melancholy",player_name:"Vietnam",team:"Arelite",kills:32,assists:57,damage_dealt:1724809,damage_taken:1923751,healing:43978},
+  {rank:13,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"Undercooked",player_name:"Paella",team:"Wicked",kills:30,assists:65,damage_dealt:1672029,damage_taken:1380093,healing:15604},
+  {rank:14,weapon_1:"SnS",weapon_2:"Crossbow",guild_name:"Undercooked",player_name:"Earthquake",team:"Wicked",kills:29,assists:49,damage_dealt:3318155,damage_taken:896970,healing:61713},
+  {rank:15,weapon_1:"Crossbow",weapon_2:"Dagger",guild_name:"Unhinged肉",player_name:"Xytosぺ",team:"Arelite",kills:25,assists:39,damage_dealt:1301538,damage_taken:581647,healing:0},
+  {rank:16,weapon_1:"Dagger",weapon_2:"Greatsword",guild_name:"Disregarded",player_name:"SmallButWhole",team:"Arelite",kills:24,assists:47,damage_dealt:1546760,damage_taken:1233345,healing:958},
+  {rank:17,weapon_1:"Dagger",weapon_2:"Orb",guild_name:"Ma Vontade",player_name:"Hitzッ",team:"Arelite",kills:23,assists:54,damage_dealt:1669256,damage_taken:683265,healing:24824},
+  {rank:18,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"JAILEDシ",player_name:"Nathias",team:"Wicked",kills:23,assists:53,damage_dealt:2609337,damage_taken:1427564,healing:12974},
+  {rank:19,weapon_1:"Greatsword",weapon_2:"Dagger",guild_name:"MILK°",player_name:"Panda",team:"Wicked",kills:23,assists:40,damage_dealt:1230665,damage_taken:1359439,healing:46687},
+  {rank:20,weapon_1:"Staff",weapon_2:"Orb",guild_name:"Ma Vontade",player_name:"Katie",team:"Arelite",kills:22,assists:36,damage_dealt:2682843,damage_taken:870946,healing:23723},
+  {rank:21,weapon_1:"Staff",weapon_2:"Orb",guild_name:"MILK°",player_name:"inoki",team:"Wicked",kills:22,assists:23,damage_dealt:1905418,damage_taken:933625,healing:8478},
+  {rank:22,weapon_1:"Greatsword",weapon_2:"Dagger",guild_name:"Unhinged肉",player_name:"Drav×",team:"Arelite",kills:21,assists:43,damage_dealt:946305,damage_taken:383216,healing:0},
+  {rank:23,weapon_1:"Spear",weapon_2:"Greatsword",guild_name:"NIGHT",player_name:"amaterasu",team:"Wicked",kills:19,assists:35,damage_dealt:1179785,damage_taken:2187285,healing:54913},
+  {rank:24,weapon_1:"Dagger",weapon_2:"Staff",guild_name:"PUSH",player_name:"Eshaberry",team:"Arelite",kills:18,assists:40,damage_dealt:1086686,damage_taken:925108,healing:8894},
+  {rank:25,weapon_1:"Dagger",weapon_2:"Staff",guild_name:"BackShotz骨",player_name:"Biniツ",team:"Arelite",kills:18,assists:39,damage_dealt:2274325,damage_taken:788061,healing:0},
+  {rank:26,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"PUSH",player_name:"Feelix",team:"Arelite",kills:15,assists:35,damage_dealt:1082922,damage_taken:1488530,healing:52604},
+  {rank:27,weapon_1:"Staff",weapon_2:"Orb",guild_name:"MILK°",player_name:"Migatte死",team:"Wicked",kills:14,assists:17,damage_dealt:2070815,damage_taken:962565,healing:0},
+  {rank:28,weapon_1:"SnS",weapon_2:"Orb",guild_name:"MILK°",player_name:"Ossenagon",team:"Wicked",kills:13,assists:56,damage_dealt:1289565,damage_taken:889671,healing:6656},
+  {rank:29,weapon_1:"Dagger",weapon_2:"Staff",guild_name:"MILK°",player_name:"Amu",team:"Wicked",kills:13,assists:33,damage_dealt:1726899,damage_taken:568978,healing:12827},
+  {rank:30,weapon_1:"Staff",weapon_2:"Wand",guild_name:"Undercooked",player_name:"Margheritaa",team:"Wicked",kills:12,assists:37,damage_dealt:1473170,damage_taken:1476356,healing:42985},
+  {rank:31,weapon_1:"Greatsword",weapon_2:"Greatsword",guild_name:"JAILEDシ",player_name:"AIYA×厲害",team:"Wicked",kills:10,assists:31,damage_dealt:2202444,damage_taken:857645,healing:51223},
+  {rank:32,weapon_1:"Greatsword",weapon_2:"Greatsword",guild_name:"Undercooked",player_name:"xKanekiiTV",team:"Wicked",kills:8,assists:51,damage_dealt:595379,damage_taken:774231,healing:72035},
+  {rank:33,weapon_1:"Longbow",weapon_2:"Longbow",guild_name:"PUSH",player_name:"Franks",team:"Arelite",kills:3,assists:43,damage_dealt:71375,damage_taken:1041783,healing:628372},
+  {rank:34,weapon_1:"Greatsword",weapon_2:"Greatsword",guild_name:"Unhinged肉",player_name:"MEW俄",team:"Arelite",kills:2,assists:31,damage_dealt:84598,damage_taken:287757,healing:1606},
+  {rank:35,weapon_1:"Greatsword",weapon_2:"Dagger",guild_name:"Unhinged肉",player_name:"Pukei",team:"Arelite",kills:2,assists:25,damage_dealt:61159,damage_taken:211632,healing:6970},
+  {rank:36,weapon_1:"Greatsword",weapon_2:"SnS",guild_name:"ICE",player_name:"MDM",team:"Arelite",kills:1,assists:92,damage_dealt:36389,damage_taken:458476,healing:1102284},
+  {rank:37,weapon_1:"Longbow",weapon_2:"Longbow",guild_name:"PUSH",player_name:"apgonzo",team:"Arelite",kills:1,assists:59,damage_dealt:40246,damage_taken:494136,healing:2468848},
+  {rank:38,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"MILK°",player_name:"bbbommobbb",team:"Wicked",kills:1,assists:57,damage_dealt:43878,damage_taken:267451,healing:1766249},
+  {rank:39,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"MILK°",player_name:"BadBeatBrad",team:"Wicked",kills:1,assists:35,damage_dealt:168637,damage_taken:474784,healing:1154385},
+  {rank:40,weapon_1:"Longbow",weapon_2:"Greatsword",guild_name:"Disregarded",player_name:"Akaru华",team:"Arelite",kills:1,assists:35,damage_dealt:73103,damage_taken:679990,healing:435051},
+  {rank:41,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"MILK°",player_name:"Dagnerus",team:"Wicked",kills:1,assists:30,damage_dealt:119030,damage_taken:896834,healing:56436},
+  {rank:42,weapon_1:"Longbow",weapon_2:"Staff",guild_name:"JAILEDシ",player_name:"Pewf",team:"Wicked",kills:1,assists:29,damage_dealt:926790,damage_taken:480142,healing:31813},
+  {rank:43,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"xRTPx",player_name:"awsmhhh",team:"Arelite",kills:1,assists:24,damage_dealt:29290,damage_taken:326736,healing:43975},
+  {rank:44,weapon_1:"Longbow",weapon_2:"Staff",guild_name:"BackShotz骨",player_name:"Ellie",team:"Arelite",kills:1,assists:17,damage_dealt:86794,damage_taken:582895,healing:1453079},
+  {rank:45,weapon_1:"SnS",weapon_2:"Spear",guild_name:"Undercooked",player_name:"Wolferwolf",team:"Wicked",kills:1,assists:13,damage_dealt:238694,damage_taken:758756,healing:15706},
+  {rank:46,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"JAILEDシ",player_name:"Duthias",team:"Wicked",kills:1,assists:11,damage_dealt:264799,damage_taken:683806,healing:49175},
+  {rank:47,weapon_1:"Longbow",weapon_2:"Staff",guild_name:"Nike",player_name:"Krippler",team:"Wicked",kills:0,assists:85,damage_dealt:38899,damage_taken:197945,healing:2029661},
+  {rank:48,weapon_1:"Longbow",weapon_2:"Staff",guild_name:"Undercooked",player_name:"narlynar",team:"Wicked",kills:0,assists:73,damage_dealt:93040,damage_taken:507402,healing:1386007},
+  {rank:49,weapon_1:"SnS",weapon_2:"SnS",guild_name:"Unhinged肉",player_name:"ChouxCreme",team:"Arelite",kills:0,assists:69,damage_dealt:26070,damage_taken:479588,healing:350584},
+  {rank:50,weapon_1:"SnS",weapon_2:"SnS",guild_name:"Boba Tea",player_name:"요마마",team:"Bora",kills:0,assists:69,damage_dealt:122,damage_taken:346042,healing:807821},
+  {rank:51,weapon_1:"Crossbow",weapon_2:"Longbow",guild_name:"Ma Vontade",player_name:"Marruh",team:"Arelite",kills:0,assists:68,damage_dealt:44963,damage_taken:787163,healing:1948039},
+  {rank:52,weapon_1:"Crossbow",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"Eddston",team:"Wicked",kills:0,assists:68,damage_dealt:35938,damage_taken:244849,healing:2566315},
+  {rank:53,weapon_1:"SnS",weapon_2:"Wand",guild_name:"JAILEDシ",player_name:"bloomy",team:"Wicked",kills:0,assists:66,damage_dealt:1729,damage_taken:332769,healing:1266347},
+  {rank:54,weapon_1:"SnS",weapon_2:"Orb",guild_name:"MILK°",player_name:"Mo",team:"Wicked",kills:0,assists:63,damage_dealt:14124,damage_taken:265441,healing:939548},
+  {rank:55,weapon_1:"SnS",weapon_2:"Wand",guild_name:"ICE",player_name:"공상",team:"Arelite",kills:0,assists:63,damage_dealt:712,damage_taken:212552,healing:494372},
+  {rank:56,weapon_1:"Crossbow",weapon_2:"Longbow",guild_name:"Unhinged肉",player_name:"Alexa",team:"Arelite",kills:0,assists:60,damage_dealt:54085,damage_taken:279872,healing:831130},
+  {rank:57,weapon_1:"SnS",weapon_2:"Wand",guild_name:"PUSH",player_name:"Dusk风暴",team:"Arelite",kills:0,assists:54,damage_dealt:7611,damage_taken:343183,healing:626359},
+  {rank:58,weapon_1:"SnS",weapon_2:"Wand",guild_name:"PUSH",player_name:"6",team:"Arelite",kills:0,assists:48,damage_dealt:20450,damage_taken:277580,healing:555358},
+  {rank:59,weapon_1:"Crossbow",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"Fab",team:"Wicked",kills:0,assists:48,damage_dealt:18759,damage_taken:593730,healing:1577663},
+  {rank:60,weapon_1:"Crossbow",weapon_2:"SnS",guild_name:"Melancholy",player_name:"McDo",team:"Arelite",kills:0,assists:46,damage_dealt:114689,damage_taken:308956,healing:43444},
+  {rank:61,weapon_1:"Longbow",weapon_2:"Longbow",guild_name:"PUSH",player_name:"hammyjammy",team:"Arelite",kills:0,assists:35,damage_dealt:43478,damage_taken:614043,healing:1818698},
+  {rank:62,weapon_1:"Staff",weapon_2:"SnS",guild_name:"Undercooked",player_name:"aquillo寶",team:"Wicked",kills:0,assists:35,damage_dealt:14595,damage_taken:408795,healing:300218},
+  {rank:63,weapon_1:"Staff",weapon_2:"SnS",guild_name:"JAILEDシ",player_name:"Dugthias",team:"Wicked",kills:0,assists:31,damage_dealt:7368,damage_taken:421219,healing:672686},
+  {rank:64,weapon_1:"Longbow",weapon_2:"Greatsword",guild_name:"PUSH",player_name:"Mostley",team:"Arelite",kills:0,assists:30,damage_dealt:30889,damage_taken:726261,healing:1050458},
+  {rank:65,weapon_1:"Staff",weapon_2:"SnS",guild_name:"MILK°",player_name:"Slayismo",team:"Wicked",kills:0,assists:28,damage_dealt:120798,damage_taken:480002,healing:18043},
+  {rank:66,weapon_1:"Staff",weapon_2:"SnS",guild_name:"Undercooked",player_name:"BEARCLAW",team:"Wicked",kills:0,assists:28,damage_dealt:82998,damage_taken:334403,healing:244190},
+  {rank:67,weapon_1:"Staff",weapon_2:"SnS",guild_name:"MILK°",player_name:"Tangueray",team:"Wicked",kills:0,assists:28,damage_dealt:1514,damage_taken:677640,healing:841212},
+  {rank:68,weapon_1:"Staff",weapon_2:"SnS",guild_name:"MILK°",player_name:"ilybear",team:"Wicked",kills:0,assists:27,damage_dealt:10048,damage_taken:202565,healing:434495},
+  {rank:69,weapon_1:"Staff",weapon_2:"SnS",guild_name:"JAILEDシ",player_name:"Koiv",team:"Wicked",kills:0,assists:26,damage_dealt:178912,damage_taken:464763,healing:3807},
+  {rank:70,weapon_1:"Longbow",weapon_2:"Longbow",guild_name:"Undercooked",player_name:"Raye",team:"Wicked",kills:0,assists:26,damage_dealt:68795,damage_taken:354968,healing:1275690},
+  {rank:71,weapon_1:"Longbow",weapon_2:"Staff",guild_name:"Unhinged肉",player_name:"Selumii",team:"Arelite",kills:0,assists:24,damage_dealt:40627,damage_taken:443124,healing:2030139},
+  {rank:72,weapon_1:"SnS",weapon_2:"Wand",guild_name:"MILK°",player_name:"Atheling",team:"Wicked",kills:0,assists:24,damage_dealt:6285,damage_taken:303363,healing:685137},
+  {rank:73,weapon_1:"Longbow",weapon_2:"Staff",guild_name:"Ma Vontade",player_name:"Natejas",team:"Arelite",kills:0,assists:23,damage_dealt:63707,damage_taken:952094,healing:1153838},
+  {rank:74,weapon_1:"SnS",weapon_2:"Wand",guild_name:"Undercooked",player_name:"Fae",team:"Wicked",kills:0,assists:18,damage_dealt:16617,damage_taken:582371,healing:1018073},
+  {rank:75,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"Undercooked",player_name:"Keppy",team:"Wicked",kills:0,assists:17,damage_dealt:118056,damage_taken:1056660,healing:1049905},
+  {rank:76,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"MILK°",player_name:"Dsdayn",team:"Wicked",kills:0,assists:16,damage_dealt:94899,damage_taken:636629,healing:298404},
+  {rank:77,weapon_1:"SnS",weapon_2:"Spear",guild_name:"PUSH",player_name:"Bladurken",team:"Arelite",kills:0,assists:15,damage_dealt:80285,damage_taken:1001198,healing:31368},
+  {rank:78,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"Undercooked",player_name:"ShiFood",team:"Wicked",kills:0,assists:13,damage_dealt:102814,damage_taken:563326,healing:1864875},
+  {rank:79,weapon_1:"SnS",weapon_2:"Wand",guild_name:"JAILEDシ",player_name:"Levityy",team:"Wicked",kills:0,assists:13,damage_dealt:51149,damage_taken:601654,healing:10271},
+  {rank:80,weapon_1:"Longbow",weapon_2:"Greatsword",guild_name:"Disregarded",player_name:"MrCantoni",team:"Arelite",kills:0,assists:12,damage_dealt:19194,damage_taken:326092,healing:139376},
+  {rank:81,weapon_1:"Spear",weapon_2:"SnS",guild_name:"MILK°",player_name:"WarReDeeMeR",team:"Wicked",kills:0,assists:11,damage_dealt:91898,damage_taken:880839,healing:72547},
+  {rank:82,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"BackShotz",player_name:"Taffy",team:"Arelite",kills:0,assists:10,damage_dealt:67916,damage_taken:850368,healing:340242},
+  {rank:83,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"Undercooked",player_name:"Riikuu",team:"Wicked",kills:0,assists:10,damage_dealt:35183,damage_taken:438618,healing:49614},
+  {rank:84,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"Undercooked",player_name:"찬물",team:"Wicked",kills:0,assists:10,damage_dealt:25628,damage_taken:637982,healing:16053},
+  {rank:85,weapon_1:"Orb",weapon_2:"Wand",guild_name:"Undercooked",player_name:"EddyGSlayer",team:"Wicked",kills:0,assists:10,damage_dealt:1603,damage_taken:597918,healing:421255},
+  {rank:86,weapon_1:"Spear",weapon_2:"SnS",guild_name:"Unhinged肉",player_name:"Realix",team:"Arelite",kills:0,assists:8,damage_dealt:55951,damage_taken:817282,healing:46589},
+  {rank:87,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"Undercooked",player_name:"Melee",team:"Wicked",kills:0,assists:8,damage_dealt:51639,damage_taken:632225,healing:5535},
+  {rank:88,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"ICE",player_name:"g0tcha",team:"Arelite",kills:0,assists:7,damage_dealt:188796,damage_taken:667369,healing:45797},
+  {rank:89,weapon_1:"Longbow",weapon_2:"Longbow",guild_name:"Undercooked",player_name:"Sayaka",team:"Wicked",kills:0,assists:7,damage_dealt:15915,damage_taken:257722,healing:74859},
+  {rank:90,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"Disregarded",player_name:"HubertCumbrdale",team:"Arelite",kills:0,assists:6,damage_dealt:81300,damage_taken:430407,healing:7937},
+  {rank:91,weapon_1:"Dagger",weapon_2:"Dagger",guild_name:"Unknown",player_name:"Lucky呪い",team:"Wicked",kills:0,assists:5,damage_dealt:45278,damage_taken:544482,healing:39745},
+  {rank:92,weapon_1:"Longbow",weapon_2:"Longbow",guild_name:"Unknown",player_name:"Gaske",team:"Wicked",kills:0,assists:4,damage_dealt:25061,damage_taken:846164,healing:180471},
+  {rank:93,weapon_1:"Longbow",weapon_2:"Longbow",guild_name:"MILK°",player_name:"Rosie",team:"Wicked",kills:0,assists:3,damage_dealt:53827,damage_taken:765671,healing:2496580},
+  {rank:94,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"JAILEDシ",player_name:"dark光",team:"Wicked",kills:0,assists:2,damage_dealt:23063,damage_taken:979279,healing:53022},
+  {rank:95,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"MILK°",player_name:"血神之血",team:"Wicked",kills:0,assists:1,damage_dealt:30666,damage_taken:1231319,healing:41368},
+  {rank:96,weapon_1:"SnS",weapon_2:"Wand",guild_name:"MILK",player_name:"amidalarose",team:"Wicked",kills:0,assists:1,damage_dealt:11226,damage_taken:508692,healing:741597}
+];
+
+// ── AW G2 ──
+const aw2=[
+  {rank:1,weapon_1:"Staff",weapon_2:"Dagger",guild_name:"ICE",player_name:"CosmicBrisket",team:"Arelite",kills:58,assists:79,damage_dealt:2538200,damage_taken:780169,healing:10433},
+  {rank:2,weapon_1:"Staff",weapon_2:"Crossbow",guild_name:"RAшR",player_name:"AFKy",team:"Arelite",kills:56,assists:118,damage_dealt:3698834,damage_taken:487108,healing:19056},
+  {rank:3,weapon_1:"Staff",weapon_2:"Crossbow",guild_name:"Unhinged肉",player_name:"Delirax",team:"Arelite",kills:56,assists:104,damage_dealt:3367086,damage_taken:248950,healing:8102},
+  {rank:4,weapon_1:"Staff",weapon_2:"Spear",guild_name:"Boba Tea",player_name:"豆犬",team:"Bora",kills:53,assists:84,damage_dealt:2967518,damage_taken:1630209,healing:19397},
+  {rank:5,weapon_1:"Staff",weapon_2:"Dagger",guild_name:"PUSH",player_name:"议员",team:"Arelite",kills:53,assists:59,damage_dealt:1912306,damage_taken:1129613,healing:46453},
+  {rank:6,weapon_1:"Staff",weapon_2:"Dagger",guild_name:"Undercooked",player_name:"zayツ",team:"Wicked",kills:51,assists:90,damage_dealt:2501018,damage_taken:1638655,healing:0},
+  {rank:7,weapon_1:"Staff",weapon_2:"Spear",guild_name:"JAILEDシ",player_name:"McLovinツ",team:"Rheggie",kills:48,assists:124,damage_dealt:3722105,damage_taken:1672434,healing:0},
+  {rank:8,weapon_1:"Staff",weapon_2:"SnS",guild_name:"PUSH",player_name:"皇狼I",team:"Arelite",kills:45,assists:100,damage_dealt:3830203,damage_taken:669901,healing:4224},
+  {rank:9,weapon_1:"Staff",weapon_2:"Spear",guild_name:"JAILEDシ",player_name:"Nathias",team:"Wicked",kills:44,assists:67,damage_dealt:3981445,damage_taken:2221116,healing:23431},
+  {rank:10,weapon_1:"Staff",weapon_2:"Greatsword",guild_name:"Disregarded",player_name:"SmallButWhole",team:"Arelite",kills:42,assists:51,damage_dealt:1738766,damage_taken:974544,healing:2881},
+  {rank:11,weapon_1:"SnS",weapon_2:"Orb",guild_name:"MILK°",player_name:"Ossenagon",team:"Wicked",kills:40,assists:68,damage_dealt:2392685,damage_taken:449100,healing:16320},
+  {rank:12,weapon_1:"SnS",weapon_2:"Spear",guild_name:"BackShotz骨",player_name:"of",team:"Arelite",kills:39,assists:50,damage_dealt:2439709,damage_taken:1377831,healing:51297},
+  {rank:13,weapon_1:"Dagger",weapon_2:"Greatsword",guild_name:"Melancholy",player_name:"Vietnam",team:"Arelite",kills:37,assists:51,damage_dealt:1692691,damage_taken:1442094,healing:28348},
+  {rank:14,weapon_1:"Crossbow",weapon_2:"Greatsword",guild_name:"BackShotz骨",player_name:"Biniツ",team:"Arelite",kills:36,assists:55,damage_dealt:2717937,damage_taken:1353985,healing:0},
+  {rank:15,weapon_1:"SnS",weapon_2:"Spear",guild_name:"JAILEDシ",player_name:"eeiv",team:"Rheggie",kills:30,assists:67,damage_dealt:2099600,damage_taken:1757265,healing:52030},
+  {rank:16,weapon_1:"Crossbow",weapon_2:"Greatsword",guild_name:"BackShotz骨",player_name:"Ken",team:"Arelite",kills:29,assists:52,damage_dealt:3338734,damage_taken:751447,healing:33149},
+  {rank:17,weapon_1:"SnS",weapon_2:"Staff",guild_name:"Ma Vontade",player_name:"Hitzツ",team:"Arelite",kills:28,assists:70,damage_dealt:2160533,damage_taken:1500075,healing:8348},
+  {rank:18,weapon_1:"Crossbow",weapon_2:"Greatsword",guild_name:"Melancholy",player_name:"天天天",team:"Arelite",kills:27,assists:54,damage_dealt:1369968,damage_taken:940942,healing:15539},
+  {rank:19,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"Unhinged肉",player_name:"Dravメ",team:"Arelite",kills:25,assists:55,damage_dealt:1196541,damage_taken:792413,healing:2793},
+  {rank:20,weapon_1:"Crossbow",weapon_2:"Greatsword",guild_name:"MILK°",player_name:"Panda",team:"Wicked",kills:25,assists:25,damage_dealt:974653,damage_taken:1133997,healing:16599},
+  {rank:21,weapon_1:"Dagger",weapon_2:"Crossbow",guild_name:"Undercooked",player_name:"Earthquake",team:"Wicked",kills:24,assists:70,damage_dealt:4028308,damage_taken:724636,healing:50212},
+  {rank:22,weapon_1:"SnS",weapon_2:"Spear",guild_name:"Undercooked",player_name:"Margheritaa",team:"Wicked",kills:22,assists:73,damage_dealt:2821980,damage_taken:1892484,healing:78626},
+  {rank:23,weapon_1:"Dagger",weapon_2:"Crossbow",guild_name:"Unhinged肉",player_name:"Xytosぺ",team:"Arelite",kills:19,assists:42,damage_dealt:1170422,damage_taken:622249,healing:0},
+  {rank:24,weapon_1:"Staff",weapon_2:"Wand",guild_name:"MILK°",player_name:"Migatte死",team:"Wicked",kills:19,assists:23,damage_dealt:1385379,damage_taken:1186955,healing:19221},
+  {rank:25,weapon_1:"SnS",weapon_2:"Spear",guild_name:"Undercooked",player_name:"Paella",team:"Wicked",kills:18,assists:74,damage_dealt:1493727,damage_taken:1775988,healing:36343},
+  {rank:26,weapon_1:"Dagger",weapon_2:"Crossbow",guild_name:"NIGHT",player_name:"amaterasu",team:"Wicked",kills:18,assists:47,damage_dealt:1167434,damage_taken:1418920,healing:30305},
+  {rank:27,weapon_1:"Staff",weapon_2:"Wand",guild_name:"Ma Vontade",player_name:"Katie",team:"Arelite",kills:18,assists:46,damage_dealt:1909536,damage_taken:1520065,healing:33793},
+  {rank:28,weapon_1:"Dagger",weapon_2:"Crossbow",guild_name:"MILK°",player_name:"Amu",team:"Wicked",kills:17,assists:47,damage_dealt:2028517,damage_taken:1010186,healing:11518},
+  {rank:29,weapon_1:"Dagger",weapon_2:"Crossbow",guild_name:"PUSH",player_name:"Eshaberry",team:"Arelite",kills:16,assists:42,damage_dealt:871079,damage_taken:1103773,healing:17549},
+  {rank:31,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"PUSH",player_name:"Feelix",team:"Arelite",kills:7,assists:33,damage_dealt:929330,damage_taken:1726822,healing:53659},
+  {rank:32,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"MILK°",player_name:"BadBeatBrad",team:"Wicked",kills:3,assists:39,damage_dealt:148379,damage_taken:428753,healing:1514528},
+  {rank:33,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"Undercooked",player_name:"xKanekiiTV",team:"Wicked",kills:3,assists:28,damage_dealt:374091,damage_taken:789848,healing:51379},
+  {rank:34,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"Disregarded",player_name:"Akaru华",team:"Arelite",kills:2,assists:47,damage_dealt:143016,damage_taken:1007018,healing:587778},
+  {rank:35,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"JAILEDシ",player_name:"Duthias",team:"Wicked",kills:2,assists:18,damage_dealt:438447,damage_taken:768892,healing:70687},
+  {rank:36,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"Undercooked",player_name:"찬물",team:"Wicked",kills:2,assists:18,damage_dealt:56433,damage_taken:565276,healing:23931},
+  {rank:37,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"Undercooked",player_name:"narlynar",team:"Wicked",kills:1,assists:78,damage_dealt:120046,damage_taken:868218,healing:2110448},
+  {rank:38,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"JAILEDシ",player_name:"Fab",team:"Wicked",kills:1,assists:61,damage_dealt:51487,damage_taken:596207,healing:2011889},
+  {rank:39,weapon_1:"Longbow",weapon_2:"Wand",guild_name:"Unhinged肉",player_name:"Alexa",team:"Arelite",kills:1,assists:51,damage_dealt:59709,damage_taken:380409,healing:891125},
+  {rank:40,weapon_1:"Greatsword",weapon_2:"Spear",guild_name:"PUSH",player_name:"Mostley",team:"Arelite",kills:1,assists:46,damage_dealt:57739,damage_taken:876924,healing:1303934},
+  {rank:41,weapon_1:"Dagger",weapon_2:"Longbow",guild_name:"MILK°",player_name:"bbbommobbb",team:"Wicked",kills:1,assists:45,damage_dealt:50081,damage_taken:390957,healing:2092601},
+  {rank:42,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"MILK°",player_name:"Dagnerus",team:"Wicked",kills:1,assists:38,damage_dealt:211682,damage_taken:715216,healing:45970},
+  {rank:43,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"Undercooked",player_name:"Raye",team:"Wicked",kills:1,assists:37,damage_dealt:86734,damage_taken:500094,healing:1074497},
+  {rank:44,weapon_1:"Dagger",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"Koiv",team:"Wicked",kills:1,assists:33,damage_dealt:104201,damage_taken:338824,healing:178298},
+  {rank:45,weapon_1:"Dagger",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"Pewf",team:"Wicked",kills:1,assists:27,damage_dealt:548121,damage_taken:1160374,healing:30629},
+  {rank:46,weapon_1:"Dagger",weapon_2:"Greatsword",guild_name:"Unknown",player_name:"Lucky呪い",team:"Wicked",kills:1,assists:2,damage_dealt:64062,damage_taken:632188,healing:42120},
+  {rank:47,weapon_1:"Wand",weapon_2:"Orb",guild_name:"ICE",player_name:"MDM",team:"Arelite",kills:0,assists:90,damage_dealt:47787,damage_taken:367752,healing:953133},
+  {rank:48,weapon_1:"Wand",weapon_2:"Orb",guild_name:"ICE",player_name:"공상",team:"Arelite",kills:0,assists:87,damage_dealt:2017,damage_taken:330613,healing:1171257},
+  {rank:49,weapon_1:"Dagger",weapon_2:"Longbow",guild_name:"Nike",player_name:"Krippler",team:"Wicked",kills:0,assists:77,damage_dealt:48731,damage_taken:495164,healing:1388134},
+  {rank:50,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Unhinged肉",player_name:"ChouxCreme",team:"Arelite",kills:0,assists:77,damage_dealt:21262,damage_taken:1028482,healing:585601},
+  {rank:51,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"JAILEDシ",player_name:"Eddston",team:"Wicked",kills:0,assists:76,damage_dealt:36084,damage_taken:250377,healing:2054703},
+  {rank:52,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"Ma Vontade",player_name:"Marruh",team:"Arelite",kills:0,assists:72,damage_dealt:40058,damage_taken:637708,healing:2395562},
+  {rank:53,weapon_1:"Wand",weapon_2:"SnS",guild_name:"JAILEDシ",player_name:"bloomy",team:"Wicked",kills:0,assists:69,damage_dealt:4049,damage_taken:420413,healing:1073559},
+  {rank:54,weapon_1:"Wand",weapon_2:"SnS",guild_name:"PUSH",player_name:"6",team:"Arelite",kills:0,assists:68,damage_dealt:24234,damage_taken:286117,healing:944908},
+  {rank:55,weapon_1:"Wand",weapon_2:"Longbow",guild_name:"Melancholy",player_name:"McDo",team:"Arelite",kills:0,assists:66,damage_dealt:175797,damage_taken:477898,healing:45303},
+  {rank:56,weapon_1:"Wand",weapon_2:"SnS",guild_name:"JAILEDシ",player_name:"Dugthias",team:"Wicked",kills:0,assists:62,damage_dealt:18984,damage_taken:625672,healing:910172},
+  {rank:57,weapon_1:"Wand",weapon_2:"SnS",guild_name:"Boba Tea",player_name:"요마마",team:"Bora",kills:0,assists:62,damage_dealt:1097,damage_taken:365582,healing:1003329},
+  {rank:58,weapon_1:"Wand",weapon_2:"SnS",guild_name:"PUSH",player_name:"hammyjammy",team:"Arelite",kills:0,assists:57,damage_dealt:27876,damage_taken:432902,healing:389875},
+  {rank:59,weapon_1:"Wand",weapon_2:"SnS",guild_name:"Undercooked",player_name:"aquillo寶",team:"Wicked",kills:0,assists:57,damage_dealt:26885,damage_taken:504957,healing:302368},
+  {rank:60,weapon_1:"Wand",weapon_2:"SnS",guild_name:"PUSH",player_name:"Franks",team:"Arelite",kills:0,assists:55,damage_dealt:86799,damage_taken:2153352,healing:1235487},
+  {rank:61,weapon_1:"Longbow",weapon_2:"Staff",guild_name:"Unhinged肉",player_name:"Selumii",team:"Arelite",kills:0,assists:47,damage_dealt:57959,damage_taken:589139,healing:2812427},
+  {rank:62,weapon_1:"SnS",weapon_2:"Wand",guild_name:"PUSH",player_name:"Dusk风暴",team:"Arelite",kills:0,assists:47,damage_dealt:24141,damage_taken:556912,healing:1385323},
+  {rank:63,weapon_1:"SnS",weapon_2:"Wand",guild_name:"MILK°",player_name:"Mo",team:"Wicked",kills:0,assists:47,damage_dealt:8652,damage_taken:315255,healing:1037879},
+  {rank:64,weapon_1:"SnS",weapon_2:"Wand",guild_name:"MILK°",player_name:"Tangueray",team:"Wicked",kills:0,assists:43,damage_dealt:3927,damage_taken:646149,healing:870608},
+  {rank:65,weapon_1:"SnS",weapon_2:"Wand",guild_name:"MILK°",player_name:"ilybear",team:"Wicked",kills:0,assists:41,damage_dealt:9436,damage_taken:235951,healing:793467},
+  {rank:66,weapon_1:"Longbow",weapon_2:"Staff",guild_name:"Ma Vontade",player_name:"Natejas",team:"Arelite",kills:0,assists:37,damage_dealt:115740,damage_taken:891720,healing:1193954},
+  {rank:67,weapon_1:"SnS",weapon_2:"Wand",guild_name:"Undercooked",player_name:"Fae",team:"Wicked",kills:0,assists:37,damage_dealt:19905,damage_taken:452385,healing:1076981},
+  {rank:68,weapon_1:"SnS",weapon_2:"Wand",guild_name:"MILK°",player_name:"VitaL+",team:"Wicked",kills:0,assists:34,damage_dealt:4054,damage_taken:460850,healing:1139341},
+  {rank:69,weapon_1:"SnS",weapon_2:"Spear",guild_name:"PUSH",player_name:"Bladurken",team:"Arelite",kills:0,assists:30,damage_dealt:44624,damage_taken:377925,healing:17199},
+  {rank:70,weapon_1:"Longbow",weapon_2:"Staff",guild_name:"Undercooked",player_name:"Riikuu",team:"Wicked",kills:0,assists:27,damage_dealt:71764,damage_taken:550295,healing:82861},
+  {rank:71,weapon_1:"Longbow",weapon_2:"Longbow",guild_name:"BackShotz骨",player_name:"Ellie·",team:"Arelite",kills:0,assists:26,damage_dealt:125208,damage_taken:593349,healing:2000548},
+  {rank:72,weapon_1:"Longbow",weapon_2:"Longbow",guild_name:"PUSH",player_name:"apgonzo",team:"Arelite",kills:0,assists:25,damage_dealt:26047,damage_taken:420081,healing:1921193},
+  {rank:73,weapon_1:"SnS",weapon_2:"Spear",guild_name:"Undercooked",player_name:"Melee",team:"Wicked",kills:0,assists:23,damage_dealt:87199,damage_taken:550585,healing:7429},
+  {rank:74,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"Undercooked",player_name:"Keppy",team:"Wicked",kills:0,assists:21,damage_dealt:135005,damage_taken:813030,healing:696773},
+  {rank:75,weapon_1:"Dagger",weapon_2:"Dagger",guild_name:"Unhinged肉",player_name:"Pukei",team:"Arelite",kills:0,assists:21,damage_dealt:80191,damage_taken:380291,healing:12845},
+  {rank:76,weapon_1:"SnS",weapon_2:"Orb",guild_name:"MILK°",player_name:"Slayismo",team:"Wicked",kills:0,assists:20,damage_dealt:97497,damage_taken:755235,healing:71959},
+  {rank:77,weapon_1:"SnS",weapon_2:"Spear",guild_name:"Disregarded",player_name:"HubertCumbrdale",team:"Arelite",kills:0,assists:19,damage_dealt:129004,damage_taken:239821,healing:9788},
+  {rank:78,weapon_1:"SnS",weapon_2:"Spear",guild_name:"JAILEDシ",player_name:"Levityy",team:"Wicked",kills:0,assists:19,damage_dealt:42592,damage_taken:333285,healing:4760},
+  {rank:79,weapon_1:"SnS",weapon_2:"Spear",guild_name:"MILK°",player_name:"Dsdayn",team:"Wicked",kills:0,assists:17,damage_dealt:120308,damage_taken:802119,healing:267642},
+  {rank:80,weapon_1:"SnS",weapon_2:"Orb",guild_name:"MILK°",player_name:"WarReDeeMeR",team:"Wicked",kills:0,assists:16,damage_dealt:142110,damage_taken:726835,healing:46738},
+  {rank:81,weapon_1:"Longbow",weapon_2:"Longbow",guild_name:"Taffy",player_name:"BackShotz",team:"Arelite",kills:0,assists:16,damage_dealt:77129,damage_taken:648635,healing:320483},
+  {rank:82,weapon_1:"Dagger",weapon_2:"SnS",guild_name:"xRTPx",player_name:"awsmhhh",team:"Arelite",kills:0,assists:16,damage_dealt:31096,damage_taken:435189,healing:33039},
+  {rank:83,weapon_1:"Dagger",weapon_2:"Spear",guild_name:"Undercooked",player_name:"Wolferwolf",team:"Wicked",kills:0,assists:14,damage_dealt:98921,damage_taken:391438,healing:9642},
+  {rank:84,weapon_1:"Dagger",weapon_2:"SnS",guild_name:"Unhinged肉",player_name:"MEW",team:"Arelite",kills:0,assists:14,damage_dealt:46191,damage_taken:295967,healing:821},
+  {rank:85,weapon_1:"Wand",weapon_2:"Orb",guild_name:"Undercooked",player_name:"EddyGSlayer",team:"Wicked",kills:0,assists:14,damage_dealt:118,damage_taken:518611,healing:555039},
+  {rank:86,weapon_1:"Longbow",weapon_2:"Longbow",guild_name:"Undercooked",player_name:"Sayaka",team:"Wicked",kills:0,assists:13,damage_dealt:23671,damage_taken:126213,healing:44993},
+  {rank:87,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"Disregarded",player_name:"MrCantoni",team:"Arelite",kills:0,assists:12,damage_dealt:40499,damage_taken:302255,healing:81672},
+  {rank:88,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"ICE",player_name:"g0tcha",team:"Arelite",kills:0,assists:11,damage_dealt:264896,damage_taken:1138994,healing:75345},
+  {rank:89,weapon_1:"SnS",weapon_2:"Spear",guild_name:"Unhinged肉",player_name:"Realix",team:"Arelite",kills:0,assists:11,damage_dealt:62404,damage_taken:353611,healing:20021},
+  {rank:90,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"Undercooked",player_name:"ShiFood",team:"Wicked",kills:0,assists:10,damage_dealt:96193,damage_taken:366540,healing:1257729},
+  {rank:91,weapon_1:"Longbow",weapon_2:"Longbow",guild_name:"N/A",player_name:"Gaske",team:"Wicked",kills:0,assists:10,damage_dealt:62376,damage_taken:1260003,healing:316622},
+  {rank:92,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"MILK°",player_name:"Rosie·",team:"Wicked",kills:0,assists:4,damage_dealt:86678,damage_taken:890064,healing:2317032},
+  {rank:93,weapon_1:"SnS",weapon_2:"SnS",guild_name:"MILK",player_name:"amidalarose",team:"Wicked",kills:0,assists:4,damage_dealt:20356,damage_taken:413384,healing:837566},
+  {rank:94,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"JAILEDシ",player_name:"dark光",team:"Wicked",kills:0,assists:2,damage_dealt:23242,damage_taken:276015,healing:3567},
+  {rank:95,weapon_1:"Dagger",weapon_2:"Dagger",guild_name:"MILK°",player_name:"Atheling",team:"Wicked",kills:0,assists:2,damage_dealt:0,damage_taken:54575,healing:55077},
+  {rank:96,weapon_1:"SnS",weapon_2:"Greatsword",guild_name:"MILK°",player_name:"血神之血",team:"Wicked",kills:0,assists:1,damage_dealt:40912,damage_taken:1721860,healing:51500}
+];
+
+function buildTableByTeam(tbodyId, data, teamName) {
+  const tbody = document.getElementById(tbodyId);
+  if(!tbody) return;
+  const rows = data.filter(r => r.team === teamName);
+  tbody.innerHTML = rows.map(r => `<tr>
+    <td>${r.rank}</td>
+    <td style="color:var(--text3);font-size:.7rem">${r.weapon_1} / ${r.weapon_2}</td>
+    <td style="color:var(--text3);font-size:.7rem">${r.guild_name}</td>
+    <td style="font-weight:600">${r.player_name}</td>
+    <td style="color:var(--red)">${r.kills}</td>
+    <td style="color:var(--teal)">${r.assists}</td>
+    <td style="color:var(--orange)">${(r.damage_dealt/1e6).toFixed(2)}M</td>
+    <td style="color:var(--blue)">${(r.damage_taken/1e6).toFixed(2)}M</td>
+    <td style="color:var(--green)">${r.healing>0?(r.healing/1e6).toFixed(2)+'M':'—'}</td>
+  </tr>`).join('');
+}
+
+buildTableByTeam('br1-bora', br1, 'Bora');
+buildTableByTeam('br1-rheggie', br1, 'Rheggie');
+buildTableByTeam('br2-bora', br2, 'Bora');
+buildTableByTeam('br2-rheggie', br2, 'Rheggie');
+buildTableByTeam('aw1-arelite', aw1, 'Arelite');
+buildTableByTeam('aw1-wicked', aw1, 'Wicked');
+buildTableByTeam('aw2-arelite', aw2, 'Arelite');
+buildTableByTeam('aw2-wicked', aw2, 'Wicked');
+
 // Full combined roster
-const fullRoster = [
-  ["IIIIIII","JAILEDシ","Rheggie",2,135,224,10144485,1288002,17952],
-  ["Delirax","Unhinged肉","Arelite",2,129,264,9196657,1462419,29141],
-  ["Earthquake","Undercooked","Wicked",2,111,193,8797812,2062872,109484],
-  ["xSouless","JAILEDシ","Rheggie",2,1,114,126435,1786151,8635283],
-  ["Biniツ","BackShotz骨","Wicked",2,85,230,8718444,2379464,5652],
-  ["Nathias","JAILEDシ","Wicked",2,89,193,8200110,3291895,64267],
-  ["YoonJ","Boba Tea","Bora",2,87,215,8210788,3185930,15699],
-  ["edmun","ICE","Bora",2,96,142,8001902,2109198,0],
-  ["be","ICE","Bora",2,97,222,7785710,4338447,83887],
-  ["尸ho","Undercooked","Wicked",2,109,217,7549250,1870829,151868],
-  ["Katie","Ma Vontade","Wicked",2,75,168,7637716,2314179,27274],
-  ["AFKy","RAШR","Arelite",2,121,230,7564978,1090298,30009],
-  ["こigこagRule","Unknown","Arelite",2,66,131,7000052,3354894,54558],
-  ["Justin","JAILEDシ","Rheggie",2,92,204,6862279,1713864,184323],
-  ["apgonzo","PUSH","Arelite",2,1,109,137333,1329615,6858703],
-  ["Margheritaa","Undercooked","Wicked",2,63,216,6787765,3922807,196903],
-  ["Strygwyr°","MILK°","Wicked",2,76,154,6745973,1259661,96630],
-  ["Jharol","Ma Vontade","Bora",2,75,139,6648882,797589,31097],
-  ["inoki","MILK°","Wicked",2,82,116,6605598,2657006,11296],
-  ["Jalinss","JAILEDシ","Rheggie",2,0,108,82695,1610660,6447806],
-  ["皇狼I","PUSH","Arelite",2,88,112,6346640,2386002,0],
-  ["豆犬","Boba Tea","Bora",2,95,183,6278244,3628265,16194],
-  ["Migatte死","MILK°","Wicked",2,65,118,6256452,1987242,17996],
-  ["Rosie·","MILK°","Wicked",2,0,13,177926,1792785,6078319],
-  ["TechnoDroid","JAILEDシ","Rheggie",2,94,195,6080436,1784379,0],
-  ["McLovinッ","JAILEDシ","Rheggie",2,59,146,5714818,3584382,12582],
-  ["Selumii","Unhinged肉","Wicked",2,1,98,121259,1236023,5593595],
-  ["nightghost1","JAILEDシ","Rheggie",2,74,189,5669697,4662124,43058],
-  ["Ossenagon","MILK°","Arelite",2,68,127,5630410,2437183,70006],
-  ["Greeto","JAILEDシ","Rheggie",2,0,127,110585,2067010,5445927],
-  ["CosmicBrisket","ICE","Arelite",2,75,149,5519650,1641830,20600],
-  ["Artemis°","JAILEDシ","Bora",2,50,131,5511462,3395073,10434],
-  ["Mudin","Ma Vontade","Bora",2,54,157,5428120,1035836,41888],
-  ["Zyrwolf","Bubble blowers","Rheggie",2,1,120,136419,2433889,5259013],
-  ["of","BackShotz骨","Wicked",2,71,145,5116105,2700455,166992],
-  ["·Flaviz","Ma Vontade","Bora",2,54,222,5231495,1811886,13893],
-  ["メsaint","SOUP","Wicked",2,58,108,4916870,1027516,50565],
-  ["Revioli","Undercooked","Wicked",2,66,186,4716574,3976344,126302],
-  ["narlynar","Undercooked","Arelite",2,1,163,258795,2003874,4553548],
-  ["msgrayness","ICE","Bora",2,2,131,112082,604131,4625129],
-  ["Marruh","Ma Vontade","Arelite",2,0,113,109932,1962363,4606684],
-  ["Mqmt","Undercooked","Rheggie",2,0,111,109655,1918665,4589218],
-  ["EgirlWaifu","PUSH","Rheggie",2,2,171,118234,766869,4579443],
-  ["Rhythmics","Unknown","Bora",2,0,15,179140,2132079,4504864],
-  ["stepsis芝","JAILEDシ","Bora",2,1,156,120202,609441,4424129],
-  ["eeiv","JAILEDシ","Arelite",2,53,129,4342690,4518949,52762],
-  ["Amu","MILK°","Wicked",2,64,128,4373257,1523761,15515],
-  ["Krul","Ma Vontade","Bora",2,1,81,191794,815650,4160665],
-  ["Jehoo","Ma Vontade","Bora",2,55,116,4116408,3543115,157411],
-  ["bbbommobbb","MILK°","Wicked",2,0,101,85941,985470,4151550],
-  ["ShiFood","Undercooked","Arelite",2,0,27,274832,1313015,3908324],
-  ["ShawarmaShuffle","PUSH","Bora",2,78,139,4166676,1893492,8922],
-  ["Paella","Undercooked","Arelite",2,48,153,4121750,4594126,37104],
-  ["ChunkyBruhdaツ","JAILEDシ","Wicked",2,75,119,3990072,2855604,61888],
-  ["Eddston","JAILEDシ","Rheggie",2,1,171,116093,534910,3930369],
-  ["BadBeatBrad","MILK°","Wicked",2,1,108,398847,1121929,3645844],
-  ["Udon","Undercooked","Wicked",2,2,15,137420,2229031,3835770],
-  ["尺","MILK°","Wicked",2,32,129,3856020,2556582,96298],
-  ["Hitzッ","Ma Vontade","Arelite",2,33,127,3888897,2503837,36526],
-  ["Keppy","Undercooked","Arelite",2,0,39,360422,1327863,3559809],
-  ["Ellie·","BackShotz骨","Wicked",2,0,48,246521,975569,3563105],
-  ["stepbro岁","JAILEDシ","Bora",2,65,113,3752050,3003265,56053],
-  ["Sharkjitsu","ICE","Bora",2,0,111,145060,1518986,3647992],
-  ["SmallButWhole","Disregarded","Wicked",2,72,90,3732366,2517259,0],
-  ["Wintrr","Undercooked","Wicked",2,46,120,3519885,4889405,165557],
-  ["Panda","MILK°","Wicked",2,65,93,3641042,1607253,30282],
-  ["TazzZ悪","MILK°","Arelite",2,57,106,3647802,2238376,10455],
-  ["Vietnam","Unknown","Arelite",2,63,115,3597236,3996248,57404],
-  ["Yagaッ","Ma Vontade","Bora",2,32,108,3618969,3053296,14789],
-  ["Omen","Wild","Arelite",2,1,97,87867,793343,3521475],
-  ["Raye","Undercooked","Wicked",2,0,113,182209,1256179,3390040],
-  ["xTheBurntPeanut","JAILEDシ","Rheggie",2,60,145,3456187,2898482,44692],
-  ["·enrique·","JAILEDシ","Rheggie",2,1,28,193675,1070547,3305499],
-  ["mars","JAILEDシ","Rheggie",2,63,79,3411300,3356295,79865],
-  ["Elrokiii","Unhinged肉","Arelite",2,1,139,202301,1101165,3242649],
-  ["Cookies","Undercooked","Wicked",2,62,96,3410046,1261090,0],
-  ["RayPeat","PUSH","Rheggie",2,52,102,3343873,3568944,65685],
-  ["Dioxin","JAILEDシ","Rheggie",2,0,104,105296,1204747,3303711],
-  ["Van","Disregarded","Rheggie",2,0,165,37967,753799,3344684],
-  ["ムlexa","Unhinged肉","Arelite",2,0,133,163579,1321301,3052952],
-  ["Elliツ","ICE","Bora",2,0,141,84123,728767,3092104],
-  ["fruitlooops","ICE","Bora",1,39,93,3103610,766753,47805],
-  ["FairAngel尹","JAILEDシ","Rheggie",2,49,123,3071002,2298910,66332],
-  ["SprayMachine","ICE","Bora",2,47,98,3042960,1819351,0],
-  ["FaytCrus","Unhinged肉","Arelite",2,37,111,3007237,1530452,32387],
-  ["Fab","JAILEDシ","Arelite",2,0,84,36795,1174362,2961807],
-  ["Mostley","Unknown","Arelite",2,0,103,162381,2040874,2828785],
-  ["amaterasu","Unknown","Wicked",2,51,116,2833831,2376483,79232],
-  ["요마마","Boba Tea","Bora",2,0,128,2623,1000907,2841772],
-  ["·ParaLLax·","Ma Vontade","Bora",2,1,80,252839,2067551,2573168],
-  ["Xytosぺ","Unhinged肉","Arelite",2,52,65,2771731,2174360,0],
-  ["SrDrake","PUSH","Arelite",2,1,91,137413,1291046,2543814],
-  ["Raitou","Bubble blowers","Rheggie",2,62,81,2658090,1500888,0],
-  ["Saint","Goths","Bora",2,0,98,24187,690674,2616711],
-  ["Feelix","PUSH","Wicked",2,19,90,2544843,2385960,45547],
-  ["Coot","JAILEDシ","Rheggie",1,27,87,2378219,1665782,113049],
-  ["Riemann","Undercooked","Wicked",2,1,154,43345,878061,2384499],
+const fullRoster = [ // [name, guild, team, gp, kills, assists, damage, taken, healing]
+  ["IIIIIII","JAILEDシ","Rheggie",4,249,405,18851960,3448308,73647],
+  ["edmun","ICE","Bora",4,211,325,18721834,3992516,0],
+  ["尸ho","Undercooked","Wicked",4,225,471,16286884,2828732,252893],
+  ["xSouless","JAILEDシ","Rheggie",4,1,217,277794,2862630,16246961],
+  ["Earthquake","Undercooked","Wicked",4,164,312,16144275,3684478,221409],
+  ["Delirax","Unhinged肉","Arelite",4,223,476,15444352,2057767,42753],
+  ["be","ICE","Bora",4,169,414,14901708,8065964,172448],
+  ["Nathias","JAILEDシ","Wicked",4,156,313,14790892,6940575,100672],
+  ["AFKy","RAшR","Arelite",4,233,456,14421886,1775589,55149],
+  ["Jharol","Ma Vontade","Bora",4,184,329,13792480,2263856,97691],
+  ["Biniツ","BackShotz骨","Arelite",4,139,324,13710706,4521510,5652],
+  ["TechnoDroid","JAILEDシ","Rheggie",4,209,373,13421178,5048615,0],
+  ["皇狼I","PUSH","Arelite",4,165,294,13222028,4170972,4224],
+  ["McLovinッ","JAILEDシ","Rheggie",4,149,382,12842360,6505632,12582],
+  ["nightghost1","JAILEDシ","Rheggie",4,141,391,12637331,10050229,84083],
+  ["Justin","JAILEDシ","Rheggie",4,157,354,12110786,4445171,546492],
+  ["Katie","Ma Vontade","Arelite",4,115,250,12230095,4705190,84790],
+  ["こigこagRule","Undercooked","Bora",4,109,261,11763597,6612225,64862],
+  ["·Flaviz","Ma Vontade","Bora",4,109,418,11677188,5082457,77526],
+  ["豆犬","Boba Tea","Bora",4,189,335,11465884,6269182,58937],
+  ["apgonzo","PUSH","Arelite",4,2,193,203626,2243832,11248744],
+  ["Margheritaa","Undercooked","Wicked",4,97,326,11082915,7291647,318514],
+  ["Jalinss","JAILEDシ","Rheggie",4,0,195,248385,2581070,11035806],
+  ["Rosie·","MILK°","Wicked",4,0,20,318431,3448520,10891931],
+  ["Artemis°","JAILEDシ","Rheggie",4,99,266,11047713,5964905,10434],
+  ["Selumii","Unhinged肉","Arelite",4,1,169,219845,2268286,10436161],
+  ["Revioli","Undercooked","Bora",4,129,384,10280224,7818605,242388],
+  ["fruitlooops","ICE","Bora",3,152,314,10305091,2934608,205149],
+  ["CosmicBrisket","ICE","Arelite",4,180,287,10409384,3067480,59721],
+  ["Greeto","JAILEDシ","Rheggie",4,0,247,236798,2908328,10150456],
+  ["Zyrwolf","Bubble blowers","Rheggie",4,3,211,312391,3834547,9541273],
+  ["Migatte死","MILK°","Wicked",4,98,158,9712646,4136762,37217],
+  ["of","BackShotz骨","Arelite",4,146,235,9226955,5351229,231954],
+  ["Ossenagon","MILK°","Wicked",4,121,251,9312660,3775954,92982],
+  ["ChunkyBruhdaツ","JAILEDシ","Rheggie",4,154,253,9178834,5956157,129054],
+  ["Krul","Ma Vontade","Bora",4,1,186,361800,2062088,8788539],
+  ["Marruh","Ma Vontade","Arelite",4,0,253,194953,3387234,8950285],
+  ["Mgmt","Undercooked","Bora",4,0,260,284402,3556687,8553393],
+  ["Jehoo","Ma Vontade","Bora",4,120,225,8498954,6908070,264036],
+  ["EgirlWaifu","PUSH","Arelite",4,3,311,243999,1297252,8503650],
+  ["Eddston","JAILEDシ","Wicked",4,1,315,188115,1030136,8551387],
+  ["eeiv","JAILEDシ","Wicked",4,123,270,8450396,7414205,115462],
+  ["inoki","MILK°","Wicked",3,104,139,8511016,3590631,19774],
+  ["narlynar","Undercooked","Wicked",4,2,314,471881,3379494,8050003],
+  ["Mudin","Ma Vontade","Bora",3,88,259,8395187,1729826,91671],
+  ["ShawarmaShuffle","PUSH","Bora",4,138,279,8220552,4037716,27051],
+  ["bbbommobbb","MILK°","Wicked",4,2,203,179900,1643878,8010400],
+  ["Amu","MILK°","Wicked",4,94,208,8128673,3102925,39860],
+  ["stepsis芝","JAILEDシ","Rheggie",4,1,306,218444,1320456,7815920],
+  ["Riemann","Undercooked","Bora",4,1,284,218771,2112632,7758282],
+  ["Hitzッ","Ma Vontade","Arelite",4,84,251,7718686,4687177,69698],
+  ["stepbro岁","JAILEDシ","Rheggie",4,129,208,7358691,5633511,293445],
+  ["Udon","Undercooked","Bora",4,2,34,307146,4215379,7222220],
+  ["ShiFood","Undercooked","Wicked",4,0,50,473839,2242881,7030928],
+  ["Ellie·","BackShotz骨","Arelite",4,1,91,458523,2151813,7016732],
+  ["mars","JAILEDシ","Rheggie",4,133,191,7315627,6319313,79865],
+  ["Dioxin","JAILEDシ","Rheggie",4,2,243,210448,1953301,7166837],
+  ["Paella","Undercooked","Wicked",4,96,292,7287506,7750207,89051],
+  ["Vietnam","Melancholy","Arelite",4,132,223,7014736,7362093,129730],
+  ["Sharkjitsu","ICE","Bora",4,1,180,295290,2750117,6772544],
+  ["Wintrr","Undercooked","Bora",4,91,239,6800958,9178193,250259],
+  ["BadBeatBrad","MILK°","Wicked",4,5,182,715863,2025466,6314757],
+  ["SmallButWhole","Disregarded","Arelite",4,138,188,7017892,4725148,3839],
+  ["TazzZ悪","MILK°","Wicked",3,104,198,6803173,3228527,10455],
+  ["AyoJohn","Unhinged肉","Rheggie",2,73,126,6663622,2965111,0],
+  ["Fab","JAILEDシ","Wicked",4,1,193,107041,2364299,6551359],
+  ["Cookies","Undercooked","Bora",4,129,191,6585652,2492871,7560],
+  ["Van","Disregarded","Rheggie",4,0,302,64361,1157384,6094107],
+  ["·ParaLLax·","Ma Vontade","Bora",4,4,165,448207,4419584,5695642],
+  ["msgrayness","ICE","Bora",3,2,171,176807,1137687,5933130],
+  ["Raye","Undercooked","Wicked",4,1,176,337738,2111241,5740227],
+  ["SprayMachine","ICE","Bora",4,97,207,5974467,3130580,0],
+  ["Panda","MILK°","Wicked",4,113,158,5846360,4100689,93568],
+  ["Keppy","Undercooked","Wicked",4,0,77,613483,3197553,5306487],
+  ["Coot","JAILEDシ","Rheggie",3,55,224,5740274,4210221,131470],
+  ["RayPeat","PUSH","Bora",4,98,189,5709035,6794503,150726],
+  ["FaytCrus","Unhinged肉","Rheggie",4,73,226,5635882,2963353,77923],
+  ["Raitou","Bubble blowers","Rheggie",4,128,168,5675597,3025677,0],
+  ["FairAngel尹","JAILEDシ","Rheggie",4,92,187,5467089,5389702,135441],
+  ["amaterasu","NIGHT","Wicked",4,88,198,5181050,5982688,164450],
+  ["Elliツ","ICE","Bora",4,1,247,161841,1588733,5157018],
+  ["天天天","Melancholy","Arelite",4,98,159,5208091,3229430,39535],
+  ["Xytosぺ","Unhinged肉","Arelite",4,96,146,5243691,3378256,0],
+  ["Saint","Goths","Bora",4,0,199,51565,1440349,4922364],
+  ["メsaint","SOUP","Rheggie",2,58,108,4916870,1027516,50565],
+  ["SrDrake","PUSH","Bora",4,2,190,277790,2867146,4500319],
+  ["sunny㕯","JAILEDシ","Rheggie",4,104,140,4528070,5774273,188676],
+  ["Feelix","PUSH","Arelite",4,41,158,4557095,5601312,151810],
+  ["요마마","Boba Tea","Bora",4,0,259,3842,1712531,4652922],
+  ["Natejas","Ma Vontade","Arelite",4,1,136,425533,3472221,4149109],
+  ["Dravメ","Unhinged肉","Arelite",4,88,187,4433222,2392745,2793],
+  ["议员","PUSH","Arelite",4,97,134,4302273,3639252,101712],
+  ["Dusk风暴","PUSH","Arelite",4,0,187,71506,2106981,4323592],
+  ["bloomy","JAILEDシ","Wicked",4,0,299,17346,1384840,4369356],
+  ["Noodle","JAILEDシ","Rheggie",4,0,193,66932,1811155,4315663],
+  ["Spydur芝","JAILEDシ","Rheggie",4,0,169,28193,2761127,4320022],
+  ["Fae","Undercooked","Wicked",4,0,171,81226,2201588,4232835],
+  ["Franks","PUSH","Arelite",4,3,214,288235,6778508,3780085],
+  ["Mostley","PUSH","Arelite",3,1,133,184516,2641976,3828805],
+  ["hammyjammy","PUSH","Arelite",4,0,190,96883,2365091,3749778],
+  ["Tangueray","MILK°","Wicked",4,0,180,12796,2693499,3627552],
+  ["Silch","Melancholy","Bora",2,2,33,246536,1953649,3292963],
+  ["Krippler","Nike","Wicked",2,0,162,87630,693109,3417795],
+  ["Mednev","Ma Vontade","Bora",4,1,229,443340,1654403,3042662],
+  ["amidalarose","MILK°","Wicked",4,1,11,60282,2318097,3408984],
+  ["Dugthias","JAILEDシ","Wicked",4,1,230,61494,2214034,3338782],
+  ["Terrormisu狐","Undercooked","Bora",3,0,126,30590,1090841,3212542],
+  ["Fade","ICE","Bora",2,40,87,3115645,3436549,37820],
+  ["Akaru华","Disregarded","Arelite",4,5,163,474466,2973158,2564764],
+  ["공상","ICE","Arelite",4,1,267,249859,1375461,2649475],
+  ["ilybear","MILK°","Wicked",4,0,179,37030,1007636,2825121],
+  ["Mo","MILK°","Wicked",3,0,171,31581,866632,2804042],
+  ["Trazodoneツ","JAILEDシ","Rheggie",4,0,229,56595,1749483,2711729],
+  ["Cream","Undercooked","Bora",4,0,283,58846,1321026,2526789],
+  ["Krowck神","Ma Vontade","Bora",4,2,213,161875,2389590,1913825],
+  ["ReinaKertia","PUSH","Arelite",4,0,240,37528,1009306,2430373],
+  ["Sakki","Melancholy","Bora",2,42,98,2383818,2058117,16814],
   ["Justin","Ma Vontade","Bora",2,0,88,66717,1363568,2333864],
-  ["Dusk风暴","PUSH","Arelite",2,0,86,39754,1206886,2311910],
-  ["Dravメ","Unhinged肉","Arelite",2,42,89,2290376,1217116,0],
-  ["Fae","Undercooked","Wicked",2,0,116,44704,1166832,2137781],
-  ["Noodle","JAILEDシ","Rheggie",2,0,106,26976,1133922,2080557],
-  ["sunny㕯","JAILEDシ","Bora",2,45,70,2009548,3197807,87077],
-  ["Natejas","Ma Vontade","Wicked",2,1,76,246086,1628407,1801317],
-  ["Franks","PUSH","Arelite",2,0,116,130061,3583373,1916226],
-  ["bloomyㄘ","JAILEDシ","Rheggie",2,0,164,11568,631658,2029450],
-  ["ditto","Pokopia","Arelite",2,0,147,37707,1291148,1958862],
-  ["Spydur芝","JAILEDシ","Rheggie",2,0,78,6157,1486828,1926179],
-  ["Tangueray","MILK°","Wicked",2,0,109,7355,1369710,1915732],
-  ["Tagato","PUSH","Arelite",2,0,69,21824,1242465,1844883],
-  ["amidalarose","MILK°","Wicked",2,1,6,28700,1396021,1829821],
-  ["Akaru华","Disregarded","Arelite",2,2,81,258347,1286150,1541935],
+  ["xKanekiiTV","Undercooked","Wicked",4,19,201,2129257,2859885,235519],
+  ["Pewf","JAILEDシ","Wicked",4,4,92,2231101,2872979,115583],
+  ["ChouxCreme","Unhinged肉","Arelite",4,2,306,100277,3264343,2246274],
+  ["Kxle","Melancholy","Bora",4,52,90,2270636,3286850,61249],
+  ["Atheling","MILK°","Wicked",4,0,128,42085,1274298,2224279],
+  ["Qigzhou","JAILEDシ","Rheggie",4,0,262,62618,1748362,2203312],
+  ["Mnoe","Bubble blowers","Rheggie",2,0,70,88315,788448,2092348],
+  ["MDM","ICE","Arelite",2,1,182,84176,826228,2055417],
+  ["EddyGSlayer","Undercooked","Wicked",4,0,56,2679,2101412,2017539],
+  ["Eshaberry","PUSH","Arelite",2,34,82,1957765,2028881,26443],
+  ["TOPDAWG照","Ma Vontade","Bora",4,0,194,83484,1273042,1788297],
+  ["Alexa","Unhinged肉","Arelite",2,1,111,113794,660281,1722255],
+  ["aquillo寶","Undercooked","Wicked",4,1,185,82895,2305655,1715014],
+  ["Dsdayn","MILK°","Wicked",4,0,68,472700,3395643,1313536],
+  ["Micheruメ","PUSH","Bora",4,14,121,1616317,4349167,158797],
+  ["Duthias","JAILEDシ","Wicked",4,7,73,1534664,3367096,239790],
+  ["kiersii","BackShotz骨","Arelite",4,0,124,33548,1380149,1730373],
+  ["shq","ICE","Bora",4,1,252,72283,1006436,1573504],
+  ["Yuzurain","JAILEDシ","Rheggie",4,2,83,258680,3894541,1145333],
+  ["Koiv","JAILEDシ","Wicked",4,4,145,570732,1946404,733309],
+  ["cyclingpig","Undercooked","Bora",4,1,204,41341,1605128,1244409],
+  ["g0tcha","ICE","Arelite",4,1,38,984207,4298854,286517],
+  ["Forrest","JAILEDシ","Rheggie",4,5,119,788831,4156664,461616],
+  ["FelpyK","Ma Vontade","Bora",4,5,71,392881,2616524,854721],
+  ["Kyr1n","BackShotz骨","Arelite",4,2,90,1079091,3421918,121347],
+  ["meow","ICE","Bora",2,0,120,10837,897987,1095887],
+  ["Dagnerus","MILK°","Wicked",4,4,140,689317,3784972,239406],
+  ["RheGGie","Undercooked","Bora",4,0,62,181127,4322937,710011],
+  ["McDo","Melancholy","Arelite",4,1,205,680924,1894544,200428],
+  ["Lexaproツ","JAILEDシ","Rheggie",4,1,46,252631,4623314,609307],
+  ["Clearedメ","JAILEDシ","Rheggie",4,3,93,500162,4750251,343302],
+  ["HubertCumbrdale","Disregarded","Arelite",4,1,73,791027,2119204,37362],
+  ["Wolferwolf","Undercooked","Wicked",4,2,50,703908,2583853,48805],
+  ["RedCamper","PUSH","Bora",4,3,122,654474,6767365,77317],
+  ["GayFurryTank","ICE","Bora",4,0,41,161562,4107464,565879],
+  ["Loudpack","Disregarded","Rheggie",3,2,65,556305,2354138,169207],
+  ["MrCantoni","Disregarded","Arelite",4,0,62,185343,2260368,540033],
+  ["Slayismo","MILK°","Wicked",4,0,67,460261,2923347,180983],
+  ["Noah","JAILEDシ","Rheggie",4,0,121,348137,3315587,269486],
+  ["dark光","JAILEDシ","Wicked",4,2,26,420124,3541811,164792],
+  ["Prozacツ","PUSH","Bora",3,1,68,406029,2503502,124444],
+  ["xDebo","Disregarded","Rheggie",4,2,64,244509,3668129,213322],
+  ["toputasso","Ma Vontade","Bora",3,2,37,379712,2009625,65935],
+  ["Riikuu","Undercooked","Wicked",4,0,66,199485,2298737,245657],
+  ["encore","JAILEDシ","Rheggie",4,2,111,321145,4051404,104900],
+  ["Melee","Undercooked","Wicked",4,3,54,368251,4093097,38986],
+  ["Picklesnaus","Undercooked","Bora",3,1,63,281681,2095369,107427],
+  ["Sayaka","Undercooked","Wicked",4,0,44,141030,1282054,238587],
+  ["Bladurken","PUSH","Arelite",4,0,80,263977,3739805,106673],
+  ["WarReDeeMeR","MILK°","Wicked",2,0,27,234008,1607674,119285],
+  ["Turnip","Undercooked","Bora",4,2,109,142025,2703008,196449],
+  ["Realix","Unhinged肉","Arelite",4,0,34,222635,2258107,113272],
+  ["NWGhost","Unhinged肉","Rheggie",4,2,38,124837,3361547,55561],
+  ["stepson矛","JAILEDシ","Rheggie",4,0,83,181374,1615023,119672],
+  ["Pukei","Unhinged肉","Arelite",4,3,92,259356,1100306,35510],
+  ["Levityy","JAILEDシ","Wicked",4,0,55,187014,3008973,95965],
+  ["Moon乂","PUSH","Bora",4,1,112,169965,1656593,109058],
+  ["YaBoom雅博姆","PUSH","Bora",4,0,34,145373,3602230,110107],
+  ["ADub187","JAILEDシ","Rheggie",4,0,43,108849,2835845,145053],
+  ["Ruthlesssssss","Undercooked","Bora",4,0,42,178758,3309689,47580],
+  ["MEW餓","Unhinged肉","Arelite",4,2,75,220183,1195141,4108],
+  ["찬물","Undercooked","Wicked",4,2,52,144533,2391924,69080],
+  ["blood_神之血","MILK°","Wicked",4,0,9,162055,6215818,148886],
 ];
 
 const teamColors = {Arelite:'var(--arelite)',Bora:'var(--bora)',Rheggie:'var(--rheggie)',Wicked:'var(--wicked)'};
