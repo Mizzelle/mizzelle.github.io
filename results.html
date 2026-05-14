@@ -53,7 +53,7 @@ body::before{content:'';position:fixed;inset:0;
 .score-bar-r{height:100%;transition:width .8s ease;border-radius:0 4px 4px 0;}
 .winner-badge{display:inline-block;font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .6rem;border-radius:2px;margin-top:.4rem;}
 
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-bottom:1.5rem;}
+.stats-grid,.match-stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-bottom:1.5rem;}
 .stat-block{background:var(--surface);border:1px solid var(--border);padding:1rem 1.2rem;position:relative;overflow:hidden;}
 .stat-block::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--accent,var(--purple));}
 .stat-block-title{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-bottom:.75rem;padding-left:.5rem;}
@@ -639,7 +639,12 @@ footer a{color:var(--teal);text-decoration:none;}
           <div class="score-team-name" style="color:var(--wicked)">Team Wicked</div>
           <div class="score-kills" style="color:var(--wicked)">400</div>
           <div class="score-label">Total Kills</div>
-        </div><div class="stat-guild">RA山R · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">56</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="match-stats-grid">
+      <div class="stat-block" style="--accent:var(--red)"><div class="stat-block-title">🗡 Top Kills</div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">AFKy</div><div class="stat-guild">RAшR · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">56</span></div>
         <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">TazzZ悪</div><div class="stat-guild">MILK° · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:84%"></div></div><span class="stat-val">47</span></div>
         <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">CosmicBrisket</div><div class="stat-guild">ICE · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:84%"></div></div><span class="stat-val">47</span></div>
         <div class="stat-row"><span class="stat-pos b">4</span><div class="stat-info"><div class="stat-name">McLovinッ</div><div class="stat-guild">JAILEDシ · Rheggie (sub)</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:75%"></div></div><span class="stat-val">42</span></div>
@@ -683,8 +688,13 @@ footer a{color:var(--teal);text-decoration:none;}
           <div class="score-team-name" style="color:var(--wicked)">Team Wicked</div>
           <div class="score-kills" style="color:var(--wicked)">398</div>
           <div class="score-label">Total Kills</div>
-        </div><div class="stat-guild">ICE · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">58</span></div>
-        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">AFKy</div><div class="stat-guild">RA山R · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:97%"></div></div><span class="stat-val">56</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="match-stats-grid">
+      <div class="stat-block" style="--accent:var(--red)"><div class="stat-block-title">🗡 Top Kills</div>
+        <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">CosmicBrisket</div><div class="stat-guild">ICE · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">58</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">AFKy</div><div class="stat-guild">RAшR · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:97%"></div></div><span class="stat-val">56</span></div>
         <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">Delirax</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:97%"></div></div><span class="stat-val">56</span></div>
         <div class="stat-row"><span class="stat-pos b">4</span><div class="stat-info"><div class="stat-name">豆犬</div><div class="stat-guild">Boba Tea · Bora (sub)</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:91%"></div></div><span class="stat-val">53</span></div>
         <div class="stat-row"><span class="stat-pos b">4</span><div class="stat-info"><div class="stat-name">议员</div><div class="stat-guild">PUSH · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:91%"></div></div><span class="stat-val">53</span></div>
@@ -698,10 +708,10 @@ footer a{color:var(--teal);text-decoration:none;}
       </div>
       <div class="stat-block" style="--accent:var(--green)"><div class="stat-block-title">💚 Top Healing</div>
         <div class="stat-row"><span class="stat-pos g">1</span><div class="stat-info"><div class="stat-name">Selumii</div><div class="stat-guild">Unhinged肉 · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:100%"></div></div><span class="stat-val">2.8M</span></div>
-        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">Rosie•</div><div class="stat-guild">MILK° · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:83%"></div></div><span class="stat-val">2.3M</span></div>
-        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">Marruh</div><div class="stat-guild">Ma Vontade · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:86%"></div></div><span class="stat-val">2.4M</span></div>
-        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">apgonzo</div><div class="stat-guild">PUSH · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:69%"></div></div><span class="stat-val">1.9M</span></div>
-        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">EgirlWaifu</div><div class="stat-guild">PUSH · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:83%"></div></div><span class="stat-val">2.3M</span></div>
+        <div class="stat-row"><span class="stat-pos s">2</span><div class="stat-info"><div class="stat-name">Marruh</div><div class="stat-guild">Ma Vontade · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:85%"></div></div><span class="stat-val">2.4M</span></div>
+        <div class="stat-row"><span class="stat-pos b">3</span><div class="stat-info"><div class="stat-name">Rosie·</div><div class="stat-guild">MILK° · Wicked</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:82%"></div></div><span class="stat-val">2.3M</span></div>
+        <div class="stat-row"><span class="stat-pos">4</span><div class="stat-info"><div class="stat-name">apgonzo</div><div class="stat-guild">PUSH · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:68%"></div></div><span class="stat-val">1.9M</span></div>
+        <div class="stat-row"><span class="stat-pos">5</span><div class="stat-info"><div class="stat-name">EgirlWaifu</div><div class="stat-guild">PUSH · Arelite</div></div><div class="stat-bar-bg"><div class="stat-bar-fg" style="width:82%"></div></div><span class="stat-val">2.3M</span></div>
       </div>
     </div>
     <div class="roster-title">Full Roster — Team Arelite</div>
